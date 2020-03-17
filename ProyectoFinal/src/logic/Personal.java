@@ -2,10 +2,10 @@ package logic;
 
 public abstract class Personal {
 	
-	String id; 
-	String name; 
-	String apellido; 
-	String sexo; 
+	protected String id; 
+	protected String name; 
+	protected String apellido; 
+	protected String sexo; 
 	
 	
 	
