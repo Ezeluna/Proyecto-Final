@@ -17,11 +17,11 @@ public class solicitudPersona {
 	private boolean mudarse;
 	private boolean dispViajar; 
 	private boolean vehiculoPropio; 
-	private int categLicencia;
+	private boolean licencia;
 	
 	public solicitudPersona(String id, String gradoAcademico, String actividadProfesional, String nacionalidad,
 			String direccion, ArrayList<String> idiomas, String jornadaLab, boolean presencial, String tipoContrato,
-			int yearExperience, boolean mudarse, boolean dispViajar, boolean vehiculoPropio, int categLicencia) {
+			int yearExperience, boolean mudarse, boolean dispViajar, boolean vehiculoPropio, boolean licencia) {
 		super();
 		this.id = id;
 		this.gradoAcademico = gradoAcademico;
@@ -35,7 +35,7 @@ public class solicitudPersona {
 		this.yearExperience = yearExperience;
 		this.mudarse = mudarse;
 		this.vehiculoPropio = vehiculoPropio;
-		this.categLicencia = categLicencia;
+		this.licencia = licencia;
 		this.dispViajar = dispViajar; 
 	}
 
@@ -143,12 +143,12 @@ public class solicitudPersona {
 		this.vehiculoPropio = vehiculoPropio;
 	}
 
-	public int getCategLicencia() {
-		return categLicencia;
+	public boolean getCategLicencia() {
+		return licencia;
 	}
 
-	public void setCategLicencia(int categLicencia) {
-		this.categLicencia = categLicencia;
+	public void setCategLicencia(boolean licencia) {
+		this.licencia = licencia;
 	} 
 	
 	
