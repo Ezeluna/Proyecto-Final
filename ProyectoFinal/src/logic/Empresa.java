@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Empresa {
 	private String RNC;
@@ -81,6 +82,9 @@ public class Empresa {
 	
 	//Función para agregar un empleado contratado
 	public void insertarEmpleadoC(Personal empleadoC) {
+		LocalDate date = LocalDate.now();
+		empleadoC.setFechaContratado(date);
+		empleadoC.setContratado(true);
 		misEmpleadosC.add(empleadoC);
 	}
 

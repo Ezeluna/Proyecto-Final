@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public abstract class Personal {
 	
@@ -22,6 +23,7 @@ public abstract class Personal {
 	protected boolean mudarse;
 	protected boolean contratado;
 	protected String estudiosComplementarios;
+	protected LocalDate fechaContratado;
 	
 	public Personal(String id, String name, String apellido, String sexo, String nacionalidad, String ciudad,
 			String direccion, ArrayList<String> idiomas, String fechaNacimiento, String telefono, String correo,
@@ -190,6 +192,14 @@ public abstract class Personal {
 
 	public void setEstudiosComplementarios(String estudiosComplementarios) {
 		this.estudiosComplementarios = estudiosComplementarios;
+	}
+
+	public LocalDate getFechaContratado() {
+		return fechaContratado;
+	}
+
+	public void setFechaContratado(LocalDate fechaContratado) {
+		this.fechaContratado = fechaContratado;
 	}
 	
 	
