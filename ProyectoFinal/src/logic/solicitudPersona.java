@@ -18,6 +18,7 @@ public class solicitudPersona {
 	private boolean dispViajar; 
 	private boolean vehiculoPropio; 
 	private boolean licencia;
+	private int cantSolicitudes;
 	
 	public solicitudPersona(String id, String gradoAcademico, String actividadProfesional, String nacionalidad,
 			String direccion, ArrayList<String> idiomas, String jornadaLab, boolean presencial, String tipoContrato,
@@ -37,6 +38,7 @@ public class solicitudPersona {
 		this.vehiculoPropio = vehiculoPropio;
 		this.licencia = licencia;
 		this.dispViajar = dispViajar; 
+		this.cantSolicitudes = 0; 
 	}
 
 	public String getId() {
@@ -149,7 +151,25 @@ public class solicitudPersona {
 
 	public void setCategLicencia(boolean licencia) {
 		this.licencia = licencia;
+	}
+
+	public boolean isLicencia() {
+		return licencia;
+	}
+
+	public void setLicencia(boolean licencia) {
+		this.licencia = licencia;
+	}
+
+	public int getCantSolicitudes() {
+		return cantSolicitudes;
+	}
+
+	public void setCantSolicitudes(int cantSolicitudes) {
+		this.cantSolicitudes = cantSolicitudes;
 	} 
+	
+	
 	
 	
 	

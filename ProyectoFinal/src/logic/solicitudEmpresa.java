@@ -20,6 +20,7 @@ public class solicitudEmpresa {
 	private int categoriaLicencia; 
 	private boolean mudarse; 
 	private int cantVacantes;
+	private int cantSolicitudes;
 	
 	public solicitudEmpresa(String id, String gradoAcademico, String actividadProfesional, String nacionalidad,
 			String direccion, ArrayList<String> idiomas, int edadMax, int edadMin, int yearExperience,
@@ -42,6 +43,7 @@ public class solicitudEmpresa {
 		this.categoriaLicencia = categoriaLicencia;
 		this.mudarse = mudarse;
 		this.cantVacantes = cantVacantes;
+		this.cantSolicitudes = 0; 
 	}
 
 	public String getId() {
@@ -170,7 +172,17 @@ public class solicitudEmpresa {
 
 	public void setCantVacantes(int cantVacantes) {
 		this.cantVacantes = cantVacantes;
+	}
+
+	public int getCantSolicitudes() {
+		return cantSolicitudes;
+	}
+
+	public void setCantSolicitudes(int cantSolicitudes) {
+		this.cantSolicitudes = cantSolicitudes;
 	} 
+	
+	
 	
 	
 	
