@@ -8,6 +8,9 @@ public class Bolsa_Laboral {
 	private ArrayList<Empresa> misEmpresas; 
 	private ArrayList<solicitudEmpresa> reqEmpresas; 
 	private ArrayList<solicitudPersona> reqPersona;
+	public static Bolsa_Laboral bolsa;  
+	
+	// CONSTRUCTOR
 	
 	public Bolsa_Laboral() {
 		super();
@@ -17,6 +20,8 @@ public class Bolsa_Laboral {
 		this.reqPersona = new ArrayList<>(); 
 		
 	}
+	
+	// SETTERS Y GETTERS
 
 	public ArrayList<Personal> getMisSolicitantes() {
 		return misSolicitantes;
@@ -49,6 +54,16 @@ public class Bolsa_Laboral {
 	public void setReqPersona(ArrayList<solicitudPersona> reqPersona) {
 		this.reqPersona = reqPersona;
 	} 
+	
+	public static Bolsa_Laboral getInstance() {
+		if (bolsa == null) {
+			bolsa = new Bolsa_Laboral();
+		}
+		return bolsa;
+
+	}
+	
+	// EMPRESA
 	
 	
 	
