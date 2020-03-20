@@ -79,7 +79,30 @@ public class Bolsa_Laboral {
 	
 	 //Personal 
 	
-	//trhtyhyh
+	//Insertar un solicitante
+	public void insertarSolicitante(Personal solicitante) {
+		
+		solicitante.setContratado(false);
+		misSolicitantes.add(solicitante);
+	}
 	
-
+	//Buscar solicitante by cedula y retornarlo
+	public Personal buscarSolicitanteByCe(String cedula) {
+		Personal solici = null;
+		
+		for(Personal aux : misSolicitantes) {
+			if(cedula.equalsIgnoreCase(aux.getCedula())) {
+				solici = aux;
+			}
+		}
+		
+		return solici;
+	}
+	
+	//Modificar solicitante
+	public void modificarSolicitante(Personal solicitante) {
+		
+		
+	}
+	
 }

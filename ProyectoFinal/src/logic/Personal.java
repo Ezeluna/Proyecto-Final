@@ -26,12 +26,11 @@ public abstract class Personal {
 	protected String estudiosComplementarios;
 	protected LocalDate fechaContratado;
 	
-	public Personal(String id, String cedula, String name, String apellido, String sexo, String nacionalidad, String ciudad,
+	public Personal(String cedula, String name, String apellido, String sexo, String nacionalidad, String ciudad,
 			String direccion, ArrayList<String> idiomas, String fechaNacimiento, String telefono, String correo,
 			int yearExperiencia, boolean vehiculo, boolean licencia, boolean dispViajar, boolean mudarse,
 			boolean contratado, String estudiosComplementarios) {
 		super();
-		this.id = id;
 		this.cedula = cedula;
 		this.name = name;
 		this.apellido = apellido;
