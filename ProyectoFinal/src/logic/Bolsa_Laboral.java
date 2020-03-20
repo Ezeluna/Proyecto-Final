@@ -99,10 +99,5 @@ public class Bolsa_Laboral {
 		return solici;
 	}
 	
-	//Modificar solicitante
-	public void modificarSolicitante(Personal solicitante) {
-		
-		
-	}
 	
 }
