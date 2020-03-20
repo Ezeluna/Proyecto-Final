@@ -9,27 +9,29 @@ public class Empresa {
 	private String telefono;
 	private String ciudad;
 	private String direccion;
+	private String area; 
 	private String email;
 	private ArrayList<Personal> misEmpleadosC;
 	
-	public Empresa(String rNC, String nombre, String telefono, String ciudad, String direccion, String email,
+	public Empresa(String RNC, String nombre, String telefono, String ciudad, String direccion, String area, String email,
 			ArrayList<Personal> misEmpleadosC) {
 		super();
-		RNC = rNC;
+		this.RNC = RNC;
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.ciudad = ciudad;
 		this.direccion = direccion;
+		this.area = area; 
 		this.email = email;
-		this.misEmpleadosC = misEmpleadosC;
+		this.misEmpleadosC = new ArrayList<>();
 	}
 
 	public String getRNC() {
 		return RNC;
 	}
 
-	public void setRNC(String rNC) {
-		RNC = rNC;
+	public void setRNC(String RNC) {
+		this.RNC = RNC;
 	}
 
 	public String getNombre() {
@@ -80,6 +82,14 @@ public class Empresa {
 		this.misEmpleadosC = misEmpleadosC;
 	}
 	
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+
 	//Función para agregar un empleado contratado
 	public void insertarEmpleadoC(Personal empleadoC) {
 		LocalDate date = LocalDate.now();

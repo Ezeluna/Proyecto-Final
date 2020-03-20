@@ -69,15 +69,53 @@ public class Bolsa_Laboral {
 		misEmpresas.add(empresa);
 	}
 	
-	
-	
-	
-	
-	
+	public Empresa RetornarEmpresa(String RNC) {// Retornar una Empresa pasando un RNC
+		Empresa miEmpresa = null;
+		for (Empresa empresa : misEmpresas) {
+			if (empresa.getRNC().equalsIgnoreCase(RNC)) {
+				miEmpresa = empresa;
+			}
 
+		}
+		return miEmpresa;
+	}
+
+	public void eliminarEmpresa(String cod) {// Elimina una empresa pasandole el codigo
+		Empresa empresaeliminar = null;
+		for (Empresa empresa : misEmpresas) {
+			if (empresa.getRNC().equalsIgnoreCase(cod)) {
+				empresaeliminar = empresa;
+			}
+		}
+		misEmpresas.remove(empresaeliminar);
+	}
+
+	public void modificaEmpresa(Empresa empresa) {// Modifica una empresa que se reciba
+
+		for (Empresa miempresa : misEmpresas) {
+			if (empresa.getRNC().equalsIgnoreCase(miempresa.getRNC())) {
+				miempresa.setArea(empresa.getArea());
+				miempresa.setNombre(empresa.getNombre());
+				miempresa.setDireccion(empresa.getDireccion());
+				miempresa.setEmail(empresa.getEmail());
+				miempresa.setTelefono(empresa.getRNC());
+				miempresa.setCiudad(empresa.getCiudad());
+			}
+		}
+	}
+
+	public boolean EmpresaExiste(String rnc) {// Devuelve un boolean de si existe una empresa pasando RNC
+		boolean existe = false;
+		for (Empresa empresa : misEmpresas) {
+			if (empresa.getRNC().equalsIgnoreCase(rnc)) {
+				existe = true;
+			}
+		}
+		return existe;
+
+	}
 	
-	
-	 //Personal 
+	 // PERSONAL
 	
 	//Insertar un solicitante
 	public void insertarSolicitante(Personal solicitante) {
