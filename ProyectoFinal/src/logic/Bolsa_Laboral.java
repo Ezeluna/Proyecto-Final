@@ -65,9 +65,6 @@ public class Bolsa_Laboral {
 	
 	// EMPRESA
 	
-	public void insertEmpresa(Empresa empresa) {
-		misEmpresas.add(empresa);
-	}
 	
 	
 	

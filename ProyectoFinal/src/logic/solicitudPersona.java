@@ -20,6 +20,7 @@ public class solicitudPersona {
 	private boolean licencia;
 	private int cantSolicitudes;
 	
+	
 	public solicitudPersona(String id, String gradoAcademico, String actividadProfesional, String nacionalidad,
 			String direccion, ArrayList<String> idiomas, String jornadaLab, boolean presencial, String tipoContrato,
 			int yearExperience, boolean mudarse, boolean dispViajar, boolean vehiculoPropio, boolean licencia) {
@@ -169,7 +170,9 @@ public class solicitudPersona {
 		this.cantSolicitudes = cantSolicitudes;
 	} 
 	
-	
+	public void IncrementarCantSolicitudes(){
+		cantSolicitudes++;
+	}
 	
 	
 	

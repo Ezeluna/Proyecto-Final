@@ -22,6 +22,7 @@ public class solicitudEmpresa {
 	private int cantVacantes;
 	private int cantSolicitudes;
 	
+	
 	public solicitudEmpresa(String id, String gradoAcademico, String actividadProfesional, String nacionalidad,
 			String direccion, ArrayList<String> idiomas, int edadMax, int edadMin, int yearExperience,
 			String jornadaLaboral, boolean presencial, String tipoContrato, boolean vehiculoPropio,
@@ -180,11 +181,11 @@ public class solicitudEmpresa {
 
 	public void setCantSolicitudes(int cantSolicitudes) {
 		this.cantSolicitudes = cantSolicitudes;
-	} 
-	
-	
-	
-	
+	}
+
+	public void IncrementarCantSolicitudes(){
+		cantSolicitudes++;
+	}
 	
 	
 
