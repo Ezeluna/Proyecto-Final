@@ -188,5 +188,11 @@ public class solicitudEmpresa {
 	}
 	
 	
+<<<<<<< HEAD
+=======
+	//Probando
+	 
+	//Probando2
+>>>>>>> branch 'master' of https://github.com/dariannye/Proyecto-Final.git
 
 }
