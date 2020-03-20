@@ -6,6 +6,7 @@ import java.time.LocalDate;
 public abstract class Personal {
 	
 	protected String id; 
+	protected String cedula;
 	protected String name; 
 	protected String apellido; 
 	protected String sexo; 
@@ -25,12 +26,13 @@ public abstract class Personal {
 	protected String estudiosComplementarios;
 	protected LocalDate fechaContratado;
 	
-	public Personal(String id, String name, String apellido, String sexo, String nacionalidad, String ciudad,
+	public Personal(String id, String cedula, String name, String apellido, String sexo, String nacionalidad, String ciudad,
 			String direccion, ArrayList<String> idiomas, String fechaNacimiento, String telefono, String correo,
 			int yearExperiencia, boolean vehiculo, boolean licencia, boolean dispViajar, boolean mudarse,
 			boolean contratado, String estudiosComplementarios) {
 		super();
 		this.id = id;
+		this.cedula = cedula;
 		this.name = name;
 		this.apellido = apellido;
 		this.sexo = sexo;
@@ -200,6 +202,14 @@ public abstract class Personal {
 
 	public void setFechaContratado(LocalDate fechaContratado) {
 		this.fechaContratado = fechaContratado;
+	}
+
+	public String getCedula() {
+		return cedula;
+	}
+
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
 	}
 	
 	
