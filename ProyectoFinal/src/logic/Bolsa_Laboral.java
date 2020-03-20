@@ -72,4 +72,11 @@ public class Bolsa_Laboral {
 	
 	
 
+	
+	
+	 //Personal 
+	
+	//trhtyhyh
+	
+
 }
