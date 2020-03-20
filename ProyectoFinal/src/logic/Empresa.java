@@ -87,5 +87,7 @@ public class Empresa {
 		empleadoC.setContratado(true);
 		misEmpleadosC.add(empleadoC);
 	}
+	
+	
 
 }
