@@ -33,6 +33,8 @@ public class Universitario extends Personal {
 	public void setPostGrado(boolean postGrado) {
 		this.postGrado = postGrado;
 	}
+	
+	//Probando
 
 	
 }

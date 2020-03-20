@@ -212,6 +212,7 @@ public abstract class Personal {
 		this.cedula = cedula;
 	}
 	
+	//Probando
 	
 	
 	

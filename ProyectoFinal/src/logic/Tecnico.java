@@ -24,5 +24,6 @@ public class Tecnico extends Personal {
 		this.area = area;
 	}
 
+	//Probando
 	
 }
