@@ -94,7 +94,6 @@ public class Bolsa_Laboral {
 
 		for (Empresa miempresa : misEmpresas) {
 			if (empresa.getRNC().equalsIgnoreCase(miempresa.getRNC())) {
-				miempresa.setArea(empresa.getArea());
 				miempresa.setNombre(empresa.getNombre());
 				miempresa.setDireccion(empresa.getDireccion());
 				miempresa.setEmail(empresa.getEmail());
@@ -137,5 +136,35 @@ public class Bolsa_Laboral {
 		return solici;
 	}
 	
+	//Devolver si existe un solicitante
+	public boolean SolicitanteExiste(String cedula) {
+		boolean existe = false;
+		
+		for(Personal aux : misSolicitantes) {
+			if(cedula.equalsIgnoreCase(aux.getCedula())) {
+				existe = true;
+			}
+		}
+		
+		return existe;
+	}
+	
+	//Retornar indice del arrayList de misSolicintantes
+	public int indiceSolicitante(String id) {
+		int indice = 0;
+		for(int i = 0; i<misSolicitantes.size(); i++) {
+			if(misSolicitantes.get(i).getId().equalsIgnoreCase(id)) {
+				indice = i;
+			}
+		}
+		
+		return indice;
+	}
+	
+	//Eliminar soclicitante por codigo
+	public void eliminarSolicitante(Personal solicitante) {
+		int indice = indiceSolicitante(solicitante.getId());
+		misSolicitantes.remove(indice);
+	}
 	
 }
