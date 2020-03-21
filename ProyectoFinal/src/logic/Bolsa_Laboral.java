@@ -181,4 +181,16 @@ public class Bolsa_Laboral {
 			}
 		}
 	}
+	
+	public String contradato(Personal soli) {// retorna un boolean si esta contratado o no
+		String estado = null;
+		if (soli.isContratado()) {
+			estado = "Contratado";
+
+		} else {
+			estado = "Desempleado";
+		}
+		return estado;
+	}
+
 }
