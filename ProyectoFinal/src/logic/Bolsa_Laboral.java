@@ -167,4 +167,18 @@ public class Bolsa_Laboral {
 		misSolicitantes.remove(indice);
 	}
 	
+	//Modificar solicitante
+	public void modificarSolicitante(Personal solicit) {
+		for(Personal solicitante : misSolicitantes ) {
+			if(solicit.getCedula().equalsIgnoreCase(solicitante.getCedula())) {//compara la cedula del solicitante que se quiere modificar con la del solicitante que ya se tiene
+				solicitante.setName(solicit.getName());
+				solicitante.setApellido(solicit.getApellido());
+				solicitante.setTelefono(solicit.getTelefono());
+				solicitante.setDireccion(solicit.getDireccion());
+				solicitante.setCiudad(solicit.getCiudad());
+				solicitante.setCorreo(solicit.getCorreo());
+				solicitante.setFechaNacimiento(solicit.getFechaNacimiento());
+			}
+		}
+	}
 }
