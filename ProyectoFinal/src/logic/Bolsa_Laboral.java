@@ -236,5 +236,25 @@ public class Bolsa_Laboral {
 		}
 		return estado;
 	}
+	
+	public String tipoSolicitante(Personal soli) {// retorna el tipo de solicitante
+		String solici = null;
+
+		if (soli instanceof Universitario) {
+			solici = "Universitario";
+
+		}
+		if (soli instanceof Bachiller) {
+			solici = "Bachiller";
+
+		}
+		if (soli instanceof Tecnico) {
+			solici = "Tecnico";
+
+		}
+
+		return solici;
+
+	}
 
 }
