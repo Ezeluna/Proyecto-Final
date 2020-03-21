@@ -114,6 +114,50 @@ public class Bolsa_Laboral {
 
 	}
 	
+	public int CantUCon(String rnc) {// Devuelve la cantidad de Universitarios que contrato una empresa
+		int CantconU = 0;
+		for (Empresa empresa : misEmpresas) {
+			if (empresa.getRNC().equalsIgnoreCase(rnc)) {
+				for (Personal soli : empresa.getMisEmpleadosC()) {
+					if (soli instanceof Universitario) {
+						CantconU++;
+					}
+				}
+			}
+		}
+		return CantconU;
+	}
+	
+	public int CantTCon(String rnc) {// Devuelve la cantidad de Tecnicos que contrato una empresa
+		int CantconT = 0;
+		for (Empresa empresa : misEmpresas) {
+			if (empresa.getRNC().equalsIgnoreCase(rnc)) {
+				for (Personal soli : empresa.getMisEmpleadosC()) {
+					if (soli instanceof Tecnico) {
+						CantconT++;
+					}
+				}
+			}
+		}
+		return CantconT;
+	}
+	
+	public int CantBCon(String rnc) {// Devuelve la cantidad de Bachilleres que contrato una empresa
+		int CantconB = 0;
+		for (Empresa empresa : misEmpresas) {
+			if (empresa.getRNC().equalsIgnoreCase(rnc)) {
+				for (Personal soli : empresa.getMisEmpleadosC()) {
+					if (soli instanceof Bachiller) {
+						CantconB++;
+					}
+				}
+			}
+		}
+		return CantconB;
+	}
+	
+
+	
 	 // PERSONAL
 	
 	//Insertar un solicitante
