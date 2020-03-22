@@ -17,6 +17,11 @@ public class Universitario extends Personal {
 		this.carrera = carrera;
 		this.postGrado = postGrado;
 	}
+	
+	@Override
+	void insertarIdioma(String aux){
+		idiomas.add(aux); 
+	}
 
 	public String getCarrera() {
 		return carrera;

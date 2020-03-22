@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.ArrayList;
+
 public class Bachiller extends Personal {
 	private ArrayList<String> habilidades;
 
@@ -13,6 +14,11 @@ public class Bachiller extends Personal {
 		// TODO Auto-generated constructor stub
 		
 	   this.habilidades = new ArrayList<>();
+	}
+	
+	@Override
+	void insertarIdioma(String aux){
+		idiomas.add(aux); 
 	}
 
 	public ArrayList<String> getHabilidades() {

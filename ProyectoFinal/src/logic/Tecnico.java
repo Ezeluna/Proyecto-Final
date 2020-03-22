@@ -1,7 +1,5 @@
 package logic;
 
-
-
 public class Tecnico extends Personal {
 	private String area;
 
@@ -14,6 +12,11 @@ public class Tecnico extends Personal {
 		// TODO Auto-generated constructor stub
 		
 		this.area = area;
+	}
+	
+	@Override
+	void insertarIdioma(String aux){
+		idiomas.add(aux); 
 	}
 
 	public String getArea() {

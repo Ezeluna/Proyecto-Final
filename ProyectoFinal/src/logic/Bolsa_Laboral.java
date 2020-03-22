@@ -105,7 +105,7 @@ public class Bolsa_Laboral {
 		}
 	}
 
-	public boolean EmpresaExiste(String rnc) {// Devuelve un boolean  si existe una empresa pasando RNC
+	public boolean EmpresaExiste(String rnc) {// Devuelve un boolean si existe una empresa pasando RNC
 		boolean existe = false;
 		for (Empresa empresa : misEmpresas) {
 			if (empresa.getRNC().equalsIgnoreCase(rnc)) {

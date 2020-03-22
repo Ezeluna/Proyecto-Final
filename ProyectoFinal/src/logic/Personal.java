@@ -27,9 +27,8 @@ public abstract class Personal {
 	protected LocalDate fechaContratado;
 	
 	public Personal(String cedula, String name, String apellido, String sexo, String nacionalidad, String ciudad,
-			String direccion, String fechaNacimiento, String telefono, String correo,
-			int yearExperiencia, boolean vehiculo, boolean licencia, boolean dispViajar, boolean mudarse,
-			boolean contratado, String estudiosComplementarios) {
+			String direccion, String fechaNacimiento, String telefono, String correo, int yearExperiencia, boolean vehiculo,
+			boolean licencia, boolean dispViajar, boolean mudarse, boolean contratado, String estudiosComplementarios) {
 		super();
 		this.cedula = cedula;
 		this.name = name;
@@ -50,6 +49,8 @@ public abstract class Personal {
 		this.contratado = contratado;
 		this.estudiosComplementarios = estudiosComplementarios;
 	}
+	
+	abstract void insertarIdioma(String aux);
 
 	public String getId() {
 		return id;
@@ -211,10 +212,8 @@ public abstract class Personal {
 		this.cedula = cedula;
 	}
 	
-	public  void insertarIdioma(String aux) {  
-		idiomas.add(aux);
-	}
 	
+
 	
 	
 	

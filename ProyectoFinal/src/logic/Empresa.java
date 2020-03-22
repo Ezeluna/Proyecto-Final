@@ -22,7 +22,7 @@ public class Empresa {
 		this.direccion = direccion;
 		this.area = area; 
 		this.email = email;
-		this.misEmpleadosC = new ArrayList<>();
+		this.misEmpleadosC = new ArrayList<Personal>();
 	}
 
 	public String getRNC() {
