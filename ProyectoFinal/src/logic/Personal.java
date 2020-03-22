@@ -38,7 +38,7 @@ public abstract class Personal {
 		this.nacionalidad = nacionalidad;
 		this.ciudad = ciudad;
 		this.direccion = direccion;
-		this.idiomas = new ArrayList<String>();
+		idiomas = new ArrayList<String>();
 		this.fechaNacimiento = fechaNacimiento;
 		this.telefono = telefono;
 		this.correo = correo;

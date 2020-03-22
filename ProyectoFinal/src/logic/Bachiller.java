@@ -1,15 +1,14 @@
 package logic;
 
 import java.util.ArrayList;
-
 public class Bachiller extends Personal {
 	private ArrayList<String> habilidades;
 
 	public Bachiller(String cedula, String name, String apellido, String sexo, String nacionalidad, String ciudad,
-			String direccion, ArrayList<String> idiomas, String fechaNacimiento, String telefono, String correo,
+			String direccion, String fechaNacimiento, String telefono, String correo,
 			int yearExperiencia, boolean vehiculo, boolean licencia, boolean dispViajar, boolean mudarse,
 			boolean contratado, String estudiosComplementarios) {
-		super(cedula, name, apellido, sexo, nacionalidad, ciudad, direccion, idiomas, fechaNacimiento, telefono, correo,
+		super(cedula, name, apellido, sexo, nacionalidad, ciudad, direccion,fechaNacimiento, telefono, correo,
 				yearExperiencia, vehiculo, licencia, dispViajar, mudarse, contratado, estudiosComplementarios);
 		// TODO Auto-generated constructor stub
 		

@@ -2,6 +2,8 @@ package logic;
 
 import java.util.ArrayList;
 
+
+
 public class Bolsa_Laboral {
 	
 	private ArrayList<Personal> misSolicitantes; 
@@ -255,6 +257,20 @@ public class Bolsa_Laboral {
 
 		return solici;
 
+	}
+	
+
+	public void removerContratados(ArrayList<Personal> misContratados) {// Quitar las solicitudes de los contratados
+
+		for (Personal contratado : misContratados) {
+			for (Personal solicitante : misSolicitantes) {
+				if (solicitante.isContratado() == false) {
+					if (contratado.getCedula().equalsIgnoreCase(solicitante.getCedula())) {
+						misSolicitantes.remove(solicitante);
+					}
+				}
+			}
+		}
 	}
 
 }
