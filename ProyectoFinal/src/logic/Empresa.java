@@ -13,8 +13,7 @@ public class Empresa {
 	private String email;
 	private ArrayList<Personal> misEmpleadosC;
 	
-	public Empresa(String RNC, String nombre, String telefono, String ciudad, String direccion, String area, String email,
-			ArrayList<Personal> misEmpleadosC) {
+	public Empresa(String RNC, String nombre, String telefono, String ciudad, String direccion, String area, String email) {
 		super();
 		this.RNC = RNC;
 		this.nombre = nombre;
@@ -78,9 +77,9 @@ public class Empresa {
 		return misEmpleadosC;
 	}
 
-	public void setMisEmpleadosC(ArrayList<Personal> misEmpleadosC) {
+	/*public void setMisEmpleadosC(ArrayList<Personal> misEmpleadosC) {
 		this.misEmpleadosC = misEmpleadosC;
-	}
+	}*/
 	
 	public String getArea() {
 		return area;

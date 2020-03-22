@@ -27,7 +27,7 @@ public abstract class Personal {
 	protected LocalDate fechaContratado;
 	
 	public Personal(String cedula, String name, String apellido, String sexo, String nacionalidad, String ciudad,
-			String direccion, ArrayList<String> idiomas, String fechaNacimiento, String telefono, String correo,
+			String direccion, /*ArrayList<String> idiomas,*/ String fechaNacimiento, String telefono, String correo,
 			int yearExperiencia, boolean vehiculo, boolean licencia, boolean dispViajar, boolean mudarse,
 			boolean contratado, String estudiosComplementarios) {
 		super();
@@ -38,7 +38,7 @@ public abstract class Personal {
 		this.nacionalidad = nacionalidad;
 		this.ciudad = ciudad;
 		this.direccion = direccion;
-		this.idiomas = idiomas;
+		//this.idiomas = idiomas;
 		this.fechaNacimiento = fechaNacimiento;
 		this.telefono = telefono;
 		this.correo = correo;
