@@ -7,7 +7,7 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		Personal p1 = new Universitario("054-145","Juan","Perez","Masculino","Dominicano","Moca","Residencial Primaver",ArrayList<String>("ingles"),"19 marzo","809-578-5034","juanperez21",5,true,true,false,false,true,"blabla","ITT",true);
+		Personal p1 = new Universitario("054-145","Juan","Perez","Masculino","Dominicano","Moca","Residencial Primaver","ingles","19 marzo","809-578-5034","juanperez21",5,true,true,false,false,true,"blabla","ITT",true);
 		//Personal p2 = new Tecnico("054-145","Juan","Perez","Masculino","Dominicano","Moca","Residencial Primaver","19 marzo","809-578-5034","juanperez21",5,true,true,false,false,true,"blabla","ITT");
 		//Personal p3 = new Tecnico("054-145","Juan","Perez","Masculino","Dominicano","Moca","Residencial Primaver","19 marzo","809-578-5034","juanperez21",5,true,true,false,false,true,"blabla","ITT");
 		

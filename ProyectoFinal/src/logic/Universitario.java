@@ -2,8 +2,6 @@ package logic;
 
 import java.util.ArrayList;
 
-
-
 public class Universitario extends Personal {
 	private String carrera;
 	private boolean postGrado;
