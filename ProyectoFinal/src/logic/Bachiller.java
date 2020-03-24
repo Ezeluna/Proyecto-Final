@@ -8,12 +8,16 @@ public class Bachiller extends Personal {
 	public Bachiller(String cedula, String name, String apellido, String sexo, String nacionalidad, String ciudad,
 			String direccion, String fechaNacimiento, String telefono, String correo,
 			int yearExperiencia, boolean vehiculo, boolean licencia, boolean dispViajar, boolean mudarse,
-			boolean contratado, String estudiosComplementarios) {
+			boolean contratado, String estudiosComplementarios,ArrayList<String> habilidades) {
 		super(cedula, name, apellido, sexo, nacionalidad, ciudad, direccion,fechaNacimiento, telefono, correo,
 				yearExperiencia, vehiculo, licencia, dispViajar, mudarse, contratado, estudiosComplementarios);
 		// TODO Auto-generated constructor stub
 		
 	   this.habilidades = new ArrayList<>();
+	   for (String habili : habilidades) {
+			this.habilidades.add(habili);
+			
+		}
 	}
 	
 	@Override

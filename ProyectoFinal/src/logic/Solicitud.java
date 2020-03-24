@@ -4,21 +4,21 @@ import java.util.ArrayList;
 
 public abstract class Solicitud {
 	
-	private String id; 
-	private int cantVacantes;
-	private int cantSolicitudes;
-	private Empresa empresa;  
-	private String direccion; 
-	private ArrayList<String> idiomas; 
-	private int edadMax; 
-	private int edadMin; 
-	private int yearExperience; 
-	private String jornadaLaboral; 
-	private boolean presencial; 
-	private String tipoContrato; 
-	private boolean vehiculoPropio; 
-	private int categoriaLicencia; 
-	private boolean mudarse;
+	protected String id; 
+	protected int cantVacantes;
+	protected int cantSolicitudes;
+	protected Empresa empresa;  
+	protected String direccion; 
+	protected ArrayList<String> idiomas; 
+	protected int edadMax; 
+	protected int edadMin; 
+	protected int yearExperience; 
+	protected String jornadaLaboral; 
+	protected boolean presencial; 
+	protected String tipoContrato; 
+	protected boolean vehiculoPropio; 
+	protected int categoriaLicencia; 
+	protected boolean mudarse;
 	
 	public Solicitud(String id, int cantVacantes, int cantSolicitudes, Empresa empresa, String direccion, int edadMax, 
 			int edadMin, int yearExperience, String jornadaLaboral,boolean presencial, String tipoContrato, boolean vehiculoPropio, 
