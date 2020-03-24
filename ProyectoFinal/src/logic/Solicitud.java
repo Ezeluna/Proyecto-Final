@@ -164,7 +164,9 @@ public abstract class Solicitud {
 		this.mudarse = mudarse;
 	} 
 	
-	
+	public void IncrementarCantSolicitudes() {
+		cantSolicitudes++;
+	}
 	
 	
 
