@@ -2,14 +2,12 @@ package logic;
 
 import java.util.ArrayList;
 
-public class solicitudEmpresa {
+public abstract class Solicitud {
 	
 	private String id; 
-	private Empresa empresa; 
-	private String RNC; 
-	private String gradoAcademico; 
-	private String actividadProfesional; 
-	private String nacionalidad; 
+	private int cantVacantes;
+	private int cantSolicitudes;
+	private Empresa empresa;  
 	private String direccion; 
 	private ArrayList<String> idiomas; 
 	private int edadMax; 
@@ -20,24 +18,18 @@ public class solicitudEmpresa {
 	private String tipoContrato; 
 	private boolean vehiculoPropio; 
 	private int categoriaLicencia; 
-	private boolean mudarse; 
-	private int cantVacantes;
-	private int cantSolicitudes;
+	private boolean mudarse;
 	
-	
-	public solicitudEmpresa(String id, Empresa empresa, String RNC,  String gradoAcademico, String actividadProfesional, 
-			String nacionalidad, String direccion, ArrayList<String> idiomas, int edadMax, int edadMin, int yearExperience,
-			String jornadaLaboral, boolean presencial, String tipoContrato, boolean vehiculoPropio,
-			int categoriaLicencia, boolean mudarse, int cantVacantes) {
+	public Solicitud(String id, int cantVacantes, int cantSolicitudes, Empresa empresa, String direccion, int edadMax, 
+			int edadMin, int yearExperience, String jornadaLaboral,boolean presencial, String tipoContrato, boolean vehiculoPropio, 
+			int categoriaLicencia, boolean mudarse) {
 		super();
 		this.id = id;
-		this.empresa = empresa; 
-		this.RNC = RNC; 
-		this.gradoAcademico = gradoAcademico;
-		this.actividadProfesional = actividadProfesional;
-		this.nacionalidad = nacionalidad;
+		this.cantVacantes = cantVacantes;
+		this.cantSolicitudes = 0;
+		this.empresa = empresa;
 		this.direccion = direccion;
-		this.idiomas = idiomas;
+		idiomas = new ArrayList<>(); 
 		this.edadMax = edadMax;
 		this.edadMin = edadMin;
 		this.yearExperience = yearExperience;
@@ -47,12 +39,33 @@ public class solicitudEmpresa {
 		this.vehiculoPropio = vehiculoPropio;
 		this.categoriaLicencia = categoriaLicencia;
 		this.mudarse = mudarse;
-		this.cantVacantes = cantVacantes;
-		this.cantSolicitudes = 0; 
+		
 	}
+	
+	abstract void insertarIdioma(String aux);
 
 	public String getId() {
 		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public int getCantVacantes() {
+		return cantVacantes;
+	}
+
+	public void setCantVacantes(int cantVacantes) {
+		this.cantVacantes = cantVacantes;
+	}
+
+	public int getCantSolicitudes() {
+		return cantSolicitudes;
+	}
+
+	public void setCantSolicitudes(int cantSolicitudes) {
+		this.cantSolicitudes = cantSolicitudes;
 	}
 
 	public Empresa getEmpresa() {
@@ -61,42 +74,6 @@ public class solicitudEmpresa {
 
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
-	}
-
-	public String getRNC() {
-		return RNC;
-	}
-
-	public void setRNC(String rNC) {
-		RNC = rNC;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getGradoAcademico() {
-		return gradoAcademico;
-	}
-
-	public void setGradoAcademico(String gradoAcademico) {
-		this.gradoAcademico = gradoAcademico;
-	}
-
-	public String getActividadProfesional() {
-		return actividadProfesional;
-	}
-
-	public void setActividadProfesional(String actividadProfesional) {
-		this.actividadProfesional = actividadProfesional;
-	}
-
-	public String getNacionalidad() {
-		return nacionalidad;
-	}
-
-	public void setNacionalidad(String nacionalidad) {
-		this.nacionalidad = nacionalidad;
 	}
 
 	public String getDireccion() {
@@ -185,34 +162,10 @@ public class solicitudEmpresa {
 
 	public void setMudarse(boolean mudarse) {
 		this.mudarse = mudarse;
-	}
-
-	public int getCantVacantes() {
-		return cantVacantes;
-	}
-
-	public void setCantVacantes(int cantVacantes) {
-		this.cantVacantes = cantVacantes;
-	}
-
-	public int getCantSolicitudes() {
-		return cantSolicitudes;
-	}
-
-	public void setCantSolicitudes(int cantSolicitudes) {
-		this.cantSolicitudes = cantSolicitudes;
-	}
-
-	public void IncrementarCantSolicitudes(){
-		cantSolicitudes++;
-	}
+	} 
 	
 	
-
-	//Probando
-	 
-	//Probando2
 	
-	//Probando3
+	
 
 }
