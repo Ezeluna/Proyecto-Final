@@ -414,9 +414,6 @@ public class Bolsa_Laboral {
 			if ((persona.getEdad() >= solicitud.getEdadMin()) && (persona.getEdad() <= solicitud.getEdadMax())) {
 				porciento++;
 			}
-		/*	if (validarIdiomas(persona, solicitud)) {
-				porciento++;
-			}*/
 		}
 
 		if (porciento >= 5) {// si se cumple el 70%
