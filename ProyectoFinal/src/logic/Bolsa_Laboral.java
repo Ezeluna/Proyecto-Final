@@ -416,7 +416,7 @@ public class Bolsa_Laboral {
 			}
 		}
 
-		if (porciento >= 5) {// si se cumple el 70%
+		if (porciento >= 4) {// si se cumple el 70%
 			valido = true;
 		}
 
