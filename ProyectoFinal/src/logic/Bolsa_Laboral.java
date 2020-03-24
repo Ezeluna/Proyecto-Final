@@ -8,8 +8,7 @@ public class Bolsa_Laboral {
 	
 	private ArrayList<Personal> misSolicitantes; 
 	private ArrayList<Empresa> misEmpresas; 
-	private ArrayList<solicitudEmpresa> reqEmpresas; 
-	private ArrayList<solicitudPersona> reqPersona;
+	private ArrayList<Solicitud> misSolicitudes; 
 	public static Bolsa_Laboral bolsa;  
 	
 	// CONSTRUCTOR
@@ -18,8 +17,8 @@ public class Bolsa_Laboral {
 		super();
 		this.misSolicitantes = new ArrayList<>(); 
 		this.misEmpresas = new ArrayList<>(); 
-		this.reqEmpresas = new ArrayList<>(); 
-		this.reqPersona = new ArrayList<>(); 
+		this.misSolicitudes = new ArrayList<>(); 
+		
 		
 	}
 	
@@ -41,22 +40,15 @@ public class Bolsa_Laboral {
 		this.misEmpresas = misEmpresas;
 	}
 
-	public ArrayList<solicitudEmpresa> getReqEmpresas() {
-		return reqEmpresas;
-	}
-
-	public void setReqEmpresas(ArrayList<solicitudEmpresa> reqEmpresas) {
-		this.reqEmpresas = reqEmpresas;
-	}
-
-	public ArrayList<solicitudPersona> getReqPersona() {
-		return reqPersona;
-	}
-
-	public void setReqPersona(ArrayList<solicitudPersona> reqPersona) {
-		this.reqPersona = reqPersona;
-	} 
 	
+	public ArrayList<Solicitud> getMisSolicitudes() {
+		return misSolicitudes;
+	}
+
+	public void setMisSolicitudes(ArrayList<Solicitud> misSolicitudes) {
+		this.misSolicitudes = misSolicitudes;
+	}
+
 	public static Bolsa_Laboral getInstance() {
 		if (bolsa == null) {
 			bolsa = new Bolsa_Laboral();
@@ -285,24 +277,24 @@ public class Bolsa_Laboral {
 	
 	// SOLICITUD EMPRESA
 	
-	public void insertSolicitud(solicitudEmpresa eSolicitud) {// Agregar una solicitud al arraylist
-		reqEmpresas.add(eSolicitud);
+	public void insertSolicitud(Solicitud solicitud) {// Agregar una solicitud al arraylist
+		misSolicitudes.add(solicitud);
 	}
 
-	public boolean buscarSolicitud(solicitudEmpresa eSolicitud) {// Devuelve un boolean si el solicitante existe
+	public boolean buscarSolicitud(Solicitud solicitud) {// Devuelve un boolean si la solicitud existe o no
 		boolean find = false;
-		if (reqEmpresas.contains(eSolicitud)) {
+		if (misSolicitudes.contains(solicitud)) {
 			find = true;
 		}
 		return find;
 	}
 	
-	public int cantSoliB(String rnc) {// Retorna cantidad de solicitudes de bachilleres,hecha por una empresa
+	public int cantSoliB(String rnc) {// Retorna cantidad de solicitudes de bachilleres de una empresa
 		int cant = 0;
-		for (solicitudEmpresa soli : reqEmpresas) {
+		for (Solicitud soli : misSolicitudes) {
 			if (soli.getEmpresa().getRNC().equalsIgnoreCase(rnc)) {
 
-				if (soli.getGradoAcademico().equalsIgnoreCase("Bachiller")) {
+				if (soli instanceof SolicitudBachiller) {
 					cant++;
 				}
 			}
@@ -310,12 +302,12 @@ public class Bolsa_Laboral {
 		return cant;
 	}
 	
-	public int cantSoliT(String rnc) {// Retorna cantidad de solicitudes de tecnicos, hecha por una empresa
+	public int cantSoliT(String rnc) {// Retorna cantidad de solicitudes de tecnicnos de una empresa
 		int cant = 0;
-		for (solicitudEmpresa soli : reqEmpresas) {
+		for (Solicitud soli : misSolicitudes) {
 			if (soli.getEmpresa().getRNC().equalsIgnoreCase(rnc)) {
 
-				if (soli.getGradoAcademico().equalsIgnoreCase("Tecnico")) {
+				if (soli instanceof SolicitudTecnico) {
 					cant++;
 				}
 			}
@@ -323,12 +315,12 @@ public class Bolsa_Laboral {
 		return cant;
 	}
 	
-	public int cantSoliU(String rnc) {// Retorna cantidad de solicitudes de universitarios, hecha por una empresa
+	public int cantSoliU(String rnc) {// Retorna cantidad de solicitudes de universitarios de una empresa
 		int cant = 0;
-		for (solicitudEmpresa soli : reqEmpresas) {
+		for (Solicitud soli : misSolicitudes) {
 			if (soli.getEmpresa().getRNC().equalsIgnoreCase(rnc)) {
 
-				if (soli.getGradoAcademico().equalsIgnoreCase("Universitario")) {
+				if (soli instanceof SolicitudUniversitario) {
 					cant++;
 				}
 			}
@@ -336,9 +328,9 @@ public class Bolsa_Laboral {
 		return cant;
 	}
 	
-	public solicitudEmpresa RetornarSolocitudId(String id) {// Retornar Solicitud de una empresa pansando su id
-		solicitudEmpresa miSolicitud = null;
-		for (solicitudEmpresa solicitud : reqEmpresas) {
+	public Solicitud RetornarSolocitudId(String id) {// Retornar Solicitud de una empresa pansando su id
+		Solicitud miSolicitud = null;
+		for (Solicitud solicitud : misSolicitudes) {
 			if (solicitud.getId().equalsIgnoreCase(id)) {
 				miSolicitud = solicitud;
 			}
@@ -357,9 +349,9 @@ public class Bolsa_Laboral {
 		return cant;
 	}
 	
-	public ArrayList<solicitudEmpresa> RetornaSolicitudEmp(Empresa emp) {// Retorna todas las solicitudes de una empresa
-		ArrayList<solicitudEmpresa> solicitudes = new ArrayList<solicitudEmpresa>();
-		for (solicitudEmpresa solicitud : reqEmpresas) {
+	public ArrayList<Solicitud> RetornaSolicitudEmp(Empresa emp) {// Retorna todas las solicitudes de una empresa
+		ArrayList<Solicitud> solicitudes = new ArrayList<Solicitud>();
+		for (Solicitud solicitud : misSolicitudes) {
 			if (solicitud.getEmpresa().getRNC().equalsIgnoreCase(emp.getRNC())) {
 				solicitudes.add(solicitud);
 			}
@@ -370,15 +362,15 @@ public class Bolsa_Laboral {
 	
 	public boolean EliminarSolicitud(String id) {// borra una solicitud de empresa pasando su id
 		boolean eliminar = false;
-		solicitudEmpresa SolicitudEliminar = null;
-		for (solicitudEmpresa soli : reqEmpresas) {
+		Solicitud SolicitudEliminar = null;
+		for (Solicitud soli : misSolicitudes) {
 			if (soli.getId().equalsIgnoreCase(id)) {
 				SolicitudEliminar = soli;
 				eliminar = true;
 			}
 
 		}
-		reqEmpresas.remove(SolicitudEliminar);
+		misSolicitudes.remove(SolicitudEliminar);
 		return eliminar;
 	}
 	
