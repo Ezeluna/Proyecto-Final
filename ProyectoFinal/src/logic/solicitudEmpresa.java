@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class solicitudEmpresa {
 	
 	private String id; 
+	private Empresa empresa; 
+	private String RNC; 
 	private String gradoAcademico; 
 	private String actividadProfesional; 
 	private String nacionalidad; 
@@ -23,12 +25,14 @@ public class solicitudEmpresa {
 	private int cantSolicitudes;
 	
 	
-	public solicitudEmpresa(String id, String gradoAcademico, String actividadProfesional, String nacionalidad,
-			String direccion, ArrayList<String> idiomas, int edadMax, int edadMin, int yearExperience,
+	public solicitudEmpresa(String id, Empresa empresa, String RNC,  String gradoAcademico, String actividadProfesional, 
+			String nacionalidad, String direccion, ArrayList<String> idiomas, int edadMax, int edadMin, int yearExperience,
 			String jornadaLaboral, boolean presencial, String tipoContrato, boolean vehiculoPropio,
 			int categoriaLicencia, boolean mudarse, int cantVacantes) {
 		super();
 		this.id = id;
+		this.empresa = empresa; 
+		this.RNC = RNC; 
 		this.gradoAcademico = gradoAcademico;
 		this.actividadProfesional = actividadProfesional;
 		this.nacionalidad = nacionalidad;
@@ -49,6 +53,22 @@ public class solicitudEmpresa {
 
 	public String getId() {
 		return id;
+	}
+
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+
+	public String getRNC() {
+		return RNC;
+	}
+
+	public void setRNC(String rNC) {
+		RNC = rNC;
 	}
 
 	public void setId(String id) {

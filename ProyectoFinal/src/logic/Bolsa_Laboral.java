@@ -272,5 +272,119 @@ public class Bolsa_Laboral {
 			}
 		}
 	}
+	
+	public void contratarEmpleados(solicitudEmpresa solicitud, ArrayList<Personal> empleados) {// Contratar empleado
+
+		Empresa empresa = solicitud.getEmpresa();
+		for (Personal solicitante : empleados) {
+			solicitud.IncrementarCantSolicitudes();;
+			empresa.insertarEmpleadoC(solicitante);;
+		}
+
+	}
+	
+	// SOLICITUD EMPRESA
+	
+	public void insertSolicitud(solicitudEmpresa pSolicitud) {// Agregar una solicitud al arraylist
+		reqEmpresas.add(pSolicitud);
+	}
+
+	public boolean buscarSolicitud(solicitudEmpresa pSolicitud) {// Devuelve un boolean si el solicitante existe
+		boolean find = false;
+		if (reqEmpresas.contains(pSolicitud)) {
+			find = true;
+		}
+		return find;
+	}
+	
+	public int cantSoliB(String rnc) {// Retorna cantidad de solicitudes de obreros por una empresa
+		int cant = 0;
+		for (solicitudEmpresa soli : reqEmpresas) {
+			if (soli.getEmpresa().getRNC().equalsIgnoreCase(rnc)) {
+
+				if (soli.getGradoAcademico().equalsIgnoreCase("Bachiller")) {
+					cant++;
+				}
+			}
+		}
+		return cant;
+	}
+	
+	public int cantSoliT(String rnc) {// Retorna cantidad de solicitudes de tecnicos por una empresa
+		int cant = 0;
+		for (solicitudEmpresa soli : reqEmpresas) {
+			if (soli.getEmpresa().getRNC().equalsIgnoreCase(rnc)) {
+
+				if (soli.getGradoAcademico().equalsIgnoreCase("Tecnico")) {
+					cant++;
+				}
+			}
+		}
+		return cant;
+	}
+	
+	public int cantSoliU(String rnc) {// Retorna cantidad de solicitudes de tecnicos por una empresa
+		int cant = 0;
+		for (solicitudEmpresa soli : reqEmpresas) {
+			if (soli.getEmpresa().getRNC().equalsIgnoreCase(rnc)) {
+
+				if (soli.getGradoAcademico().equalsIgnoreCase("Universitario")) {
+					cant++;
+				}
+			}
+		}
+		return cant;
+	}
+	
+	public solicitudEmpresa RetornarSolocitudCod(String id) {// Retornar Solicitud de una empresa pansando su codigo
+		solicitudEmpresa miSolicitud = null;
+		for (solicitudEmpresa solicitud : reqEmpresas) {
+			if (solicitud.getId().equalsIgnoreCase(id)) {
+				miSolicitud = solicitud;
+			}
+
+		}
+		return miSolicitud;
+	}
+	
+	public int cantidadSoliEmpresa(Empresa soli) {// retorna cantidad de solicitudes que ha hecho una empresa
+		int cant = 0;
+		for (Empresa misoli : misEmpresas) {
+			if (soli.getRNC().equalsIgnoreCase(misoli.getRNC())) {
+				cant++;
+			}
+		}
+		return cant;
+	}
+	
+	public ArrayList<solicitudEmpresa> RetornaSolicitudEmp(Empresa emp) {// Retorna todas las solicitudes de una empresa
+		ArrayList<solicitudEmpresa> solicitudes = new ArrayList<solicitudEmpresa>();
+		for (solicitudEmpresa solicitud : reqEmpresas) {
+			if (solicitud.getEmpresa().getRNC().equalsIgnoreCase(emp.getRNC())) {
+				solicitudes.add(solicitud);
+			}
+
+		}
+		return solicitudes;
+	}
+	
+	public boolean EliminarSolicitud(String id) {// borra una solicitud de empresa pasando su id
+		boolean eliminar = false;
+		solicitudEmpresa SolicitudEliminar = null;
+		for (solicitudEmpresa soli : reqEmpresas) {
+			if (soli.getId().equalsIgnoreCase(id)) {
+				SolicitudEliminar = soli;
+				eliminar = true;
+			}
+
+		}
+		reqEmpresas.remove(SolicitudEliminar);
+		return eliminar;
+	}
+	
+	// SOLICITUD PERSONAL
+	
+	
+
 
 }
