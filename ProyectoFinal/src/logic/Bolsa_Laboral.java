@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 
 
+
+
+
+
 public class Bolsa_Laboral {
 	
 	private ArrayList<Personal> misSolicitantes; 
@@ -215,7 +219,7 @@ public class Bolsa_Laboral {
 				solicitante.setDireccion(solicit.getDireccion());
 				solicitante.setCiudad(solicit.getCiudad());
 				solicitante.setCorreo(solicit.getCorreo());
-				solicitante.setFechaNacimiento(solicit.getFechaNacimiento());
+				solicitante.setEdad(solicit.getEdad());
 			}
 		}
 	}
@@ -349,6 +353,18 @@ public class Bolsa_Laboral {
 		return cant;
 	}
 	
+	public int cantidadSolicitante(Personal soli) {// Retorna cantidad de solicitudes del personal
+		int cant = 0;
+		for (Personal misoli : misSolicitantes) {
+			if (soli.getCedula().equalsIgnoreCase(misoli.getCedula())) {
+				cant++;
+			}
+
+		}
+		return cant;
+
+	}
+	
 	public ArrayList<Solicitud> RetornaSolicitudEmp(Empresa emp) {// Retorna todas las solicitudes de una empresa
 		ArrayList<Solicitud> solicitudes = new ArrayList<Solicitud>();
 		for (Solicitud solicitud : misSolicitudes) {
@@ -374,7 +390,41 @@ public class Bolsa_Laboral {
 		return eliminar;
 	}
 	
+	//MATCHING
 	
+	public boolean validarGeneral(Personal persona, Solicitud solicitud) {// VALIDA AL PERSONAL GENERAL
+		int porciento = 0;
+		boolean valido = false;
+		if (persona.contratado == false) {
+			porciento++;
+
+			if (persona.isVehiculo() == solicitud.isVehiculoPropio()) {
+				porciento++;
+			}
+			if (persona.isMudarse() == solicitud.isMudarse()) {
+				porciento++;
+			}
+			if (persona.getCategoriaLicencia() >= solicitud.getCategoriaLicencia()) {
+				porciento++;
+			}
+
+			if (persona.getYearExperiencia() >= solicitud.getYearExperience()) {
+				porciento++;
+			}
+			if ((persona.getEdad() >= solicitud.getEdadMin()) && (persona.getEdad() <= solicitud.getEdadMax())) {
+				porciento++;
+			}
+		/*	if (validarIdiomas(persona, solicitud)) {
+				porciento++;
+			}*/
+		}
+
+		if (porciento >= 5) {// si se cumple el 70%
+			valido = true;
+		}
+
+		return valido;
+	}
 	
 	
 }

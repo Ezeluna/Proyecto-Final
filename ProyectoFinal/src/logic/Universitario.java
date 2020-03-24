@@ -7,11 +7,11 @@ public class Universitario extends Personal {
 	private boolean postGrado;
 
 	public Universitario(String cedula, String name, String apellido, String sexo, String nacionalidad, String ciudad,
-			String direccion, String fechaNacimiento, String telefono, String correo,
-			int yearExperiencia, boolean vehiculo, boolean licencia, boolean dispViajar, boolean mudarse,
+			String direccion, int edad, String telefono, String correo,
+			int yearExperiencia, boolean vehiculo, int categoriaLicencia, boolean dispViajar, boolean mudarse,
 			boolean contratado, String estudiosComplementarios, String carrera, boolean postGrado) {
-		super(cedula, name, apellido, sexo, nacionalidad, ciudad, direccion,fechaNacimiento, telefono, correo,
-				yearExperiencia, vehiculo, licencia, dispViajar, mudarse, contratado, estudiosComplementarios);
+		super(cedula, name, apellido, sexo, nacionalidad, ciudad, direccion,edad, telefono, correo,
+				yearExperiencia, vehiculo, categoriaLicencia, dispViajar, mudarse, contratado, estudiosComplementarios);
 		// TODO Auto-generated constructor stub
 		
 		this.carrera = carrera;

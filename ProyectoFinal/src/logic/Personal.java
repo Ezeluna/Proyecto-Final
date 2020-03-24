@@ -14,12 +14,12 @@ public abstract class Personal {
 	protected String ciudad;
 	protected String direccion;
 	protected ArrayList<String> idiomas;
-	protected String fechaNacimiento;
+	protected int edad;
 	protected String telefono;
 	protected String correo;
 	protected int yearExperiencia;
 	protected boolean vehiculo;
-	protected boolean licencia;
+	protected int categoriaLicencia;
 	protected boolean dispViajar;
 	protected boolean mudarse;
 	protected boolean contratado;
@@ -27,8 +27,8 @@ public abstract class Personal {
 	protected LocalDate fechaContratado;
 	
 	public Personal(String cedula, String name, String apellido, String sexo, String nacionalidad, String ciudad,
-			String direccion, String fechaNacimiento, String telefono, String correo, int yearExperiencia, boolean vehiculo,
-			boolean licencia, boolean dispViajar, boolean mudarse, boolean contratado, String estudiosComplementarios) {
+			String direccion, int edad, String telefono, String correo, int yearExperiencia, boolean vehiculo,
+			int categoriaLicencia, boolean dispViajar, boolean mudarse, boolean contratado, String estudiosComplementarios) {
 		super();
 		this.cedula = cedula;
 		this.name = name;
@@ -38,12 +38,12 @@ public abstract class Personal {
 		this.ciudad = ciudad;
 		this.direccion = direccion;
 		idiomas = new ArrayList<String>();
-		this.fechaNacimiento = fechaNacimiento;
+		this.edad = edad;
 		this.telefono = telefono;
 		this.correo = correo;
 		this.yearExperiencia = yearExperiencia;
 		this.vehiculo = vehiculo;
-		this.licencia = licencia;
+		this.categoriaLicencia = categoriaLicencia;
 		this.dispViajar = dispViajar;
 		this.mudarse = mudarse;
 		this.contratado = contratado;
@@ -116,14 +116,6 @@ public abstract class Personal {
 		this.idiomas = idiomas;
 	}
 
-	public String getFechaNacimiento() {
-		return fechaNacimiento;
-	}
-
-	public void setFechaNacimiento(String fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
-	}
-
 	public String getTelefono() {
 		return telefono;
 	}
@@ -155,14 +147,7 @@ public abstract class Personal {
 	public void setVehiculo(boolean vehiculo) {
 		this.vehiculo = vehiculo;
 	}
-
-	public boolean isLicencia() {
-		return licencia;
-	}
-
-	public void setLicencia(boolean licencia) {
-		this.licencia = licencia;
-	}
+    
 
 	public boolean isDispViajar() {
 		return dispViajar;
@@ -210,6 +195,22 @@ public abstract class Personal {
 
 	public void setCedula(String cedula) {
 		this.cedula = cedula;
+	}
+
+	public int getCategoriaLicencia() {
+		return categoriaLicencia;
+	}
+
+	public void setCategoriaLicencia(int categoriaLicencia) {
+		this.categoriaLicencia = categoriaLicencia;
+	}
+
+	public int getEdad() {
+		return edad;
+	}
+
+	public void setEdad(int edad) {
+		this.edad = edad;
 	}
 	
 	
