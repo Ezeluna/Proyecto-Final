@@ -273,7 +273,7 @@ public class Bolsa_Laboral {
 		}
 	}
 	
-	public void contratarEmpleados(solicitudEmpresa solicitud, ArrayList<Personal> empleados) {// Contratar empleado
+	public void contratarEmpleados(Solicitud solicitud, ArrayList<Personal> empleados) {// Contratar empleado
 
 		Empresa empresa = solicitud.getEmpresa();
 		for (Personal solicitante : empleados) {
@@ -382,78 +382,6 @@ public class Bolsa_Laboral {
 		return eliminar;
 	}
 	
-	// SOLICITUD PERSONAL
-	
-	public void insertSolicitudP(solicitudPersona pSolicitud) {// Agregar una solicitud de persona
-		reqPersona.add(pSolicitud);
-	}
-
-	public boolean buscarSolicitudP(solicitudPersona pSolicitud) {// Devuelve un boolean si el solicitante existe
-		boolean find = false;
-		if (reqPersona.contains(pSolicitud)) {
-			find = true;
-		}
-		return find;
-	}
-	
-	public int cantidadSoliB() {// Retorna cantidad de solicitudes de bachilleres
-		int cant = 0;
-		for (solicitudPersona solici : reqPersona) {
-
-				if (solici.getGradoAcademico().equalsIgnoreCase("Bachiller")) {
-					cant++;
-				}
-		}
-		return cant;
-	}
-	
-	public int cantidadSoliT() {// Retorna cantidad de solicitudes de tecnicos 
-		int cant = 0;
-		for (solicitudPersona solici : reqPersona) {
-			
-				if (solici.getGradoAcademico().equalsIgnoreCase("Tecnico")) {
-					cant++;
-		    }
-		}
-		return cant;
-	}
-	
-	public int cantidadSoliU() {// Retorna cantidad de solicitudes de universitarios
-		int cant = 0;
-		for (solicitudPersona solici : reqPersona) {
-
-				if (solici.getGradoAcademico().equalsIgnoreCase("Universitario")) {
-					cant++;
-				}
-		}
-		return cant;
-	}
-
-
-	public solicitudPersona RetornarSolocitudP(String id) {// Retornar Solicitud de una persona pansando su id
-		solicitudPersona miSolicitud = null;
-		for (solicitudPersona solicitud : reqPersona) {
-			if (solicitud.getId().equalsIgnoreCase(id)) {
-				miSolicitud = solicitud;
-			}
-
-		}
-		return miSolicitud;
-	}
-	
-	public boolean EliminarSolicitudP(String id) {// borra una solicitud de una persona pasando su id
-		boolean eliminar = false;
-		solicitudPersona SolicitudEliminar = null;
-		for (solicitudPersona soli : reqPersona) {
-			if (soli.getId().equalsIgnoreCase(id)) {
-				SolicitudEliminar = soli;
-				eliminar = true;
-			}
-
-		}
-		reqPersona.remove(SolicitudEliminar);
-		return eliminar;
-	}
 	
 	
 	
