@@ -97,6 +97,23 @@ public class Empresa {
 		misEmpleadosC.add(empleadoC);
 	}
 	
-	//Probando
+	//Función para comprobar que sea un email válido
+	private void comprobarEmail(String correo) {
+		boolean arroba = false;
+		for(int i = 0; i<correo.length(); i++) {
+			
+			if(correo.charAt(i) == '@') { //chartAt devuelve el caracter en el indice que se especifica en la cadena
+				arroba = true;
+				
+			}
+		}
+		
+		if(arroba) {
+			this.email = correo;
+		}
+		else {
+			this.email = "Email no válido";
+		}
+	}
 
 }
