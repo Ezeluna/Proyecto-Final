@@ -1,9 +1,11 @@
 package logic;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Empresa {
+public class Empresa implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private String RNC;
 	private String nombre;
 	private String telefono;

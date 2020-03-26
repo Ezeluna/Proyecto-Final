@@ -3,6 +3,8 @@ package logic;
 import java.util.ArrayList;
 
 public class Bachiller extends Personal {
+	
+	private static final long serialVersionUID = 1L;
 	private ArrayList<String> habilidades;
 
 	public Bachiller(String cedula, String name, String apellido, String sexo, String nacionalidad, String ciudad,

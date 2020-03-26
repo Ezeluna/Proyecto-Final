@@ -1,10 +1,12 @@
 package logic;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public abstract class Personal {
+public abstract class Personal implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	protected String id; 
 	protected String cedula;
 	protected String name; 

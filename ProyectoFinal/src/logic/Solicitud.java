@@ -1,9 +1,11 @@
 package logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Solicitud {
+public abstract class Solicitud implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	protected String id; 
 	protected int cantVacantes;
 	protected int cantSolicitudes;

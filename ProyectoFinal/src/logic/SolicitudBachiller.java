@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class SolicitudBachiller extends Solicitud {
 	
+	private static final long serialVersionUID = 1L;
 	private ArrayList<String> habilidades; 
 
 	public SolicitudBachiller(String id, int cantVacantes, int cantSolicitudes, Empresa empresa, String direccion,

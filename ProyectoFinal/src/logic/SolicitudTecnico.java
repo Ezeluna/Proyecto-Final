@@ -2,6 +2,7 @@ package logic;
 
 public class SolicitudTecnico extends Solicitud {
 	
+	private static final long serialVersionUID = 1L;
 	private String area; 
 
 	public SolicitudTecnico(String id, int cantVacantes, int cantSolicitudes, Empresa empresa, String direccion,

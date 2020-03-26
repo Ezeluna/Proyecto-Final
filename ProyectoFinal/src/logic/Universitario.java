@@ -3,6 +3,8 @@ package logic;
 
 
 public class Universitario extends Personal {
+	
+	private static final long serialVersionUID = 1L;
 	private String carrera;
 	private boolean postGrado;
 

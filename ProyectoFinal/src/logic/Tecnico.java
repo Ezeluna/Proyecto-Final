@@ -1,6 +1,8 @@
 package logic;
 
 public class Tecnico extends Personal {
+	
+	private static final long serialVersionUID = 1L;
 	private String area;
 
 	public Tecnico(String cedula, String name, String apellido, String sexo, String nacionalidad, String ciudad,
