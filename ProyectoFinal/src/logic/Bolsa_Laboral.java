@@ -1,19 +1,22 @@
 package logic;
 
+import java.io.FileWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-
-
-
-
-
-
-public class Bolsa_Laboral {
+public class Bolsa_Laboral implements Serializable{
+	
+	private static final long serialVersionUID = 1L; 
 	
 	private ArrayList<Personal> misSolicitantes; 
 	private ArrayList<Empresa> misEmpresas; 
 	private ArrayList<Solicitud> misSolicitudes; 
-	public static Bolsa_Laboral bolsa;  
+	public static Bolsa_Laboral bolsa;
+	private FileWriter Fwriter; 
+	private String archivo = "Bolsa_Laboral.dat"; 
+	
 	
 	// CONSTRUCTOR
 	
@@ -156,7 +159,7 @@ public class Bolsa_Laboral {
 	
 
 	
-	 // PERSONAL
+	// PERSONAL
 	
 	//Insertar un solicitante
 	public void insertarSolicitante(Personal solicitante) {
@@ -376,6 +379,18 @@ public class Bolsa_Laboral {
 		return solicitudes;
 	}
 	
+	public Empresa RetornaEmpresaSoli(String rnc) {// Retorna una solicitud dado el rnc de una empresa
+		Empresa empre = null;
+		for (Empresa empresa : misEmpresas) {
+			if (empresa.getRNC().equalsIgnoreCase(rnc)) {
+				empre = empresa;
+			}
+
+		}
+		return empre;
+
+	}
+	
 	public boolean EliminarSolicitud(String id) {// borra una solicitud de empresa pasando su id
 		boolean eliminar = false;
 		Solicitud SolicitudEliminar = null;
@@ -388,6 +403,15 @@ public class Bolsa_Laboral {
 		}
 		misSolicitudes.remove(SolicitudEliminar);
 		return eliminar;
+	}
+	
+	public void ActualizarSolicitud(Solicitud modi, Solicitud modificarSoli) {// Actualizar una solicitud cuando se modifica
+		int index = 0;
+		if (misSolicitudes.contains(modi)) {
+			index = misSolicitudes.indexOf(modi);
+		}
+		misSolicitudes.set(index, modificarSoli);
+
 	}
 	
 	//MATCHING
@@ -414,13 +438,134 @@ public class Bolsa_Laboral {
 			if ((persona.getEdad() >= solicitud.getEdadMin()) && (persona.getEdad() <= solicitud.getEdadMax())) {
 				porciento++;
 			}
+			
+			if (validarIdiomas(persona, solicitud)) {
+				porciento++;
+			}
 		}
 
-		if (porciento >= 4) {// si se cumple el 70%
+		if (porciento >= 5) {// si se cumple el 70%
 			valido = true;
 		}
 
 		return valido;
+	}
+	
+	// VALIDACION DE IDIOMAS
+	
+	public boolean validarIdiomas(Personal persona, Solicitud soli) {
+		boolean aux = false;
+		if (soli.idiomas.size() == 0) {
+			aux = true;
+		}
+		for (String idiomas : soli.getIdiomas()) {
+			if (persona.getIdiomas().contains(idiomas)) {
+				aux = true;
+			} else {
+				aux = false;
+				break;
+
+			}
+		}
+
+		return aux;
+	}
+	
+	// VALIDACION BACHILLER SOL
+		private boolean ValidarBachiller(Personal solicitante, Solicitud solicitud) {
+			boolean validar = false;
+			for (String habilidadBachiller : ((SolicitudBachiller) solicitud).getHabilidades()) {
+				if (((Bachiller) solicitante).getHabilidades().contains(habilidadBachiller)) {
+					validar = true;
+				} else {
+					validar = false;
+					break;
+				}
+			}
+
+			return validar;
+		}
+	
+	// VALIDACION TECNICO SOL
+	private boolean ValidarTecnico(Personal solicitante, Solicitud soli) {
+		boolean validar = false;
+		if (((Tecnico) solicitante).getArea().equalsIgnoreCase(((SolicitudTecnico) soli).getArea())) {
+			validar = true;
+		}
+		return validar;
+	}
+
+	// VALIDACION UNIVERSITARIO SOL
+	private boolean validarUniversitario(Personal solicitante, Solicitud soli) {
+		boolean validar = false;
+		if (((Universitario) solicitante).getCarrera().equalsIgnoreCase(((SolicitudUniversitario) soli).getCarrera())) {
+			validar = true;
+			if (!((Universitario) solicitante).isPostGrado() && ((SolicitudUniversitario) soli).isPostGrado()) {
+				validar = false;
+			}
+
+		}
+		return validar;
+	}
+	
+	// VALIDACION CORREO
+	public boolean validarCorreo(String correo) {
+		Pattern patt = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+		Matcher match = patt.matcher(correo);
+			if (!match.find()) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	
+	// MATCHEO GENERAL
+	public ArrayList<Personal> matcheo(Solicitud soli) {
+
+		ArrayList<Personal> candidato = new ArrayList<>();
+		if (soli instanceof SolicitudBachiller) {
+			for (Personal solicitante : misSolicitantes) {
+				if (solicitante instanceof Bachiller) {
+					if (validarGeneral(solicitante, soli)) {
+						if (ValidarBachiller(solicitante, soli)) {
+							candidato.add(solicitante);
+							
+
+						}
+					}
+				}
+			}
+
+		}
+
+		if (soli instanceof SolicitudTecnico) {
+			for (Personal solicitante : misSolicitantes) {
+				if (solicitante instanceof Tecnico) {
+					if (validarGeneral(solicitante, soli)) {
+						if (ValidarTecnico(solicitante, soli)) {
+							candidato.add(solicitante);
+							
+						}
+
+					}
+				}
+			}
+		}
+		if (soli instanceof SolicitudUniversitario) {
+			for (Personal solicitante : misSolicitantes) {
+				if (solicitante instanceof Universitario) {
+					if (validarGeneral(solicitante, soli)) {
+						if (validarUniversitario(solicitante, soli)) {
+							candidato.add(solicitante);
+							
+						}
+
+					}
+				}
+			}
+		}
+
+		return candidato;
 	}
 	
 	
