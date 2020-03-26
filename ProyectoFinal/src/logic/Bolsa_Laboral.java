@@ -1,8 +1,15 @@
 package logic;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -163,7 +170,8 @@ public class Bolsa_Laboral implements Serializable{
 	
 	//Insertar un solicitante
 	public void insertarSolicitante(Personal solicitante) {
-		
+		String id = getIdSolicitante();
+		solicitante.setId(id);;
 		solicitante.setContratado(false);
 		misSolicitantes.add(solicitante);
 	}
@@ -285,6 +293,8 @@ public class Bolsa_Laboral implements Serializable{
 	// SOLICITUD EMPRESA
 	
 	public void insertSolicitud(Solicitud solicitud) {// Agregar una solicitud al arraylist
+		String id = getIdSolicitud();
+		solicitud.setId(id);;
 		misSolicitudes.add(solicitud);
 	}
 
@@ -413,6 +423,223 @@ public class Bolsa_Laboral implements Serializable{
 		misSolicitudes.set(index, modificarSoli);
 
 	}
+	
+	// PERSONAL SOLICITUD
+	
+	public int cantSolicitanteUniversitario() {// devuelve cantidad de solicitantes universitarios
+
+		int cant = 0;
+		for (Personal solicitante : misSolicitantes) {
+			if (solicitante instanceof Universitario) {
+				cant++;
+			}
+		}
+
+		return cant;
+	}
+
+	public int cantSolicitanteTecnico() {// devuelve cantidad de solicitantes tecnicos
+
+		int cant = 0;
+		for (Personal solicitante : misSolicitantes) {
+			if (solicitante instanceof Tecnico) {
+				cant++;
+			}
+		}
+
+		return cant;
+	}
+
+	public int cantSolicitanteBachiller() {// devuelve cantidad de solicitantes bachilleres
+
+		int cant = 0;
+		for (Personal solicitante : misSolicitantes) {
+			if (solicitante instanceof Bachiller) {
+				cant++;
+			}
+		}
+
+		return cant;
+	}
+	
+	public int desempleadoU() {// Retornar cant. Universitarios desempleados
+		int cant = 0;
+		for (Personal soli : misSolicitantes) {
+			if (!soli.isContratado()) {
+				if (soli instanceof Universitario) {
+					cant++;
+				}
+			}
+		}
+		return cant;
+	}
+
+	public int desempleadoT() {// Retornar cant. Tecnicos desempleados
+		int cant = 0;
+		for (Personal soli : misSolicitantes) {
+			if (!soli.isContratado()) {
+				if (soli instanceof Tecnico) {
+					cant++;
+				}
+			}
+		}
+		return cant;
+	}
+
+	public int desempleadoB() {// Retornar cant. Bachilleres desempleados
+		int cant = 0;
+		for (Personal soli : misSolicitantes) {
+			if (!soli.isContratado()) {
+				if (soli instanceof Bachiller) {
+					cant++;
+				}
+			}
+		}
+		return cant;
+	}
+	
+	public int totalContratado() {// Retorna total de contratados
+		int cant = 0;
+		for (Personal soli : misSolicitantes) {
+			if (soli.isContratado()) {
+				cant++;
+			}
+		}
+		return cant;
+	}
+	
+	// PORCIENTOS 
+	
+	public float porcientoSolicitud(Solicitud soli) {// RETORNA EL PORCIENTO DE LAS SOLICITUDES ACTIVAS
+		float por = 0;
+		if (soli.getCantSolicitudes() != soli.cantVacantes) {
+			float cantTotal = soli.getCantVacantes();
+			float cantActual = soli.getCantSolicitudes();
+			por = (cantActual / cantTotal) * 100;
+		} else {
+			por = 100;
+		}
+		return por;
+	}
+	
+	public float porcientoU() {// Retorna % de Universitarios Contratados
+		float cant = 0;
+		float porciento = 0;
+		float total = totalContratado();
+		for (Personal soli : misSolicitantes) {
+			if (soli instanceof Universitario) {
+				if (soli.isContratado()) {
+					cant++;
+				}
+			}
+		}
+		if (total != 0) {
+			porciento = (cant / total) * 100;
+		}
+		return porciento;
+	}
+
+	public float porcientoT() {// Retorna % de Tecnicos Contratados
+		float cant = 0;
+		float porciento = 0;
+		float total = totalContratado();
+		for (Personal soli : misSolicitantes) {
+			if (soli instanceof Tecnico) {
+				if (soli.isContratado()) {
+					cant++;
+				}
+			}
+		}
+		if (total != 0) {
+			porciento = (cant / total) * 100;
+		}
+		return porciento;
+	}
+	
+	public float porcientoB() {// Retorna % de Bachilleres Contratados
+		float cant = 0;
+		float porciento = 0;
+		float total = totalContratado();
+		for (Personal soli : misSolicitantes) {
+			if (soli instanceof Bachiller) {
+				if (soli.isContratado()) {
+					cant++;
+				}
+			}
+		}
+		if (total != 0) {
+			porciento = (cant / total) * 100;
+		}
+		return porciento;
+	}
+	
+	public float porcientoF() {// Retorna % de Bachilleres femeninos Contratado
+		float cant = 0;
+		float porciento = 0;
+		float total = totalContratado();
+		for (Personal soli : misSolicitantes) {
+			if (soli instanceof Bachiller) {
+				if (soli.isContratado()) {
+					if (soli.sexo.equalsIgnoreCase("Femenino")) {
+						cant++;
+					}
+				}
+			}
+			if (soli instanceof Universitario) {
+				if (soli.isContratado()) {
+					if (soli.sexo.equalsIgnoreCase("Femenino")) {
+						cant++;
+					}
+				}
+			}
+			if (soli instanceof Tecnico) {
+				if (soli.isContratado()) {
+					if (soli.sexo.equalsIgnoreCase("Femenino")) {
+						cant++;
+					}
+				}
+			}
+		}
+		if (total != 0) {
+			porciento = (cant / total) * 100;
+		}
+		return porciento;
+	}
+	
+	public float porcientoH() {// retorna el % de Bachilleres masculinos contratados
+		float cant = 0;
+		float porciento = 0;
+		float total = totalContratado();
+		for (Personal soli : misSolicitantes) {
+			if (soli instanceof Bachiller) {
+				if (soli.isContratado()) {
+					if (soli.sexo.equalsIgnoreCase("Masculino")) {
+						cant++;
+					}
+				}
+			}
+			if (soli instanceof Universitario) {
+				if (soli.isContratado()) {
+					if (soli.sexo.equalsIgnoreCase("Masculino")) {
+						cant++;
+					}
+				}
+			}
+			if (soli instanceof Tecnico) {
+				if (soli.isContratado()) {
+					if (soli.sexo.equalsIgnoreCase("Masculino")) {
+						cant++;
+					}
+				}
+			}
+		}
+		if (total != 0) {
+			porciento = (cant / total) * 100;
+		}
+		return porciento;
+	}
+
+	
 	
 	//MATCHING
 	
@@ -567,6 +794,88 @@ public class Bolsa_Laboral implements Serializable{
 
 		return candidato;
 	}
+	
+	// FICHEROS 
+	
+	public String getIdSolicitud() { // Generacion de Codigos para solicitud
+		String code = "";
+		String codigo = "";
+		long milis = new java.util.GregorianCalendar().getTimeInMillis();
+		Random r = new Random(milis);
+		for (int i = 0; i < 3;) {
+			char c = (char) r.nextInt(225);
+			if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z')) {
+				code += c;
+				i++;
+			}
+
+		}
+		codigo = "SO" + code;
+		return codigo;
+	}
+	public String getIdSolicitante() {// Generacion de Codigos para solicitantes 
+		String code = "";
+		String codigo = "";
+		long milis = new java.util.GregorianCalendar().getTimeInMillis();
+		Random r = new Random(milis);
+		for (int i = 0; i < 3;) {
+			char c = (char) r.nextInt(225);
+			if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z')) {
+				code += c;
+				i++;
+			}
+
+		}
+		codigo = "S" + code;
+		return codigo;
+	}
+	
+	public void writeBolsa() {
+		FileOutputStream bolsaFile = null;
+		ObjectOutputStream bolsaOut = null;
+
+		try {
+			bolsaFile = new FileOutputStream(archivo);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			bolsaOut = new ObjectOutputStream(bolsaFile);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			bolsaOut.writeObject(bolsa);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void readBolsa() {
+		FileInputStream bolsaFile = null;
+		ObjectInputStream bolsaIn = null;
+		try {
+			bolsaFile = new FileInputStream("Bolsa_Laboral.dat");
+			bolsaIn = new ObjectInputStream(bolsaFile);
+			try {
+				bolsa = (Bolsa_Laboral) bolsaIn.readObject();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	
 	
 }
