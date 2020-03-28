@@ -22,6 +22,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSpinner;
 import javax.swing.SwingConstants;
 import javax.swing.JFormattedTextField;
+import java.awt.CardLayout;
 
 public class InsertarSolicitante extends JDialog {
 
@@ -74,11 +75,10 @@ public class InsertarSolicitante extends JDialog {
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
+		contentPanel.setLayout(new CardLayout(0, 0));
 		{
 			JPanel panel1 = new JPanel();
-			panel1.setBounds(0, 0, 596, 381);
-			contentPanel.add(panel1);
+			contentPanel.add(panel1, "name_428725178558000");
 			panel1.setLayout(null);
 			{
 				JPanel panelInformacionGe = new JPanel();
@@ -239,8 +239,7 @@ public class InsertarSolicitante extends JDialog {
 		}
 		{
 			JPanel panel2 = new JPanel();
-			panel2.setBounds(0, 0, 596, 381);
-			contentPanel.add(panel2);
+			contentPanel.add(panel2, "name_428725249088700");
 		}
 		{
 			JPanel buttonPane = new JPanel();
