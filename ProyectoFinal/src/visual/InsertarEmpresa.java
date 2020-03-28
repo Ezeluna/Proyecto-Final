@@ -58,7 +58,7 @@ public class InsertarEmpresa extends JDialog {
 	 * Create the dialog.
 	 * @throws ParseException 
 	 */
-	public InsertarEmpresa(String title, boolean modi, Empresa empresa, String RNCsoli) throws ParseException {
+	public InsertarEmpresa(String title, boolean modi, Empresa empresa, String RNCsoli)  {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
@@ -92,11 +92,18 @@ public class InsertarEmpresa extends JDialog {
 		lblrea.setBounds(10, 100, 62, 14);
 		pnlInformacion.add(lblrea);
 		
-		MaskFormatter mascara = new MaskFormatter("##########");
-		ftxtRNC = new JFormattedTextField(mascara);
-		ftxtRNC.setBackground(Color.WHITE);
-		ftxtRNC.setBounds(93, 17, 174, 23);
-		pnlInformacion.add(ftxtRNC);
+		MaskFormatter mascara;
+		try {
+			mascara = new MaskFormatter("##########");
+			ftxtRNC = new JFormattedTextField(mascara);
+			ftxtRNC.setBackground(Color.WHITE);
+			ftxtRNC.setBounds(93, 17, 174, 23);
+			pnlInformacion.add(ftxtRNC);
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		
 		
 		JLabel lblName = new JLabel("Nombre:");
 		lblName.setBounds(312, 34, 62, 14);
@@ -131,12 +138,19 @@ public class InsertarEmpresa extends JDialog {
 		txtEmail.setBounds(405, 80, 174, 23);
 		pnlInformacion.add(txtEmail);
 		
-		MaskFormatter mascara1 = new MaskFormatter("###-###-####");
-		ftxtTelf = new JFormattedTextField(mascara1);
-		ftxtTelf.setColumns(10);
-		ftxtTelf.setBackground(Color.WHITE);
-		ftxtTelf.setBounds(93, 57, 174, 23);
-		pnlInformacion.add(ftxtTelf);
+		MaskFormatter mascara1;
+		try {
+			mascara1 = new MaskFormatter("###-###-####");
+			ftxtTelf = new JFormattedTextField(mascara1);
+			ftxtTelf.setColumns(10);
+			ftxtTelf.setBackground(Color.WHITE);
+			ftxtTelf.setBounds(93, 57, 174, 23);
+			pnlInformacion.add(ftxtTelf);
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		
 		JLabel lblTelf = new JLabel("Tel\u00E9fono:");
 		lblTelf.setBounds(10, 62, 62, 14);
@@ -416,8 +430,7 @@ public class InsertarEmpresa extends JDialog {
 									txtEmail.setText(null);
 
 								} else {
-									Bolsa_Laboral.getInstance().insertEmpresa(
-											miEmpre);
+									Bolsa_Laboral.getInstance().insertEmpresa(miEmpre);
 									if (RNCsoli == null) {
 										ftxtRNC.setText(null);
 									}
