@@ -8,8 +8,12 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.MaskFormatter;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.ParseException;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
@@ -17,19 +21,28 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSpinner;
 import javax.swing.SwingConstants;
+import javax.swing.JFormattedTextField;
 
 public class InsertarSolicitante extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JPanel panel1;
 	private JPanel panel2;
-	private JTextField textCedula;
 	private JTextField textNombre;
 	private JTextField textApellidos;
 	private JTextField textCiudad;
 	private JTextField textSector;
 	private JTextField textCalle;
 	private JTextField textReferencia;
+	private JFormattedTextField ftextCedula;
+	private JComboBox cbxLicencia;
+	private JComboBox cbxProvincias;
+	private JComboBox cbxEstadoCivil;
+	private JComboBox cbxNacionalidad;
+	private JRadioButton rdbMasculino;
+	private JRadioButton rdbFemenino;
+	private JSpinner spnNumeroCasa;
+	
 
 	/**
 	 * Launch the application.
@@ -78,11 +91,6 @@ public class InsertarSolicitante extends JDialog {
 					lblCedula.setBounds(10, 33, 44, 14);
 					panelInformacionGe.add(lblCedula);
 				}
-				
-				textCedula = new JTextField();
-				textCedula.setBounds(89, 30, 131, 20);
-				panelInformacionGe.add(textCedula);
-				textCedula.setColumns(10);
 				{
 					JLabel lblNombre = new JLabel("Nombre:");
 					lblNombre.setBounds(10, 64, 56, 14);
@@ -116,11 +124,11 @@ public class InsertarSolicitante extends JDialog {
 					panelInformacionGe.add(lblSexo);
 				}
 				
-				JRadioButton rdbMasculino = new JRadioButton("M");
+				rdbMasculino = new JRadioButton("M");
 				rdbMasculino.setBounds(382, 29, 44, 23);
 				panelInformacionGe.add(rdbMasculino);
 				
-				JRadioButton rdbFemenino = new JRadioButton("F");
+				rdbFemenino = new JRadioButton("F");
 				rdbFemenino.setBounds(428, 29, 56, 23);
 				panelInformacionGe.add(rdbFemenino);
 				
@@ -128,7 +136,7 @@ public class InsertarSolicitante extends JDialog {
 				lblEstadoCivil.setBounds(295, 64, 79, 14);
 				panelInformacionGe.add(lblEstadoCivil);
 				
-				JComboBox cbxEstadoCivil = new JComboBox();
+				cbxEstadoCivil = new JComboBox();
 				cbxEstadoCivil.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Casado / Unido", "Divorceado / Viudo", "Soltero"}));
 				cbxEstadoCivil.setBounds(382, 60, 133, 22);
 				panelInformacionGe.add(cbxEstadoCivil);
@@ -137,7 +145,7 @@ public class InsertarSolicitante extends JDialog {
 				lblNacionalidad.setBounds(295, 95, 79, 14);
 				panelInformacionGe.add(lblNacionalidad);
 				
-				JComboBox cbxNacionalidad = new JComboBox();
+				cbxNacionalidad = new JComboBox();
 				cbxNacionalidad.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Alemana", "Argentina", "Belga", "Boliviana", "Brasile\u00F1a", "Canadiense", "China", "Colombiana", "Costarricense", "Cubana", "Danesa", "Dominicana", "Espa\u00F1ola", "Filipina", "Francesa", "Griega", "Guatemalteca", "Haitiana", "Holandesa", "Hondure\u00F1a", "Inglesa", "Israel\u00ED", "Italiana", "Jamaiquina", "Japonesa", "Estadounidense", "Mexicana", "Peruana", "Puertorrique\u00F1a", "Rusa", "Sueca", "Suiza", "Surcoreana", "Venezolana"}));
 				cbxNacionalidad.setBounds(382, 91, 133, 22);
 				panelInformacionGe.add(cbxNacionalidad);
@@ -146,10 +154,22 @@ public class InsertarSolicitante extends JDialog {
 				lblLicencia.setBounds(295, 126, 56, 14);
 				panelInformacionGe.add(lblLicencia);
 				
-				JComboBox cbxLicencia = new JComboBox();
+				cbxLicencia = new JComboBox();
 				cbxLicencia.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "No Poseo Licencia", "Categor\u00EDa 1", "Categor\u00EDa 2", "Categor\u00EDa 3", "Categor\u00EDa 4"}));
 				cbxLicencia.setBounds(382, 122, 133, 22);
 				panelInformacionGe.add(cbxLicencia);
+				
+				MaskFormatter mascaraCedula;
+				try {
+					mascaraCedula = new MaskFormatter("###-#######-#");
+					mascaraCedula.setPlaceholderCharacter('_');
+				    ftextCedula = new JFormattedTextField(mascaraCedula);
+				    ftextCedula.setBounds(89, 30, 131, 20);
+				    panelInformacionGe.add(ftextCedula);
+				
+				}catch (ParseException e) {
+					e.printStackTrace();
+				}
 			}
 			
 			JPanel panelUbicacionA = new JPanel();
@@ -163,7 +183,7 @@ public class InsertarSolicitante extends JDialog {
 				panelUbicacionA.add(lblProvincia);
 			}
 			{
-				JComboBox cbxProvincias = new JComboBox();
+				cbxProvincias = new JComboBox();
 				cbxProvincias.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Azua", "Bahoruco", "Barahona", "Dajab\u00F3n", "Distrito Nacional", "Duarte", "El\u00EDas Pi\u00F1a", "El Seibo", "Espaillat", "Hato Mayor", "Hermanas Mirabal", "Independencia", "La Altagracia", "La Romana", "La Vega", "Mar\u00EDa Trinidad S\u00E1nchez", "Monse\u00F1or Nouel", "Monte Cristi", "Monte Plata", "Pedernales", "Peravia", "Puerto Plata", "Saman\u00E1", "S\u00E1nchez Ram\u00EDrez", "San Crist\u00F3bal", "San Jos\u00E9 de Ocoa", "San Juan", "San Pedro de Macor\u00EDs", "Santiago", "Santiago Rodr\u00EDguez", "Santo Domingo", "Valverde"}));
 				cbxProvincias.setBounds(97, 26, 131, 22);
 				panelUbicacionA.add(cbxProvincias);
@@ -204,7 +224,7 @@ public class InsertarSolicitante extends JDialog {
 				panelUbicacionA.add(lblNumeroCasa);
 			}
 			
-			JSpinner spnNumeroCasa = new JSpinner();
+			spnNumeroCasa = new JSpinner();
 			spnNumeroCasa.setBounds(391, 73, 131, 20);
 			panelUbicacionA.add(spnNumeroCasa);
 			
