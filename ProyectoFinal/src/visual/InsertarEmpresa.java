@@ -68,6 +68,7 @@ public class InsertarEmpresa extends JDialog {
 				}
 			}
 		});
+		miEmpresa = empresa; 
 		setResizable(false);
 		setBounds(100, 100, 614, 425);
 		getContentPane().setLayout(new BorderLayout());
@@ -75,6 +76,7 @@ public class InsertarEmpresa extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		setLocationRelativeTo(null);
+		setTitle(title);
 		
 		JPanel pnlInformacion = new JPanel();
 		pnlInformacion.setBorder(new TitledBorder(null, "Informaci\u00F3n:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
