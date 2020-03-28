@@ -15,6 +15,7 @@ import java.awt.event.WindowEvent;
 import java.text.ParseException;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
@@ -23,6 +24,8 @@ import javax.swing.JSpinner;
 import javax.swing.SwingConstants;
 import javax.swing.JFormattedTextField;
 import java.awt.CardLayout;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class InsertarSolicitante extends JDialog {
 
@@ -98,6 +101,17 @@ public class InsertarSolicitante extends JDialog {
 				}
 				{
 					textNombre = new JTextField();
+					textNombre.addKeyListener(new KeyAdapter() {
+						@Override
+						public void keyTyped(KeyEvent e) {
+							char validar= e.getKeyChar();
+							if(Character.isDigit(validar)) {
+								getToolkit ().beep();
+								e.consume();
+								JOptionPane.showMessageDialog(null, "No se permiten números");
+							}
+						}
+					});
 					textNombre.setBounds(89, 61, 131, 20);
 					panelInformacionGe.add(textNombre);
 					textNombre.setColumns(10);
@@ -109,6 +123,17 @@ public class InsertarSolicitante extends JDialog {
 				}
 				{
 					textApellidos = new JTextField();
+					textApellidos.addKeyListener(new KeyAdapter() {
+						@Override
+						public void keyTyped(KeyEvent e) {
+							char validar= e.getKeyChar();
+							if(Character.isDigit(validar)) {
+								getToolkit ().beep();
+								e.consume();
+								JOptionPane.showMessageDialog(null, "No se permiten números");
+							}
+						}
+					});
 					textApellidos.setBounds(89, 92, 131, 20);
 					panelInformacionGe.add(textApellidos);
 					textApellidos.setColumns(10);
@@ -202,6 +227,7 @@ public class InsertarSolicitante extends JDialog {
 			JLabel lblSector = new JLabel("Sector: ");
 			lblSector.setBounds(10, 122, 59, 14);
 			panelUbicacionA.add(lblSector);
+			
 			
 			textSector = new JTextField();
 			textSector.setBounds(97, 119, 131, 20);
