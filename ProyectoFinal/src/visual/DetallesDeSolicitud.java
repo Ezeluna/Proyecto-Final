@@ -44,7 +44,7 @@ public class DetallesDeSolicitud extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			
-			JOptionPane.showMessageDialog(null, "No se permiten números");
+			
 			
 			{
 				JButton okButton = new JButton("OK");
