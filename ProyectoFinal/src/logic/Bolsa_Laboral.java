@@ -227,7 +227,7 @@ public class Bolsa_Laboral implements Serializable{
 				solicitante.setName(solicit.getName());
 				solicitante.setApellido(solicit.getApellido());
 				solicitante.setTelefono(solicit.getTelefono());
-				solicitante.setDireccion(solicit.getDireccion());
+				solicitante.setSector(solicit.getSector());
 				solicitante.setCiudad(solicit.getCiudad());
 				solicitante.setCorreo(solicit.getCorreo());
 				solicitante.setEdad(solicit.getEdad());

@@ -13,6 +13,10 @@ import java.awt.event.WindowEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JSpinner;
+import javax.swing.SwingConstants;
 
 public class InsertarSolicitante extends JDialog {
 
@@ -22,6 +26,10 @@ public class InsertarSolicitante extends JDialog {
 	private JTextField textCedula;
 	private JTextField textNombre;
 	private JTextField textApellidos;
+	private JTextField textCiudad;
+	private JTextField textSector;
+	private JTextField textCalle;
+	private JTextField textReferencia;
 
 	/**
 	 * Launch the application.
@@ -104,18 +112,110 @@ public class InsertarSolicitante extends JDialog {
 				}
 				{
 					JLabel lblSexo = new JLabel("Sexo:");
-					lblSexo.setBounds(310, 33, 46, 14);
+					lblSexo.setBounds(295, 33, 46, 14);
 					panelInformacionGe.add(lblSexo);
 				}
 				
 				JRadioButton rdbMasculino = new JRadioButton("M");
-				rdbMasculino.setBounds(355, 29, 44, 23);
+				rdbMasculino.setBounds(382, 29, 44, 23);
 				panelInformacionGe.add(rdbMasculino);
 				
 				JRadioButton rdbFemenino = new JRadioButton("F");
-				rdbFemenino.setBounds(414, 29, 56, 23);
+				rdbFemenino.setBounds(428, 29, 56, 23);
 				panelInformacionGe.add(rdbFemenino);
+				
+				JLabel lblEstadoCivil = new JLabel("Estado Civil:");
+				lblEstadoCivil.setBounds(295, 64, 79, 14);
+				panelInformacionGe.add(lblEstadoCivil);
+				
+				JComboBox cbxEstadoCivil = new JComboBox();
+				cbxEstadoCivil.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Casado / Unido", "Divorceado / Viudo", "Soltero"}));
+				cbxEstadoCivil.setBounds(382, 60, 133, 22);
+				panelInformacionGe.add(cbxEstadoCivil);
+				
+				JLabel lblNacionalidad = new JLabel("Nacionalidad:");
+				lblNacionalidad.setBounds(295, 95, 79, 14);
+				panelInformacionGe.add(lblNacionalidad);
+				
+				JComboBox cbxNacionalidad = new JComboBox();
+				cbxNacionalidad.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Alemana", "Argentina", "Belga", "Boliviana", "Brasile\u00F1a", "Canadiense", "China", "Colombiana", "Costarricense", "Cubana", "Danesa", "Dominicana", "Espa\u00F1ola", "Filipina", "Francesa", "Griega", "Guatemalteca", "Haitiana", "Holandesa", "Hondure\u00F1a", "Inglesa", "Israel\u00ED", "Italiana", "Jamaiquina", "Japonesa", "Estadounidense", "Mexicana", "Peruana", "Puertorrique\u00F1a", "Rusa", "Sueca", "Suiza", "Surcoreana", "Venezolana"}));
+				cbxNacionalidad.setBounds(382, 91, 133, 22);
+				panelInformacionGe.add(cbxNacionalidad);
+				
+				JLabel lblLicencia = new JLabel("Licencia: ");
+				lblLicencia.setBounds(295, 126, 56, 14);
+				panelInformacionGe.add(lblLicencia);
+				
+				JComboBox cbxLicencia = new JComboBox();
+				cbxLicencia.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "No Poseo Licencia", "Categor\u00EDa 1", "Categor\u00EDa 2", "Categor\u00EDa 3", "Categor\u00EDa 4"}));
+				cbxLicencia.setBounds(382, 122, 133, 22);
+				panelInformacionGe.add(cbxLicencia);
 			}
+			
+			JPanel panelUbicacionA = new JPanel();
+			panelUbicacionA.setBorder(new TitledBorder(null, "Ubicaci\u00F3n Actual", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panelUbicacionA.setBounds(10, 205, 576, 165);
+			panel1.add(panelUbicacionA);
+			panelUbicacionA.setLayout(null);
+			{
+				JLabel lblProvincia = new JLabel("Provincia: ");
+				lblProvincia.setBounds(10, 30, 59, 14);
+				panelUbicacionA.add(lblProvincia);
+			}
+			{
+				JComboBox cbxProvincias = new JComboBox();
+				cbxProvincias.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Azua", "Bahoruco", "Barahona", "Dajab\u00F3n", "Distrito Nacional", "Duarte", "El\u00EDas Pi\u00F1a", "El Seibo", "Espaillat", "Hato Mayor", "Hermanas Mirabal", "Independencia", "La Altagracia", "La Romana", "La Vega", "Mar\u00EDa Trinidad S\u00E1nchez", "Monse\u00F1or Nouel", "Monte Cristi", "Monte Plata", "Pedernales", "Peravia", "Puerto Plata", "Saman\u00E1", "S\u00E1nchez Ram\u00EDrez", "San Crist\u00F3bal", "San Jos\u00E9 de Ocoa", "San Juan", "San Pedro de Macor\u00EDs", "Santiago", "Santiago Rodr\u00EDguez", "Santo Domingo", "Valverde"}));
+				cbxProvincias.setBounds(97, 26, 131, 22);
+				panelUbicacionA.add(cbxProvincias);
+			}
+			{
+				JLabel lblCiudad = new JLabel("Ciudad: ");
+				lblCiudad.setBounds(10, 76, 59, 14);
+				panelUbicacionA.add(lblCiudad);
+			}
+			
+			textCiudad = new JTextField();
+			textCiudad.setBounds(97, 73, 131, 20);
+			panelUbicacionA.add(textCiudad);
+			textCiudad.setColumns(10);
+			
+			JLabel lblSector = new JLabel("Sector: ");
+			lblSector.setBounds(10, 122, 59, 14);
+			panelUbicacionA.add(lblSector);
+			
+			textSector = new JTextField();
+			textSector.setBounds(97, 119, 131, 20);
+			panelUbicacionA.add(textSector);
+			textSector.setColumns(10);
+			{
+				JLabel lblCalle = new JLabel("Calle:");
+				lblCalle.setBounds(307, 30, 46, 14);
+				panelUbicacionA.add(lblCalle);
+			}
+			{
+				textCalle = new JTextField();
+				textCalle.setBounds(391, 27, 131, 20);
+				panelUbicacionA.add(textCalle);
+				textCalle.setColumns(10);
+			}
+			{
+				JLabel lblNumeroCasa = new JLabel("N\u00FAmero:");
+				lblNumeroCasa.setBounds(307, 76, 52, 14);
+				panelUbicacionA.add(lblNumeroCasa);
+			}
+			
+			JSpinner spnNumeroCasa = new JSpinner();
+			spnNumeroCasa.setBounds(391, 73, 131, 20);
+			panelUbicacionA.add(spnNumeroCasa);
+			
+			JLabel lblReferencia = new JLabel("Referencia:");
+			lblReferencia.setBounds(307, 122, 74, 14);
+			panelUbicacionA.add(lblReferencia);
+			
+			textReferencia = new JTextField();
+			textReferencia.setBounds(391, 119, 131, 20);
+			panelUbicacionA.add(textReferencia);
+			textReferencia.setColumns(10);
 		}
 		{
 			JPanel panel2 = new JPanel();
@@ -126,16 +226,20 @@ public class InsertarSolicitante extends JDialog {
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			
+			JButton btnContinuar = new JButton("Continuar");
+			buttonPane.add(btnContinuar);
 			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+				JButton btnRegistrar = new JButton("Registrar");
+				btnRegistrar.setHorizontalAlignment(SwingConstants.RIGHT);
+				btnRegistrar.setActionCommand("OK");
+				buttonPane.add(btnRegistrar);
+				getRootPane().setDefaultButton(btnRegistrar);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+				JButton btnCancelar = new JButton("Cancelar");
+				btnCancelar.setActionCommand("Cancel");
+				buttonPane.add(btnCancelar);
 			}
 		}
 	}

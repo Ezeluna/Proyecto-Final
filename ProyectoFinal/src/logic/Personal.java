@@ -13,8 +13,12 @@ public abstract class Personal implements Serializable {
 	protected String apellido; 
 	protected String sexo; 
 	protected String nacionalidad;
+	protected String provincia;
 	protected String ciudad;
-	protected String direccion;
+	protected String sector;
+	protected String calle;
+	protected String numeroCasa;
+	protected String referencia;
 	protected ArrayList<String> idiomas;
 	protected int edad;
 	protected String telefono;
@@ -28,8 +32,8 @@ public abstract class Personal implements Serializable {
 	protected String estudiosComplementarios;
 	protected LocalDate fechaContratado;
 	
-	public Personal(String cedula, String name, String apellido, String sexo, String nacionalidad, String ciudad,
-			String direccion, int edad, String telefono, String correo, int yearExperiencia, boolean vehiculo,
+	public Personal(String cedula, String name, String apellido, String sexo, String nacionalidad, String provincia,
+			String ciudad, String sector, String calle, String numeroCasa, String referencia, int edad, String telefono, String correo, int yearExperiencia, boolean vehiculo,
 			int categoriaLicencia, boolean dispViajar, boolean mudarse, boolean contratado, String estudiosComplementarios) {
 		super();
 		this.cedula = cedula;
@@ -37,8 +41,12 @@ public abstract class Personal implements Serializable {
 		this.apellido = apellido;
 		this.sexo = sexo;
 		this.nacionalidad = nacionalidad;
+		this.provincia = provincia;
 		this.ciudad = ciudad;
-		this.direccion = direccion;
+		this.sector = sector;
+		this.calle = calle;
+		this.numeroCasa = numeroCasa;
+		this.referencia = referencia;
 		idiomas = new ArrayList<String>();
 		this.edad = edad;
 		this.telefono = telefono;
@@ -94,6 +102,14 @@ public abstract class Personal implements Serializable {
 		this.nacionalidad = nacionalidad;
 	}
 
+	public String getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
+
 	public String getCiudad() {
 		return ciudad;
 	}
@@ -102,12 +118,37 @@ public abstract class Personal implements Serializable {
 		this.ciudad = ciudad;
 	}
 
-	public String getDireccion() {
-		return direccion;
+	public String getSector() {
+		return sector;
 	}
 
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
+	public void setSector(String sector) {
+		this.sector = sector;
+	}
+
+	public String getCalle() {
+		return calle;
+	}
+
+	public void setCalle(String calle) {
+		this.calle = calle;
+	}
+
+	public String getNumeroCasa() {
+		return numeroCasa;
+	}
+
+	public void setNumeroCasa(String numeroCasa) {
+		this.numeroCasa = numeroCasa;
+	}
+	
+
+	public String getReferencia() {
+		return referencia;
+	}
+
+	public void setReferencia(String referencia) {
+		this.referencia = referencia;
 	}
 
 	public ArrayList<String> getIdiomas() {
