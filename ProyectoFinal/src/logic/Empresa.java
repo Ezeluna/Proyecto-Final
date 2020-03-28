@@ -9,21 +9,29 @@ public class Empresa implements Serializable {
 	private String RNC;
 	private String nombre;
 	private String telefono;
+	private String provincia; 
 	private String ciudad;
 	private String direccion;
+	private String calle; 
+	private int numeroLocal; 
 	private String area; 
 	private String email;
+	private String referencia; 
 	private ArrayList<Personal> misEmpleadosC;
 	
-	public Empresa(String RNC, String nombre, String telefono, String ciudad, String direccion, String area, String email) {
+	public Empresa(String RNC, String nombre, String telefono, String provincia, String ciudad, String direccion, String calle, int numeroLocal, String area, String email, String referencia) {
 		super();
 		this.RNC = RNC;
 		this.nombre = nombre;
 		this.telefono = telefono;
+		this.provincia = provincia; 
 		this.ciudad = ciudad;
 		this.direccion = direccion;
+		this.calle = calle; 
+		this.numeroLocal = numeroLocal; 
 		this.area = area; 
 		this.email = email;
+		this.referencia = referencia; 
 		this.misEmpleadosC = new ArrayList<Personal>();
 	}
 
@@ -51,6 +59,14 @@ public class Empresa implements Serializable {
 		this.telefono = telefono;
 	}
 
+	public String getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
+
 	public String getCiudad() {
 		return ciudad;
 	}
@@ -67,6 +83,22 @@ public class Empresa implements Serializable {
 		this.direccion = direccion;
 	}
 
+	public String getCalle() {
+		return calle;
+	}
+
+	public void setCalle(String calle) {
+		this.calle = calle;
+	}
+
+	public int getNumeroLocal() {
+		return numeroLocal;
+	}
+
+	public void setNumeroLocal(int numeroLocal) {
+		this.numeroLocal = numeroLocal;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -75,13 +107,17 @@ public class Empresa implements Serializable {
 		this.email = email;
 	}
 
+	public String getReferencia() {
+		return referencia;
+	}
+
+	public void setReferencia(String referencia) {
+		this.referencia = referencia;
+	}
+
 	public ArrayList<Personal> getMisEmpleadosC() {
 		return misEmpleadosC;
 	}
-
-	/*public void setMisEmpleadosC(ArrayList<Personal> misEmpleadosC) {
-		this.misEmpleadosC = misEmpleadosC;
-	}*/
 	
 	public String getArea() {
 		return area;
