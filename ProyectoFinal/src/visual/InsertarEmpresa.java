@@ -216,6 +216,19 @@ public class InsertarEmpresa extends JDialog {
 		pnlUbicacion.add(lblNolocal);
 		
 		spnNolocal = new JSpinner();
+		spnNolocal.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char validar= e.getKeyChar();
+				if(Character.isLetter(validar)) {
+					getToolkit().beep();
+					e.consume();
+					
+					JOptionPane.showMessageDialog(null,"Este campo no adminte letras");
+
+				}
+			}
+		});
 		spnNolocal.setBounds(93, 123, 174, 21);
 		pnlUbicacion.add(spnNolocal);
 		
@@ -353,7 +366,7 @@ public class InsertarEmpresa extends JDialog {
 								JOptionPane
 										.showMessageDialog(
 												null,
-												"Se debe la cuidad de la empresa a registrar",
+												"Se debe la ciudad de la empresa a registrar",
 												"ATENCIÓN",
 												JOptionPane.WARNING_MESSAGE,
 												null);
@@ -381,6 +394,14 @@ public class InsertarEmpresa extends JDialog {
 												"ATENCIÓN",
 												JOptionPane.WARNING_MESSAGE,
 												null);
+							} else if (txtArea.getText().isEmpty()) {
+								JOptionPane
+										.showMessageDialog(
+												null,
+												"Se debe ingresar un área de la empresa a registrar",
+												"ATENCIÓN",
+												JOptionPane.WARNING_MESSAGE,
+												null);
 							} else if (empresaRep(rnc)) {
 								JOptionPane.showMessageDialog(null,
 										"Empresa existente", "ATENCIÓN",
@@ -396,7 +417,7 @@ public class InsertarEmpresa extends JDialog {
 
 								} else {
 									Bolsa_Laboral.getInstance().insertEmpresa(
-											miEmpresa);
+											miEmpre);
 									if (RNCsoli == null) {
 										ftxtRNC.setText(null);
 									}
@@ -458,6 +479,8 @@ public class InsertarEmpresa extends JDialog {
 				buttonPane.add(btnCancelar);
 			}
 		}
+		if(modi){
+			loadEmpresaModi();}
 	}
 	
 	private void loadEmpresaModi() {
