@@ -3,7 +3,7 @@ package logic;
 import java.util.ArrayList;
 import java.io.Serializable;
 import java.time.LocalDate;
-
+//hola
 public abstract class Personal implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

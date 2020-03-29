@@ -1,7 +1,7 @@
 package logic;
 
 import java.util.ArrayList;
-
+//hi
 public class SolicitudBachiller extends Solicitud {
 	
 	private static final long serialVersionUID = 1L;

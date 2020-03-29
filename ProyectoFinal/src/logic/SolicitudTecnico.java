@@ -1,5 +1,5 @@
 package logic;
-
+//ctt
 public class SolicitudTecnico extends Solicitud {
 	
 	private static final long serialVersionUID = 1L;

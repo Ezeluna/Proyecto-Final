@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+//probando
 public class Bolsa_Laboral implements Serializable{
 	
 	private static final long serialVersionUID = 1L; 

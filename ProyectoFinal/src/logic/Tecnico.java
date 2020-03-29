@@ -1,7 +1,7 @@
 package logic;
 
 public class Tecnico extends Personal {
-	
+	//jeje
 	private static final long serialVersionUID = 1L;
 	private String area;
 

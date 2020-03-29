@@ -2,6 +2,7 @@ package logic;
 
 import java.util.ArrayList;
 
+//probando
 public class Bachiller extends Personal {
 	
 	private static final long serialVersionUID = 1L;

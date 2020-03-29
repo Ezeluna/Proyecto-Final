@@ -1,7 +1,7 @@
 package logic;
 
 
-
+//jeje
 public class Universitario extends Personal {
 	
 	private static final long serialVersionUID = 1L;
