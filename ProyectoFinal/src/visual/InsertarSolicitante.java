@@ -28,6 +28,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import com.toedter.calendar.JDateChooser;
 
 public class InsertarSolicitante extends JDialog {
 
@@ -206,6 +207,10 @@ public class InsertarSolicitante extends JDialog {
 				    ftextCedula = new JFormattedTextField(mascaraCedula);
 				    ftextCedula.setBounds(89, 30, 131, 20);
 				    panelInformacionGe.add(ftextCedula);
+				    
+				    JDateChooser dateChooser = new JDateChooser();
+				    dateChooser.setBounds(89, 123, 131, 20);
+				    panelInformacionGe.add(dateChooser);
 				
 				}catch (ParseException e) {
 					e.printStackTrace();
