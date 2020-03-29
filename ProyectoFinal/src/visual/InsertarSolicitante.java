@@ -26,6 +26,8 @@ import javax.swing.JFormattedTextField;
 import java.awt.CardLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class InsertarSolicitante extends JDialog {
 
@@ -150,10 +152,23 @@ public class InsertarSolicitante extends JDialog {
 				}
 				
 				rdbMasculino = new JRadioButton("M");
+				rdbMasculino.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						rdbMasculino.setSelected(true);
+						rdbFemenino.setSelected(false);
+
+					}
+				});
 				rdbMasculino.setBounds(382, 29, 44, 23);
 				panelInformacionGe.add(rdbMasculino);
 				
 				rdbFemenino = new JRadioButton("F");
+				rdbFemenino.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						rdbMasculino.setSelected(false);
+						rdbFemenino.setSelected(true);
+					}
+				});
 				rdbFemenino.setBounds(428, 29, 56, 23);
 				panelInformacionGe.add(rdbFemenino);
 				
@@ -220,6 +235,17 @@ public class InsertarSolicitante extends JDialog {
 			}
 			
 			textCiudad = new JTextField();
+			textCiudad.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent e) {
+					char validar= e.getKeyChar();
+					if(Character.isDigit(validar)) {
+						getToolkit ().beep();
+						e.consume();
+						JOptionPane.showMessageDialog(null, "No se permiten números");
+					}
+				}
+			});
 			textCiudad.setBounds(97, 73, 131, 20);
 			panelUbicacionA.add(textCiudad);
 			textCiudad.setColumns(10);
@@ -230,6 +256,17 @@ public class InsertarSolicitante extends JDialog {
 			
 			
 			textSector = new JTextField();
+			textSector.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent e) {
+					char validar= e.getKeyChar();
+					if(Character.isDigit(validar)) {
+						getToolkit ().beep();
+						e.consume();
+						JOptionPane.showMessageDialog(null, "No se permiten números");
+					}
+				}
+			});
 			textSector.setBounds(97, 119, 131, 20);
 			panelUbicacionA.add(textSector);
 			textSector.setColumns(10);
