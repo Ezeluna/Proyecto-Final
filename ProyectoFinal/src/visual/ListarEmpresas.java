@@ -15,15 +15,15 @@ public class ListarEmpresas extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			ListarEmpresas dialog = new ListarEmpresas();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
+	/*
+	 * public static void main(String[] args) { try { ListarEmpresas dialog = new
+	 * ListarEmpresas(); dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+	 * dialog.setVisible(true); } catch (Exception e) { e.printStackTrace(); }
+	 * 
+	 * }
+	 */
+	 
 
 	/**
 	 * Create the dialog.
