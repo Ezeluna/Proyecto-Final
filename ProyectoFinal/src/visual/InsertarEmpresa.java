@@ -28,7 +28,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
+//jeje
 public class InsertarEmpresa extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();

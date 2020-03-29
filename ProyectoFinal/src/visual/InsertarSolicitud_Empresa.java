@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 public class InsertarSolicitud_Empresa extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	//probando
+	//probando jeje
 
 	/**
 	 * Launch the application.

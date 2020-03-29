@@ -36,7 +36,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EtchedBorder;
 
 public class InsertarSolicitante extends JDialog {
-
+//jeje
 	private final JPanel contentPanel = new JPanel();
 	private JPanel panel1;
 	private JPanel panel2;
