@@ -29,6 +29,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import com.toedter.calendar.JDateChooser;
+import javax.swing.JSeparator;
+import java.awt.Color;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
 
 public class InsertarSolicitante extends JDialog {
 
@@ -49,6 +53,8 @@ public class InsertarSolicitante extends JDialog {
 	private JRadioButton rdbMasculino;
 	private JRadioButton rdbFemenino;
 	private JSpinner spnNumeroCasa;
+	private JTextField textTelefono;
+	private JTextField textField;
 	
 
 	/**
@@ -308,7 +314,85 @@ public class InsertarSolicitante extends JDialog {
 		{
 			JPanel panel2 = new JPanel();
 			contentPanel.add(panel2, "name_428725249088700");
-		}
+			panel2.setLayout(null);
+			
+			JPanel panelContacto = new JPanel();
+			panelContacto.setBorder(new TitledBorder(null, "Contactos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panelContacto.setBounds(10, 11, 566, 86);
+			panel2.add(panelContacto);
+			panelContacto.setLayout(null);
+			
+			JLabel lblTelefono = new JLabel("Tel\u00E9fono: ");
+			lblTelefono.setBounds(10, 34, 66, 14);
+			panelContacto.add(lblTelefono);
+			
+			textTelefono = new JTextField();
+			textTelefono.setBounds(94, 30, 131, 23);
+			panelContacto.add(textTelefono);
+			textTelefono.setColumns(10);
+			
+			JLabel lblEmail = new JLabel("E-mail:");
+			lblEmail.setBounds(266, 34, 46, 14);
+			panelContacto.add(lblEmail);
+			
+			textField = new JTextField();
+			textField.setBounds(316, 30, 226, 23);
+			panelContacto.add(textField);
+			textField.setColumns(10);
+			
+			JPanel panelInfoGeneral = new JPanel();
+			panelInfoGeneral.setBorder(new TitledBorder(null, "Informaci\u00F3n General", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panelInfoGeneral.setBounds(10, 107, 566, 104);
+			panel2.add(panelInfoGeneral);
+			panelInfoGeneral.setLayout(null);
+			
+			JLabel lblVehiculo = new JLabel("Veh\u00EDculo Propio: ");
+			lblVehiculo.setBounds(10, 30, 96, 14);
+			panelInfoGeneral.add(lblVehiculo);
+			
+			JRadioButton rbtnSiVehiculoPro = new JRadioButton("S\u00ED");
+			rbtnSiVehiculoPro.setBounds(125, 26, 33, 23);
+			panelInfoGeneral.add(rbtnSiVehiculoPro);
+			
+			JRadioButton rbtnNoVehiculoPro = new JRadioButton("No");
+			rbtnNoVehiculoPro.setBounds(177, 26, 39, 23);
+			panelInfoGeneral.add(rbtnNoVehiculoPro);
+			
+			JLabel lblDisponibilidadM = new JLabel("Disponibilidad de relocalizaci\u00F3n:");
+			lblDisponibilidadM.setBounds(10, 68, 165, 14);
+			panelInfoGeneral.add(lblDisponibilidadM);
+			
+			JRadioButton rbtnSiDisponibilidad = new JRadioButton("S\u00ED\r\n");
+			rbtnSiDisponibilidad.setBounds(182, 64, 39, 23);
+			panelInfoGeneral.add(rbtnSiDisponibilidad);
+			
+			JRadioButton rbtnNoDisponibilidad = new JRadioButton("No");
+			rbtnNoDisponibilidad.setBounds(220, 64, 39, 23);
+			panelInfoGeneral.add(rbtnNoDisponibilidad);
+			
+			JSeparator separator = new JSeparator();
+			separator.setBackground(Color.RED);
+			separator.setOrientation(SwingConstants.VERTICAL);
+			separator.setBounds(277, 11, 20, 82);
+			panelInfoGeneral.add(separator);
+			
+			JLabel lblIdiomas = new JLabel("Idiomas: ");
+			lblIdiomas.setBounds(290, 11, 56, 14);
+			panelInfoGeneral.add(lblIdiomas);
+			
+			JComboBox cbxIdiomas = new JComboBox();
+			cbxIdiomas.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Afrikaans", "Alban\u00E9s", "Alem\u00E1n", "Amharico", "Arabe", "Armenio", "Bengali", "Bieloruso", "Birman\u00E9s", "Bulgaro", "Catalan", "Checo", "Chino", "Coreano", "Croata", "Dan\u00E9s", "Dari", "Dzongkha", "Escoc\u00E9s", "Eslovaco", "Esloveniano", "Espa\u00F1ol", "Esperanto", "Estoniano", "Faroese", "Farsi", "Finland\u00E9s", "Franc\u00E9s", "Gaelico", "Galese", "Gallego", "Griego", "Hebreo", "Hindi", "Holand\u00E9s", "Hungaro", "Ingl\u00E9s", "Indonesio", "Inuktitut (Eskimo)", "Islandico", "Italiano", "Japon\u00E9s", "Khmer", "Kurdo", "Lao", "Laponico", "Latviano", "Lituano", "Macedonio", "Malay\u00E9s", "Malt\u00E9s", "Nepali", "Noruego", "Pashto", "Polaco", "Portugu\u00E9s", "Rumano", "Ruso", "Serbio", "Somali", "Suahili", "Sueco", "Tagalog-Filipino", "Tajik", "Tamil", "Tailand\u00E9s", "Tibetano", "Tigrinia", "Tongan\u00E9s", "Turco", "Turkmenistano", "Ucraniano", "Urdu", "Uzbekistano", "Vasco", "Vietnam\u00E9s"}));
+			cbxIdiomas.setBounds(290, 39, 123, 23);
+			panelInfoGeneral.add(cbxIdiomas);
+			
+			JButton btnEliminar = new JButton("Remover\r\n");
+			btnEliminar.setBounds(307, 70, 89, 23);
+			panelInfoGeneral.add(btnEliminar);
+			
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setBounds(438, 26, 142, 67);
+			panelInfoGeneral.add(scrollPane);
+				}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
