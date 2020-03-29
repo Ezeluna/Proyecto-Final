@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 public class ListarEmpresas extends JDialog {
+	//probando
 
 	private final JPanel contentPanel = new JPanel();
 

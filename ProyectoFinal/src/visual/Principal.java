@@ -25,6 +25,7 @@ public class Principal extends JFrame {
 
 	private JPanel contentPane;
 	private Dimension dim = null;
+	//hola
 
 	/**
 	 * Launch the application.

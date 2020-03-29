@@ -33,6 +33,7 @@ import javax.swing.JSeparator;
 import java.awt.Color;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.border.EtchedBorder;
 
 public class InsertarSolicitante extends JDialog {
 
@@ -83,7 +84,7 @@ public class InsertarSolicitante extends JDialog {
 			}
 		});
 		setTitle("Insertar Solicitante");
-		setBounds(100, 100, 612, 453);
+		setBounds(100, 100, 612, 472);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -373,7 +374,7 @@ public class InsertarSolicitante extends JDialog {
 			JSeparator separator = new JSeparator();
 			separator.setBackground(Color.RED);
 			separator.setOrientation(SwingConstants.VERTICAL);
-			separator.setBounds(277, 11, 20, 82);
+			separator.setBounds(265, 11, 8, 82);
 			panelInfoGeneral.add(separator);
 			
 			JLabel lblIdiomas = new JLabel("Idiomas: ");
@@ -381,18 +382,58 @@ public class InsertarSolicitante extends JDialog {
 			panelInfoGeneral.add(lblIdiomas);
 			
 			JComboBox cbxIdiomas = new JComboBox();
-			cbxIdiomas.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Afrikaans", "Alban\u00E9s", "Alem\u00E1n", "Amharico", "Arabe", "Armenio", "Bengali", "Bieloruso", "Birman\u00E9s", "Bulgaro", "Catalan", "Checo", "Chino", "Coreano", "Croata", "Dan\u00E9s", "Dari", "Dzongkha", "Escoc\u00E9s", "Eslovaco", "Esloveniano", "Espa\u00F1ol", "Esperanto", "Estoniano", "Faroese", "Farsi", "Finland\u00E9s", "Franc\u00E9s", "Gaelico", "Galese", "Gallego", "Griego", "Hebreo", "Hindi", "Holand\u00E9s", "Hungaro", "Ingl\u00E9s", "Indonesio", "Inuktitut (Eskimo)", "Islandico", "Italiano", "Japon\u00E9s", "Khmer", "Kurdo", "Lao", "Laponico", "Latviano", "Lituano", "Macedonio", "Malay\u00E9s", "Malt\u00E9s", "Nepali", "Noruego", "Pashto", "Polaco", "Portugu\u00E9s", "Rumano", "Ruso", "Serbio", "Somali", "Suahili", "Sueco", "Tagalog-Filipino", "Tajik", "Tamil", "Tailand\u00E9s", "Tibetano", "Tigrinia", "Tongan\u00E9s", "Turco", "Turkmenistano", "Ucraniano", "Urdu", "Uzbekistano", "Vasco", "Vietnam\u00E9s"}));
-			cbxIdiomas.setBounds(290, 39, 123, 23);
+			cbxIdiomas.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Alba\u00F1il", "Anfitri\u00F3n de Fiesta", "Artesano", "Carpintero", "Chofer", "Chef", "Constructor", "Decorador", "Ebanista", "Electricista", "Mec\u00E1nico", "Pintor", "Plomero", "Salva Vidas", "Modista", "Seguridad", "Sirviente", "Jardinero"}));
+			cbxIdiomas.setBounds(273, 36, 123, 23);
 			panelInfoGeneral.add(cbxIdiomas);
 			
 			JButton btnEliminar = new JButton("Remover\r\n");
-			btnEliminar.setBounds(307, 70, 89, 23);
+			btnEliminar.setBounds(290, 64, 89, 23);
 			panelInfoGeneral.add(btnEliminar);
 			
 			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(438, 26, 142, 67);
+			scrollPane.setBounds(406, 20, 142, 67);
 			panelInfoGeneral.add(scrollPane);
-				}
+			
+			JList list = new JList();
+			scrollPane.setViewportView(list);
+			
+			JPanel panelTipoSolicitante = new JPanel();
+			panelTipoSolicitante.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Tipo de Solicitante", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			panelTipoSolicitante.setBounds(10, 216, 566, 49);
+			panel2.add(panelTipoSolicitante);
+			panelTipoSolicitante.setLayout(null);
+			
+			JRadioButton rbtnObrero = new JRadioButton("Obrero\r\n");
+			rbtnObrero.setBounds(72, 19, 84, 23);
+			panelTipoSolicitante.add(rbtnObrero);
+			
+			JRadioButton rbtnTecnico = new JRadioButton("T\u00E9cnico");
+			rbtnTecnico.setBounds(228, 19, 84, 23);
+			panelTipoSolicitante.add(rbtnTecnico);
+			
+			JRadioButton rbtnUniversitario = new JRadioButton("Universitario");
+			rbtnUniversitario.setBounds(384, 19, 109, 23);
+			panelTipoSolicitante.add(rbtnUniversitario);
+			
+			JPanel panelObrero = new JPanel();
+			panelObrero.setBorder(new TitledBorder(null, "Obrero", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panelObrero.setBounds(10, 267, 566, 112);
+			panel2.add(panelObrero);
+			panelObrero.setLayout(null);
+			
+			JLabel lblHabilidades = new JLabel("Habilidades:");
+			lblHabilidades.setBounds(10, 26, 71, 14);
+			panelObrero.add(lblHabilidades);
+			
+			JComboBox cbxHabilidades = new JComboBox();
+			cbxHabilidades.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Alba\u00F1il", "Anfitri\u00F3n de Fiesta", "Artesano", "Carpintero", "Chofer", "Chef", "Constructor", "Decorador", "Ebanista", "Electricista", "Mec\u00E1nico", "Pintor", "Plomero", "Salva Vidas", "Modista", "Seguridad", "Sirviente", "Jardinero"}));
+			cbxHabilidades.setBounds(10, 47, 123, 22);
+			panelObrero.add(cbxHabilidades);
+			
+			JButton btnRemoverH = new JButton("Remover");
+			btnRemoverH.setBounds(31, 80, 89, 23);
+			panelObrero.add(btnRemoverH);
+					}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));

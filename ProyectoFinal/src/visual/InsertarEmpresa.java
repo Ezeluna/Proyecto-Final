@@ -44,6 +44,7 @@ public class InsertarEmpresa extends JDialog {
 	private JComboBox cbxProvincia;
 	private JSpinner spnNolocal;
 	private Empresa miEmpresa = null; 
+	private String probando;
 
 	/**
 	 * Launch the application.
