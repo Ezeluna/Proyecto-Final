@@ -8,7 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class SolicitudEmpresa extends JDialog {
+public class InsertarSolicitud_Empresa extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
@@ -17,7 +17,7 @@ public class SolicitudEmpresa extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			SolicitudEmpresa dialog = new SolicitudEmpresa();
+			InsertarSolicitud_Empresa dialog = new InsertarSolicitud_Empresa();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -28,7 +28,7 @@ public class SolicitudEmpresa extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public SolicitudEmpresa() {
+	public InsertarSolicitud_Empresa() {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
