@@ -7,7 +7,7 @@ public abstract class Solicitud implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	protected String id; 
-	protected int cantVacantes;
+	protected float cantVacantes;
 	protected int cantSolicitudes;
 	protected Empresa empresa;  
 	protected String localidad; 
@@ -20,11 +20,10 @@ public abstract class Solicitud implements Serializable {
 	protected int categoriaLicencia; 
 	protected boolean mudarse;
 	
-	public Solicitud(String id, int cantVacantes, int cantSolicitudes, Empresa empresa, String localidad, int edadMax, 
+	public Solicitud( float cantVacantes, Empresa empresa, String localidad, int edadMax, 
 			int edadMin, int yearExperience, String tipoContrato, boolean vehiculoPropio, 
 			int categoriaLicencia, boolean mudarse) {
 		super();
-		this.id = id;
 		this.cantVacantes = cantVacantes;
 		this.cantSolicitudes = 0;
 		this.empresa = empresa;
@@ -49,11 +48,11 @@ public abstract class Solicitud implements Serializable {
 		this.id = id;
 	}
 
-	public int getCantVacantes() {
+	public float getCantVacantes() {
 		return cantVacantes;
 	}
 
-	public void setCantVacantes(int cantVacantes) {
+	public void setCantVacantes(float cantVacantes) {
 		this.cantVacantes = cantVacantes;
 	}
 

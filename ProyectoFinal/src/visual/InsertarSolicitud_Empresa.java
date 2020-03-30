@@ -38,6 +38,9 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.SpinnerNumberModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class InsertarSolicitud_Empresa extends JDialog {
 
@@ -64,7 +67,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 	private JSpinner spnEdadMinima;
 	private JSpinner spnEdadMaxima;
 	private JComboBox cbxIdioma;
-	private JList listIdioma;
+	private JList listIdiomas;
 	private JList ListHabilidad;
 	private JSpinner spnUniversitarioExperiencia;
 	private JSpinner spnTecnicoExperiencia;
@@ -207,6 +210,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 		contentPanel.setBackground(new Color(248, 248, 255));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
+		setLocationRelativeTo(null);
 		{
 			JPanel panelEmpresa = new JPanel();
 			panelEmpresa.setLayout(null);
@@ -301,7 +305,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 				rbtnReubicacionSi = new JRadioButton("Si");
 				rbtnReubicacionSi.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						rbtnReubicacionSi.setSelected(false);
+						rbtnReubicacionNo.setSelected(false);
 					}
 				});
 				rbtnReubicacionSi.setBackground(new Color(248, 248, 255));
@@ -401,7 +405,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 			panelEdad.setBounds(10, 257, 245, 59);
 			contentPanel.add(panelEdad);
 			{
-				JLabel lblNewLabel = new JLabel("Minima:");
+				JLabel lblNewLabel = new JLabel("M\u00EDnima:");
 				lblNewLabel.setBounds(15, 28, 60, 14);
 				panelEdad.add(lblNewLabel);
 			}
@@ -412,12 +416,14 @@ public class InsertarSolicitud_Empresa extends JDialog {
 			}
 			{
 				spnEdadMinima = new JSpinner();
+				spnEdadMinima.setModel(new SpinnerNumberModel(new Integer(18), null, null, new Integer(1)));
 				spnEdadMinima.setBackground(Color.WHITE);
 				spnEdadMinima.setBounds(62, 24, 51, 23);
 				panelEdad.add(spnEdadMinima);
 			}
 			{
 				spnEdadMaxima = new JSpinner();
+				spnEdadMaxima.setModel(new SpinnerNumberModel(new Integer(35), null, null, new Integer(1)));
 				spnEdadMaxima.setBackground(Color.WHITE);
 				spnEdadMaxima.setBounds(180, 24, 51, 23);
 				panelEdad.add(spnEdadMaxima);
@@ -433,18 +439,45 @@ public class InsertarSolicitud_Empresa extends JDialog {
 			contentPanel.add(PanelVacante);
 			{
 				rbtnTecnico = new JRadioButton("T\u00E9cnico ");
+				rbtnTecnico.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						rbtnUniversitario.setSelected(false);
+						rbtnBachiller.setSelected(false);
+						panelUniversitario.setVisible(false);
+						panelTecnico.setVisible(true);
+						panelBachiller.setVisible(false);
+					}
+				});
 				rbtnTecnico.setBackground(new Color(248, 248, 255));
 				rbtnTecnico.setBounds(107, 22, 75, 23);
 				PanelVacante.add(rbtnTecnico);
 			}
 			{
 				rbtnUniversitario = new JRadioButton("Universitario");
+				rbtnUniversitario.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						rbtnTecnico.setSelected(false);
+						rbtnBachiller.setSelected(false);
+						panelUniversitario.setVisible(true);
+						panelTecnico.setVisible(false);
+						panelBachiller.setVisible(false);
+					}
+				});
 				rbtnUniversitario.setBackground(new Color(248, 248, 255));
 				rbtnUniversitario.setBounds(6, 22, 99, 23);
 				PanelVacante.add(rbtnUniversitario);
 			}
 			{
-				rbtnBachiller = new JRadioButton("");
+				rbtnBachiller = new JRadioButton("Bachiller");
+				rbtnBachiller.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						rbtnUniversitario.setSelected(false);
+						rbtnTecnico.setSelected(false);
+						panelUniversitario.setVisible(false);
+						panelTecnico.setVisible(false);
+						panelBachiller.setVisible(true);
+					}
+				});
 				rbtnBachiller.setBackground(new Color(248, 248, 255));
 				rbtnBachiller.setBounds(184, 22, 75, 23);
 				PanelVacante.add(rbtnBachiller);
@@ -465,6 +498,21 @@ public class InsertarSolicitud_Empresa extends JDialog {
 			}
 			{
 				cbxIdioma = new JComboBox();
+				cbxIdioma.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+
+						if (!misIdiomas.contains((String) cbxIdioma.getSelectedItem())
+								&& cbxIdioma.getSelectedIndex() > 0) {
+
+							misIdiomas.add((String) cbxIdioma.getSelectedItem());
+						} else if (misIdiomas.contains((String) cbxIdioma.getSelectedItem())) {
+							JOptionPane.showMessageDialog(null, "Ese idioma ha sido seleccionado", "ATENCIÓN",
+									JOptionPane.ERROR_MESSAGE, null);
+						}
+						cbxIdioma.setSelectedIndex(0);
+						cargarIdioma();
+					}
+				});
 				cbxIdioma.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Afrikaans", "Alban\u00E9s",
 						"Alem\u00E1n", "Amharico", "Arabe", "Armenio", "Bengali", "Bieloruso", "Birman\u00E9s", "Bulgaro",
 						"Catalan", "Checo", "Chino", "Coreano", "Croata", "Dan\u00E9s", "Dari", "Dzongkha", "Escoc\u00E9s",
@@ -485,15 +533,34 @@ public class InsertarSolicitud_Empresa extends JDialog {
 				scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 				scrollPane.setBounds(15, 67, 215, 86);
 				panelIdioma.add(scrollPane);
+				
+				listIdiomas = new JList();
+				listIdiomas.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						indexListaIdioma = (String) listIdiomas.getSelectedValue();
+					}
+				
+				});
+				listIdiomas.setLocation(18, 0);
+				scrollPane.setViewportView(listIdiomas);
+				
 			}
+	
 			{
 				JButton btnEliminarIdioma = new JButton("");
+				btnEliminarIdioma.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						misIdiomas.remove(indexListaIdioma);
+						cargarIdioma();
+					}
+				});
 				btnEliminarIdioma.setBounds(201, 26, 29, 25);
 				panelIdioma.add(btnEliminarIdioma);
 			}
 		}
 		{
-			JPanel panelUniversitario = new JPanel();
+			panelUniversitario = new JPanel();
 			panelUniversitario.setLayout(null);
 			panelUniversitario.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null),
 								"Universitario", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -541,13 +608,12 @@ public class InsertarSolicitud_Empresa extends JDialog {
 						"Psicolog\u00EDa", "Ing. Civil", "Ing. Electr\u00F3nica", "Ing. Industrial",
 						"Ing. Mecatr\u00F3nica", "Ing. Sistema", "Ing. Telem\u00E1tica", "Enfermeria", "Estomatolog\u00EDa",
 						"Medicina", "Nutricion y Dietetica", "Terapia F\u00EDsica" }));
-				cbxCarrera.setBackground(Color.WHITE);
 				cbxCarrera.setBounds(93, 61, 160, 23);
 				panelUniversitario.add(cbxCarrera);
 			}
 		}
 		{
-			JPanel panelTecnico = new JPanel();
+			panelTecnico = new JPanel();
 			panelTecnico.setLayout(null);
 			panelTecnico.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "T\u00E9cnico",
 								TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -566,12 +632,6 @@ public class InsertarSolicitud_Empresa extends JDialog {
 				panelTecnico.add(spnTecnicoExperiencia);
 			}
 			{
-				JLabel label_8 = new JLabel("*");
-				label_8.setForeground(Color.RED);
-				label_8.setBounds(10, 65, 46, 14);
-				panelTecnico.add(label_8);
-			}
-			{
 				JLabel lblArea = new JLabel("Area:");
 				lblArea.setBounds(18, 65, 72, 14);
 				panelTecnico.add(lblArea);
@@ -587,7 +647,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 			}
 		}
 		{
-			JPanel panelBachiller = new JPanel();
+			panelBachiller = new JPanel();
 			panelBachiller.setLayout(null);
 			panelBachiller.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "",
 			TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -610,12 +670,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 				lblHabilidades.setBounds(18, 65, 72, 14);
 				panelBachiller.add(lblHabilidades);
 			}
-			{
-				JLabel label_9 = new JLabel("*");
-				label_9.setForeground(Color.RED);
-				label_9.setBounds(10, 65, 46, 14);
-				panelBachiller.add(label_9);
-			}
+		
 			{
 				cbxHabilidades = new JComboBox();
 				cbxHabilidades.setBackground(new Color(248, 248, 255));
@@ -645,9 +700,26 @@ public class InsertarSolicitud_Empresa extends JDialog {
 				JScrollPane scrollPane_1 = new JScrollPane();
 				scrollPane_1.setBounds(18, 90, 235, 63);
 				panelBachiller.add(scrollPane_1);
+				
+				ListHabilidad = new JList();
+				ListHabilidad.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						indexListaHabilidades = (String) ListHabilidad.getSelectedValue();
+					}
+				});
+				ListHabilidad.setLocation(20, 0);
+				scrollPane_1.setViewportView(ListHabilidad);
 			}
+			
 			{
 				JButton bntEliminarHabilidad = new JButton("");
+				bntEliminarHabilidad.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						misHabilidades.remove(indexListaHabilidades);
+						cargarHabilidades();
+					}
+				});
 				bntEliminarHabilidad.setBounds(224, 60, 29, 25);
 				panelBachiller.add(bntEliminarHabilidad);
 			}
@@ -659,14 +731,235 @@ public class InsertarSolicitud_Empresa extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				if (modificarSoli != null) {
+					okButton.setText("Modificar");
+				} else {
+					okButton.setText("Insertar");
+				}
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						String RNC = ftxtRNC.getText();
+						String Contrato = (String) cbxContrato.getSelectedItem();
+						Boolean reubicacion = false;
+						if (rbtnReubicacionSi.isSelected()) {
+							reubicacion = true;
+						} else if (rbtnReubicacionNo.isSelected()) {
+							reubicacion = false;
+						}
+						boolean vehiculo = false;
+						if (rbtnVehiculoSi.isSelected()) {
+							vehiculo = true;
+						} else if (rbtnVehiculoNo.isSelected()) {
+							vehiculo = false;
+						}
+
+						float vacantes = (float) spnVacantes.getValue();
+
+						String localidad = (String) cbxLocalidad.getSelectedItem();
+						int categoriaLicencia = 0;
+						if (cbxLicencia.getSelectedIndex() == 1) {
+							categoriaLicencia = 1;
+						}
+						if (cbxLicencia.getSelectedIndex() == 2) {
+							categoriaLicencia = 2;
+						}
+						if (cbxLicencia.getSelectedIndex() == 3) {
+							categoriaLicencia = 3;
+						}
+						if (cbxLicencia.getSelectedIndex() == 4) {
+							categoriaLicencia = 4;
+						}
+						if (cbxLicencia.getSelectedIndex() == 5) {
+							categoriaLicencia = 5;
+						}
+						int edadMinima = (int) spnEdadMinima.getValue();
+						int edadMaxima = (int) spnEdadMaxima.getValue();
+						int experienciaUniversitario = (int) spnUniversitarioExperiencia.getValue();
+						int experienciaTecnico = (int) spnTecnicoExperiencia.getValue();
+						int experienciaBachiller = (int) spnBachillerExperiencia.getValue();
+						String carrera = (String) cbxCarrera.getSelectedItem();
+						boolean posGrado = false;
+						if (rbtnPostGradoSi.isSelected()) {
+							posGrado = true;
+						}
+						String area = (String) cbxArea.getSelectedItem();
+						if (modificarSoli == null) {
+
+							if (txtName.getText().isEmpty()) {
+								JOptionPane.showMessageDialog(null, "Se debe ingresar la empresa que solicita",
+										"ATENCIÓN", JOptionPane.WARNING_MESSAGE, null);
+							} else if (cbxContrato.getSelectedIndex() == 0 || cbxLocalidad.getSelectedIndex() == 0) {
+								JOptionPane.showMessageDialog(null, "No deje campos vacios", "ATENCIÓN",
+										JOptionPane.WARNING_MESSAGE, null);
+
+							} else if (rbtnVehiculoSi.isSelected() && cbxLicencia.getSelectedIndex() == 0) {
+								JOptionPane.showMessageDialog(null,
+										"Selecciona la categoria de la Licencia de conducir", "ATENCIÓN",
+										JOptionPane.WARNING_MESSAGE, null);
+
+							} else if (!rbtnTecnico.isSelected() && !rbtnUniversitario.isSelected()
+									&& !rbtnBachiller.isSelected()) {
+								JOptionPane.showMessageDialog(null, "Selecciona el tipo de empleado que se necesita",
+										"ATENCIÓN", JOptionPane.WARNING_MESSAGE, null);
+
+							} else if (panelUniversitario.isVisible() && cbxCarrera.getSelectedIndex() == 0) {
+								JOptionPane.showMessageDialog(null, "Selecciona la carrera del universitario",
+										"ATENCIÓN", JOptionPane.WARNING_MESSAGE, null);
+
+							} else if (panelTecnico.isVisible() && cbxArea.getSelectedIndex() == 0) {
+								JOptionPane.showMessageDialog(null, "Selecciona el area del tecnico", "ATENCIÓN",
+										JOptionPane.WARNING_MESSAGE, null);
+							} else if (panelBachiller.isVisible() && misHabilidades.size() == 0) {
+								JOptionPane.showMessageDialog(null, "Selecciona las habilidades del obrero", "ATENCIÓN",
+										JOptionPane.WARNING_MESSAGE, null);
+
+							} else if (panelUniversitario.isVisible() && !rbtnPostGradoSi.isSelected()
+									&& !rbtnPostGradoNo.isSelected()) {
+								rbtnPostGradoNo.setSelected(true);
+							} else if ((int) spnEdadMaxima.getValue() < (int) spnEdadMinima.getValue()) {
+								JOptionPane.showMessageDialog(null, "Edad minima no puede ser mayor que la máxima",
+										"ATENCIÓN", JOptionPane.WARNING_MESSAGE, null);
+
+							} else {
+								if (rbtnUniversitario.isSelected()) {
+									SolicitudUniversitario nuevaSoli = new SolicitudUniversitario((float) vacantes,
+											empresa, localidad, edadMaxima, edadMinima, experienciaUniversitario, Contrato, vehiculo,
+											categoriaLicencia, reubicacion, carrera, posGrado);
+
+									bolsa.insertSolicitud(nuevaSoli);
+									JOptionPane.showMessageDialog(null, "La Solicitud se registro correctamente",
+											"Información", JOptionPane.INFORMATION_MESSAGE, null);
+									clean(1);
+								}
+								if (rbtnTecnico.isSelected()) {
+									SolicitudTecnico nuevaSoli = new SolicitudTecnico((float) vacantes,
+											empresa, localidad, edadMaxima, edadMinima, experienciaUniversitario, Contrato, vehiculo,
+											categoriaLicencia, reubicacion, area);
+									
+									bolsa.insertSolicitud(nuevaSoli);
+									JOptionPane.showMessageDialog(null, "La Solicitud se registro correctamente",
+											"Información", JOptionPane.INFORMATION_MESSAGE, null);
+									clean(2);
+								}
+								if (rbtnBachiller.isSelected()) {
+									SolicitudBachiller nuevaSoli = new SolicitudBachiller((float) vacantes,
+											empresa, localidad, edadMaxima, edadMinima, experienciaUniversitario, Contrato, vehiculo,
+											categoriaLicencia, reubicacion, misHabilidades);
+									nuevaSoli.setIdiomas(misIdiomas);
+									bolsa.insertSolicitud(nuevaSoli);
+									JOptionPane.showMessageDialog(null, "La Solicitud se registro correctamente",
+											"Información", JOptionPane.INFORMATION_MESSAGE, null);
+									clean(3);
+								}
+
+							}
+							////// MODIFICAR
+						} else {
+
+							modificarSoli.setTipoContrato((String) cbxContrato.getSelectedItem());
+
+							if (rbtnReubicacionSi.isSelected()) {
+								modificarSoli.setMudarse(true);
+							} else {
+								modificarSoli.setMudarse(false);
+							}
+							if (rbtnVehiculoSi.isSelected()) {
+								modificarSoli.setVehiculoPropio(true);
+								modificarSoli.setCategoriaLicencia((int) cbxLicencia.getSelectedIndex());
+							} else {
+								modificarSoli.setVehiculoPropio(false);
+							}
+							modificarSoli.setCantVacantes((float) spnVacantes.getValue());
+							modificarSoli.setDireccion((String) cbxLocalidad.getSelectedItem());
+							modificarSoli.setEdadMin((int) spnEdadMinima.getValue());
+							modificarSoli.setEdadMax((int) spnEdadMaxima.getValue());
+							modificarSoli.setIdiomas(misIdiomas);
+							if (modi instanceof SolicitudUniversitario) {
+								modificarSoli.setYearExperience((int) spnUniversitarioExperiencia.getValue());
+								((SolicitudUniversitario) modificarSoli)
+										.setCarrera((String) cbxCarrera.getSelectedItem());
+								if (rbtnPostGradoSi.isSelected()) {
+									((SolicitudUniversitario) modificarSoli).setPostGrado(true);
+								} else {
+									((SolicitudUniversitario) modificarSoli).setPostGrado(false);
+								}
+
+							} else if (modi instanceof SolicitudTecnico) {
+								modificarSoli.setYearExperience((int) spnTecnicoExperiencia.getValue());
+								((SolicitudTecnico) modificarSoli).setArea((String) cbxArea.getSelectedItem());
+
+							} else if (modi instanceof SolicitudBachiller) {
+								modificarSoli.setYearExperience((int) spnBachillerExperiencia.getValue());
+								((SolicitudBachiller) modificarSoli).setHabilidades(misHabilidades);
+
+							}
+							Bolsa_Laboral.getInstance().ActualizarSolicitud(modi, modificarSoli);
+							JOptionPane.showMessageDialog(null, "La Solicitud se modifico correctamente", "Información",
+									JOptionPane.INFORMATION_MESSAGE, null);
+							/*if (ListarSolicitud_Empresa.cbxfiltro.getSelectedIndex() == 0) {
+								ListarSolicitud_Empresa.loadtabla(0);
+							}
+							if (ListarSolicitud_Empresa.cbxfiltro.getSelectedIndex() == 1) {
+								ListarSolicitud_Empresa.loadtabla(1);
+
+							}
+							if (ListarSolicitud_Empresa.cbxfiltro.getSelectedIndex() == 2) {
+								ListarSolicitud_Empresa.loadtabla(2);
+
+							}
+							if (ListarSolicitud_Empresa.cbxfiltro.getSelectedIndex() == 3) {
+								ListarSolicitud_Empresa.loadtabla(3);
+
+							}*/
+
+							dispose();
+
+						}
+
+					}
+
+					private void clean(int i) {
+						ftxtRNC.setValue("");
+						txtName.setText("");
+						cbxContrato.setSelectedIndex(0);
+						rbtnReubicacionNo.setSelected(false);
+						rbtnReubicacionSi.setSelected(false);
+						rbtnVehiculoSi.setSelected(false);
+						rbtnVehiculoNo.setSelected(false);
+						spnVacantes.setValue(1);
+						cbxLocalidad.setSelectedIndex(0);
+						cbxLicencia.setSelectedIndex(0);
+						spnEdadMinima.setValue(18);
+						spnEdadMaxima.setValue(19);
+						misIdiomas.removeAll(misIdiomas);
+						cargarIdioma();
+						if (i == 1) {
+							rbtnUniversitario.setSelected(false);
+							spnUniversitarioExperiencia.setValue(0);
+							cbxCarrera.setSelectedIndex(0);
+							rbtnPostGradoNo.setSelected(false);
+							rbtnPostGradoSi.setSelected(false);
+						}
+						if (i == 2) {
+							rbtnTecnico.setSelected(false);
+							spnTecnicoExperiencia.setValue(0);
+							cbxArea.setSelectedIndex(0);
+						}
+						if (i == 3) {
+							rbtnBachiller.setSelected(false);
+							misHabilidades.removeAll(misHabilidades);
+							cargarHabilidades();
+						}
+
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
 				JButton btnCancelar = new JButton("Cancelar");
-				btnCancelar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
+				btnCancelar.addActionListener(new ActionListener() {				public void actionPerformed(ActionEvent e) {
 						dispose();
 					}
 				});
@@ -682,7 +975,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 		for (String idio : misIdiomas) {
 			idioma.addElement(idio);
 		}
-		listIdioma.setModel(idioma);
+		listIdiomas.setModel(idioma);
 
 	}
 
@@ -695,5 +988,4 @@ public class InsertarSolicitud_Empresa extends JDialog {
 		ListHabilidad.setModel(habilidades);
 
 	}
-
 }
