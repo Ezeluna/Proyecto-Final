@@ -459,6 +459,16 @@ public class InsertarSolicitante extends JDialog {
 			panelInfoGeneral.add(cbxIdiomas);
 			
 			btnEliminarIdioma = new JButton("Remover\r\n");
+			btnEliminarIdioma.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					int index = listIdiomas.getSelectedIndex();
+					String idioma = listIdiomas.getSelectedValue().toString();
+					modeloIdiomas.remove(index);
+					eliminarIdioma(idioma);
+					btnEliminarIdioma.setEnabled(false);
+
+				}
+			});
 			btnEliminarIdioma.setEnabled(false);
 			btnEliminarIdioma.setBounds(290, 64, 89, 23);
 			panelInfoGeneral.add(btnEliminarIdioma);
@@ -566,4 +576,15 @@ public class InsertarSolicitante extends JDialog {
 		}
 		listIdiomas.setModel(modeloIdiomas);
 	}
+	
+	public void eliminarIdioma(String idioma) {
+		int index = 0;
+		for (int i = 0; i < misIdiomas.size(); i++) {
+			if (misIdiomas.get(i).equalsIgnoreCase(idioma)) {
+				index = i;
+			}
+		}
+		misIdiomas.remove(index);
+	}
+
 }
