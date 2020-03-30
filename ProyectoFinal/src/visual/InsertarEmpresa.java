@@ -123,7 +123,7 @@ public class InsertarEmpresa extends JDialog {
 					getToolkit().beep();
 
 					e.consume();
-					JOptionPane.showMessageDialog(null,"Este campo no adminte número");
+					JOptionPane.showMessageDialog(null,"Este campo no admite número");
 
 				}
 			}
@@ -166,7 +166,7 @@ public class InsertarEmpresa extends JDialog {
 					getToolkit().beep();
 
 					e.consume();
-					JOptionPane.showMessageDialog(null,"Este campo no adminte número");
+					JOptionPane.showMessageDialog(null,"Este campo no admite número");
 
 				}
 			}
@@ -216,7 +216,7 @@ public class InsertarEmpresa extends JDialog {
 					getToolkit().beep();
 
 					e.consume();
-					JOptionPane.showMessageDialog(null,"Este campo no adminte número");
+					JOptionPane.showMessageDialog(null,"Este campo no admite número");
 
 				}
 			}
@@ -239,7 +239,7 @@ public class InsertarEmpresa extends JDialog {
 					getToolkit().beep();
 					e.consume();
 					
-					JOptionPane.showMessageDialog(null,"Este campo no adminte letras");
+					JOptionPane.showMessageDialog(null,"Este campo no admite letras");
 
 				}
 			}
@@ -256,7 +256,7 @@ public class InsertarEmpresa extends JDialog {
 					getToolkit().beep();
 
 					e.consume();
-					JOptionPane.showMessageDialog(null,"Este campo no adminte número");
+					JOptionPane.showMessageDialog(null,"Este campo no admite número");
 
 				}
 			}
@@ -266,7 +266,7 @@ public class InsertarEmpresa extends JDialog {
 		txtCiudad.setBounds(405, 24, 174, 23);
 		pnlUbicacion.add(txtCiudad);
 		
-		JLabel lblCiudad = new JLabel("Cuidad:");
+		JLabel lblCiudad = new JLabel("Ciudad:");
 		lblCiudad.setBounds(312, 24, 62, 14);
 		pnlUbicacion.add(lblCiudad);
 		
