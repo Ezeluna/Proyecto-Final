@@ -56,6 +56,8 @@ public class InsertarSolicitante extends JDialog {
 	private JSpinner spnNumeroCasa;
 	private JTextField textTelefono;
 	private JTextField textField;
+	private JPanel panelObrero;
+	private JPanel panelTecnico;
 	
 
 	/**
@@ -395,7 +397,46 @@ public class InsertarSolicitante extends JDialog {
 			panelInfoGeneral.add(scrollPane);
 			
 			JList list = new JList();
-			scrollPane.setViewportView(list);
+			scrollPane.spanelObrero = new JPanel();
+			panelObrero.setBounds(0, 11, 566, 112);
+			panelInfoGeneral.add(panelObrero);
+			panelObrero.setBorder(new TitledBorder(null, "Obrero", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panelObrero.setLayout(null);
+			
+			JLabel lblHabilidades = new JLabel("Habilidades:");
+			lblHabilidades.setBounds(288, 26, 71, 14);
+			panelObrero.add(lblHabilidades);
+			
+			JComboBox cbxHabilidades = new JComboBox();
+			cbxHabilidades.setBounds(276, 47, 123, 22);
+			cbxHabilidades.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Alba\u00F1il", "Anfitri\u00F3n de Fiesta", "Artesano", "Carpintero", "Chofer", "Chef", "Constructor", "Decorador", "Ebanista", "Electricista", "Mec\u00E1nico", "Pintor", "Plomero", "Salva Vidas", "Modista", "Seguridad", "Sirviente", "Jardinero"}));
+			panelObrero.add(cbxHabilidades);
+			
+			JButton btnRemoverH = new JButton("Remover");
+			btnRemoverH.setBounds(298, 80, 89, 23);
+			panelObrero.add(btnRemoverH);
+			JScrollPane scrollPaneH = new JScrollPane();
+			scrollPaneH.setBounds(409, 22, 140, 65);
+			panelObrero.add(scrollPaneH);
+			
+			JList<? extends E> list_1 = new JList();
+			scrollPaneH.setViewportView(list_1);
+			
+			
+			
+			JSeparator separator_1 = new JSeparator();
+			separator_1.setBounds(270, 11, 2, 92);
+			separator_1.setBackground(Color.RED);
+			separator_1.setOrientation(SwingConstants.VERTICAL);
+			panelObrero.add(separator_1);
+			
+			JLabel lblYearExpe = new JLabel("A\u00F1os de Experiencia:");
+			lblYearExpe.setBounds(10, 51, 101, 14);
+			panelObrero.add(lblYearExpe);
+			
+			JSpinner spnYearExpO = new JSpinner();
+			spnYearExpO.setBounds(133, 48, 114, 20);
+			panelObrero.add(spnYearExpO);
 			
 			JPanel panelTipoSolicitante = new JPanel();
 			panelTipoSolicitante.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Tipo de Solicitante", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -415,28 +456,29 @@ public class InsertarSolicitante extends JDialog {
 			rbtnUniversitario.setBounds(384, 19, 109, 23);
 			panelTipoSolicitante.add(rbtnUniversitario);
 			
-			JPanel panelObrero = new JPanel();
-			panelObrero.setBorder(new TitledBorder(null, "Obrero", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panelObrero.setBounds(10, 267, 566, 112);
-			panel2.add(panelObrero);
-			panelObrero.setLayout(null);
+			JPanel panelTecnico = new JPanel();
+			panelTecnico.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "T\u00E9cnico", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			panelTecnico.setBounds(10, 267, 566, 112);
+			panel2.add(panelTecnico);
+			panelTecnico.setLayout(null);
 			
-			JLabel lblHabilidades = new JLabel("Habilidades:");
-			lblHabilidades.setBounds(10, 26, 71, 14);
-			panelObrero.add(lblHabilidades);
+			JLabel lblYearExpT = new JLabel("A\u00F1os de Experiencia:");
+			lblYearExpT.setBounds(10, 45, 118, 14);
+			panelTecnico.add(lblYearExpT);
 			
-			JComboBox cbxHabilidades = new JComboBox();
-			cbxHabilidades.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Alba\u00F1il", "Anfitri\u00F3n de Fiesta", "Artesano", "Carpintero", "Chofer", "Chef", "Constructor", "Decorador", "Ebanista", "Electricista", "Mec\u00E1nico", "Pintor", "Plomero", "Salva Vidas", "Modista", "Seguridad", "Sirviente", "Jardinero"}));
-			cbxHabilidades.setBounds(10, 47, 123, 22);
-			panelObrero.add(cbxHabilidades);
+			JSpinner spnYearExpeT = new JSpinner();
+			spnYearExpeT.setBounds(133, 48, 114, 20);
+			panelTecnico.add(spnYearExpeT);
 			
-			JButton btnRemoverH = new JButton("Remover");
-			btnRemoverH.setBounds(31, 80, 89, 23);
-			panelObrero.add(btnRemoverH);
-					}
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			JLabel lblArea = new JLabel("\u00C1rea:");
+			lblArea.setBounds(328, 45, 46, 14);
+			panelTecnico.add(lblArea);
+			
+			JComboBox comboBox = new JComboBox();
+			comboBox.setBounds(375, 41, 30, 22);
+			panelTecnico.add(comboBox);
+			
+			ane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			
 			JButton btnContinuar = new JButton("Continuar");
