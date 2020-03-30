@@ -414,6 +414,7 @@ public class InsertarSolicitante extends JDialog {
 			rbtnUniversitario.setBounds(384, 19, 109, 23);
 			panelTipoSolicitante.add(rbtnUniversitario);
 			
+			 //p
 			JPanel panelTecnico = new JPanel();
 			panelTecnico.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "T\u00E9cnico", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			panelTecnico.setBounds(10, 267, 566, 112);
