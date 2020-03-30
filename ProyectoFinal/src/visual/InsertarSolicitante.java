@@ -36,13 +36,15 @@ import java.awt.Color;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.border.EtchedBorder;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class InsertarSolicitante extends JDialog {
 //jeje
 	private final JPanel contentPanel = new JPanel();
 	private JPanel panel1;
 	private JPanel panel2;
-	private JButton btnEliminar;
+	private JButton btnEliminarIdioma;
 	private JButton btnRemoverH;
 	private JButton btnContinuar;
 	private JButton btnRegistrar;
@@ -456,15 +458,22 @@ public class InsertarSolicitante extends JDialog {
 			cbxIdiomas.setBounds(273, 36, 123, 23);
 			panelInfoGeneral.add(cbxIdiomas);
 			
-			btnEliminar = new JButton("Remover\r\n");
-			btnEliminar.setBounds(290, 64, 89, 23);
-			panelInfoGeneral.add(btnEliminar);
+			btnEliminarIdioma = new JButton("Remover\r\n");
+			btnEliminarIdioma.setEnabled(false);
+			btnEliminarIdioma.setBounds(290, 64, 89, 23);
+			panelInfoGeneral.add(btnEliminarIdioma);
 			
 			JScrollPane scrollPane = new JScrollPane();
 			scrollPane.setBounds(406, 20, 142, 67);
 			panelInfoGeneral.add(scrollPane);
 			
 			listIdiomas = new JList();
+			listIdiomas.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					btnEliminarIdioma.setEnabled(true);
+				}
+			});
 			scrollPane.setViewportView(listIdiomas);
 			
 			JPanel panelTipoSolicitante = new JPanel();
