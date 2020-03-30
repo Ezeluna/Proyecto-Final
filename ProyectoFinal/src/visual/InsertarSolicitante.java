@@ -56,8 +56,6 @@ public class InsertarSolicitante extends JDialog {
 	private JSpinner spnNumeroCasa;
 	private JTextField textTelefono;
 	private JTextField textField;
-	private JPanel panelObrero;
-	private JPanel panelTecnico;
 	
 
 	/**
@@ -345,7 +343,7 @@ public class InsertarSolicitante extends JDialog {
 			
 			JPanel panelInfoGeneral = new JPanel();
 			panelInfoGeneral.setBorder(new TitledBorder(null, "Informaci\u00F3n General", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panelInfoGeneral.setBounds(10, 107, 566, 104);
+			panelInfoGeneral.setBounds(10, 108, 566, 104);
 			panel2.add(panelInfoGeneral);
 			panelInfoGeneral.setLayout(null);
 			
@@ -397,53 +395,13 @@ public class InsertarSolicitante extends JDialog {
 			panelInfoGeneral.add(scrollPane);
 			
 			JList list = new JList();
-			scrollPane.spanelObrero = new JPanel();
-			panelObrero.setBounds(0, 11, 566, 112);
-			panelInfoGeneral.add(panelObrero);
-			panelObrero.setBorder(new TitledBorder(null, "Obrero", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panelObrero.setLayout(null);
-			
-			JLabel lblHabilidades = new JLabel("Habilidades:");
-			lblHabilidades.setBounds(288, 26, 71, 14);
-			panelObrero.add(lblHabilidades);
-			
-			JComboBox cbxHabilidades = new JComboBox();
-			cbxHabilidades.setBounds(276, 47, 123, 22);
-			cbxHabilidades.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Alba\u00F1il", "Anfitri\u00F3n de Fiesta", "Artesano", "Carpintero", "Chofer", "Chef", "Constructor", "Decorador", "Ebanista", "Electricista", "Mec\u00E1nico", "Pintor", "Plomero", "Salva Vidas", "Modista", "Seguridad", "Sirviente", "Jardinero"}));
-			panelObrero.add(cbxHabilidades);
-			
-			JButton btnRemoverH = new JButton("Remover");
-			btnRemoverH.setBounds(298, 80, 89, 23);
-			panelObrero.add(btnRemoverH);
-			JScrollPane scrollPaneH = new JScrollPane();
-			scrollPaneH.setBounds(409, 22, 140, 65);
-			panelObrero.add(scrollPaneH);
-			
-			JList<? extends E> list_1 = new JList();
-			scrollPaneH.setViewportView(list_1);
-			
-			
-			
-			JSeparator separator_1 = new JSeparator();
-			separator_1.setBounds(270, 11, 2, 92);
-			separator_1.setBackground(Color.RED);
-			separator_1.setOrientation(SwingConstants.VERTICAL);
-			panelObrero.add(separator_1);
-			
-			JLabel lblYearExpe = new JLabel("A\u00F1os de Experiencia:");
-			lblYearExpe.setBounds(10, 51, 101, 14);
-			panelObrero.add(lblYearExpe);
-			
-			JSpinner spnYearExpO = new JSpinner();
-			spnYearExpO.setBounds(133, 48, 114, 20);
-			panelObrero.add(spnYearExpO);
+			scrollPane.setViewportView(list);
 			
 			JPanel panelTipoSolicitante = new JPanel();
 			panelTipoSolicitante.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Tipo de Solicitante", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			panelTipoSolicitante.setBounds(10, 216, 566, 49);
 			panel2.add(panelTipoSolicitante);
-			panelTipoSolicitante.setLayout(null);
-			
+			panelTipoSolicitante.setLayout(null);			
 			JRadioButton rbtnObrero = new JRadioButton("Obrero\r\n");
 			rbtnObrero.setBounds(72, 19, 84, 23);
 			panelTipoSolicitante.add(rbtnObrero);
