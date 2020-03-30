@@ -13,6 +13,7 @@ import javax.swing.text.MaskFormatter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,6 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JSpinner;
 import javax.swing.SwingConstants;
 import javax.swing.JFormattedTextField;
@@ -40,6 +42,12 @@ public class InsertarSolicitante extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JPanel panel1;
 	private JPanel panel2;
+	private JButton btnEliminar;
+	private JButton btnRemoverH;
+	private JButton btnContinuar;
+	private JButton btnRegistrar;
+	private JButton btnCancelar;
+	private JPanel panelContacto;
 	private JTextField textNombre;
 	private JTextField textApellidos;
 	private JTextField textCiudad;
@@ -47,17 +55,33 @@ public class InsertarSolicitante extends JDialog {
 	private JTextField textCalle;
 	private JTextField textReferencia;
 	private JFormattedTextField ftextCedula;
+	private JFormattedTextField ftextTelefono;
 	private JComboBox cbxLicencia;
 	private JComboBox cbxProvincias;
 	private JComboBox cbxEstadoCivil;
 	private JComboBox cbxNacionalidad;
+	private JComboBox cbxIdiomas;
+	private JComboBox cbxHabilidades;
 	private JRadioButton rdbMasculino;
 	private JRadioButton rdbFemenino;
+	private JRadioButton rbtnSiVehiculoPro;
+	private JRadioButton rbtnNoVehiculoPro;
+	private JRadioButton rbtnSiDisponibilidad;
+	private JRadioButton rbtnNoDisponibilidad;
+	private JRadioButton rbtnObrero;
+	private JRadioButton rbtnTecnico;
+	private JRadioButton rbtnUniversitario;
 	private JSpinner spnNumeroCasa;
-	private JTextField textTelefono;
+	private JSpinner spnYearExp;
 	private JTextField textField;
 	private JPanel panelObrero;
 	private JPanel panelTecnico;
+	private JList listIdiomas;
+	private JList listHabilidades;
+	private ArrayList<String> misIdiomas = new ArrayList<>();
+	private ArrayList<String> misHabilidades = new ArrayList<>();
+	private DefaultListModel<String> modeloIdiomas = new DefaultListModel<>();
+	private DefaultListModel<String> modeloHabilidad = new DefaultListModel<>();
 	
 
 	/**
@@ -315,11 +339,11 @@ public class InsertarSolicitante extends JDialog {
 			textReferencia.setColumns(10);
 		}
 		{
-			JPanel panel2 = new JPanel();
+			panel2 = new JPanel();
 			contentPanel.add(panel2, "name_428725249088700");
 			panel2.setLayout(null);
 			
-			JPanel panelContacto = new JPanel();
+			panelContacto = new JPanel();
 			panelContacto.setBorder(new TitledBorder(null, "Contactos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			panelContacto.setBounds(10, 11, 566, 86);
 			panel2.add(panelContacto);
@@ -329,11 +353,6 @@ public class InsertarSolicitante extends JDialog {
 			lblTelefono.setBounds(10, 34, 66, 14);
 			panelContacto.add(lblTelefono);
 			
-			textTelefono = new JTextField();
-			textTelefono.setBounds(94, 30, 131, 23);
-			panelContacto.add(textTelefono);
-			textTelefono.setColumns(10);
-			
 			JLabel lblEmail = new JLabel("E-mail:");
 			lblEmail.setBounds(266, 34, 46, 14);
 			panelContacto.add(lblEmail);
@@ -342,6 +361,18 @@ public class InsertarSolicitante extends JDialog {
 			textField.setBounds(316, 30, 226, 23);
 			panelContacto.add(textField);
 			textField.setColumns(10);
+			
+			MaskFormatter mascaraTelefono;
+			try {
+				mascaraTelefono = new MaskFormatter("(###) ### - ####");
+				mascaraTelefono.setPlaceholderCharacter('_');
+			    ftextTelefono = new JFormattedTextField(mascaraTelefono);
+			    ftextTelefono.setBounds(75, 30, 140, 22);
+			    panelContacto.add(ftextTelefono);
+			
+			}catch (ParseException e) {
+				e.printStackTrace();
+			}
 			
 			JPanel panelInfoGeneral = new JPanel();
 			panelInfoGeneral.setBorder(new TitledBorder(null, "Informaci\u00F3n General", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -353,11 +384,23 @@ public class InsertarSolicitante extends JDialog {
 			lblVehiculo.setBounds(10, 30, 96, 14);
 			panelInfoGeneral.add(lblVehiculo);
 			
-			JRadioButton rbtnSiVehiculoPro = new JRadioButton("S\u00ED");
+			rbtnSiVehiculoPro = new JRadioButton("S\u00ED");
+			rbtnSiVehiculoPro.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					rbtnSiVehiculoPro.setSelected(true);
+					rbtnNoVehiculoPro.setSelected(false);
+				}
+			});
 			rbtnSiVehiculoPro.setBounds(125, 26, 33, 23);
 			panelInfoGeneral.add(rbtnSiVehiculoPro);
 			
-			JRadioButton rbtnNoVehiculoPro = new JRadioButton("No");
+		    rbtnNoVehiculoPro = new JRadioButton("No");
+		    rbtnNoVehiculoPro.addActionListener(new ActionListener() {
+		    	public void actionPerformed(ActionEvent e) {
+		    		rbtnSiVehiculoPro.setSelected(false);
+					rbtnNoVehiculoPro.setSelected(true);
+		    	}
+		    });
 			rbtnNoVehiculoPro.setBounds(177, 26, 39, 23);
 			panelInfoGeneral.add(rbtnNoVehiculoPro);
 			
@@ -365,11 +408,23 @@ public class InsertarSolicitante extends JDialog {
 			lblDisponibilidadM.setBounds(10, 68, 165, 14);
 			panelInfoGeneral.add(lblDisponibilidadM);
 			
-			JRadioButton rbtnSiDisponibilidad = new JRadioButton("S\u00ED\r\n");
+			rbtnSiDisponibilidad = new JRadioButton("S\u00ED\r\n");
+			rbtnSiDisponibilidad.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					rbtnSiDisponibilidad.setSelected(true);
+					rbtnNoDisponibilidad.setSelected(false);
+				}
+			});
 			rbtnSiDisponibilidad.setBounds(182, 64, 39, 23);
 			panelInfoGeneral.add(rbtnSiDisponibilidad);
 			
-			JRadioButton rbtnNoDisponibilidad = new JRadioButton("No");
+			rbtnNoDisponibilidad = new JRadioButton("No");
+			rbtnNoDisponibilidad.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					rbtnSiDisponibilidad.setSelected(false);
+					rbtnNoDisponibilidad.setSelected(true);
+				}
+			});
 			rbtnNoDisponibilidad.setBounds(220, 64, 39, 23);
 			panelInfoGeneral.add(rbtnNoDisponibilidad);
 			
@@ -383,12 +438,25 @@ public class InsertarSolicitante extends JDialog {
 			lblIdiomas.setBounds(290, 11, 56, 14);
 			panelInfoGeneral.add(lblIdiomas);
 			
-			JComboBox cbxIdiomas = new JComboBox();
+			cbxIdiomas = new JComboBox();
+			cbxIdiomas.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					if (!misIdiomas.contains(cbxIdiomas.getSelectedItem().toString())
+							&& cbxIdiomas.getSelectedIndex() > 0) {
+						misIdiomas.add(cbxIdiomas.getSelectedItem().toString());
+						modeloIdiomas.removeAllElements();
+						loadIdioma();
+						cbxIdiomas.setSelectedIndex(0);
+					} else if (misIdiomas.contains(cbxIdiomas.getSelectedItem().toString())) {
+						panel2.setVisible(true);
+					}
+				}
+			});
 			cbxIdiomas.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Alba\u00F1il", "Anfitri\u00F3n de Fiesta", "Artesano", "Carpintero", "Chofer", "Chef", "Constructor", "Decorador", "Ebanista", "Electricista", "Mec\u00E1nico", "Pintor", "Plomero", "Salva Vidas", "Modista", "Seguridad", "Sirviente", "Jardinero"}));
 			cbxIdiomas.setBounds(273, 36, 123, 23);
 			panelInfoGeneral.add(cbxIdiomas);
 			
-			JButton btnEliminar = new JButton("Remover\r\n");
+			btnEliminar = new JButton("Remover\r\n");
 			btnEliminar.setBounds(290, 64, 89, 23);
 			panelInfoGeneral.add(btnEliminar);
 			
@@ -396,8 +464,8 @@ public class InsertarSolicitante extends JDialog {
 			scrollPane.setBounds(406, 20, 142, 67);
 			panelInfoGeneral.add(scrollPane);
 			
-			JList list = new JList();
-			scrollPane.setViewportView(list);
+			listIdiomas = new JList();
+			scrollPane.setViewportView(listIdiomas);
 			
 			JPanel panelTipoSolicitante = new JPanel();
 			panelTipoSolicitante.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Tipo de Solicitante", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -405,17 +473,18 @@ public class InsertarSolicitante extends JDialog {
 			panel2.add(panelTipoSolicitante);
 			panelTipoSolicitante.setLayout(null);
 			
-			JRadioButton rbtnObrero = new JRadioButton("Obrero\r\n");
+			rbtnObrero = new JRadioButton("Obrero\r\n");
 			rbtnObrero.setBounds(72, 19, 84, 23);
 			panelTipoSolicitante.add(rbtnObrero);
 			
-			JRadioButton rbtnTecnico = new JRadioButton("T\u00E9cnico");
+			rbtnTecnico = new JRadioButton("T\u00E9cnico");
 			rbtnTecnico.setBounds(228, 19, 84, 23);
 			panelTipoSolicitante.add(rbtnTecnico);
 			
-			JRadioButton rbtnUniversitario = new JRadioButton("Universitario");
+			rbtnUniversitario = new JRadioButton("Universitario");
 			rbtnUniversitario.setBounds(384, 19, 109, 23);
 			panelTipoSolicitante.add(rbtnUniversitario);
+			
 			
 			panelObrero = new JPanel();
 			panelObrero.setBorder(new TitledBorder(null, "Obrero", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -427,17 +496,20 @@ public class InsertarSolicitante extends JDialog {
 			lblHabilidades.setBounds(288, 26, 71, 14);
 			panelObrero.add(lblHabilidades);
 			
-			JComboBox cbxHabilidades = new JComboBox();
+			cbxHabilidades = new JComboBox();
 			cbxHabilidades.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Alba\u00F1il", "Anfitri\u00F3n de Fiesta", "Artesano", "Carpintero", "Chofer", "Chef", "Constructor", "Decorador", "Ebanista", "Electricista", "Mec\u00E1nico", "Pintor", "Plomero", "Salva Vidas", "Modista", "Seguridad", "Sirviente", "Jardinero"}));
 			cbxHabilidades.setBounds(276, 47, 123, 22);
 			panelObrero.add(cbxHabilidades);
 			
-			JButton btnRemoverH = new JButton("Remover");
+			btnRemoverH = new JButton("Remover");
 			btnRemoverH.setBounds(298, 80, 89, 23);
 			panelObrero.add(btnRemoverH);
 			JScrollPane scrollPaneH = new JScrollPane();
 			scrollPaneH.setBounds(409, 22, 140, 65);
 			panelObrero.add(scrollPaneH);
+			
+			listHabilidades = new JList();
+			scrollPaneH.setViewportView(listHabilidades);
 			
 			
 			
@@ -453,27 +525,36 @@ public class InsertarSolicitante extends JDialog {
 			lblYearExpe.setBounds(10, 51, 101, 14);
 			panelObrero.add(lblYearExpe);
 			
-			JSpinner spinner = new JSpinner();
-			spinner.setBounds(133, 48, 114, 20);
-			panelObrero.add(spinner);
+			spnYearExp = new JSpinner();
+			spnYearExp.setBounds(133, 48, 114, 20);
+			panelObrero.add(spnYearExp);
+			
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			
-			JButton btnContinuar = new JButton("Continuar");
+			btnContinuar = new JButton("Continuar");
 			buttonPane.add(btnContinuar);
 			{
-				JButton btnRegistrar = new JButton("Registrar");
+				btnRegistrar = new JButton("Registrar");
 				btnRegistrar.setHorizontalAlignment(SwingConstants.RIGHT);
 				btnRegistrar.setActionCommand("OK");
 				buttonPane.add(btnRegistrar);
 				getRootPane().setDefaultButton(btnRegistrar);
 			}
 			{
-				JButton btnCancelar = new JButton("Cancelar");
+				btnCancelar = new JButton("Cancelar");
 				btnCancelar.setActionCommand("Cancel");
 				buttonPane.add(btnCancelar);
 			}
 		}
+	}
+	
+	
+	public void loadIdioma() {
+		for (String idioma : misIdiomas) {
+			modeloIdiomas.addElement(idioma);
+		}
+		listIdiomas.setModel(modeloIdiomas);
 	}
 }
