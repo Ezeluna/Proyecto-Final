@@ -1,16 +1,18 @@
 package logic;
 
+import java.util.ArrayList;
+
 public class SolicitudUniversitario extends Solicitud {
 	//ctt
 	private static final long serialVersionUID = 1L;
 	private String carrera;
 	private boolean postGrado;
 
-	public SolicitudUniversitario(String id, int cantVacantes, int cantSolicitudes, Empresa empresa, String direccion,
-			int edadMax, int edadMin, int yearExperience, String jornadaLaboral, boolean presencial,
-			String tipoContrato, boolean vehiculoPropio, int categoriaLicencia, boolean mudarse, String carrera, boolean postGrado) {
-		super(id, cantVacantes, cantSolicitudes, empresa, direccion, edadMax, edadMin, yearExperience, jornadaLaboral,
-				presencial, tipoContrato, vehiculoPropio, categoriaLicencia, mudarse);
+	public SolicitudUniversitario(String id, int cantVacantes, int cantSolicitudes, Empresa empresa, String localidad,
+			int edadMax, int edadMin, int yearExperience, 
+			String tipoContrato, boolean vehiculoPropio, int categoriaLicencia, boolean mudarse, ArrayList<String> habilidades) {
+		super(id, cantVacantes, cantSolicitudes, empresa, localidad, edadMax, edadMin, yearExperience,
+				tipoContrato, vehiculoPropio, categoriaLicencia, mudarse);
 		
 		this.carrera = carrera; 
 		this.postGrado = postGrado; 

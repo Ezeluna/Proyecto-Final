@@ -2,7 +2,7 @@ package logic;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-//hi
+
 public abstract class Solicitud implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -10,33 +10,28 @@ public abstract class Solicitud implements Serializable {
 	protected int cantVacantes;
 	protected int cantSolicitudes;
 	protected Empresa empresa;  
-	protected String direccion; 
+	protected String localidad; 
 	protected ArrayList<String> idiomas; 
 	protected int edadMax; 
 	protected int edadMin; 
 	protected int yearExperience; 
-	protected String jornadaLaboral; 
-	protected boolean presencial; 
 	protected String tipoContrato; 
 	protected boolean vehiculoPropio; 
 	protected int categoriaLicencia; 
 	protected boolean mudarse;
 	
-	public Solicitud(String id, int cantVacantes, int cantSolicitudes, Empresa empresa, String direccion, int edadMax, 
-			int edadMin, int yearExperience, String jornadaLaboral,boolean presencial, String tipoContrato, boolean vehiculoPropio, 
+	public Solicitud(String id, int cantVacantes, int cantSolicitudes, Empresa empresa, String localidad, int edadMax, 
+			int edadMin, int yearExperience, String tipoContrato, boolean vehiculoPropio, 
 			int categoriaLicencia, boolean mudarse) {
 		super();
 		this.id = id;
 		this.cantVacantes = cantVacantes;
 		this.cantSolicitudes = 0;
 		this.empresa = empresa;
-		this.direccion = direccion;
 		idiomas = new ArrayList<>(); 
 		this.edadMax = edadMax;
 		this.edadMin = edadMin;
 		this.yearExperience = yearExperience;
-		this.jornadaLaboral = jornadaLaboral;
-		this.presencial = presencial;
 		this.tipoContrato = tipoContrato;
 		this.vehiculoPropio = vehiculoPropio;
 		this.categoriaLicencia = categoriaLicencia;
@@ -78,12 +73,12 @@ public abstract class Solicitud implements Serializable {
 		this.empresa = empresa;
 	}
 
-	public String getDireccion() {
-		return direccion;
+	public String getLocalidad() {
+		return localidad;
 	}
 
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
+	public void setDireccion(String localidad) {
+		this.localidad = localidad;
 	}
 
 	public ArrayList<String> getIdiomas() {
@@ -116,22 +111,6 @@ public abstract class Solicitud implements Serializable {
 
 	public void setYearExperience(int yearExperience) {
 		this.yearExperience = yearExperience;
-	}
-
-	public String getJornadaLaboral() {
-		return jornadaLaboral;
-	}
-
-	public void setJornadaLaboral(String jornadaLaboral) {
-		this.jornadaLaboral = jornadaLaboral;
-	}
-
-	public boolean isPresencial() {
-		return presencial;
-	}
-
-	public void setPresencial(boolean presencial) {
-		this.presencial = presencial;
 	}
 
 	public String getTipoContrato() {

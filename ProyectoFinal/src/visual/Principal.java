@@ -63,9 +63,6 @@ public class Principal extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnNewMenu_1 = new JMenu("New menu");
-		menuBar.add(mnNewMenu_1);
-		
 		JMenu mnNewMenu = new JMenu("Empresa");
 		menuBar.add(mnNewMenu);
 		
@@ -92,6 +89,19 @@ public class Principal extends JFrame {
 			}
 		});
 		mnNewMenu.add(mntmListarEmpresas);
+		
+		JMenu mnSolicitudEmpresa = new JMenu("Solicitud");
+		menuBar.add(mnSolicitudEmpresa);
+		
+		JMenuItem mntmSolicitudEmpresa = new JMenuItem("Solicitud Empresa");
+		mntmSolicitudEmpresa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				InsertarSolicitud_Empresa solicitud = new InsertarSolicitud_Empresa(null);
+				solicitud.setModal(true);
+				solicitud.setVisible(true);
+			}
+		});
+		mnSolicitudEmpresa.add(mntmSolicitudEmpresa);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
