@@ -74,7 +74,7 @@ public class InsertarSolicitante extends JDialog {
 	private JRadioButton rbtnTecnico;
 	private JRadioButton rbtnUniversitario;
 	private JSpinner spnNumeroCasa;
-	private JSpinner spnYearExp;
+	private JSpinner spnYearExpO;
 	private JTextField textField;
 	private JPanel panelObrero;
 	private JPanel panelTecnico;
@@ -454,7 +454,7 @@ public class InsertarSolicitante extends JDialog {
 					}
 				}
 			});
-			cbxIdiomas.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Alba\u00F1il", "Anfitri\u00F3n de Fiesta", "Artesano", "Carpintero", "Chofer", "Chef", "Constructor", "Decorador", "Ebanista", "Electricista", "Mec\u00E1nico", "Pintor", "Plomero", "Salva Vidas", "Modista", "Seguridad", "Sirviente", "Jardinero"}));
+			cbxIdiomas.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Afrikaans", "Alban\u00E9s", "Alem\u00E1n", "Amharico", "Arabe", "Armenio", "Bengali", "Bieloruso", "Birman\u00E9s", "Bulgaro", "Catalan", "Checo", "Chino", "Coreano", "Croata", "Dan\u00E9s", "Dari", "Dzongkha", "Escoc\u00E9s", "Eslovaco", "Esloveniano", "Espa\u00F1ol", "Esperanto", "Estoniano", "Faroese", "Farsi", "Finland\u00E9s", "Franc\u00E9s", "Gaelico", "Galese", "Gallego", "Griego", "Hebreo", "Hindi", "Holand\u00E9s", "Hungaro", "Ingl\u00E9s", "Indonesio", "Inuktitut (Eskimo)", "Islandico", "Italiano", "Japon\u00E9s", "Khmer", "Kurdo", "Lao", "Laponico", "Latviano", "Lituano", "Macedonio", "Malay\u00E9s", "Malt\u00E9s", "Nepali", "Noruego", "Pashto", "Polaco", "Portugu\u00E9s", "Rumano", "Ruso", "Serbio", "Somali", "Suahili", "Sueco", "Tagalog-Filipino", "Tajik", "Tamil", "Tailand\u00E9s", "Tibetano", "Tigrinia", "Tongan\u00E9s", "Turco", "Turkmenistano", "Ucraniano", "Urdu", "Uzbekistano", "Vasco", "Vietnam\u00E9s"}));
 			cbxIdiomas.setBounds(273, 36, 123, 23);
 			panelInfoGeneral.add(cbxIdiomas);
 			
@@ -493,14 +493,47 @@ public class InsertarSolicitante extends JDialog {
 			panelTipoSolicitante.setLayout(null);
 			
 			rbtnObrero = new JRadioButton("Obrero\r\n");
+			rbtnObrero.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					btnRegistrar.setEnabled(true);
+					rbtnObrero.setSelected(true);
+					rbtnTecnico.setSelected(false);
+					rbtnUniversitario.setSelected(false);
+					panelObrero.setVisible(true);
+					//panel_Tecnico.setVisible(false);
+					//panel_Universitario.setVisible(false);
+				}
+			});
 			rbtnObrero.setBounds(72, 19, 84, 23);
 			panelTipoSolicitante.add(rbtnObrero);
 			
 			rbtnTecnico = new JRadioButton("T\u00E9cnico");
+			rbtnTecnico.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					btnRegistrar.setEnabled(true);
+					rbtnObrero.setSelected(false);
+					rbtnTecnico.setSelected(true);
+					rbtnUniversitario.setSelected(false);
+					panelObrero.setVisible(false);
+					//panel_Tecnico.setVisible(true);
+					//panel_Universitario.setVisible(false);
+				}
+			});
 			rbtnTecnico.setBounds(228, 19, 84, 23);
 			panelTipoSolicitante.add(rbtnTecnico);
 			
 			rbtnUniversitario = new JRadioButton("Universitario");
+			rbtnUniversitario.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					btnRegistrar.setEnabled(true);
+					rbtnObrero.setSelected(false);
+					rbtnTecnico.setSelected(false);
+					rbtnUniversitario.setSelected(true);
+					panelObrero.setVisible(false);
+					//panelTecnico.setVisible(false);
+					//panelUniversitario.setVisible(true);
+				}
+			});
 			rbtnUniversitario.setBounds(384, 19, 109, 23);
 			panelTipoSolicitante.add(rbtnUniversitario);
 			
@@ -516,6 +549,19 @@ public class InsertarSolicitante extends JDialog {
 			panelObrero.add(lblHabilidades);
 			
 			cbxHabilidades = new JComboBox();
+			cbxHabilidades.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					if (!misHabilidades.contains(cbxHabilidades.getSelectedItem().toString())
+							&& cbxHabilidades.getSelectedIndex() > 0) {
+						misHabilidades.add(cbxHabilidades.getSelectedItem().toString());
+						modeloHabilidad.removeAllElements();
+						loadHabilidades();
+					} else if (misHabilidades.contains(cbxHabilidades.getSelectedItem().toString())) {
+						panel2.setVisible(true);
+					}
+				}
+				
+			});
 			cbxHabilidades.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Alba\u00F1il", "Anfitri\u00F3n de Fiesta", "Artesano", "Carpintero", "Chofer", "Chef", "Constructor", "Decorador", "Ebanista", "Electricista", "Mec\u00E1nico", "Pintor", "Plomero", "Salva Vidas", "Modista", "Seguridad", "Sirviente", "Jardinero"}));
 			cbxHabilidades.setBounds(276, 47, 123, 22);
 			panelObrero.add(cbxHabilidades);
@@ -528,6 +574,12 @@ public class InsertarSolicitante extends JDialog {
 			panelObrero.add(scrollPaneH);
 			
 			listHabilidades = new JList();
+			listHabilidades.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					btnRemoverH.setEnabled(true);
+				}
+			});
 			scrollPaneH.setViewportView(listHabilidades);
 			
 			
@@ -544,9 +596,9 @@ public class InsertarSolicitante extends JDialog {
 			lblYearExpe.setBounds(10, 51, 101, 14);
 			panelObrero.add(lblYearExpe);
 			
-			spnYearExp = new JSpinner();
-			spnYearExp.setBounds(133, 48, 114, 20);
-			panelObrero.add(spnYearExp);
+			spnYearExpO = new JSpinner();
+			spnYearExpO.setBounds(133, 48, 114, 20);
+			panelObrero.add(spnYearExpO);
 			
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -585,6 +637,13 @@ public class InsertarSolicitante extends JDialog {
 			}
 		}
 		misIdiomas.remove(index);
+	}
+	
+	public void loadHabilidades() {
+		for (String habilidad : misHabilidades) {
+			modeloHabilidad.addElement(habilidad);
+		}
+		listHabilidades.setModel(modeloHabilidad);
 	}
 
 }
