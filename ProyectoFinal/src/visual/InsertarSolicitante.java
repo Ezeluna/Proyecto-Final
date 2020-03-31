@@ -567,6 +567,16 @@ public class InsertarSolicitante extends JDialog {
 			panelObrero.add(cbxHabilidades);
 			
 			btnRemoverH = new JButton("Remover");
+			btnRemoverH.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					int index = listHabilidades.getSelectedIndex();
+					String habilidad = listHabilidades.getSelectedValue().toString();
+					modeloHabilidad.remove(index);
+					eliminarHabilidad(habilidad);
+					btnRemoverH.setEnabled(false);
+				}
+			});
+			
 			btnRemoverH.setBounds(298, 80, 89, 23);
 			panelObrero.add(btnRemoverH);
 			JScrollPane scrollPaneH = new JScrollPane();
@@ -605,6 +615,11 @@ public class InsertarSolicitante extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			
 			btnContinuar = new JButton("Continuar");
+			btnContinuar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+				}
+			});
 			buttonPane.add(btnContinuar);
 			{
 				btnRegistrar = new JButton("Registrar");
@@ -644,6 +659,16 @@ public class InsertarSolicitante extends JDialog {
 			modeloHabilidad.addElement(habilidad);
 		}
 		listHabilidades.setModel(modeloHabilidad);
+	}
+	
+	public void eliminarHabilidad(String habilidad) {
+		int index = 0;
+		for (int i = 0; i < misHabilidades.size(); i++) {
+			if (misHabilidades.get(i).equalsIgnoreCase(habilidad)) {
+				index = i;
+			}
+		}
+		misHabilidades.remove(index);
 	}
 
 }
