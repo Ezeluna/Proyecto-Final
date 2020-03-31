@@ -11,7 +11,6 @@ public abstract class Solicitud implements Serializable {
 	protected int cantSolicitudes;
 	protected Empresa empresa;  
 	protected String localidad; 
-	protected ArrayList<String> idiomas; 
 	protected int edadMax; 
 	protected int edadMin; 
 	protected int yearExperience; 
@@ -19,15 +18,15 @@ public abstract class Solicitud implements Serializable {
 	protected boolean vehiculoPropio; 
 	protected int categoriaLicencia; 
 	protected boolean mudarse;
+	protected ArrayList<String> idiomas; 
 	
 	public Solicitud( float cantVacantes, Empresa empresa, String localidad, int edadMax, 
 			int edadMin, int yearExperience, String tipoContrato, boolean vehiculoPropio, 
-			int categoriaLicencia, boolean mudarse) {
+			int categoriaLicencia, boolean mudarse, ArrayList<String> idiomas) {
 		super();
 		this.cantVacantes = cantVacantes;
 		this.cantSolicitudes = 0;
 		this.empresa = empresa;
-		idiomas = new ArrayList<>(); 
 		this.edadMax = edadMax;
 		this.edadMin = edadMin;
 		this.yearExperience = yearExperience;
@@ -35,10 +34,11 @@ public abstract class Solicitud implements Serializable {
 		this.vehiculoPropio = vehiculoPropio;
 		this.categoriaLicencia = categoriaLicencia;
 		this.mudarse = mudarse;
-		
+		idiomas = new ArrayList<>(); 
+		for (String idio : idiomas) {
+			this.idiomas.add(idio);
+		}
 	}
-	
-	abstract void insertarIdioma(String aux);
 
 	public String getId() {
 		return id;

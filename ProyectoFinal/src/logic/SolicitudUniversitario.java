@@ -1,5 +1,6 @@
 package logic;
 
+import java.util.ArrayList;
 
 public class SolicitudUniversitario extends Solicitud {
 	
@@ -9,17 +10,12 @@ public class SolicitudUniversitario extends Solicitud {
 
 	public SolicitudUniversitario(float cantVacantes, Empresa empresa, String localidad, int edadMax, 
 			int edadMin, int yearExperience, String tipoContrato, boolean vehiculoPropio, 
-			int categoriaLicencia, boolean mudarse, String carrera, boolean postGrado) {
+			int categoriaLicencia, boolean mudarse, ArrayList<String> idiomas, String carrera, boolean postGrado) {
 		super(cantVacantes, empresa, localidad, edadMax, edadMin, yearExperience,
-				tipoContrato, vehiculoPropio, categoriaLicencia, mudarse);
+				tipoContrato, vehiculoPropio, categoriaLicencia, mudarse, idiomas);
 		
 		this.carrera = carrera; 
 		this.postGrado = postGrado; 
-	}
-
-	@Override
-	void insertarIdioma(String aux) {
-		idiomas.add(aux); 
 	}
 
 	public String getCarrera() {

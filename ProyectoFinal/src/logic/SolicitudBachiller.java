@@ -9,20 +9,15 @@ public class SolicitudBachiller extends Solicitud {
 
 	public SolicitudBachiller( float cantVacantes, Empresa empresa, String localidad,
 			int edadMax, int edadMin, int yearExperience, String tipoContrato, boolean vehiculoPropio, int categoriaLicencia,
-			boolean mudarse, ArrayList<String> habilidades) {
+			boolean mudarse, ArrayList<String> idiomas, ArrayList<String> habilidades) {
 		super(cantVacantes, empresa, localidad, edadMax, edadMin, yearExperience,
-				tipoContrato, vehiculoPropio, categoriaLicencia, mudarse);
+				tipoContrato, vehiculoPropio, categoriaLicencia, mudarse, idiomas );
 		
 		this.habilidades = new ArrayList<>();
 		for (String habili : habilidades) {
 			this.habilidades.add(habili);
 			
 		}
-	}
-
-	@Override
-	void insertarIdioma(String aux) {
-		idiomas.add(aux); 
 	}
 
 	public ArrayList<String> getHabilidades() {

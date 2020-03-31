@@ -359,7 +359,8 @@ public class InsertarSolicitud_Empresa extends JDialog {
 			}
 			{
 				spnVacantes = new JSpinner();
-				spnVacantes.setBackground(Color.WHITE);
+				spnVacantes.setBackground(new Color(255, 255, 255));
+				spnVacantes.setModel(new SpinnerNumberModel(new Float(1), new Float(1), null, new Float(1)));
 				spnVacantes.setBounds(338, 23, 160, 23);
 				PanelGeneral.add(spnVacantes);
 			}
@@ -824,7 +825,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 								if (rbtnUniversitario.isSelected()) {
 									SolicitudUniversitario nuevaSoli = new SolicitudUniversitario((float) vacantes,
 											empresa, localidad, edadMaxima, edadMinima, experienciaUniversitario, Contrato, vehiculo,
-											categoriaLicencia, reubicacion, carrera, posGrado);
+											categoriaLicencia, reubicacion, misIdiomas, carrera, posGrado);
 
 									bolsa.insertSolicitud(nuevaSoli);
 									JOptionPane.showMessageDialog(null, "La Solicitud se registro correctamente",
@@ -834,7 +835,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 								if (rbtnTecnico.isSelected()) {
 									SolicitudTecnico nuevaSoli = new SolicitudTecnico((float) vacantes,
 											empresa, localidad, edadMaxima, edadMinima, experienciaUniversitario, Contrato, vehiculo,
-											categoriaLicencia, reubicacion, area);
+											categoriaLicencia, misIdiomas, reubicacion, area);
 									
 									bolsa.insertSolicitud(nuevaSoli);
 									JOptionPane.showMessageDialog(null, "La Solicitud se registro correctamente",
@@ -844,7 +845,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 								if (rbtnBachiller.isSelected()) {
 									SolicitudBachiller nuevaSoli = new SolicitudBachiller((float) vacantes,
 											empresa, localidad, edadMaxima, edadMinima, experienciaUniversitario, Contrato, vehiculo,
-											categoriaLicencia, reubicacion, misHabilidades);
+											categoriaLicencia, reubicacion, misIdiomas, misHabilidades);
 									nuevaSoli.setIdiomas(misIdiomas);
 									bolsa.insertSolicitud(nuevaSoli);
 									JOptionPane.showMessageDialog(null, "La Solicitud se registro correctamente",
@@ -896,7 +897,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 							Bolsa_Laboral.getInstance().ActualizarSolicitud(modi, modificarSoli);
 							JOptionPane.showMessageDialog(null, "La Solicitud se modifico correctamente", "Información",
 									JOptionPane.INFORMATION_MESSAGE, null);
-							/*if (ListarSolicitud_Empresa.cbxfiltro.getSelectedIndex() == 0) {
+							if (ListarSolicitud_Empresa.cbxfiltro.getSelectedIndex() == 0) {
 								ListarSolicitud_Empresa.loadtabla(0);
 							}
 							if (ListarSolicitud_Empresa.cbxfiltro.getSelectedIndex() == 1) {
@@ -910,7 +911,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 							if (ListarSolicitud_Empresa.cbxfiltro.getSelectedIndex() == 3) {
 								ListarSolicitud_Empresa.loadtabla(3);
 
-							}*/
+							}
 
 							dispose();
 

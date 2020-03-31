@@ -1,6 +1,6 @@
 package logic;
 
-
+import java.util.ArrayList;
 
 public class SolicitudTecnico extends Solicitud {
 	
@@ -9,16 +9,11 @@ public class SolicitudTecnico extends Solicitud {
 
 	public SolicitudTecnico(float cantVacantes, Empresa empresa, String localidad, int edadMax, 
 			int edadMin, int yearExperience, String tipoContrato, boolean vehiculoPropio, 
-			int categoriaLicencia, boolean mudarse, String area) {
+			int categoriaLicencia, ArrayList<String> idiomas, boolean mudarse, String area) {
 		super(cantVacantes, empresa, localidad, edadMax, edadMin, yearExperience,
-				tipoContrato, vehiculoPropio, categoriaLicencia, mudarse);
+				tipoContrato, vehiculoPropio, categoriaLicencia, mudarse, idiomas);
 		
 		this.area = area;
-	}
-
-	@Override
-	void insertarIdioma(String aux) {
-		idiomas.add(aux); 
 	}
 
 	public String getArea() {
