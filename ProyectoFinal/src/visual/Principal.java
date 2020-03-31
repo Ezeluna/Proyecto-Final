@@ -102,6 +102,16 @@ public class Principal extends JFrame {
 			}
 		});
 		mnSolicitudEmpresa.add(mntmSolicitudEmpresa);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Listado de Solicitudes");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarSolicitud_Empresa listsolicitud = new ListarSolicitud_Empresa();
+				listsolicitud.setModal(true);
+				listsolicitud.setVisible(true);
+			}
+		});
+		mnSolicitudEmpresa.add(mntmNewMenuItem);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

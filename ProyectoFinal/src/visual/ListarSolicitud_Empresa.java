@@ -34,6 +34,8 @@ import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ListarSolicitud_Empresa extends JDialog {
 
@@ -52,20 +54,12 @@ public class ListarSolicitud_Empresa extends JDialog {
 
 	private static JComboBox<String> cbxHabilidades;
 	private static JComboBox<String> cbxIdioma;
+	private JTable table_1;
 
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			ListarSolicitud_Empresa dialog = new ListarSolicitud_Empresa();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Create the dialog.
@@ -125,14 +119,36 @@ public class ListarSolicitud_Empresa extends JDialog {
 		scrollPane.setBounds(10, 58, 887, 356);
 		panel.add(scrollPane);
 		
-		JList list = new JList();
-		scrollPane.setViewportView(list);
+		table_1 = new JTable();
+		table_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int aux = table.getSelectedRow();
+				if (aux > -1) {
+					btnModificar.setEnabled(true);
+					btnEliminar.setEnabled(true);
+					//btnDetallar.setEnabled(true);
+					codigo = (String) table.getModel().getValueAt(aux, 0);
+
+				} else {
+					btnModificar.setEnabled(false);
+					btnEliminar.setEnabled(false);
+					//btnDetallar.setEnabled(false);
+					codigo = "";
+				}
+			}
+		});
+		modeloTabla = new DefaultTableModel();
+		table.getTableHeader().setResizingAllowed(false);
+		loadAll();
+		scrollPane.setViewportView(table_1);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton btnEliminar = new JButton("Eliminar");
+				btnEliminar = new JButton("Eliminar");
+				btnEliminar.setEnabled(false);
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar esta solicitud?", "Atención Requerida", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
@@ -143,7 +159,7 @@ public class ListarSolicitud_Empresa extends JDialog {
 											JOptionPane.INFORMATION_MESSAGE, null);
 
 									btnEliminar.setEnabled(false);
-									btnDetallar.setEnabled(false);
+									//btnDetallar.setEnabled(false);
 									btnModificar.setEnabled(false);
 								}
 							}
@@ -153,7 +169,8 @@ public class ListarSolicitud_Empresa extends JDialog {
 				buttonPane.add(btnEliminar);
 			}
 			{
-				JButton btnModificar = new JButton("Modificar");
+				btnModificar = new JButton("Modificar");
+				btnModificar.setEnabled(false);
 				btnModificar.setActionCommand("OK");
 				buttonPane.add(btnModificar);
 				getRootPane().setDefaultButton(btnModificar);

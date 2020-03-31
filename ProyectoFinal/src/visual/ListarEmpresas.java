@@ -135,10 +135,10 @@ public class ListarEmpresas extends JDialog {
 						
 
 						}
-							InsertarEmpresa modificaremore = new InsertarEmpresa("Modificar Empresa", true, miem, null);
-							modificaremore.setModal(true);
-							modificaremore.setLocationRelativeTo(null);
-							modificaremore.setVisible(true);
+							InsertarEmpresa modificarempre = new InsertarEmpresa("Modificar Empresa", true, miem, null);
+							modificarempre.setModal(true);
+							modificarempre.setLocationRelativeTo(null);
+							modificarempre.setVisible(true);
 							loadTable();
 							btnModificar.setEnabled(false);
 							btnEliminar.setEnabled(false);
