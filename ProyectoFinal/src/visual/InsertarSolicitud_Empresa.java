@@ -41,7 +41,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.SpinnerNumberModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+//
 public class InsertarSolicitud_Empresa extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
