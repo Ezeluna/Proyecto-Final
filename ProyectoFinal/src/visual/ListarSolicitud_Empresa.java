@@ -8,10 +8,11 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.DefaultTableCellRenderer;
+
 
 import logic.Bolsa_Laboral;
 import logic.Empresa;
@@ -28,7 +29,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
@@ -36,11 +36,14 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.border.EtchedBorder;
+import java.awt.Color;
+import javax.swing.ScrollPaneConstants;
 //
 public class ListarSolicitud_Empresa extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private static JTable table;
+	private static JTable table_1;
 	private static Object[] fila;
 	private static DefaultTableModel modeloTabla;
 	private static DefaultTableCellRenderer centrar = new DefaultTableCellRenderer();
@@ -49,12 +52,12 @@ public class ListarSolicitud_Empresa extends JDialog {
 	private JFormattedTextField ftxtRNCempresa;
 	private JButton btnModificar;
 	private JButton btnEliminar;
-	private JButton btnDetallar;
+	private JButton btnShow;
 	private String codigo = "";
 
 	private static JComboBox<String> cbxHabilidades;
 	private static JComboBox<String> cbxIdioma;
-	private JTable table_1;
+	
 
 
 	/**
@@ -74,32 +77,58 @@ public class ListarSolicitud_Empresa extends JDialog {
 		contentPanel.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Listado de Solicitudes Empresariales:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBounds(10, 11, 907, 425);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblFiltrarPor = new JLabel("Filtrar por:");
-		lblFiltrarPor.setBounds(10, 27, 68, 14);
+		lblFiltrarPor.setBounds(10, 25, 68, 14);
 		panel.add(lblFiltrarPor);
 		
 		cbxfiltro = new JComboBox();
+		cbxfiltro.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				btnShow.setEnabled(false);
+				btnEliminar.setEnabled(false);
+				btnModificar.setEnabled(false);
+			}
+		});
+		cbxfiltro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (cbxfiltro.getSelectedIndex() == 0) {
+					ftxtRNCempresa.setText("");
+					loadtabla(0);
+				} else if (cbxfiltro.getSelectedIndex() == 1) {
+					ftxtRNCempresa.setText("");
+					loadtabla(1);
+				} else if (cbxfiltro.getSelectedIndex() == 2) {
+					ftxtRNCempresa.setText("");
+					loadtabla(2);
+				} else if (cbxfiltro.getSelectedIndex() == 3) {
+					ftxtRNCempresa.setText("");
+					loadtabla(3);
+				}
+
+			}
+		});
 		cbxfiltro.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Universitarios", "T\u00E9cnicos", "Bachilleres"}));
-		cbxfiltro.setBounds(88, 23, 118, 23);
+		cbxfiltro.setBounds(77, 21, 118, 23);
 		panel.add(cbxfiltro);
 		
 		JLabel lblRncEmpresa = new JLabel("RNC Empresa:");
-		lblRncEmpresa.setBounds(211, 27, 85, 14);
+		lblRncEmpresa.setBounds(211, 25, 85, 14);
 		panel.add(lblRncEmpresa);
 		
-		JFormattedTextField ftxtRNCempresa = new JFormattedTextField();
-		ftxtRNCempresa.setBounds(306, 23, 118, 23);
+		ftxtRNCempresa = new JFormattedTextField();
+		ftxtRNCempresa.setBounds(306, 21, 118, 23);
 		panel.add(ftxtRNCempresa);
 		
 		JButton btnSearch = new JButton("");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				btnDetallar.setEnabled(false);
+				btnShow.setEnabled(false);
 				btnEliminar.setEnabled(false);
 				btnModificar.setEnabled(false);
 				empresaListar = Bolsa_Laboral.getInstance().RetornarEmpresa(ftxtRNCempresa.getText());
@@ -112,10 +141,19 @@ public class ListarSolicitud_Empresa extends JDialog {
 				}
 			}
 		});
-		btnSearch.setBounds(430, 23, 29, 24);
+		btnSearch.setBounds(430, 21, 29, 23);
 		panel.add(btnSearch);
 		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				btnShow.setEnabled(false);
+				btnEliminar.setEnabled(false);
+				btnModificar.setEnabled(false);
+			}
+		});
 		scrollPane.setBounds(10, 58, 887, 356);
 		panel.add(scrollPane);
 		
@@ -123,23 +161,23 @@ public class ListarSolicitud_Empresa extends JDialog {
 		table_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int aux = table.getSelectedRow();
+				int aux = table_1.getSelectedRow();
 				if (aux > -1) {
 					btnModificar.setEnabled(true);
 					btnEliminar.setEnabled(true);
-					//btnDetallar.setEnabled(true);
-					codigo = (String) table.getModel().getValueAt(aux, 0);
+					btnShow.setEnabled(true);
+					codigo = (String) table_1.getModel().getValueAt(aux, 0);
 
 				} else {
 					btnModificar.setEnabled(false);
 					btnEliminar.setEnabled(false);
-					//btnDetallar.setEnabled(false);
+					btnShow.setEnabled(false);
 					codigo = "";
 				}
 			}
 		});
 		modeloTabla = new DefaultTableModel();
-		table.getTableHeader().setResizingAllowed(false);
+		table_1.getTableHeader().setResizingAllowed(false);
 		loadAll();
 		scrollPane.setViewportView(table_1);
 		{
@@ -159,17 +197,36 @@ public class ListarSolicitud_Empresa extends JDialog {
 											JOptionPane.INFORMATION_MESSAGE, null);
 
 									btnEliminar.setEnabled(false);
-									//btnDetallar.setEnabled(false);
+									btnShow.setEnabled(false);
 									btnModificar.setEnabled(false);
 								}
 							}
 						}
 					}
 				});
+				
+				btnShow = new JButton("Ver Solicitud");
+				btnShow.setEnabled(false);
+				btnShow.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						DetallesSolicitudE detalle = new DetallesSolicitudE();//Bolsa_Laboral.getInstance().RetornarSolocitudId(codigo)
+						detalle.setModal(true);
+						detalle.setVisible(true);
+					}
+				});
+				buttonPane.add(btnShow);
 				buttonPane.add(btnEliminar);
 			}
 			{
 				btnModificar = new JButton("Modificar");
+				btnModificar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						InsertarSolicitud_Empresa modificarSoli = new InsertarSolicitud_Empresa(Bolsa_Laboral.getInstance().RetornarSolocitudId(codigo));
+						modificarSoli.setModal(true);
+						modificarSoli.setVisible(true);
+						Solicitud soli = Bolsa_Laboral.getInstance().RetornarSolocitudId(codigo);
+					}
+				});
 				btnModificar.setEnabled(false);
 				btnModificar.setActionCommand("OK");
 				buttonPane.add(btnModificar);
@@ -201,7 +258,7 @@ public class ListarSolicitud_Empresa extends JDialog {
 
 		}
 		if (i == 3) {
-			loadObrero();
+			loadBachiller();
 		}
 
 	}
@@ -222,7 +279,7 @@ public class ListarSolicitud_Empresa extends JDialog {
 				fila[2] = "Técnico";
 			}
 			if (soli instanceof SolicitudBachiller) {
-				fila[2] = "Obrero";
+				fila[2] = "Bachiller";
 			}
 			String min = Integer.toString(soli.getEdadMin());
 			String max = Integer.toString(soli.getEdadMax());
@@ -236,13 +293,13 @@ public class ListarSolicitud_Empresa extends JDialog {
 			fila[5] = soli.getLocalidad();
 			modeloTabla.addRow(fila);
 		}
-		table.setModel(modeloTabla);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.getTableHeader().setReorderingAllowed(false);
-		TableColumnModel columnModel = table.getColumnModel();
+		table_1.setModel(modeloTabla);
+		table_1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table_1.getTableHeader().setReorderingAllowed(false);
+		TableColumnModel columnModel = table_1.getColumnModel();
 		centrar.setHorizontalAlignment(SwingConstants.CENTER);
 		for (int i = 0; i < nombreColumna.length; i++) {
-			table.getColumnModel().getColumn(i).setCellRenderer(centrar);
+			table_1.getColumnModel().getColumn(i).setCellRenderer(centrar);
 		}
 
 		columnModel.getColumn(0).setPreferredWidth(110);
@@ -290,13 +347,13 @@ public class ListarSolicitud_Empresa extends JDialog {
 			}
 
 		}
-		table.setModel(modeloTabla);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.getTableHeader().setReorderingAllowed(false);
-		TableColumnModel columnModel = table.getColumnModel();
+		table_1.setModel(modeloTabla);
+		table_1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table_1.getTableHeader().setReorderingAllowed(false);
+		TableColumnModel columnModel = table_1.getColumnModel();
 		centrar.setHorizontalAlignment(SwingConstants.CENTER);
 		for (int i = 0; i < nombreColumna.length; i++) {
-			table.getColumnModel().getColumn(i).setCellRenderer(centrar);
+			table_1.getColumnModel().getColumn(i).setCellRenderer(centrar);
 		}
 
 		columnModel.getColumn(0).setPreferredWidth(65);
@@ -346,13 +403,13 @@ public class ListarSolicitud_Empresa extends JDialog {
 			}
 
 		}
-		table.setModel(modeloTabla);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.getTableHeader().setReorderingAllowed(false);
-		TableColumnModel columnModel = table.getColumnModel();
+		table_1.setModel(modeloTabla);
+		table_1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table_1.getTableHeader().setReorderingAllowed(false);
+		TableColumnModel columnModel = table_1.getColumnModel();
 		centrar.setHorizontalAlignment(SwingConstants.CENTER);
 		for (int i = 0; i < nombreColumna.length; i++) {
-			table.getColumnModel().getColumn(i).setCellRenderer(centrar);
+			table_1.getColumnModel().getColumn(i).setCellRenderer(centrar);
 		}
 
 		columnModel.getColumn(0).setPreferredWidth(65);
@@ -366,7 +423,7 @@ public class ListarSolicitud_Empresa extends JDialog {
 
 	}
 
-	private static void loadObrero() {
+	private static void loadBachiller() {
 		String[] nombreColumna = { "Código", "Empresa", "Vacantes", "Rango Edad", "Vehiculo", "Provincia", "Idiomas",
 				"Habilidades" };
 		modeloTabla.setColumnIdentifiers(nombreColumna);
@@ -402,13 +459,13 @@ public class ListarSolicitud_Empresa extends JDialog {
 			}
 
 		}
-		table.setModel(modeloTabla);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.getTableHeader().setReorderingAllowed(false);
-		TableColumnModel columnModel = table.getColumnModel();
+		table_1.setModel(modeloTabla);
+		table_1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table_1.getTableHeader().setReorderingAllowed(false);
+		TableColumnModel columnModel = table_1.getColumnModel();
 		centrar.setHorizontalAlignment(SwingConstants.CENTER);
 		for (int i = 0; i < nombreColumna.length; i++) {
-			table.getColumnModel().getColumn(i).setCellRenderer(centrar);
+			table_1.getColumnModel().getColumn(i).setCellRenderer(centrar);
 		}
 
 		columnModel.getColumn(0).setPreferredWidth(65);
@@ -455,13 +512,13 @@ public class ListarSolicitud_Empresa extends JDialog {
 			modeloTabla.addRow(fila);
 
 		}
-		table.setModel(modeloTabla);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.getTableHeader().setReorderingAllowed(false);
-		TableColumnModel columnModel = table.getColumnModel();
+		table_1.setModel(modeloTabla);
+		table_1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table_1.getTableHeader().setReorderingAllowed(false);
+		TableColumnModel columnModel = table_1.getColumnModel();
 		centrar.setHorizontalAlignment(SwingConstants.CENTER);
 		for (int i = 0; i < nombreColumna.length; i++) {
-			table.getColumnModel().getColumn(i).setCellRenderer(centrar);
+			table_1.getColumnModel().getColumn(i).setCellRenderer(centrar);
 		}
 
 		columnModel.getColumn(0).setPreferredWidth(110);
@@ -473,12 +530,12 @@ public class ListarSolicitud_Empresa extends JDialog {
 	}
 
 	public static void setComboIdiomas() {
-		TableColumn col = table.getColumnModel().getColumn(6);
+		TableColumn col = table_1.getColumnModel().getColumn(6);
 		col.setCellEditor(new DefaultCellEditor(cbxIdioma));
 	}
 
 	public static void setCombo() {
-		TableColumn col = table.getColumnModel().getColumn(7);
+		TableColumn col = table_1.getColumnModel().getColumn(7);
 		col.setCellEditor(new DefaultCellEditor(cbxHabilidades));
 
 	}

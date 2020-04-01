@@ -650,8 +650,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 		{
 			panelBachiller = new JPanel();
 			panelBachiller.setLayout(null);
-			panelBachiller.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "",
-			TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			panelBachiller.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Bachiller", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			panelBachiller.setBackground(new Color(248, 248, 255));
 			panelBachiller.setBounds(255, 319, 265, 164);
 			contentPanel.add(panelBachiller);
