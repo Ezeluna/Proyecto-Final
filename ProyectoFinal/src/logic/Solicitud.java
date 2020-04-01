@@ -76,7 +76,7 @@ public abstract class Solicitud implements Serializable {
 		return localidad;
 	}
 
-	public void setDireccion(String localidad) {
+	public void setLocalidad(String localidad) {
 		this.localidad = localidad;
 	}
 

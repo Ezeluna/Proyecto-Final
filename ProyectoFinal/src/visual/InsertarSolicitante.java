@@ -43,6 +43,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EtchedBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.SystemColor;
 
 public class InsertarSolicitante extends JDialog {
 //jeje //
@@ -132,10 +133,12 @@ public class InsertarSolicitante extends JDialog {
 		setLocationRelativeTo(null);
 		{
 			panel1 = new JPanel();
+			panel1.setBackground(SystemColor.inactiveCaptionBorder);
 			contentPanel.add(panel1, "name_428725178558000");
 			panel1.setLayout(null);
 			{
 				JPanel panelInformacionGe = new JPanel();
+				panelInformacionGe.setBackground(SystemColor.inactiveCaptionBorder);
 				panelInformacionGe.setBorder(new TitledBorder(null, "Informaci\u00F3n General", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 				panelInformacionGe.setBounds(10, 25, 576, 169);
 				panel1.add(panelInformacionGe);
@@ -201,6 +204,7 @@ public class InsertarSolicitante extends JDialog {
 				}
 				
 				rdbMasculino = new JRadioButton("M");
+				rdbMasculino.setBackground(SystemColor.inactiveCaptionBorder);
 				rdbMasculino.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						rdbMasculino.setSelected(true);
@@ -212,6 +216,7 @@ public class InsertarSolicitante extends JDialog {
 				panelInformacionGe.add(rdbMasculino);
 				
 				rdbFemenino = new JRadioButton("F");
+				rdbFemenino.setBackground(SystemColor.inactiveCaptionBorder);
 				rdbFemenino.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						rdbMasculino.setSelected(false);
@@ -266,6 +271,7 @@ public class InsertarSolicitante extends JDialog {
 			}
 			
 			JPanel panelUbicacionA = new JPanel();
+			panelUbicacionA.setBackground(SystemColor.inactiveCaptionBorder);
 			panelUbicacionA.setBorder(new TitledBorder(null, "Ubicaci\u00F3n Actual", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			panelUbicacionA.setBounds(10, 205, 576, 165);
 			panel1.add(panelUbicacionA);
@@ -355,10 +361,12 @@ public class InsertarSolicitante extends JDialog {
 		}
 		{
 			panel2 = new JPanel();
+			panel2.setBackground(SystemColor.inactiveCaptionBorder);
 			contentPanel.add(panel2, "name_428725249088700");
 			panel2.setLayout(null);
 			
 			panelContacto = new JPanel();
+			panelContacto.setBackground(SystemColor.inactiveCaptionBorder);
 			panelContacto.setBorder(new TitledBorder(null, "Contactos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			panelContacto.setBounds(10, 11, 566, 86);
 			panel2.add(panelContacto);
@@ -390,6 +398,7 @@ public class InsertarSolicitante extends JDialog {
 			}
 			
 			JPanel panelInfoGeneral = new JPanel();
+			panelInfoGeneral.setBackground(SystemColor.inactiveCaptionBorder);
 			panelInfoGeneral.setBorder(new TitledBorder(null, "Informaci\u00F3n General", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			panelInfoGeneral.setBounds(10, 107, 566, 104);
 			panel2.add(panelInfoGeneral);
@@ -500,6 +509,7 @@ public class InsertarSolicitante extends JDialog {
 			scrollPane.setViewportView(listIdiomas);
 			
 			JPanel panelTipoSolicitante = new JPanel();
+			panelTipoSolicitante.setBackground(SystemColor.inactiveCaptionBorder);
 			panelTipoSolicitante.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Tipo de Solicitante", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			panelTipoSolicitante.setBounds(10, 216, 566, 49);
 			panel2.add(panelTipoSolicitante);
@@ -553,6 +563,7 @@ public class InsertarSolicitante extends JDialog {
 			
 			
 			pnlBachiller = new JPanel();
+			pnlBachiller.setBackground(SystemColor.inactiveCaptionBorder);
 			pnlBachiller.setBorder(new TitledBorder(null, "Bachiller", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			pnlBachiller.setBounds(10, 267, 566, 112);
 			panel2.add(pnlBachiller);
@@ -710,6 +721,7 @@ public class InsertarSolicitante extends JDialog {
 				pnlUniversitario.add(separator_3);
 			
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(SystemColor.inactiveCaptionBorder);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			

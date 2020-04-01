@@ -28,6 +28,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.SystemColor;
 //jeje
 public class InsertarEmpresa extends JDialog {
 
@@ -73,6 +74,7 @@ public class InsertarEmpresa extends JDialog {
 		setResizable(false);
 		setBounds(100, 100, 614, 425);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(SystemColor.inactiveCaptionBorder);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
@@ -80,6 +82,7 @@ public class InsertarEmpresa extends JDialog {
 		setTitle(title);
 		
 		JPanel pnlInformacion = new JPanel();
+		pnlInformacion.setBackground(SystemColor.inactiveCaptionBorder);
 		pnlInformacion.setBorder(new TitledBorder(null, "Informaci\u00F3n:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		pnlInformacion.setBounds(5, 23, 593, 140);
 		contentPanel.add(pnlInformacion);
@@ -176,6 +179,7 @@ public class InsertarEmpresa extends JDialog {
 		txtArea.setColumns(10);
 		
 		JPanel pnlUbicacion = new JPanel();
+		pnlUbicacion.setBackground(SystemColor.inactiveCaptionBorder);
 		pnlUbicacion.setBorder(new TitledBorder(null, "Ubicaci\u00F3n:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		pnlUbicacion.setBounds(5, 174, 593, 166);
 		contentPanel.add(pnlUbicacion);
@@ -304,6 +308,7 @@ public class InsertarEmpresa extends JDialog {
 		pnlUbicacion.add(lblReferencia);
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(SystemColor.inactiveCaptionBorder);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{

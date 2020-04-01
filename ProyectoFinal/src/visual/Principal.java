@@ -20,6 +20,7 @@ import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.SystemColor;
 
 public class Principal extends JFrame {
 
@@ -61,6 +62,7 @@ public class Principal extends JFrame {
 		Bolsa_Laboral.getInstance().readBolsa();
 		
 		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBackground(SystemColor.inactiveCaptionBorder);
 		setJMenuBar(menuBar);
 		
 		JMenu mnNewMenu = new JMenu("Empresa");
@@ -127,6 +129,7 @@ public class Principal extends JFrame {
 		});
 		mnPersonal.add(mntSolicitudP);
 		contentPane = new JPanel();
+		contentPane.setBackground(SystemColor.inactiveCaptionBorder);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));

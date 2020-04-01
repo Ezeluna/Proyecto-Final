@@ -2,10 +2,13 @@ package visual;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.SystemColor;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.border.TitledBorder;
@@ -31,6 +34,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -39,6 +43,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.UIManager;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 //
@@ -207,14 +213,15 @@ public class InsertarSolicitud_Empresa extends JDialog {
 		setBounds(100, 100, 547, 598);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPanel.setBackground(new Color(248, 248, 255));
+		contentPanel.setBackground(SystemColor.inactiveCaptionBorder);
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		setLocationRelativeTo(null);
 		{
 			JPanel panelEmpresa = new JPanel();
 			panelEmpresa.setLayout(null);
-			panelEmpresa.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Empresa",
+			panelEmpresa.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Empresa",
+
 								TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			panelEmpresa.setBackground(new Color(248, 248, 255));
 			panelEmpresa.setBounds(10, 32, 507, 72);
@@ -280,7 +287,8 @@ public class InsertarSolicitud_Empresa extends JDialog {
 		{
 			JPanel PanelGeneral = new JPanel();
 			PanelGeneral.setLayout(null);
-			PanelGeneral.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "General",            TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			PanelGeneral.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "General",
+            TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			PanelGeneral.setBackground(new Color(248, 248, 255));
 			PanelGeneral.setBounds(10, 104, 507, 150);
 			contentPanel.add(PanelGeneral);
@@ -433,7 +441,8 @@ public class InsertarSolicitud_Empresa extends JDialog {
 		{
 			JPanel PanelVacante = new JPanel();
 			PanelVacante.setLayout(null);
-			PanelVacante.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Tipo Vacante",
+			PanelVacante.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Tipo Vacante",
+
 								TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			PanelVacante.setBackground(new Color(248, 248, 255));
 			PanelVacante.setBounds(255, 257, 265, 59);
@@ -487,7 +496,8 @@ public class InsertarSolicitud_Empresa extends JDialog {
 		{
 			JPanel panelIdioma = new JPanel();
 			panelIdioma.setLayout(null);
-			panelIdioma.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Idiomas",
+			panelIdioma.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Idiomas",
+
 								TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			panelIdioma.setBackground(new Color(248, 248, 255));
 			panelIdioma.setBounds(10, 319, 245, 164);
@@ -563,7 +573,8 @@ public class InsertarSolicitud_Empresa extends JDialog {
 		{
 			panelUniversitario = new JPanel();
 			panelUniversitario.setLayout(null);
-			panelUniversitario.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null),
+			panelUniversitario.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null),
+
 								"Universitario", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			panelUniversitario.setBackground(new Color(248, 248, 255));
 			panelUniversitario.setBounds(255, 319, 265, 164);
@@ -616,7 +627,8 @@ public class InsertarSolicitud_Empresa extends JDialog {
 		{
 			panelTecnico = new JPanel();
 			panelTecnico.setLayout(null);
-			panelTecnico.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "T\u00E9cnico",
+			panelTecnico.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "T\u00E9cnico",
+
 								TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			panelTecnico.setBackground(new Color(248, 248, 255));
 			panelTecnico.setBounds(255, 319, 265, 164);
@@ -726,7 +738,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBackground(new Color(248, 248, 255));
+			buttonPane.setBackground(SystemColor.inactiveCaptionBorder);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
@@ -870,7 +882,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 								modificarSoli.setVehiculoPropio(false);
 							}
 							modificarSoli.setCantVacantes((float) spnVacantes.getValue());
-							modificarSoli.setDireccion((String) cbxLocalidad.getSelectedItem());
+							modificarSoli.setLocalidad((String) cbxLocalidad.getSelectedItem());
 							modificarSoli.setEdadMin((int) spnEdadMinima.getValue());
 							modificarSoli.setEdadMax((int) spnEdadMaxima.getValue());
 							modificarSoli.setIdiomas(misIdiomas);
@@ -959,7 +971,8 @@ public class InsertarSolicitud_Empresa extends JDialog {
 			}
 			{
 				JButton btnCancelar = new JButton("Cancelar");
-				btnCancelar.addActionListener(new ActionListener() {				public void actionPerformed(ActionEvent e) {
+				btnCancelar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
 						dispose();
 					}
 				});
