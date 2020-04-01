@@ -85,7 +85,7 @@ public class ListarSolicitud_Empresa extends JDialog {
 		
 		cbxfiltro = new JComboBox();
 		cbxfiltro.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Universitarios", "T\u00E9cnicos", "Bachilleres"}));
-		cbxfiltro.setBounds(77, 23, 118, 23);
+		cbxfiltro.setBounds(88, 23, 118, 23);
 		panel.add(cbxfiltro);
 		
 		JLabel lblRncEmpresa = new JLabel("RNC Empresa:");

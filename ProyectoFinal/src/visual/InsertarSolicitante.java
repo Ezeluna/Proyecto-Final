@@ -45,7 +45,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class InsertarSolicitante extends JDialog {
-//jeje
+//jeje //
 	private final JPanel contentPanel = new JPanel();
 	private JPanel panel1;
 	private JPanel panel2;
