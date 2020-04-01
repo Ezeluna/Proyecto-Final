@@ -17,11 +17,14 @@ import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import logic.Solicitud;
 import logic.SolicitudBachiller;
 import logic.SolicitudTecnico;
 import logic.SolicitudUniversitario;
+
 
 
 public class DetallesSolicitudE extends JDialog {
@@ -35,9 +38,9 @@ public class DetallesSolicitudE extends JDialog {
 	private JTextField textLicencia;
 	private JTextField textTipoVa;
 	private JTextField textEdad;
-	private JTextField textExperiencia;
+	private JTextField textExperienciaU;
 	private JTextField textCarrera;
-	private JTextField textField_2;
+	private JTextField textExpeTec;
 	private JTextField textArea;
 	private JTextField textExpBa;
 	private JLabel lblReub;
@@ -56,7 +59,7 @@ public class DetallesSolicitudE extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		try {
 			DetallesSolicitudE dialog = new DetallesSolicitudE();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -64,12 +67,23 @@ public class DetallesSolicitudE extends JDialog {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	/**
 	 * Create the dialog.
 	 */
-	public DetallesSolicitudE() {
+	public DetallesSolicitudE(Solicitud solicitud) {
+		setResizable(false);
+		setModal(true);
+		miSolici = solicitud;
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+				cargarInfo();
+			}
+		});
+				
+		
 		setTitle("Solicitud\r\n");
 		setBounds(100, 100, 547, 577);
 		getContentPane().setLayout(new BorderLayout());
@@ -210,11 +224,11 @@ public class DetallesSolicitudE extends JDialog {
 		lblExperiencia.setBounds(10, 36, 75, 14);
 		panelUniversitario.add(lblExperiencia);
 		
-		textExperiencia = new JTextField();
-		textExperiencia.setEnabled(false);
-		textExperiencia.setBounds(95, 33, 121, 20);
-		panelUniversitario.add(textExperiencia);
-		textExperiencia.setColumns(10);
+		textExperienciaU = new JTextField();
+		textExperienciaU.setEnabled(false);
+		textExperienciaU.setBounds(95, 33, 121, 20);
+		panelUniversitario.add(textExperienciaU);
+		textExperienciaU.setColumns(10);
 		
 		JLabel lblCarrera = new JLabel("Carrera:");
 		lblCarrera.setBounds(10, 75, 61, 14);
@@ -245,10 +259,10 @@ public class DetallesSolicitudE extends JDialog {
 		lblExpeTec.setBounds(10, 36, 75, 14);
 		panelTecnico.add(lblExpeTec);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(78, 33, 121, 20);
-		panelTecnico.add(textField_2);
-		textField_2.setColumns(10);
+		textExpeTec = new JTextField();
+		textExpeTec.setBounds(78, 33, 121, 20);
+		panelTecnico.add(textExpeTec);
+		textExpeTec.setColumns(10);
 		
 		JLabel lblArea = new JLabel("\u00C1rea:");
 		lblArea.setBounds(10, 75, 61, 14);
@@ -313,8 +327,68 @@ public class DetallesSolicitudE extends JDialog {
 		textRnc.setText(miSolici.getEmpresa().getRNC());
 		textNombre.setText(miSolici.getEmpresa().getNombre());
 		textContrato.setText(miSolici.getTipoContrato());
-		//textVacantes.setText(miSolici.getCantVacantes());
+		textVacantes.setText(Float.toString(miSolici.getCantVacantes()));
+		textLocalidad.setText(miSolici.getLocalidad());
+		textLicencia.setText("Categoría: "+Integer.toString(miSolici.getCategoriaLicencia()));
+		String edadMin = Integer.toString(miSolici.getEdadMin());
+		String edadMax = Integer.toString(miSolici.getEdadMax());
+		textEdad.setText(edadMin+" a "+edadMax+" años");
+		if(miSolici.isMudarse()){
+			lblReub.setText("Si");
+		}else{
+			lblReub.setText("No");
+		}
+		if(miSolici.isVehiculoPropio()){
+			lblReqVeh.setText("Si");
+		}else{
+			lblReqVeh.setText("No");
+		}
+		cargarIdiomas();
+		if(miSolici instanceof SolicitudUniversitario){
+			
+			panelUniversitario.setVisible(true);
+			panelTecnico.setVisible(false);
+			panelBachiller.setVisible(false);
+			
+			textExperienciaU.setText(Integer.toString(((SolicitudUniversitario)miSolici).getYearExperience()));
+			textCarrera.setText(((SolicitudUniversitario)miSolici).getCarrera());
+			if(((SolicitudUniversitario)miSolici).isPostGrado()){
+				lblPostGra.setText("Si");				
+			}else{
+				lblPostGra.setText("No");
+			}
+		}
+		if(miSolici instanceof SolicitudTecnico){
+			textTipoVa.setText("Técnico");
+			panelUniversitario.setVisible(false);
+			panelTecnico.setVisible(true);
+			panelBachiller.setVisible(false);
+			textExpeTec.setText(Integer.toString(((SolicitudTecnico)miSolici).getYearExperience()));
+			textArea.setText(((SolicitudTecnico)miSolici).getArea());
+						
+		}
+		if(miSolici instanceof SolicitudBachiller){
+			textTipoVa.setText("Bachiller");
+			panelUniversitario.setVisible(false);
+			panelTecnico.setVisible(false);
+			panelBachiller.setVisible(true);
+			textExpBa.setText(Integer.toString(((SolicitudBachiller)miSolici).getYearExperience()));
+			CargarHabilidades();
+		}
 		
 		
 	}
+		
+	private void CargarHabilidades() {
+		DefaultListModel habilidades = new DefaultListModel();
+		for (String habili : ((SolicitudBachiller)miSolici).getHabilidades()) {
+			habilidades.addElement(habili);
+		}
+		listHabilidades.setModel(habilidades);
+		
+		
+	}
+		
+		
+
 }
