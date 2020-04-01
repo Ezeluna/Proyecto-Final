@@ -69,26 +69,33 @@ public class InsertarSolicitante extends JDialog {
 	private JComboBox cbxNacionalidad;
 	private JComboBox cbxIdiomas;
 	private JComboBox cbxHabilidades;
+	private JComboBox cbxAreaTecnico;
+	private JComboBox cbxCarrera;
 	private JRadioButton rdbMasculino;
 	private JRadioButton rdbFemenino;
 	private JRadioButton rbtnSiVehiculoPro;
 	private JRadioButton rbtnNoVehiculoPro;
 	private JRadioButton rbtnSiDisponibilidad;
 	private JRadioButton rbtnNoDisponibilidad;
+	private JRadioButton rdbSiPost;
+	private JRadioButton rdbNoPost;
 	private JRadioButton rbtnObrero;
 	private JRadioButton rbtnTecnico;
 	private JRadioButton rbtnUniversitario;
 	private JSpinner spnNumeroCasa;
+	private JSpinner spnYearT;
 	private JSpinner spnYearExpO;
+	private JSpinner spnAnosExpUniversitario;
 	private JTextField textField;
-	private JPanel panelObrero;
-	private JPanel panelTecnico;
+	private JPanel pnlBachiller;
 	private JList listIdiomas;
 	private JList listHabilidades;
 	private ArrayList<String> misIdiomas = new ArrayList<>();
 	private ArrayList<String> misHabilidades = new ArrayList<>();
 	private DefaultListModel<String> modeloIdiomas = new DefaultListModel<>();
 	private DefaultListModel<String> modeloHabilidad = new DefaultListModel<>();
+	private JPanel pnlTecnico;
+	private JPanel pnlUniversitario;
 	
 	
 
@@ -122,6 +129,7 @@ public class InsertarSolicitante extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new CardLayout(0, 0));
+		setLocationRelativeTo(null);
 		{
 			panel1 = new JPanel();
 			contentPanel.add(panel1, "name_428725178558000");
@@ -497,16 +505,17 @@ public class InsertarSolicitante extends JDialog {
 			panel2.add(panelTipoSolicitante);
 			panelTipoSolicitante.setLayout(null);
 			
-			rbtnObrero = new JRadioButton("Obrero\r\n");
+			rbtnObrero = new JRadioButton("Bachiller\r\n");
+			rbtnObrero.setSelected(true);
 			rbtnObrero.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					btnRegistrar.setEnabled(true);
-					rbtnObrero.setSelected(true);
-					rbtnTecnico.setSelected(false);
-					rbtnUniversitario.setSelected(false);
-					panelObrero.setVisible(true);
-					//panel_Tecnico.setVisible(false);
-					//panel_Universitario.setVisible(false);
+						btnRegistrar.setEnabled(true);
+						rbtnObrero.setSelected(true);
+						rbtnTecnico.setSelected(false);
+						rbtnUniversitario.setSelected(false);
+						pnlBachiller.setVisible(true);
+						pnlTecnico.setVisible(false);
+						pnlUniversitario.setVisible(false);
 				}
 			});
 			rbtnObrero.setBounds(72, 19, 84, 23);
@@ -519,9 +528,9 @@ public class InsertarSolicitante extends JDialog {
 					rbtnObrero.setSelected(false);
 					rbtnTecnico.setSelected(true);
 					rbtnUniversitario.setSelected(false);
-					panelObrero.setVisible(false);
-					//panel_Tecnico.setVisible(true);
-					//panel_Universitario.setVisible(false);
+					pnlBachiller.setVisible(false);
+					pnlTecnico.setVisible(true);
+					pnlUniversitario.setVisible(false);
 				}
 			});
 			rbtnTecnico.setBounds(228, 19, 84, 23);
@@ -534,24 +543,24 @@ public class InsertarSolicitante extends JDialog {
 					rbtnObrero.setSelected(false);
 					rbtnTecnico.setSelected(false);
 					rbtnUniversitario.setSelected(true);
-					panelObrero.setVisible(false);
-					//panelTecnico.setVisible(false);
-					//panelUniversitario.setVisible(true);
+					pnlBachiller.setVisible(false);
+					pnlTecnico.setVisible(false);
+					pnlUniversitario.setVisible(true);
 				}
 			});
 			rbtnUniversitario.setBounds(384, 19, 109, 23);
 			panelTipoSolicitante.add(rbtnUniversitario);
 			
 			
-			panelObrero = new JPanel();
-			panelObrero.setBorder(new TitledBorder(null, "Obrero", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panelObrero.setBounds(10, 267, 566, 112);
-			panel2.add(panelObrero);
-			panelObrero.setLayout(null);
+			pnlBachiller = new JPanel();
+			pnlBachiller.setBorder(new TitledBorder(null, "Bachiller", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			pnlBachiller.setBounds(10, 267, 566, 112);
+			panel2.add(pnlBachiller);
+			pnlBachiller.setLayout(null);
 			
 			JLabel lblHabilidades = new JLabel("Habilidades:");
 			lblHabilidades.setBounds(288, 26, 71, 14);
-			panelObrero.add(lblHabilidades);
+			pnlBachiller.add(lblHabilidades);
 			
 			cbxHabilidades = new JComboBox();
 			cbxHabilidades.addActionListener(new ActionListener() {
@@ -569,7 +578,7 @@ public class InsertarSolicitante extends JDialog {
 			});
 			cbxHabilidades.setModel(new DefaultComboBoxModel(new String[] {"< Seleccione >", "Alba\u00F1il", "Anfitri\u00F3n de Fiesta", "Artesano", "Carpintero", "Chofer", "Chef", "Constructor", "Decorador", "Ebanista", "Electricista", "Mec\u00E1nico", "Pintor", "Plomero", "Salva Vidas", "Modista", "Seguridad", "Sirviente", "Jardinero"}));
 			cbxHabilidades.setBounds(276, 47, 123, 22);
-			panelObrero.add(cbxHabilidades);
+			pnlBachiller.add(cbxHabilidades);
 			
 			btnRemoverH = new JButton("Remover");
 			btnRemoverH.setEnabled(false);
@@ -584,10 +593,10 @@ public class InsertarSolicitante extends JDialog {
 			});
 			
 			btnRemoverH.setBounds(298, 80, 89, 23);
-			panelObrero.add(btnRemoverH);
+			pnlBachiller.add(btnRemoverH);
 			JScrollPane scrollPaneH = new JScrollPane();
 			scrollPaneH.setBounds(409, 22, 140, 65);
-			panelObrero.add(scrollPaneH);
+			pnlBachiller.add(scrollPaneH);
 			
 			listHabilidades = new JList();
 			listHabilidades.addMouseListener(new MouseAdapter() {
@@ -604,17 +613,101 @@ public class InsertarSolicitante extends JDialog {
 			separator_1.setBackground(Color.RED);
 			separator_1.setOrientation(SwingConstants.VERTICAL);
 			separator_1.setBounds(270, 11, 2, 92);
-			panelObrero.add(separator_1);
+			pnlBachiller.add(separator_1);
 			
 			
 			
 			JLabel lblYearExpe = new JLabel("A\u00F1os de Experiencia:");
 			lblYearExpe.setBounds(10, 51, 123, 14);
-			panelObrero.add(lblYearExpe);
+			pnlBachiller.add(lblYearExpe);
 			
 			spnYearExpO = new JSpinner();
 			spnYearExpO.setBounds(143, 48, 114, 20);
-			panelObrero.add(spnYearExpO);
+			pnlBachiller.add(spnYearExpO);
+			
+			pnlTecnico = new JPanel();
+			pnlTecnico.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "T\u00E9cnico", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			pnlTecnico.setBounds(10, 267, 566, 112);
+			panel2.add(pnlTecnico);
+			pnlTecnico.setLayout(null);
+			pnlTecnico.setVisible(false);
+			
+			JLabel lblYear = new JLabel("A\u00F1os de Experiencia:");
+			lblYear.setBounds(10, 49, 132, 14);
+			pnlTecnico.add(lblYear);
+			
+			spnYearT = new JSpinner();
+			spnYearT.setBackground(new Color(248, 248, 255));
+			spnYearT.setBounds(146, 46, 123, 23);
+			pnlTecnico.add(spnYearT);
+
+			JLabel lblrea = new JLabel("\u00C1rea:");
+			lblrea.setBounds(310, 49, 38, 14);
+			pnlTecnico.add(lblrea);
+			
+			cbxAreaTecnico = new JComboBox();
+			cbxAreaTecnico.setBackground(new Color(248, 248, 255));
+			cbxAreaTecnico.setModel(
+					new DefaultComboBoxModel(new String[] { "< Seleccione >", "Emprendimiento", "Mecanograf\u00EDa",
+							"Dise\u00F1o Gr\u00E1fico", "Programaci\u00F3n", "Contabilidad", "Programaci\u00F3n Web" }));
+			cbxAreaTecnico.setBounds(396, 46, 123, 23);
+			pnlTecnico.add(cbxAreaTecnico);
+			
+			JSeparator separator_2 = new JSeparator();
+			separator_2.setOrientation(SwingConstants.VERTICAL);
+			separator_2.setBackground(Color.RED);
+			separator_2.setBounds(290, 11, 2, 92);
+			pnlTecnico.add(separator_2);
+
+			
+			pnlUniversitario = new JPanel();
+			pnlUniversitario.setBorder(new TitledBorder(null, "Universitario", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			pnlUniversitario.setBounds(10, 267, 566, 112);
+			panel2.add(pnlUniversitario);
+			pnlUniversitario.setLayout(null);
+			pnlUniversitario.setVisible(false);
+			
+	    	JLabel lblAnosExpUniversitario = new JLabel("A\u00F1os de Experiencia:");
+			lblAnosExpUniversitario.setBounds(10, 49, 132, 14);
+			pnlUniversitario.add(lblAnosExpUniversitario);
+
+				spnAnosExpUniversitario = new JSpinner();
+				spnAnosExpUniversitario.setBackground(new Color(248, 248, 255));
+				spnAnosExpUniversitario.setBounds(146, 46, 123, 23);
+				pnlUniversitario.add(spnAnosExpUniversitario);
+				
+				JLabel lblCarrera = new JLabel("Carrera:");
+				lblCarrera.setBounds(305, 26, 65, 14);
+				pnlUniversitario.add(lblCarrera);
+				
+				cbxCarrera = new JComboBox();
+				cbxCarrera.setBackground(new Color(248, 248, 255));
+				cbxCarrera.setModel(new DefaultComboBoxModel(new String[] { "< Seleccione >", "Adm. de Empresas",
+						"Adm. Hotelera", "Derecho", "Econom\u00EDa", "Contabilidad", "Mercadotecnia", "Arquitectura",
+						"Comunicacion Social", "Dise\u00F1o e Interiorismo", "Ecologia", "Educaci\u00F3n", "Filosof\u00EDa",
+						"Psicolog\u00EDa", "Ing. Civil", "Ing. Electr\u00F3nica", "Ing. Industrial", "Ing. Mecatr\u00F3nica",
+						"Ing. Sistema", "Ing. Telem\u00E1tica", "Enfermeria", "Estomatolog\u00EDa", "Medicina",
+						"Nutricion y Dietetica", "Terapia F\u00EDsica" }));
+				cbxCarrera.setBounds(391, 23, 123, 23);
+				pnlUniversitario.add(cbxCarrera);
+
+				JLabel lblPostgrado = new JLabel("PostGrado:");
+				lblPostgrado.setBounds(305, 64, 65, 14);
+				pnlUniversitario.add(lblPostgrado);
+				
+				rdbSiPost = new JRadioButton("S\u00ED");
+				rdbSiPost.setBounds(391, 60, 38, 23);
+				pnlUniversitario.add(rdbSiPost);
+
+				rdbNoPost = new JRadioButton("No");
+				rdbNoPost.setBounds(431, 60, 58, 23);
+				pnlUniversitario.add(rdbNoPost);
+				
+				JSeparator separator_3 = new JSeparator();
+				separator_3.setOrientation(SwingConstants.VERTICAL);
+				separator_3.setBackground(Color.RED);
+				separator_3.setBounds(290, 11, 2, 92);
+				pnlUniversitario.add(separator_3);
 			
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -644,9 +737,9 @@ public class InsertarSolicitante extends JDialog {
 						if(igual==true) {
 							JOptionPane.showMessageDialog(null,"Ya existe una persona registrada con esa cedula");
 						}
-						else if(ftextCedula.getText().equalsIgnoreCase("___-_______-_")||textNombre.getText().isEmpty()|| textApellidos.getText().isEmpty()||textCiudad.getText().isEmpty() || cbxLicencia.getSelectedIndex() == 0 || cbxProvincias.getSelectedIndex() == 0 || sexo.equalsIgnoreCase("") ) {
+						/*else if(ftextCedula.getText().equalsIgnoreCase("___-_______-_")||textNombre.getText().isEmpty()|| textApellidos.getText().isEmpty()||textCiudad.getText().isEmpty() || cbxLicencia.getSelectedIndex() == 0 || cbxProvincias.getSelectedIndex() == 0 || sexo.equalsIgnoreCase("") ) {
 							JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
-						}
+						}*/
 					}
 					
 					panel1.setVisible(false);
