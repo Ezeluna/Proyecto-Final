@@ -112,6 +112,20 @@ public class Principal extends JFrame {
 			}
 		});
 		mnSolicitudEmpresa.add(mntmNewMenuItem);
+		
+		JMenu mnPersonal = new JMenu("Personal");
+		menuBar.add(mnPersonal);
+		
+		JMenuItem mntSolicitudP = new JMenuItem("Solicitud");
+		mntSolicitudP.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				InsertarSolicitante insertP = new InsertarSolicitante();
+				insertP.setModal(true);
+				insertP.setVisible(true);
+				
+			}
+		});
+		mnPersonal.add(mntSolicitudP);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-//probando
+
+
+
 public class Bolsa_Laboral implements Serializable{
 	
 	private static final long serialVersionUID = 1L; 
@@ -25,6 +27,8 @@ public class Bolsa_Laboral implements Serializable{
 	private String archivo = "Bolsa_Laboral.dat"; 
 	
 	
+	
+	
 	// CONSTRUCTOR
 	
 	public Bolsa_Laboral() {
@@ -35,6 +39,7 @@ public class Bolsa_Laboral implements Serializable{
 		
 		
 	}
+	
 	
 	// SETTERS Y GETTERS
 

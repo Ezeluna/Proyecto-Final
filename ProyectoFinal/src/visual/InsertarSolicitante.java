@@ -31,6 +31,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import com.toedter.calendar.JDateChooser;
+
+import logic.Bolsa_Laboral;
+import logic.Personal;
+
+
 import javax.swing.JSeparator;
 import java.awt.Color;
 import javax.swing.JList;
@@ -85,6 +90,7 @@ public class InsertarSolicitante extends JDialog {
 	private DefaultListModel<String> modeloIdiomas = new DefaultListModel<>();
 	private DefaultListModel<String> modeloHabilidad = new DefaultListModel<>();
 	
+	
 
 	/**
 	 * Launch the application.
@@ -108,7 +114,6 @@ public class InsertarSolicitante extends JDialog {
 			public void windowActivated(WindowEvent e) {
 				panel1.setVisible(true);
 				panel2.setVisible(false);
-				
 			}
 		});
 		setTitle("Insertar Solicitante");
@@ -118,7 +123,7 @@ public class InsertarSolicitante extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new CardLayout(0, 0));
 		{
-			JPanel panel1 = new JPanel();
+			panel1 = new JPanel();
 			contentPanel.add(panel1, "name_428725178558000");
 			panel1.setLayout(null);
 			{
@@ -393,7 +398,7 @@ public class InsertarSolicitante extends JDialog {
 					rbtnNoVehiculoPro.setSelected(false);
 				}
 			});
-			rbtnSiVehiculoPro.setBounds(125, 26, 33, 23);
+			rbtnSiVehiculoPro.setBounds(125, 26, 48, 23);
 			panelInfoGeneral.add(rbtnSiVehiculoPro);
 			
 		    rbtnNoVehiculoPro = new JRadioButton("No");
@@ -403,11 +408,11 @@ public class InsertarSolicitante extends JDialog {
 					rbtnNoVehiculoPro.setSelected(true);
 		    	}
 		    });
-			rbtnNoVehiculoPro.setBounds(177, 26, 39, 23);
+			rbtnNoVehiculoPro.setBounds(193, 26, 48, 23);
 			panelInfoGeneral.add(rbtnNoVehiculoPro);
 			
-			JLabel lblDisponibilidadM = new JLabel("Disponibilidad de relocalizaci\u00F3n:");
-			lblDisponibilidadM.setBounds(10, 68, 165, 14);
+			JLabel lblDisponibilidadM = new JLabel("Disponibilidad de mudarse:");
+			lblDisponibilidadM.setBounds(10, 68, 163, 14);
 			panelInfoGeneral.add(lblDisponibilidadM);
 			
 			rbtnSiDisponibilidad = new JRadioButton("S\u00ED\r\n");
@@ -417,7 +422,7 @@ public class InsertarSolicitante extends JDialog {
 					rbtnNoDisponibilidad.setSelected(false);
 				}
 			});
-			rbtnSiDisponibilidad.setBounds(182, 64, 39, 23);
+			rbtnSiDisponibilidad.setBounds(170, 64, 39, 23);
 			panelInfoGeneral.add(rbtnSiDisponibilidad);
 			
 			rbtnNoDisponibilidad = new JRadioButton("No");
@@ -427,7 +432,7 @@ public class InsertarSolicitante extends JDialog {
 					rbtnNoDisponibilidad.setSelected(true);
 				}
 			});
-			rbtnNoDisponibilidad.setBounds(220, 64, 39, 23);
+			rbtnNoDisponibilidad.setBounds(211, 64, 48, 23);
 			panelInfoGeneral.add(rbtnNoDisponibilidad);
 			
 			JSeparator separator = new JSeparator();
@@ -567,6 +572,7 @@ public class InsertarSolicitante extends JDialog {
 			panelObrero.add(cbxHabilidades);
 			
 			btnRemoverH = new JButton("Remover");
+			btnRemoverH.setEnabled(false);
 			btnRemoverH.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					int index = listHabilidades.getSelectedIndex();
@@ -603,11 +609,11 @@ public class InsertarSolicitante extends JDialog {
 			
 			
 			JLabel lblYearExpe = new JLabel("A\u00F1os de Experiencia:");
-			lblYearExpe.setBounds(10, 51, 101, 14);
+			lblYearExpe.setBounds(10, 51, 123, 14);
 			panelObrero.add(lblYearExpe);
 			
 			spnYearExpO = new JSpinner();
-			spnYearExpO.setBounds(133, 48, 114, 20);
+			spnYearExpO.setBounds(143, 48, 114, 20);
 			panelObrero.add(spnYearExpO);
 			
 			JPanel buttonPane = new JPanel();
@@ -618,8 +624,36 @@ public class InsertarSolicitante extends JDialog {
 			btnContinuar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
+					boolean igual = false;
+					String sexo = "";
+					if (rdbFemenino.isSelected()) {
+						sexo = "Femenino";
+					} else if (rdbMasculino.isSelected()) {
+						sexo = "Masculino";
+					}
+					
+					if(panel1.isVisible()) {
+					
+					if(!Bolsa_Laboral.getInstance().getMisSolicitantes().isEmpty()) {
+						for (Personal personal : Bolsa_Laboral.getInstance().getMisSolicitantes()) {
+							if (ftextCedula.getText().equalsIgnoreCase(personal.getCedula())) {
+								igual=true;
+							}
+						  }
+						}
+						if(igual==true) {
+							JOptionPane.showMessageDialog(null,"Ya existe una persona registrada con esa cedula");
+						}
+						else if(ftextCedula.getText().equalsIgnoreCase("___-_______-_")||textNombre.getText().isEmpty()|| textApellidos.getText().isEmpty()||textCiudad.getText().isEmpty() || cbxLicencia.getSelectedIndex() == 0 || cbxProvincias.getSelectedIndex() == 0 || sexo.equalsIgnoreCase("") ) {
+							JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
+						}
+					}
+					
+					panel1.setVisible(false);
+					panel2.setVisible(true);
 				}
-			});
+				}
+			);
 			buttonPane.add(btnContinuar);
 			{
 				btnRegistrar = new JButton("Registrar");
