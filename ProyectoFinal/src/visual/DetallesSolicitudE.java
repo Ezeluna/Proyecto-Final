@@ -248,11 +248,11 @@ public class DetallesSolicitudE extends JDialog {
 		textCarrera.setColumns(10);
 		
 		JLabel lblPostGrado = new JLabel("PostGrado:");
-		lblPostGrado.setBounds(10, 109, 61, 14);
+		lblPostGrado.setBounds(10, 109, 75, 14);
 		panelUniversitario.add(lblPostGrado);
 		
 		lblPostGra = new JLabel("New label");
-		lblPostGra.setBounds(128, 109, 46, 14);
+		lblPostGra.setBounds(118, 109, 61, 14);
 		panelUniversitario.add(lblPostGra);
 		
 		panelTecnico = new JPanel();
@@ -329,12 +329,7 @@ public class DetallesSolicitudE extends JDialog {
 		}
 	}
 	
-	private void cargarIdiomas() {
-		for (String idio : miSolici.getIdiomas()) {
-			idioma.addElement(idio);			
-		}
-		listIdioma.setModel(idioma);
-	}
+
 	
 	private void cargarInfo() {
 		textRnc.setText(miSolici.getEmpresa().getRNC());
@@ -357,8 +352,10 @@ public class DetallesSolicitudE extends JDialog {
 			lblReqVeh.setText("No");
 		}
 		cargarIdiomas();
+		
 		if(miSolici instanceof SolicitudUniversitario){
 			
+			textTipoVa.setText("Universitario");
 			panelUniversitario.setVisible(true);
 			panelTecnico.setVisible(false);
 			panelBachiller.setVisible(false);
@@ -390,6 +387,12 @@ public class DetallesSolicitudE extends JDialog {
 		}
 		
 		
+	}
+	private void cargarIdiomas() {
+		for (String idio : miSolici.getIdiomas()) {
+			idioma.addElement(idio);			
+		}
+		listIdioma.setModel(idioma);
 	}
 		
 	private void CargarHabilidades() {
