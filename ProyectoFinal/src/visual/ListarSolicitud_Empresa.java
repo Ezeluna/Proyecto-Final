@@ -44,6 +44,7 @@ import java.text.ParseException;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import javax.swing.ScrollPaneConstants;
+import java.awt.SystemColor;
 //
 public class ListarSolicitud_Empresa extends JDialog {
 
@@ -78,13 +79,13 @@ public class ListarSolicitud_Empresa extends JDialog {
 		setBounds(100, 100, 943, 519);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBackground(new Color(245, 255, 250));
+		contentPanel.setBackground(SystemColor.inactiveCaptionBorder);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
-			panel.setBackground(new Color(245, 255, 250));
+			panel.setBackground(SystemColor.inactiveCaptionBorder);
 			panel.setBorder(
 					new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Lista De Solicitudes", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			contentPanel.add(panel, BorderLayout.CENTER);
@@ -196,7 +197,6 @@ public class ListarSolicitud_Empresa extends JDialog {
 			}
 			{
 				JButton button = new JButton("");
-				//button.setIcon(new ImageIcon(ListarSolicitud_Empresa.class.getResource("/img/buscar.png")));
 				button.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						btnShow.setEnabled(false);
@@ -214,18 +214,17 @@ public class ListarSolicitud_Empresa extends JDialog {
 					}
 
 				});
-				button.setBounds(430, 22, 29, 25);
+				button.setBounds(430, 21, 29, 24);
 				panel.add(button);
 			}
 		}
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBackground(new Color(245, 255, 250));
+			buttonPane.setBackground(SystemColor.inactiveCaptionBorder);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnEliminar = new JButton("Eliminar");
-				//btnEliminar.setIcon(new ImageIcon(ListarSolicitud_Empresa.class.getResource("/img/borrar.png")));
 				btnEliminar.setEnabled(false);
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -247,7 +246,6 @@ public class ListarSolicitud_Empresa extends JDialog {
 				});
 				{
 					btnShow = new JButton("Ver Solicitud");
-					//btnShow.setIcon(new ImageIcon(ListarSolicitud_Empresa.class.getResource("/img/ver.png")));
 					btnShow.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							DetallesSolicitudE detalle = new DetallesSolicitudE(Bolsa_Laboral.getInstance().RetornarSolocitudId(codigo));
@@ -263,7 +261,6 @@ public class ListarSolicitud_Empresa extends JDialog {
 			}
 			{
 				btnModificar = new JButton("Modificar");
-				//btnModificar.setIcon(new ImageIcon(ListarSolicitud_Empresa.class.getResource("/img/modificar.png")));
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						InsertarSolicitud_Empresa modifSoli = new InsertarSolicitud_Empresa(Bolsa_Laboral.getInstance().RetornarSolocitudId(codigo));

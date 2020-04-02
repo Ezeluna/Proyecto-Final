@@ -26,6 +26,7 @@ public abstract class Solicitud implements Serializable {
 		super();
 		this.cantVacantes = cantVacantes;
 		this.cantSolicitudes = 0;
+		this.localidad = localidad; 
 		this.empresa = empresa;
 		this.edadMax = edadMax;
 		this.edadMin = edadMin;

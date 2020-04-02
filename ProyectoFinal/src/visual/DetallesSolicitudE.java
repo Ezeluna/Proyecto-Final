@@ -24,6 +24,7 @@ import logic.Solicitud;
 import logic.SolicitudBachiller;
 import logic.SolicitudTecnico;
 import logic.SolicitudUniversitario;
+import java.awt.SystemColor;
 
 
 
@@ -87,11 +88,13 @@ public class DetallesSolicitudE extends JDialog {
 		setTitle("Solicitud\r\n");
 		setBounds(100, 100, 547, 577);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(SystemColor.inactiveCaptionBorder);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 		JPanel panelEmpre = new JPanel();
+		panelEmpre.setBackground(SystemColor.inactiveCaptionBorder);
 		panelEmpre.setBorder(new TitledBorder(null, "Empresa", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelEmpre.setBounds(10, 32, 507, 72);
 		contentPanel.add(panelEmpre);
@@ -119,6 +122,7 @@ public class DetallesSolicitudE extends JDialog {
 		textNombre.setColumns(10);
 		
 		JPanel panelInfoGeneral = new JPanel();
+		panelInfoGeneral.setBackground(SystemColor.inactiveCaptionBorder);
 		panelInfoGeneral.setBorder(new TitledBorder(null, "Info. General", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelInfoGeneral.setBounds(10, 123, 507, 188);
 		contentPanel.add(panelInfoGeneral);
@@ -145,7 +149,7 @@ public class DetallesSolicitudE extends JDialog {
 		textVacantes.setColumns(10);
 		
 		JLabel lblReubcacion = new JLabel("Reubicaci\u00F3n:");
-		lblReubcacion.setBounds(10, 64, 66, 14);
+		lblReubcacion.setBounds(10, 64, 84, 14);
 		panelInfoGeneral.add(lblReubcacion);
 		
 		lblReub = new JLabel("New label");
@@ -163,7 +167,7 @@ public class DetallesSolicitudE extends JDialog {
 		textLocalidad.setColumns(10);
 		
 		JLabel lblRequiereVeh = new JLabel("Requiere Veh\u00EDculo:");
-		lblRequiereVeh.setBounds(10, 103, 104, 14);
+		lblRequiereVeh.setBounds(10, 103, 121, 14);
 		panelInfoGeneral.add(lblRequiereVeh);
 		
 		lblReqVeh = new JLabel("New label");
@@ -196,11 +200,12 @@ public class DetallesSolicitudE extends JDialog {
 		
 		textEdad = new JTextField();
 		textEdad.setEnabled(false);
-		textEdad.setBounds(350, 131, 134, 20);
+		textEdad.setBounds(350, 137, 134, 20);
 		panelInfoGeneral.add(textEdad);
 		textEdad.setColumns(10);
 		
 		JPanel panelIdioma = new JPanel();
+		panelIdioma.setBackground(SystemColor.inactiveCaptionBorder);
 		panelIdioma.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Idioma(s)", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panelIdioma.setBounds(281, 337, 236, 134);
 		contentPanel.add(panelIdioma);
@@ -215,6 +220,7 @@ public class DetallesSolicitudE extends JDialog {
 		scrollPane.setViewportView(listIdioma);
 		
 		panelUniversitario = new JPanel();
+		panelUniversitario.setBackground(SystemColor.inactiveCaptionBorder);
 		panelUniversitario.setBorder(new TitledBorder(null, "Universitario", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelUniversitario.setBounds(10, 337, 245, 134);
 		contentPanel.add(panelUniversitario);
@@ -225,6 +231,7 @@ public class DetallesSolicitudE extends JDialog {
 		panelUniversitario.add(lblExperiencia);
 		
 		textExperienciaU = new JTextField();
+		textExperienciaU.setEditable(false);
 		textExperienciaU.setEnabled(false);
 		textExperienciaU.setBounds(95, 33, 121, 20);
 		panelUniversitario.add(textExperienciaU);
@@ -249,6 +256,7 @@ public class DetallesSolicitudE extends JDialog {
 		panelUniversitario.add(lblPostGra);
 		
 		panelTecnico = new JPanel();
+		panelTecnico.setBackground(SystemColor.inactiveCaptionBorder);
 		panelTecnico.setBounds(10, 337, 245, 134);
 		contentPanel.add(panelTecnico);
 		panelTecnico.setBorder(new TitledBorder(null, "T\u00E9cnico", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -260,6 +268,7 @@ public class DetallesSolicitudE extends JDialog {
 		panelTecnico.add(lblExpeTec);
 		
 		textExpeTec = new JTextField();
+		textExpeTec.setEditable(false);
 		textExpeTec.setBounds(78, 33, 121, 20);
 		panelTecnico.add(textExpeTec);
 		textExpeTec.setColumns(10);
@@ -274,6 +283,7 @@ public class DetallesSolicitudE extends JDialog {
 		textArea.setColumns(10);
 		
 		panelBachiller = new JPanel();
+		panelBachiller.setBackground(SystemColor.inactiveCaptionBorder);
 		panelBachiller.setBounds(10, 337, 245, 134);
 		contentPanel.add(panelBachiller);
 		panelBachiller.setBorder(new TitledBorder(null, "Bachiller", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -285,12 +295,13 @@ public class DetallesSolicitudE extends JDialog {
 		panelBachiller.add(lblBachiller);
 		
 		textExpBa = new JTextField();
+		textExpBa.setEditable(false);
 		textExpBa.setBounds(95, 33, 121, 20);
 		panelBachiller.add(textExpBa);
 		textExpBa.setColumns(10);
 		
 		JLabel lblHabilidades = new JLabel("Habilidades:");
-		lblHabilidades.setBounds(10, 75, 61, 14);
+		lblHabilidades.setBounds(10, 75, 75, 14);
 		panelBachiller.add(lblHabilidades);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -298,9 +309,11 @@ public class DetallesSolicitudE extends JDialog {
 		panelBachiller.add(scrollPane_1);
 		
 		listHabilidades = new JList();
+		listHabilidades.setEnabled(false);
 		scrollPane_1.setViewportView(listHabilidades);
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(SystemColor.inactiveCaptionBorder);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{

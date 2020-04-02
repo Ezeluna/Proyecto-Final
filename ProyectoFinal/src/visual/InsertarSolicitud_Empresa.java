@@ -614,6 +614,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 			}
 			{
 				cbxCarrera = new JComboBox();
+				cbxCarrera.setBackground(Color.WHITE);
 				cbxCarrera.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Adm. de Empresas",
 						"Adm. Hotelera", "Derecho", "Econom\u00EDa", "Contabilidad", "Mercadotecnia", "Arquitectura",
 						"Comunicacion Social", "Dise\u00F1o e Interiorismo", "Ecologia", "Educaci\u00F3n", "Filosof\u00EDa",

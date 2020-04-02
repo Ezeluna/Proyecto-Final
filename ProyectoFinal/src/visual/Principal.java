@@ -69,6 +69,7 @@ public class Principal extends JFrame {
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmRegistrarEmpresa = new JMenuItem("Registrar Empresa");
+		mntmRegistrarEmpresa.setBackground(SystemColor.inactiveCaptionBorder);
 		mntmRegistrarEmpresa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				InsertarEmpresa empre;
@@ -81,6 +82,7 @@ public class Principal extends JFrame {
 		mnNewMenu.add(mntmRegistrarEmpresa);
 		
 		JMenuItem mntmListarEmpresas = new JMenuItem("Listado de Empresas");
+		mntmListarEmpresas.setBackground(SystemColor.inactiveCaptionBorder);
 		mntmListarEmpresas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ListarEmpresas empre;
@@ -93,9 +95,11 @@ public class Principal extends JFrame {
 		mnNewMenu.add(mntmListarEmpresas);
 		
 		JMenu mnSolicitudEmpresa = new JMenu("Solicitud");
+		mnSolicitudEmpresa.setBackground(SystemColor.inactiveCaptionBorder);
 		menuBar.add(mnSolicitudEmpresa);
 		
 		JMenuItem mntmSolicitudEmpresa = new JMenuItem("Solicitud Empresa");
+		mntmSolicitudEmpresa.setBackground(SystemColor.inactiveCaptionBorder);
 		mntmSolicitudEmpresa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				InsertarSolicitud_Empresa solicitud = new InsertarSolicitud_Empresa(null);
@@ -106,6 +110,7 @@ public class Principal extends JFrame {
 		mnSolicitudEmpresa.add(mntmSolicitudEmpresa);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Listado de Solicitudes");
+		mntmNewMenuItem.setBackground(SystemColor.inactiveCaptionBorder);
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ListarSolicitud_Empresa listsolicitud = new ListarSolicitud_Empresa();
@@ -119,6 +124,7 @@ public class Principal extends JFrame {
 		menuBar.add(mnPersonal);
 		
 		JMenuItem mntSolicitudP = new JMenuItem("Solicitud");
+		mntSolicitudP.setBackground(SystemColor.inactiveCaptionBorder);
 		mntSolicitudP.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				InsertarSolicitante insertP = new InsertarSolicitante();
@@ -128,6 +134,12 @@ public class Principal extends JFrame {
 			}
 		});
 		mnPersonal.add(mntSolicitudP);
+		
+		JMenu mnMatcheo = new JMenu("Matcheo");
+		menuBar.add(mnMatcheo);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("New menu item");
+		mnMatcheo.add(mntmNewMenuItem_1);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.inactiveCaptionBorder);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
