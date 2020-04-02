@@ -135,7 +135,7 @@ public class Principal extends JFrame {
 		});
 		mnPersonal.add(mntSolicitudP);
 		
-		JMenu mnMatcheo = new JMenu("Matcheo");
+		JMenu mnMatcheo = new JMenu("Match");
 		menuBar.add(mnMatcheo);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("New menu item");

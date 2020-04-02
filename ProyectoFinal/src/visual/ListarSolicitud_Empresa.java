@@ -126,7 +126,7 @@ public class ListarSolicitud_Empresa extends JDialog {
 
 				});
 				cbxfiltro.setModel(
-						new DefaultComboBoxModel(new String[] { "Todos", "Universitatio", "T\u00E9cnico", "Bachiller" }));
+						new DefaultComboBoxModel(new String[] { "Todos", "Universitario", "T\u00E9cnico", "Bachiller" }));
 				cbxfiltro.setBounds(77, 21, 118, 23);
 				panel.add(cbxfiltro);
 			}
