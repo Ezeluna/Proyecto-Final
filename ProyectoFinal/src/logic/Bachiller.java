@@ -1,5 +1,6 @@
 package logic;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 //probando
@@ -9,11 +10,11 @@ public class Bachiller extends Personal {
 	private ArrayList<String> habilidades;
 
 	public Bachiller(String cedula, String name, String apellido, String sexo, String nacionalidad,  String provincia,
-			String ciudad, String sector, String calle, String numeroCasa, String referencia,  int edad, String telefono, String correo,
+			String ciudad, String sector, String calle, int numeroCasa, String referencia, LocalDate fechaN, String telefono, String correo,
 			int yearExperiencia, boolean vehiculo, int categoriaLicencia, boolean dispViajar, boolean mudarse,
-			boolean contratado, String estudiosComplementarios,ArrayList<String> habilidades) {
-		super(cedula, name, apellido, sexo, nacionalidad, provincia, ciudad, sector, calle, numeroCasa, referencia, edad, telefono, correo,
-				yearExperiencia, vehiculo, categoriaLicencia, dispViajar, mudarse, contratado, estudiosComplementarios);
+			boolean contratado, ArrayList<String> habilidades) {
+		super(cedula, name, apellido, sexo, nacionalidad, provincia, ciudad, sector, calle, numeroCasa, referencia, fechaN, telefono, correo,
+				yearExperiencia, vehiculo, categoriaLicencia, dispViajar, mudarse, contratado);
 		// TODO Auto-generated constructor stub
 		
 	   this.habilidades = new ArrayList<>();

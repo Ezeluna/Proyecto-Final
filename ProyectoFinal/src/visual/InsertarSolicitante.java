@@ -13,7 +13,10 @@ import javax.swing.text.MaskFormatter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -32,9 +35,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import com.toedter.calendar.JDateChooser;
 
+import logic.Bachiller;
 import logic.Bolsa_Laboral;
 import logic.Personal;
-
 
 import javax.swing.JSeparator;
 import java.awt.Color;
@@ -87,7 +90,7 @@ public class InsertarSolicitante extends JDialog {
 	private JSpinner spnYearT;
 	private JSpinner spnYearExpO;
 	private JSpinner spnAnosExpUniversitario;
-	private JTextField textField;
+	private JTextField textEmail;
 	private JPanel pnlBachiller;
 	private JList listIdiomas;
 	private JList listHabilidades;
@@ -389,10 +392,10 @@ public class InsertarSolicitante extends JDialog {
 			lblEmail.setBounds(266, 34, 46, 14);
 			panelContacto.add(lblEmail);
 			
-			textField = new JTextField();
-			textField.setBounds(316, 30, 226, 23);
-			panelContacto.add(textField);
-			textField.setColumns(10);
+			textEmail = new JTextField();
+			textEmail.setBounds(316, 30, 226, 23);
+			panelContacto.add(textEmail);
+			textEmail.setColumns(10);
 			
 			MaskFormatter mascaraTelefono;
 			try {
@@ -816,7 +819,125 @@ public class InsertarSolicitante extends JDialog {
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
+						boolean error = false;
+
+						String cedula = ftextCedula.getText();
+						String nombre = textNombre.getText();
+						String apellido = textApellidos.getText();
+						String telefono = ftextTelefono.getText();
+						String estadoCivil = cbxEstadoCivil.getSelectedItem().toString();
+						String nacionalidad = cbxNacionalidad.getSelectedItem().toString();
+						String sexo = "";
+						String provincia = cbxProvincias.getSelectedItem().toString();
+						String ciudad = textCiudad.getText();
+						String sector = textSector.getText();
+						String calle = textCalle.getText();
+						String direccion = "";
+						int yearExperienciaB = (int) spnYearExpO.getValue();
+						int yearExperienciaT = (int) spnYearT.getValue();
+						int yearExperienciaU = (int) spnAnosExpUniversitario.getValue();
+						int numeroCasa = (int) spnNumeroCasa.getValue();
+						String referencia = textReferencia.getText();
+						String email = textEmail.getText();
+						Date fechaN = dateChooser.getDate();
+						LocalDate fechaNacimiento = fechaN.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+						boolean vehiculoP = false;
+						boolean postGrado = false;
+						boolean mudarse = false;
+						boolean dispViajar = false;
+						boolean contratado = false;
+						if (rbtnSiDisponibilidad.isSelected()) {
+							mudarse = true;
+						} else if (rbtnNoDisponibilidad.isSelected()) {
+							mudarse = false;
+						}
+						if (rbtnSiVehiculoPro.isSelected()) {
+							vehiculoP = true;
+						} else if (rbtnNoVehiculoPro.isSelected()) {
+							vehiculoP = false;
+						}
+						int licencia = 0;
+						if (cbxLicencia.getSelectedIndex() == 1) {
+							licencia = 0;
+						}
+						if (cbxLicencia.getSelectedIndex() == 2) {
+							licencia = 1;
+						}
+						if (cbxLicencia.getSelectedIndex() == 3) {
+							licencia = 2;
+						}
+						if (cbxLicencia.getSelectedIndex() == 4) {
+							licencia = 3;
+						}
+						if (cbxLicencia.getSelectedIndex() == 5) {
+							licencia = 4;
+						}
+						if (rdbFemenino.isSelected()) {
+							sexo = "Femenino";
+						}
+						if (rdbMasculino.isSelected()) {
+							sexo = "Masculino";
+						}
+						if (rdbSiPost.isSelected()) {
+							postGrado = true;
+						}
+						if (telefono.equalsIgnoreCase("") || email.equalsIgnoreCase("")) {
+							error = true;
+							JOptionPane.showMessageDialog(null, "Debe de llenar todos los campos.", "AVISO",
+									JOptionPane.WARNING_MESSAGE, null);
+							if (panel2.isVisible()) {
+								panel1.setVisible(false);
+								panel2.setVisible(true);
+							}
+						}else if ((!rbtnNoDisponibilidad.isSelected() && !rbtnSiDisponibilidad.isSelected())
+								|| (!rbtnSiVehiculoPro.isSelected() && !rbtnNoVehiculoPro.isSelected())) {
+							error = true;
+							JOptionPane.showMessageDialog(null, "Debe de llenar todos los campos.", "AVISO",
+									JOptionPane.WARNING_MESSAGE, null);
+
+						} else if (rbtnBachiller.isSelected()) {
+							if (misHabilidades.size() == 0) {
+								error = true;
+								JOptionPane.showMessageDialog(null, "Debe de insertar habilidades de Oberro.", "AVISO",
+										JOptionPane.WARNING_MESSAGE, null);
+
+							}
+						} else if (rbtnTecnico.isSelected()) {
+							if (cbxAreaTecnico.getSelectedIndex() == 0) {
+								error = true;
+								JOptionPane.showMessageDialog(null, "Debe de insetar area de Ténico.", "AVISO",
+										JOptionPane.WARNING_MESSAGE, null);
+
+							}
+						} else if (rbtnUniversitario.isSelected()) {
+							if (cbxCarrera.getSelectedIndex() == 0) {
+								error = true;
+								JOptionPane.showMessageDialog(null, "Debe de insetar carrera de Universitario.",
+										"AVISO", JOptionPane.WARNING_MESSAGE, null);
+
+							} else if (Bolsa_Laboral.getInstance().validarCorreo(email)) {
+								error = true;
+								JOptionPane.showMessageDialog(null, "Correo electrónico no válido", "AVISO",
+										JOptionPane.ERROR_MESSAGE, null);
+
+							}
+								
+						}
+						if(rbtnBachiller.isSelected()) {
+							if(!error) {
+								if(!modificar) {
+									int years = (int) spnYearExpO.getValue();
+									Personal soli = new Bachiller(cedula, nombre, apellido, sexo, nacionalidad, provincia, ciudad, sector, calle, numeroCasa, referencia, fechaNacimiento, telefono, email, yearExperienciaB, vehiculoP, licencia, dispViajar, mudarse, contratado, misHabilidades);
+									Bolsa_Laboral.getInstance().insertarSolicitante(soli);
+									estado = false;
+									
+								}
+							}
+						}
+						
 					}
+				
+					
 				});
 				btnRegistrar.setEnabled(false);
 				btnRegistrar.setHorizontalAlignment(SwingConstants.RIGHT);

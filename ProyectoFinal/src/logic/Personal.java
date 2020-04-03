@@ -3,6 +3,7 @@ package logic;
 import java.util.ArrayList;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.Period;
 //hola
 public abstract class Personal implements Serializable {
 	
@@ -17,10 +18,10 @@ public abstract class Personal implements Serializable {
 	protected String ciudad;
 	protected String sector;
 	protected String calle;
-	protected String numeroCasa;
+	protected int numeroCasa;
 	protected String referencia;
 	protected ArrayList<String> idiomas;
-	protected int edad;
+	protected LocalDate fechaN;
 	protected String telefono;
 	protected String correo;
 	protected int yearExperiencia;
@@ -29,12 +30,13 @@ public abstract class Personal implements Serializable {
 	protected boolean dispViajar;
 	protected boolean mudarse;
 	protected boolean contratado;
-	protected String estudiosComplementarios;
+	//protected String estudiosComplementarios;
 	protected LocalDate fechaContratado;
+	protected long edad;
 	
 	public Personal(String cedula, String name, String apellido, String sexo, String nacionalidad, String provincia,
-			String ciudad, String sector, String calle, String numeroCasa, String referencia, int edad, String telefono, String correo, int yearExperiencia, boolean vehiculo,
-			int categoriaLicencia, boolean dispViajar, boolean mudarse, boolean contratado, String estudiosComplementarios) {
+			String ciudad, String sector, String calle, int numeroCasa, String referencia, LocalDate fechaN, String telefono, String correo, int yearExperiencia, boolean vehiculo,
+			int categoriaLicencia, boolean dispViajar, boolean mudarse, boolean contratado) {
 		super();
 		this.cedula = cedula;
 		this.name = name;
@@ -48,7 +50,7 @@ public abstract class Personal implements Serializable {
 		this.numeroCasa = numeroCasa;
 		this.referencia = referencia;
 		idiomas = new ArrayList<String>();
-		this.edad = edad;
+		this.fechaN = fechaN;
 		this.telefono = telefono;
 		this.correo = correo;
 		this.yearExperiencia = yearExperiencia;
@@ -57,7 +59,7 @@ public abstract class Personal implements Serializable {
 		this.dispViajar = dispViajar;
 		this.mudarse = mudarse;
 		this.contratado = contratado;
-		this.estudiosComplementarios = estudiosComplementarios;
+		//this.estudiosComplementarios = estudiosComplementarios;
 	}
 	
 	abstract void insertarIdioma(String aux);
@@ -134,11 +136,11 @@ public abstract class Personal implements Serializable {
 		this.calle = calle;
 	}
 
-	public String getNumeroCasa() {
+	public int getNumeroCasa() {
 		return numeroCasa;
 	}
 
-	public void setNumeroCasa(String numeroCasa) {
+	public void setNumeroCasa(int numeroCasa) {
 		this.numeroCasa = numeroCasa;
 	}
 	
@@ -216,13 +218,13 @@ public abstract class Personal implements Serializable {
 		this.contratado = contratado;
 	}
 
-	public String getEstudiosComplementarios() {
+	/*public String getEstudiosComplementarios() {
 		return estudiosComplementarios;
 	}
 
 	public void setEstudiosComplementarios(String estudiosComplementarios) {
 		this.estudiosComplementarios = estudiosComplementarios;
-	}
+	}*/
 
 	public LocalDate getFechaContratado() {
 		return fechaContratado;
@@ -248,15 +250,32 @@ public abstract class Personal implements Serializable {
 		this.categoriaLicencia = categoriaLicencia;
 	}
 
-	public int getEdad() {
+	public LocalDate getFechaN() {
+		return fechaN;
+	}
+
+	public void setFechaN(LocalDate fechaN) {
+		this.fechaN = fechaN;
+	}
+
+	public long getEdad() {
+		setEdadSolicitante();
 		return edad;
 	}
 
-	public void setEdad(int edad) {
+	
+	public void setEdad(long edad) {
 		this.edad = edad;
 	}
 	
 	
+	public int setEdadSolicitante() {
+		LocalDate now = LocalDate.now();
+		Period periodo = Period.between(fechaN, now);
+		int edad = periodo.getYears();
+		setEdad(edad);
+		return edad;
+	}
 
 	
 	
