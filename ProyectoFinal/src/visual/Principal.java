@@ -21,6 +21,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.SystemColor;
+import java.awt.Font;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import java.awt.Toolkit;
 
 public class Principal extends JFrame {
 
@@ -48,13 +53,14 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/icons/icons8-pie-chart-22.png")));
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				Bolsa_Laboral.getInstance().writeBolsa();
 			}
 		});
-		setTitle("Cercarti Group");
+		setTitle("DAEX\u00A9");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -65,7 +71,34 @@ public class Principal extends JFrame {
 		menuBar.setBackground(SystemColor.inactiveCaptionBorder);
 		setJMenuBar(menuBar);
 		
+		JMenu mnMatcheo = new JMenu("Bolsa Laboral");
+		mnMatcheo.setFont(new Font("Segoe UI", Font.BOLD, 13));
+		menuBar.add(mnMatcheo);
+		
+		JMenuItem mntmPareo = new JMenuItem("Realizar Match");
+		mntmPareo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Match match;
+				try {
+					match = new Match();
+					match.setModal(true);
+					match.setVisible(true);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+				
+			}
+		});
+		mntmPareo.setBackground(SystemColor.inactiveCaptionBorder);
+		mnMatcheo.add(mntmPareo);
+		
+		JMenuItem mntContratados = new JMenuItem("Personal Contratado");
+		mntContratados.setBackground(SystemColor.inactiveCaptionBorder);
+		mnMatcheo.add(mntContratados);
+		
 		JMenu mnNewMenu = new JMenu("Empresa");
+		mnNewMenu.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmRegistrarEmpresa = new JMenuItem("Registrar Empresa");
@@ -94,11 +127,12 @@ public class Principal extends JFrame {
 		});
 		mnNewMenu.add(mntmListarEmpresas);
 		
-		JMenu mnSolicitudEmpresa = new JMenu("Solicitud");
+		JMenu mnSolicitudEmpresa = new JMenu("Solicitud Empresarial");
+		mnSolicitudEmpresa.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		mnSolicitudEmpresa.setBackground(SystemColor.inactiveCaptionBorder);
 		menuBar.add(mnSolicitudEmpresa);
 		
-		JMenuItem mntmSolicitudEmpresa = new JMenuItem("Solicitud Empresa");
+		JMenuItem mntmSolicitudEmpresa = new JMenuItem("Registrar Solicitud");
 		mntmSolicitudEmpresa.setBackground(SystemColor.inactiveCaptionBorder);
 		mntmSolicitudEmpresa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -109,7 +143,7 @@ public class Principal extends JFrame {
 		});
 		mnSolicitudEmpresa.add(mntmSolicitudEmpresa);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Listado de Solicitudes");
+		JMenuItem mntmNewMenuItem = new JMenuItem("Listar Solicitud");
 		mntmNewMenuItem.setBackground(SystemColor.inactiveCaptionBorder);
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -121,6 +155,7 @@ public class Principal extends JFrame {
 		mnSolicitudEmpresa.add(mntmNewMenuItem);
 		
 		JMenu mnPersonal = new JMenu("Personal");
+		mnPersonal.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		menuBar.add(mnPersonal);
 		
 		JMenuItem mntSolicitudP = new JMenuItem("Solicitud");
@@ -135,31 +170,22 @@ public class Principal extends JFrame {
 		});
 		mnPersonal.add(mntSolicitudP);
 		
-		JMenu mnMatcheo = new JMenu("Match");
-		menuBar.add(mnMatcheo);
+		JMenuItem mntListarSP = new JMenuItem("Listar Personal");
+		mnPersonal.add(mntListarSP);
 		
-		JMenuItem mntmPareo = new JMenuItem("Realizar Match");
-		mntmPareo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Match match;
-				try {
-					match = new Match();
-					match.setModal(true);
-					match.setVisible(true);
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} 
-				
-			}
-		});
-		mntmPareo.setBackground(SystemColor.inactiveCaptionBorder);
-		mnMatcheo.add(mntmPareo);
+		JMenu mnUtilidades = new JMenu("Utilidades");
+		mnUtilidades.setFont(new Font("Segoe UI", Font.BOLD, 13));
+		menuBar.add(mnUtilidades);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.inactiveCaptionBorder);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setIcon(new ImageIcon(Principal.class.getResource("/icons/DAEX c.png")));
+		contentPane.add(lblNewLabel, BorderLayout.NORTH);
 		dim = super.getToolkit().getScreenSize();
 		super.setSize(dim.width, (dim.height-50));
 		setLocationRelativeTo(null);
