@@ -91,19 +91,21 @@ public class InsertarSolicitante extends JDialog {
 	private JPanel pnlBachiller;
 	private JList listIdiomas;
 	private JList listHabilidades;
+	private JDateChooser dateChooser;
 	private ArrayList<String> misIdiomas = new ArrayList<>();
 	private ArrayList<String> misHabilidades = new ArrayList<>();
 	private DefaultListModel<String> modeloIdiomas = new DefaultListModel<>();
 	private DefaultListModel<String> modeloHabilidad = new DefaultListModel<>();
 	private JPanel pnlTecnico;
 	private JPanel pnlUniversitario;
+	private boolean estado = false;
 	
 	
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		try {
 			InsertarSolicitante dialog = new InsertarSolicitante();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -111,12 +113,12 @@ public class InsertarSolicitante extends JDialog {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	/**
 	 * Create the dialog.
 	 */
-	public InsertarSolicitante() {
+	public InsertarSolicitante(String title, boolean modificar, Personal solicitante, Personal persona) {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
@@ -270,7 +272,7 @@ public class InsertarSolicitante extends JDialog {
 				}
 				
 
-			    JDateChooser dateChooser = new JDateChooser();
+			    dateChooser = new JDateChooser();
 			    dateChooser.setBackground(SystemColor.inactiveCaptionBorder);
 			    dateChooser.setBounds(89, 123, 131, 20);
 			    panelInformacionGe.add(dateChooser);
@@ -749,15 +751,24 @@ public class InsertarSolicitante extends JDialog {
 			btnContinuar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
+					
 					boolean igual = false;
 					String sexo = "";
+					String fecha = ((JTextField) dateChooser.getDateEditor().getUiComponent()).getText();
 					if (rdbFemenino.isSelected()) {
 						sexo = "Femenino";
 					} else if (rdbMasculino.isSelected()) {
 						sexo = "Masculino";
 					}
+				
+				if (panel2.isVisible()) {
+					estado = false;
+					panel2.setVisible(false);
+					panel1.setVisible(true);
+					btnContinuar.setText("Continuar");
+				}
 					
-					if(panel1.isVisible()) {
+					else if(panel1.isVisible()) {
 					
 					if(!Bolsa_Laboral.getInstance().getMisSolicitantes().isEmpty()) {
 						for (Personal personal : Bolsa_Laboral.getInstance().getMisSolicitantes()) {
@@ -769,19 +780,45 @@ public class InsertarSolicitante extends JDialog {
 						if(igual==true) {
 							JOptionPane.showMessageDialog(null,"Ya existe una persona registrada con esa cedula");
 						}
-						/*else if(ftextCedula.getText().equalsIgnoreCase("___-_______-_")||textNombre.getText().isEmpty()|| textApellidos.getText().isEmpty()||textCiudad.getText().isEmpty() || cbxLicencia.getSelectedIndex() == 0 || cbxProvincias.getSelectedIndex() == 0 || sexo.equalsIgnoreCase("") ) {
+						else if(ftextCedula.getText().equalsIgnoreCase("___-_______-_")||textNombre.getText().isEmpty()|| textApellidos.getText().isEmpty()||textCiudad.getText().isEmpty() || cbxLicencia.getSelectedIndex() == 0 || cbxProvincias.getSelectedIndex() == 0 || sexo.equalsIgnoreCase("") || fecha.equalsIgnoreCase("")) {
 							JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
-						}*/
+						}else {
+							if (!modificar) {
+								estado = true;
+								btnRegistrar.setEnabled(true);
+								rbtnBachiller.setSelected(true);
+								rbtnTecnico.setSelected(false);
+								rbtnUniversitario.setSelected(false);
+								pnlBachiller.setVisible(true);
+								pnlTecnico.setVisible(false);
+								pnlUniversitario.setVisible(false);
+								panel1.setVisible(false);
+								panel2.setVisible(true);
+								btnContinuar.setText("Retroceder");
+
+							} else {
+								btnRegistrar.setEnabled(true);
+								btnContinuar.setText("Retroceder");
+								panel1.setVisible(false);
+								panel2.setVisible(true);
+							}
+							if (persona != null) {
+
+								btnRegistrar.setEnabled(false);
+							}
+						}
 					}
-					
-					panel1.setVisible(false);
-					panel2.setVisible(true);
 				}
-				}
-			);
+				});
 			buttonPane.add(btnContinuar);
 			{
 				btnRegistrar = new JButton("Registrar");
+				btnRegistrar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+					}
+				});
+				btnRegistrar.setEnabled(false);
 				btnRegistrar.setHorizontalAlignment(SwingConstants.RIGHT);
 				btnRegistrar.setActionCommand("OK");
 				buttonPane.add(btnRegistrar);
@@ -789,6 +826,11 @@ public class InsertarSolicitante extends JDialog {
 			}
 			{
 				btnCancelar = new JButton("Cancelar");
+				btnCancelar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
 				btnCancelar.setActionCommand("Cancel");
 				buttonPane.add(btnCancelar);
 			}

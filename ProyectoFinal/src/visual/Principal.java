@@ -127,7 +127,7 @@ public class Principal extends JFrame {
 		mntSolicitudP.setBackground(SystemColor.inactiveCaptionBorder);
 		mntSolicitudP.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				InsertarSolicitante insertP = new InsertarSolicitante();
+				InsertarSolicitante insertP = new InsertarSolicitante("Insertar Solicitante", false, null, null);
 				insertP.setModal(true);
 				insertP.setVisible(true);
 				
