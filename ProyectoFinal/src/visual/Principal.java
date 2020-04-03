@@ -26,6 +26,7 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.Toolkit;
+import javax.swing.JSeparator;
 
 public class Principal extends JFrame {
 
@@ -60,7 +61,7 @@ public class Principal extends JFrame {
 				Bolsa_Laboral.getInstance().writeBolsa();
 			}
 		});
-		setTitle("DAEX\u00A9");
+		setTitle("DAEX\u00A9 - Bolsa Laboral");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -68,10 +69,11 @@ public class Principal extends JFrame {
 		Bolsa_Laboral.getInstance().readBolsa();
 		
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBackground(SystemColor.inactiveCaptionBorder);
+		menuBar.setBackground(SystemColor.activeCaption);
 		setJMenuBar(menuBar);
 		
 		JMenu mnMatcheo = new JMenu("Bolsa Laboral");
+		mnMatcheo.setIcon(new ImageIcon(Principal.class.getResource("/icons/pareo24.png")));
 		mnMatcheo.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		menuBar.add(mnMatcheo);
 		
@@ -98,6 +100,7 @@ public class Principal extends JFrame {
 		mnMatcheo.add(mntContratados);
 		
 		JMenu mnNewMenu = new JMenu("Empresa");
+		mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/icons/empresa24.png")));
 		mnNewMenu.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		menuBar.add(mnNewMenu);
 		
@@ -128,6 +131,7 @@ public class Principal extends JFrame {
 		mnNewMenu.add(mntmListarEmpresas);
 		
 		JMenu mnSolicitudEmpresa = new JMenu("Solicitud Empresarial");
+		mnSolicitudEmpresa.setIcon(new ImageIcon(Principal.class.getResource("/icons/Solicitud24.png")));
 		mnSolicitudEmpresa.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		mnSolicitudEmpresa.setBackground(SystemColor.inactiveCaptionBorder);
 		menuBar.add(mnSolicitudEmpresa);
@@ -155,6 +159,7 @@ public class Principal extends JFrame {
 		mnSolicitudEmpresa.add(mntmNewMenuItem);
 		
 		JMenu mnPersonal = new JMenu("Personal");
+		mnPersonal.setIcon(new ImageIcon(Principal.class.getResource("/icons/Solicitante24.png")));
 		mnPersonal.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		menuBar.add(mnPersonal);
 		
@@ -174,6 +179,7 @@ public class Principal extends JFrame {
 		mnPersonal.add(mntListarSP);
 		
 		JMenu mnUtilidades = new JMenu("Utilidades");
+		mnUtilidades.setIcon(new ImageIcon(Principal.class.getResource("/icons/reportar24.png")));
 		mnUtilidades.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		menuBar.add(mnUtilidades);
 		contentPane = new JPanel();
@@ -182,13 +188,21 @@ public class Principal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
+		JPanel panel = new JPanel();
+		panel.setBackground(SystemColor.inactiveCaptionBorder);
+		contentPane.add(panel, BorderLayout.CENTER);
+		panel.setLayout(null);
+		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setIcon(new ImageIcon(Principal.class.getResource("/icons/DAEX c.png")));
-		contentPane.add(lblNewLabel, BorderLayout.NORTH);
+		lblNewLabel.setIcon(new ImageIcon(Principal.class.getResource("/icons/DAEX_LOGO.png")));
+		lblNewLabel.setBounds(550, -17, 195, 194);
+		panel.add(lblNewLabel);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(0, 164, 1350, 2);
+		panel.add(separator);
 		dim = super.getToolkit().getScreenSize();
 		super.setSize(dim.width, (dim.height-50));
 		setLocationRelativeTo(null);
 	}
-
 }
