@@ -25,6 +25,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.TitledBorder;
 import java.awt.SystemColor;
+import javax.swing.ImageIcon;
 
 public class ListarEmpresas extends JDialog {
 	
@@ -112,6 +113,7 @@ public class ListarEmpresas extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			
 			btnEliminar = new JButton("Eliminar");
+			btnEliminar.setIcon(new ImageIcon(ListarEmpresas.class.getResource("/icons/borrar.png")));
 			btnEliminar.setEnabled(false);
 			btnEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -132,6 +134,7 @@ public class ListarEmpresas extends JDialog {
 			buttonPane.add(btnEliminar);
 			{
 				btnModificar = new JButton("Modificar");
+				btnModificar.setIcon(new ImageIcon(ListarEmpresas.class.getResource("/icons/modificar.png")));
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (cod != "") {
@@ -155,6 +158,7 @@ public class ListarEmpresas extends JDialog {
 			}
 			{
 				JButton btnCancelar = new JButton("Cancelar");
+				btnCancelar.setIcon(new ImageIcon(ListarEmpresas.class.getResource("/icons/cancelar.png")));
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

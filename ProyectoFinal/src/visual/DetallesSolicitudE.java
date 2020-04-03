@@ -231,7 +231,6 @@ public class DetallesSolicitudE extends JDialog {
 		panelUniversitario.add(lblExperiencia);
 		
 		textExperienciaU = new JTextField();
-		textExperienciaU.setEditable(false);
 		textExperienciaU.setEnabled(false);
 		textExperienciaU.setBounds(95, 33, 121, 20);
 		panelUniversitario.add(textExperienciaU);
@@ -268,7 +267,7 @@ public class DetallesSolicitudE extends JDialog {
 		panelTecnico.add(lblExpeTec);
 		
 		textExpeTec = new JTextField();
-		textExpeTec.setEditable(false);
+		textExpeTec.setEnabled(false);
 		textExpeTec.setBounds(78, 33, 121, 20);
 		panelTecnico.add(textExpeTec);
 		textExpeTec.setColumns(10);
@@ -278,6 +277,7 @@ public class DetallesSolicitudE extends JDialog {
 		panelTecnico.add(lblArea);
 		
 		textArea = new JTextField();
+		textArea.setEnabled(false);
 		textArea.setBounds(78, 72, 121, 20);
 		panelTecnico.add(textArea);
 		textArea.setColumns(10);
@@ -295,7 +295,7 @@ public class DetallesSolicitudE extends JDialog {
 		panelBachiller.add(lblBachiller);
 		
 		textExpBa = new JTextField();
-		textExpBa.setEditable(false);
+		textExpBa.setEnabled(false);
 		textExpBa.setBounds(95, 33, 121, 20);
 		panelBachiller.add(textExpBa);
 		textExpBa.setColumns(10);
@@ -384,6 +384,7 @@ public class DetallesSolicitudE extends JDialog {
 			panelBachiller.setVisible(true);
 			textExpBa.setText(Integer.toString(((SolicitudBachiller)miSolici).getYearExperience()));
 			CargarHabilidades();
+			
 		}
 		
 		

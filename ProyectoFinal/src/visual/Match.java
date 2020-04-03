@@ -10,12 +10,57 @@ import javax.swing.border.EmptyBorder;
 import java.awt.SystemColor;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+
+import logic.Bolsa_Laboral;
+import logic.Empresa;
+import logic.Personal;
+import logic.Solicitud;
+import logic.SolicitudBachiller;
+import logic.SolicitudTecnico;
+import logic.SolicitudUniversitario;
+
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import java.awt.Color;
+import javax.swing.JFormattedTextField;
+import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.text.ParseException;
 
 public class Match extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	private static Object[] fila;
+
+	private static DefaultTableModel modelo;
+	private static DefaultTableCellRenderer centrar = new DefaultTableCellRenderer();
+	private JFormattedTextField ftxtRNC;
+	Empresa miEmpresa = null;
+	private JTextField txtNombre;
+	private JButton btnShow;
+	private DefaultListModel<String> model = new DefaultListModel<>();
+	private JList list;
+	private String codigo = "";
+	private ArrayList<Personal> miPersonalC = new ArrayList<>();
+	private JFormattedTextField ftxtCodSolicitud;
 	private JTable table;
-	private JTable table_1;
+	
+	
 
 	/**
 	 * Launch the application.
@@ -33,13 +78,14 @@ public class Match extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Match() {
+	public Match() throws ParseException{
 		setBounds(100, 100, 870, 509);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(SystemColor.inactiveCaptionBorder);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
+		setLocationRelativeTo(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(SystemColor.inactiveCaptionBorder);
@@ -47,31 +93,111 @@ public class Match extends JDialog {
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(SystemColor.inactiveCaptionBorder);
-		panel_1.setBounds(5, 5, 505, 400);
-		panel.add(panel_1);
-		panel_1.setLayout(null);
+		JPanel pnlEmpresa = new JPanel();
+		pnlEmpresa.setBorder(new TitledBorder(null, "Empresa:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		pnlEmpresa.setBackground(SystemColor.inactiveCaptionBorder);
+		pnlEmpresa.setBounds(5, 5, 505, 400);
+		panel.add(pnlEmpresa);
+		pnlEmpresa.setLayout(null);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 122, 485, 230);
-		panel_1.add(scrollPane_1);
+		scrollPane_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int aux = table.getSelectedRow(); 
+				if(aux > -1) {
+					btnShow.setEnabled(true);
+					codigo = (String) table.getModel().getValueAt(aux, 0);
+					ftxtCodSolicitud.setValue(codigo);
+				} else {
+					codigo = "";
+					btnShow.setEnabled(false);
+				}
+			}
+		});
+		scrollPane_1.setBounds(10, 114, 485, 233);
+		pnlEmpresa.add(scrollPane_1);
 		
-		table_1 = new JTable();
-		scrollPane_1.setViewportView(table_1);
+		table = new JTable();
+		scrollPane_1.setViewportView(table);
+		
+		btnShow = new JButton(" Ver Solicitantes");
+		btnShow.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Solicitud soli = Bolsa_Laboral.getInstance().RetornarSolocitudId(codigo);
+				if(soli != null) {
+					miPersonalC = Bolsa_Laboral.getInstance().matcheo(soli);
+				}
+				
+				cargarSolicitante();
+			}
+		});
+		btnShow.setEnabled(false);
+		btnShow.setBounds(356, 358, 139, 25);
+		pnlEmpresa.add(btnShow);
+		
+		txtNombre = new JTextField();
+		txtNombre.setEnabled(false);
+		txtNombre.setColumns(10);
+		txtNombre.setBackground(Color.WHITE);
+		txtNombre.setBounds(73, 57, 406, 23);
+		pnlEmpresa.add(txtNombre);
+		
+		JFormattedTextField ftxtRNC = new JFormattedTextField();
+		ftxtRNC.setBackground(Color.WHITE);
+		ftxtRNC.setBounds(73, 26, 139, 23);
+		pnlEmpresa.add(ftxtRNC);
+		
+		JLabel label = new JLabel("RNC:");
+		label.setBounds(20, 30, 46, 14);
+		pnlEmpresa.add(label);
+		
+		JLabel lblNombre = new JLabel("Nombre:");
+		lblNombre.setBounds(20, 61, 59, 14);
+		pnlEmpresa.add(lblNombre);
+		
+		JButton btnBuscar = new JButton("");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(Bolsa_Laboral.getInstance().RetornarEmpresa(ftxtRNC.getText()) != null) {
+					
+					
+				}
+			}
+		});
+		btnBuscar.setIcon(new ImageIcon(Match.class.getResource("/icons/Logo Buscar.png")));
+		btnBuscar.setBounds(215, 25, 29, 25);
+		pnlEmpresa.add(btnBuscar);
+		
+		JLabel label_1 = new JLabel("C\u00F3digo Solicitud:");
+		label_1.setBounds(254, 30, 102, 14);
+		pnlEmpresa.add(label_1);
+		
+		JFormattedTextField ftxtCodSolicitud_1 = new JFormattedTextField();
+		ftxtCodSolicitud_1.setEnabled(false);
+		ftxtCodSolicitud_1.setBackground(Color.WHITE);
+		ftxtCodSolicitud_1.setBounds(351, 26, 128, 23);
+		pnlEmpresa.add(ftxtCodSolicitud_1);
+		
+		JLabel lblSoli = new JLabel("Solicitudes");
+		lblSoli.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblSoli.setBounds(213, 89, 88, 14);
+		pnlEmpresa.add(lblSoli);
 		{
-			JPanel panel_2 = new JPanel();
-			panel_2.setBackground(SystemColor.inactiveCaptionBorder);
-			panel_2.setBounds(520, 5, 308, 400);
-			panel.add(panel_2);
-			panel_2.setLayout(null);
+			JPanel pnlSolicitantes = new JPanel();
+			pnlSolicitantes.setBorder(new TitledBorder(null, "Solicitantes:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			pnlSolicitantes.setBackground(SystemColor.inactiveCaptionBorder);
+			pnlSolicitantes.setBounds(520, 5, 308, 400);
+			panel.add(pnlSolicitantes);
+			pnlSolicitantes.setLayout(null);
 			{
 				JScrollPane scrollPane = new JScrollPane();
 				scrollPane.setBounds(10, 32, 291, 357);
-				panel_2.add(scrollPane);
+				pnlSolicitantes.add(scrollPane);
 				
-				table = new JTable();
-				scrollPane.setViewportView(table);
+			    list = new JList();
+				scrollPane.setViewportView(list);
 			}
 		}
 		{
@@ -91,5 +217,102 @@ public class Match extends JDialog {
 				buttonPane.add(btnCancelar);
 			}
 		}
+	}
+	
+	private void loadTable(Empresa empresa) {
+		String[] columnNames = { "Código", "Tipo", "Vacantes", "Rango Edad", "Localidad" };
+		modelo.setColumnIdentifiers(columnNames);
+		modelo.setRowCount(0);
+		fila = new Object[modelo.getColumnCount()];
+
+		if (empresa == null) {
+			for (Solicitud soli : Bolsa_Laboral.getInstance().getMisSolicitudes()) {
+				if (soli.getCantVacantes() > 0) {
+					fila[0] = soli.getId();
+					if (soli instanceof SolicitudUniversitario) {
+						fila[1] = "Universitario";
+					}
+					if (soli instanceof SolicitudTecnico) {
+						fila[1] = "Técnico";
+					}
+					if (soli instanceof SolicitudBachiller) {
+						fila[1] = "Bachiller";
+					}
+					fila[2] = soli.getCantVacantes();
+					String min = Integer.toString(soli.getEdadMin());
+					String max = Integer.toString(soli.getEdadMax());
+					String rango = min + "-" + max;
+					fila[3] = rango;
+					fila[4] = soli.getLocalidad();
+
+					modelo.addRow(fila);
+
+				}
+			}
+
+		} else {
+			ArrayList<Solicitud> solicitudesEmpresa = new ArrayList<>();
+			for (Solicitud solicitud : Bolsa_Laboral.getInstance().RetornaSolicitudEmp(empresa)) {
+				solicitudesEmpresa.add(solicitud);
+
+			}
+
+			for (Solicitud soli : solicitudesEmpresa) {
+				if (soli.getCantVacantes() > 0) {
+					fila[0] = soli.getId();
+					if (soli instanceof SolicitudUniversitario) {
+						fila[1] = "Universitario";
+					}
+					if (soli instanceof SolicitudTecnico) {
+						fila[1] = "Técnico";
+					}
+					if (soli instanceof SolicitudBachiller) {
+						fila[1] = "Bachiller";
+					}
+					fila[2] = soli.getCantVacantes();
+					String min = Integer.toString(soli.getEdadMin());
+					String max = Integer.toString(soli.getEdadMax());
+					String rango = min + "-" + max + " Años";
+					fila[3] = rango;
+					fila[4] = soli.getLocalidad();
+
+					modelo.addRow(fila);
+
+				}
+			}
+		}
+
+		TableColumnModel columnModel = table.getColumnModel();
+		centrar.setHorizontalAlignment(SwingConstants.CENTER);
+
+		for (int i = 0; i < columnNames.length; i++) {
+			table.getColumnModel().getColumn(i).setCellRenderer(centrar);
+		}
+		columnModel.getColumn(0).setPreferredWidth(80);
+		columnModel.getColumn(1).setPreferredWidth(80);
+		columnModel.getColumn(2).setPreferredWidth(106);
+		columnModel.getColumn(3).setPreferredWidth(120);
+		columnModel.getColumn(4).setPreferredWidth(80);
+
+	}
+
+	public void cargarSolicitante() {
+		if (miPersonalC.size() != 0) {
+			for (Personal soli : miPersonalC) {
+				String candidato = soli.getCedula() + " " + soli.getName() + " " + soli.getApellido();
+				model.addElement(candidato);
+			}
+			list.setModel(model);
+		} else {
+			JOptionPane.showMessageDialog(null,
+					"No existen solicitantes en la actualidad para satisfacer esta solicitud", "Información",
+					JOptionPane.INFORMATION_MESSAGE, null);
+		}
+	}
+
+	public void clean() {
+		model.clear();
+		miPersonalC = new ArrayList<>();
+		loadTable(null);
 	}
 }

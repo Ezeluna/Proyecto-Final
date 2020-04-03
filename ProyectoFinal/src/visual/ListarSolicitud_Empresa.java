@@ -42,6 +42,7 @@ import java.text.ParseException;
 
 import java.awt.Color;
 import java.awt.SystemColor;
+import javax.swing.ImageIcon;
 //
 public class ListarSolicitud_Empresa extends JDialog {
 
@@ -194,6 +195,7 @@ public class ListarSolicitud_Empresa extends JDialog {
 			}
 			{
 				JButton button = new JButton("");
+				button.setIcon(new ImageIcon(ListarSolicitud_Empresa.class.getResource("/icons/Logo Buscar.png")));
 				button.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						btnShow.setEnabled(false);
@@ -222,6 +224,7 @@ public class ListarSolicitud_Empresa extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnEliminar = new JButton("Eliminar");
+				btnEliminar.setIcon(new ImageIcon(ListarSolicitud_Empresa.class.getResource("/icons/borrar.png")));
 				btnEliminar.setEnabled(false);
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -243,6 +246,7 @@ public class ListarSolicitud_Empresa extends JDialog {
 				});
 				{
 					btnShow = new JButton("Ver Solicitud");
+					btnShow.setIcon(new ImageIcon(ListarSolicitud_Empresa.class.getResource("/icons/ver.png")));
 					btnShow.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							DetallesSolicitudE detalle = new DetallesSolicitudE(Bolsa_Laboral.getInstance().RetornarSolocitudId(codigo));
@@ -258,6 +262,7 @@ public class ListarSolicitud_Empresa extends JDialog {
 			}
 			{
 				btnModificar = new JButton("Modificar");
+				btnModificar.setIcon(new ImageIcon(ListarSolicitud_Empresa.class.getResource("/icons/modificar.png")));
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						InsertarSolicitud_Empresa modifSoli = new InsertarSolicitud_Empresa(Bolsa_Laboral.getInstance().RetornarSolocitudId(codigo));
@@ -273,6 +278,7 @@ public class ListarSolicitud_Empresa extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setIcon(new ImageIcon(ListarSolicitud_Empresa.class.getResource("/icons/cancelar.png")));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

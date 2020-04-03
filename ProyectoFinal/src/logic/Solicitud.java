@@ -18,7 +18,7 @@ public abstract class Solicitud implements Serializable {
 	protected boolean vehiculoPropio; 
 	protected int categoriaLicencia; 
 	protected boolean mudarse;
-	protected ArrayList<String> idiomas; 
+	protected ArrayList<String> idiomas = new ArrayList<>(); ; 
 	
 	public Solicitud( float cantVacantes, Empresa empresa, String localidad, int edadMax, 
 			int edadMin, int yearExperience, String tipoContrato, boolean vehiculoPropio, 
@@ -35,7 +35,6 @@ public abstract class Solicitud implements Serializable {
 		this.vehiculoPropio = vehiculoPropio;
 		this.categoriaLicencia = categoriaLicencia;
 		this.mudarse = mudarse;
-		idiomas = new ArrayList<>(); 
 		for (String idio : idiomas) {
 			this.idiomas.add(idio);
 		}

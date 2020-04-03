@@ -138,8 +138,23 @@ public class Principal extends JFrame {
 		JMenu mnMatcheo = new JMenu("Match");
 		menuBar.add(mnMatcheo);
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("New menu item");
-		mnMatcheo.add(mntmNewMenuItem_1);
+		JMenuItem mntmPareo = new JMenuItem("Realizar Match");
+		mntmPareo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Match match;
+				try {
+					match = new Match();
+					match.setModal(true);
+					match.setVisible(true);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+				
+			}
+		});
+		mntmPareo.setBackground(SystemColor.inactiveCaptionBorder);
+		mnMatcheo.add(mntmPareo);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.inactiveCaptionBorder);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

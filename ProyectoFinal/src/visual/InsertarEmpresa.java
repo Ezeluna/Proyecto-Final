@@ -29,6 +29,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.SystemColor;
+import javax.swing.ImageIcon;
 //jeje
 public class InsertarEmpresa extends JDialog {
 
@@ -313,6 +314,7 @@ public class InsertarEmpresa extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnRegistrar = new JButton("Registrar");
+				btnRegistrar.setIcon(new ImageIcon(InsertarEmpresa.class.getResource("/icons/add.png")));
 				if(modi){
 					btnRegistrar.setText("Salvar Modificaciones");
 				}
@@ -489,6 +491,7 @@ public class InsertarEmpresa extends JDialog {
 			}
 			{
 				JButton btnCancelar = new JButton("Cancelar");
+				btnCancelar.setIcon(new ImageIcon(InsertarEmpresa.class.getResource("/icons/cancelar.png")));
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

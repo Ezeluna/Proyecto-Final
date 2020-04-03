@@ -243,6 +243,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 			}
 			{
 				JButton btnNewButton = new JButton("");
+				btnNewButton.setIcon(new ImageIcon(InsertarSolicitud_Empresa.class.getResource("/icons/Logo Buscar.png")));
 				btnNewButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						String RNC = ftxtRNC.getText();
@@ -560,6 +561,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 	
 			{
 				JButton btnEliminarIdioma = new JButton("");
+				btnEliminarIdioma.setIcon(new ImageIcon(InsertarSolicitud_Empresa.class.getResource("/icons/borrar.png")));
 				btnEliminarIdioma.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						misIdiomas.remove(indexListaIdioma);
@@ -743,7 +745,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				JButton okButton = new JButton(" ");
 				if (modificarSoli != null) {
 					okButton.setText("Modificar");
 				} else {
@@ -972,6 +974,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 			}
 			{
 				JButton btnCancelar = new JButton("Cancelar");
+				btnCancelar.setIcon(new ImageIcon(InsertarSolicitud_Empresa.class.getResource("/icons/cancelar.png")));
 				btnCancelar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 						dispose();
