@@ -25,6 +25,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JSpinner;
 import javax.swing.SwingConstants;
 import javax.swing.JFormattedTextField;
@@ -38,6 +39,9 @@ import com.toedter.calendar.JDateChooser;
 import logic.Bachiller;
 import logic.Bolsa_Laboral;
 import logic.Personal;
+import logic.Tecnico;
+import logic.Universitario;
+
 
 import javax.swing.JSeparator;
 import java.awt.Color;
@@ -102,6 +106,9 @@ public class InsertarSolicitante extends JDialog {
 	private JPanel pnlTecnico;
 	private JPanel pnlUniversitario;
 	private boolean estado = false;
+	private boolean error = false;
+	private Personal modiS = null;
+	private Personal verSoli = null;
 	
 	
 
@@ -833,9 +840,6 @@ public class InsertarSolicitante extends JDialog {
 						String sector = textSector.getText();
 						String calle = textCalle.getText();
 						String direccion = "";
-						int yearExperienciaB = (int) spnYearExpO.getValue();
-						int yearExperienciaT = (int) spnYearT.getValue();
-						int yearExperienciaU = (int) spnAnosExpUniversitario.getValue();
 						int numeroCasa = (int) spnNumeroCasa.getValue();
 						String referencia = textReferencia.getText();
 						String email = textEmail.getText();
@@ -927,16 +931,87 @@ public class InsertarSolicitante extends JDialog {
 							if(!error) {
 								if(!modificar) {
 									int years = (int) spnYearExpO.getValue();
-									Personal soli = new Bachiller(cedula, nombre, apellido, sexo, nacionalidad, provincia, ciudad, sector, calle, numeroCasa, referencia, fechaNacimiento, telefono, email, yearExperienciaB, vehiculoP, licencia, dispViajar, mudarse, contratado, misHabilidades);
+									Personal soli = new Bachiller(cedula, nombre, apellido, sexo, nacionalidad, provincia, ciudad, sector, calle, numeroCasa, referencia, fechaNacimiento, telefono, email, years, vehiculoP, licencia, dispViajar, mudarse, contratado, misHabilidades);
 									Bolsa_Laboral.getInstance().insertarSolicitante(soli);
 									estado = false;
+									JOptionPane.showMessageDialog(null,
+											"El solicitante se ha registrado de manera exitosa.", "Información",
+											JOptionPane.INFORMATION_MESSAGE, null);
 									
+									//Principal.actualizarChart();  ESTO FALTA
+									//clean();
 								}
+								if(modificar) {
+									int years = (int) spnYearExpO.getValue();
+									Personal soli = new Bachiller(cedula, nombre, apellido, sexo, nacionalidad, provincia, ciudad, sector, calle, numeroCasa, referencia, fechaNacimiento, telefono, email, years, vehiculoP, licencia, dispViajar, mudarse, contratado, misHabilidades);
+									Bolsa_Laboral.getInstance().modificarSolicitante(soli);
+									estado = false;
+									JOptionPane.showMessageDialog(null,
+											"El solicitante se ha modificado de manera exitosa.", "Información",
+											JOptionPane.INFORMATION_MESSAGE, null);
+									//Principal.actualizarChart();  ESTO FALTA
+									dispose();
+								}
+								
 							}
 						}
 						
+						if(rbtnUniversitario.isSelected()) {
+							if(!error) {
+								if(!modificar) {
+									int years = (int) spnAnosExpUniversitario.getValue();
+									Personal soli = new Universitario(cedula, nombre, apellido, sexo, nacionalidad, provincia, ciudad, sector, calle, numeroCasa, referencia, fechaNacimiento, telefono, email, years, vehiculoP, licencia, dispViajar, mudarse, contratado, cbxCarrera.getSelectedItem().toString(), false);
+									Bolsa_Laboral.getInstance().insertarSolicitante(soli);		
+									estado = false;
+									JOptionPane.showMessageDialog(null,
+											"El solicitante se ha registrado de manera exitosa.", "Información",
+											JOptionPane.INFORMATION_MESSAGE, null);
+									
+									//Principal.actualizarChart();  ESTO FALTA
+									//clean();
+					        	}
+								if(modificar) {
+									int years = (int) spnAnosExpUniversitario.getValue();
+									Personal soli = new Universitario(cedula, nombre, apellido, sexo, nacionalidad, provincia, ciudad, sector, calle, numeroCasa, referencia, fechaNacimiento, telefono, email, years, vehiculoP, licencia, dispViajar, mudarse, contratado, cbxCarrera.getSelectedItem().toString(), false);
+									estado = false;
+									Bolsa_Laboral.getInstance().modificarSolicitante(soli);
+									JOptionPane.showMessageDialog(null,
+											"El solicitante se ha modificado de manera exitosa.", "Información",
+											JOptionPane.INFORMATION_MESSAGE, null);
+									
+									//Principal.actualizarChart();  ESTO FALTA
+									dispose();
+								}
+					        }  
+						}
+						
+						if(rbtnTecnico.isSelected()) {
+							if(!error) {
+								if(!modificar) {
+									int years = (int) spnYearT.getValue();
+									Personal soli = new Tecnico(cedula, nombre, apellido, sexo, nacionalidad, provincia, ciudad, sector, calle, numeroCasa, referencia, fechaNacimiento, telefono, email, years, vehiculoP, licencia, dispViajar, mudarse, contratado,cbxAreaTecnico.getSelectedItem().toString());
+									Bolsa_Laboral.getInstance().insertarSolicitante(soli);
+									JOptionPane.showMessageDialog(null,
+											"El solicitante se ha registrado de manera exitosa.", "Información",
+											JOptionPane.INFORMATION_MESSAGE, null);
+                                        
+									//Principal.actualizarChart();  ESTO FALTA
+									estado = false;
+									//clean();
+								}
+								if(modificar) {
+									int years = (int) spnYearT.getValue();
+									Personal soli = new Tecnico(cedula, nombre, apellido, sexo, nacionalidad, provincia, ciudad, sector, calle, numeroCasa, referencia, fechaNacimiento, telefono, email, years, vehiculoP, licencia, dispViajar, mudarse, contratado,cbxAreaTecnico.getSelectedItem().toString());
+									Bolsa_Laboral.getInstance().modificarSolicitante(soli);
+									JOptionPane.showMessageDialog(null,
+											"El solicitante se ha modificado de manera exitosa.", "Información",
+											JOptionPane.INFORMATION_MESSAGE, null);
+									estado = false;
+									dispose();
+								}
+							}
+						}
 					}
-				
 					
 				});
 				btnRegistrar.setEnabled(false);
@@ -956,6 +1031,7 @@ public class InsertarSolicitante extends JDialog {
 				buttonPane.add(btnCancelar);
 			}
 		}
+		//estado();
 	}
 	
 	
@@ -992,5 +1068,73 @@ public class InsertarSolicitante extends JDialog {
 		}
 		misHabilidades.remove(index);
 	}
+	
+	public void resetWindow() {
+		rbtnBachiller.setSelected(true);
+		rbtnTecnico.setSelected(false);
+		rbtnUniversitario.setSelected(false);
+		pnlBachiller.setVisible(true);
+		pnlTecnico.setVisible(false);
+		pnlUniversitario.setVisible(false);
+		panel1.setVisible(false);
+		panel2.setVisible(true);
+		btnContinuar.setText(" Retroceder");
+		error = false;
+
+	}
+
+	public void clean() {
+		btnContinuar.setIcon(new ImageIcon(InsertarSolicitante.class.getResource("/img/Siguiente.png")));
+		textNombre.setText("");
+		textApellidos.setText("");
+		textCalle.setText("");
+		textCiudad.setText("");
+		textEmail.setText("");
+		ftextCedula.setText("");
+		textReferencia.setText("");
+		textSector.setText("");
+		ftextTelefono.setText("");
+		ftextCedula.setText("");
+		cbxAreaTecnico.setSelectedIndex(0);
+		cbxCarrera.setSelectedIndex(0);
+		cbxEstadoCivil.setSelectedIndex(0);
+		cbxHabilidades.setSelectedIndex(0);
+		cbxIdiomas.setSelectedIndex(0);
+		cbxLicencia.setSelectedIndex(0);
+		cbxNacionalidad.setSelectedIndex(0);
+		cbxProvincias.setSelectedIndex(0);
+		rbtnBachiller.setSelected(true);
+		rdbFemenino.setSelected(false);
+		rdbMasculino.setSelected(false);
+		rbtnNoDisponibilidad.setSelected(false);
+		rbtnSiDisponibilidad.setSelected(false);
+		rbtnSiVehiculoPro.setSelected(false);
+		rbtnNoVehiculoPro.setSelected(false);
+		panel1.setVisible(true);
+		panel2.setVisible(false);
+		spnYearExpO.setValue(0);
+		spnYearT.setValue(0);
+		spnAnosExpUniversitario.setValue(0);
+		spnNumeroCasa.setValue(0);
+		btnContinuar.setText("Continuar ");
+		LocalDate fecha = LocalDate.now();
+		Date date = java.sql.Date.valueOf(fecha);
+		btnRegistrar.setEnabled(false);
+		misHabilidades = new ArrayList<>();
+		misIdiomas = new ArrayList<>();
+		modeloHabilidad.clear();
+		error = false;
+		modeloIdiomas.clear();
+	}
+	
+	public void call() {
+		dispose();
+		InsertarSolicitante soli = new InsertarSolicitante("Insertar Solicitante", false, null, null);
+		soli.setModal(true);
+		soli.setLocationRelativeTo(null);
+		soli.setVisible(true);
+	}
+	
+	
 
 }
