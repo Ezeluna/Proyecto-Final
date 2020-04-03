@@ -27,7 +27,6 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -41,9 +40,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
 
-import javax.swing.border.EtchedBorder;
 import java.awt.Color;
-import javax.swing.ScrollPaneConstants;
 import java.awt.SystemColor;
 //
 public class ListarSolicitud_Empresa extends JDialog {
@@ -276,7 +273,6 @@ public class ListarSolicitud_Empresa extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
-				//cancelButton.setIcon(new ImageIcon(ListarSolicitud_Empresa.class.getResource("/img/cancelar.png")));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
