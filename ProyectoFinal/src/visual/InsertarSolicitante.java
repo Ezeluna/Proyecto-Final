@@ -112,6 +112,7 @@ public class InsertarSolicitante extends JDialog {
 	private Personal verSoli = null;
 	
 	
+	
 
 	/**
 	 * Launch the application.
@@ -936,11 +937,12 @@ public class InsertarSolicitante extends JDialog {
 								JOptionPane.showMessageDialog(null, "Debe de insetar carrera de Universitario.",
 										"AVISO", JOptionPane.WARNING_MESSAGE, null);
 
-							} else if (Bolsa_Laboral.getInstance().validarCorreo(email)) {
+							} else {if ((Bolsa_Laboral.getInstance().validarCorreo(email))) {
 								error = true;
 								JOptionPane.showMessageDialog(null, "Correo electrónico no válido", "AVISO",
 										JOptionPane.ERROR_MESSAGE, null);
 
+							}
 							}
 								
 						}
@@ -977,7 +979,7 @@ public class InsertarSolicitante extends JDialog {
 							if(!error) {
 								if(!modificar) {
 									int years = (int) spnAnosExpUniversitario.getValue();
-									Personal soli = new Universitario(cedula, nombre, apellido, sexo, nacionalidad, provincia, ciudad, sector, calle, numeroCasa, referencia, fechaNacimiento, telefono, email, years, vehiculoP, licencia, dispViajar, mudarse, contratado, estadoCivil, cbxCarrera.getSelectedItem().toString(), false);
+									Personal soli = new Universitario(cedula, nombre, apellido, sexo, nacionalidad, provincia, ciudad, sector, calle, numeroCasa, referencia, fechaNacimiento, telefono, email, years, vehiculoP, licencia, dispViajar, mudarse, contratado, estadoCivil, cbxCarrera.getSelectedItem().toString(), postGrado);
 									Bolsa_Laboral.getInstance().insertarSolicitante(soli);		
 									estado = false;
 									JOptionPane.showMessageDialog(null,
@@ -1101,7 +1103,7 @@ public class InsertarSolicitante extends JDialog {
 	}
 
 	public void clean() {
-		btnContinuar.setIcon(new ImageIcon(InsertarSolicitante.class.getResource("/img/Siguiente.png")));
+		btnContinuar.setIcon(new ImageIcon(InsertarSolicitante.class.getResource("/icons/Siguiente.png")));
 		textNombre.setText("");
 		textApellidos.setText("");
 		textCalle.setText("");
