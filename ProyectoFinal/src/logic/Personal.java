@@ -33,10 +33,11 @@ public abstract class Personal implements Serializable {
 	//protected String estudiosComplementarios;
 	protected LocalDate fechaContratado;
 	protected long edad;
+	protected String estadoCivil;
 	
 	public Personal(String cedula, String name, String apellido, String sexo, String nacionalidad, String provincia,
 			String ciudad, String sector, String calle, int numeroCasa, String referencia, LocalDate fechaN, String telefono, String correo, int yearExperiencia, boolean vehiculo,
-			int categoriaLicencia, boolean dispViajar, boolean mudarse, boolean contratado) {
+			int categoriaLicencia, boolean dispViajar, boolean mudarse, boolean contratado, String estadoCivil) {
 		super();
 		this.cedula = cedula;
 		this.name = name;
@@ -59,6 +60,7 @@ public abstract class Personal implements Serializable {
 		this.dispViajar = dispViajar;
 		this.mudarse = mudarse;
 		this.contratado = contratado;
+		this.estadoCivil = estadoCivil;
 		//this.estudiosComplementarios = estudiosComplementarios;
 	}
 	
@@ -275,6 +277,14 @@ public abstract class Personal implements Serializable {
 		int edad = periodo.getYears();
 		setEdad(edad);
 		return edad;
+	}
+
+	public String getEstadoCivil() {
+		return estadoCivil;
+	}
+
+	public void setEstadoCivil(String estadoCivil) {
+		this.estadoCivil = estadoCivil;
 	}
 
 	

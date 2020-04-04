@@ -758,9 +758,16 @@ public class InsertarSolicitante extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			
 			btnContinuar = new JButton("Continuar");
+			btnContinuar.setIcon(new ImageIcon(InsertarSolicitante.class.getResource("/icons/Siguiente.png")));
 			btnContinuar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
+					if (panel2.isVisible()) {
+						btnContinuar.setIcon(
+								new ImageIcon(InsertarSolicitante.class.getResource("/icons/Siguiente.png")));
+					} else {
+						btnContinuar.setIcon(
+								new ImageIcon(InsertarSolicitante.class.getResource("/icons/retroceso.png")));
+					}
 					
 					boolean igual = false;
 					String sexo = "";
@@ -823,6 +830,14 @@ public class InsertarSolicitante extends JDialog {
 			buttonPane.add(btnContinuar);
 			{
 				btnRegistrar = new JButton("Registrar");
+				if (!modificar) {
+					btnRegistrar.setIcon(new ImageIcon(InsertarSolicitante.class.getResource("/icons/add.png")));
+				} else {
+					btnRegistrar.setIcon(new ImageIcon(InsertarSolicitante.class.getResource("/icons/modificar.png")));
+				}
+				
+				
+				btnRegistrar.setEnabled(false);
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
@@ -931,7 +946,7 @@ public class InsertarSolicitante extends JDialog {
 							if(!error) {
 								if(!modificar) {
 									int years = (int) spnYearExpO.getValue();
-									Personal soli = new Bachiller(cedula, nombre, apellido, sexo, nacionalidad, provincia, ciudad, sector, calle, numeroCasa, referencia, fechaNacimiento, telefono, email, years, vehiculoP, licencia, dispViajar, mudarse, contratado, misHabilidades);
+									Personal soli = new Bachiller(cedula, nombre, apellido, sexo, nacionalidad, provincia, ciudad, sector, calle, numeroCasa, referencia, fechaNacimiento, telefono, email, years, vehiculoP, licencia, dispViajar, mudarse, contratado, estadoCivil, misHabilidades);
 									Bolsa_Laboral.getInstance().insertarSolicitante(soli);
 									estado = false;
 									JOptionPane.showMessageDialog(null,
@@ -943,7 +958,7 @@ public class InsertarSolicitante extends JDialog {
 								}
 								if(modificar) {
 									int years = (int) spnYearExpO.getValue();
-									Personal soli = new Bachiller(cedula, nombre, apellido, sexo, nacionalidad, provincia, ciudad, sector, calle, numeroCasa, referencia, fechaNacimiento, telefono, email, years, vehiculoP, licencia, dispViajar, mudarse, contratado, misHabilidades);
+									Personal soli = new Bachiller(cedula, nombre, apellido, sexo, nacionalidad, provincia, ciudad, sector, calle, numeroCasa, referencia, fechaNacimiento, telefono, email, years, vehiculoP, licencia, dispViajar, mudarse, contratado, estadoCivil, misHabilidades);
 									Bolsa_Laboral.getInstance().modificarSolicitante(soli);
 									estado = false;
 									JOptionPane.showMessageDialog(null,
@@ -960,7 +975,7 @@ public class InsertarSolicitante extends JDialog {
 							if(!error) {
 								if(!modificar) {
 									int years = (int) spnAnosExpUniversitario.getValue();
-									Personal soli = new Universitario(cedula, nombre, apellido, sexo, nacionalidad, provincia, ciudad, sector, calle, numeroCasa, referencia, fechaNacimiento, telefono, email, years, vehiculoP, licencia, dispViajar, mudarse, contratado, cbxCarrera.getSelectedItem().toString(), false);
+									Personal soli = new Universitario(cedula, nombre, apellido, sexo, nacionalidad, provincia, ciudad, sector, calle, numeroCasa, referencia, fechaNacimiento, telefono, email, years, vehiculoP, licencia, dispViajar, mudarse, contratado, estadoCivil, cbxCarrera.getSelectedItem().toString(), false);
 									Bolsa_Laboral.getInstance().insertarSolicitante(soli);		
 									estado = false;
 									JOptionPane.showMessageDialog(null,
@@ -972,7 +987,7 @@ public class InsertarSolicitante extends JDialog {
 					        	}
 								if(modificar) {
 									int years = (int) spnAnosExpUniversitario.getValue();
-									Personal soli = new Universitario(cedula, nombre, apellido, sexo, nacionalidad, provincia, ciudad, sector, calle, numeroCasa, referencia, fechaNacimiento, telefono, email, years, vehiculoP, licencia, dispViajar, mudarse, contratado, cbxCarrera.getSelectedItem().toString(), false);
+									Personal soli = new Universitario(cedula, nombre, apellido, sexo, nacionalidad, provincia, ciudad, sector, calle, numeroCasa, referencia, fechaNacimiento, telefono, email, years, vehiculoP, licencia, dispViajar, mudarse, contratado, estadoCivil, cbxCarrera.getSelectedItem().toString(), false);
 									estado = false;
 									Bolsa_Laboral.getInstance().modificarSolicitante(soli);
 									JOptionPane.showMessageDialog(null,
@@ -989,7 +1004,7 @@ public class InsertarSolicitante extends JDialog {
 							if(!error) {
 								if(!modificar) {
 									int years = (int) spnYearT.getValue();
-									Personal soli = new Tecnico(cedula, nombre, apellido, sexo, nacionalidad, provincia, ciudad, sector, calle, numeroCasa, referencia, fechaNacimiento, telefono, email, years, vehiculoP, licencia, dispViajar, mudarse, contratado,cbxAreaTecnico.getSelectedItem().toString());
+									Personal soli = new Tecnico(cedula, nombre, apellido, sexo, nacionalidad, provincia, ciudad, sector, calle, numeroCasa, referencia, fechaNacimiento, telefono, email, years, vehiculoP, licencia, dispViajar, mudarse, contratado, estadoCivil, cbxAreaTecnico.getSelectedItem().toString());
 									Bolsa_Laboral.getInstance().insertarSolicitante(soli);
 									JOptionPane.showMessageDialog(null,
 											"El solicitante se ha registrado de manera exitosa.", "Información",
@@ -1001,7 +1016,7 @@ public class InsertarSolicitante extends JDialog {
 								}
 								if(modificar) {
 									int years = (int) spnYearT.getValue();
-									Personal soli = new Tecnico(cedula, nombre, apellido, sexo, nacionalidad, provincia, ciudad, sector, calle, numeroCasa, referencia, fechaNacimiento, telefono, email, years, vehiculoP, licencia, dispViajar, mudarse, contratado,cbxAreaTecnico.getSelectedItem().toString());
+									Personal soli = new Tecnico(cedula, nombre, apellido, sexo, nacionalidad, provincia, ciudad, sector, calle, numeroCasa, referencia, fechaNacimiento, telefono, email, years, vehiculoP, licencia, dispViajar, mudarse, contratado,estadoCivil, cbxAreaTecnico.getSelectedItem().toString());
 									Bolsa_Laboral.getInstance().modificarSolicitante(soli);
 									JOptionPane.showMessageDialog(null,
 											"El solicitante se ha modificado de manera exitosa.", "Información",
@@ -1014,7 +1029,7 @@ public class InsertarSolicitante extends JDialog {
 					}
 					
 				});
-				btnRegistrar.setEnabled(false);
+				
 				btnRegistrar.setHorizontalAlignment(SwingConstants.RIGHT);
 				btnRegistrar.setActionCommand("OK");
 				buttonPane.add(btnRegistrar);
@@ -1134,7 +1149,258 @@ public class InsertarSolicitante extends JDialog {
 		soli.setLocationRelativeTo(null);
 		soli.setVisible(true);
 	}
-	
-	
 
-}
+	
+	public void loadSolicitanteModi() {
+		if (modiS != null) {
+			btnRegistrar.setText("Modificar");
+			LocalDate fecha = modiS.getFechaN();
+			Date date = java.sql.Date.valueOf(fecha);
+			textApellidos.setEnabled(false);
+			textNombre.setEnabled(false);
+			rdbFemenino.setEnabled(false);
+			rdbMasculino.setEnabled(false);
+			ftextCedula.setEnabled(false);
+			dateChooser.setEnabled(false);
+			cbxNacionalidad.setEnabled(false);
+			rbtnSiDisponibilidad.setEnabled(false);
+			rbtnNoDisponibilidad.setEnabled(false);
+			
+			// Incersion de datos
+						for (String idio : modiS.getIdiomas()) {
+							misIdiomas.add(idio);
+						}
+						loadIdioma();
+						textCiudad.setText(modiS.getCiudad());
+						textCalle.setText(modiS.getCalle());
+						textSector.setText(modiS.getSector());
+						textReferencia.setText(modiS.getReferencia());
+						spnNumeroCasa.setValue(modiS.getNumeroCasa());
+						textNombre.setText(modiS.getName());
+						textApellidos.setText(modiS.getApellido());
+						ftextCedula.setText(modiS.getCedula());
+						dateChooser.setDate(date);
+						cbxNacionalidad.setSelectedItem(modiS.getNacionalidad());
+						cbxEstadoCivil.setSelectedItem(modiS.getEstadoCivil());
+						cbxProvincias.setSelectedItem(modiS.getProvincia());
+						ftextTelefono.setText(modiS.getTelefono());
+						textEmail.setText(modiS.getCorreo());
+						if (modiS.getSexo().equalsIgnoreCase("Femenino")) {
+							rdbFemenino.setSelected(true);
+						} else {
+							rdbMasculino.setSelected(true);
+						}
+						if (modiS.isVehiculo()) {
+							rbtnSiVehiculoPro.setSelected(true);
+						} else {
+							rbtnNoVehiculoPro.setSelected(true);
+						}
+						if (modiS.getCategoriaLicencia() == 0) {
+							cbxLicencia.setSelectedIndex(1);
+						}
+						if (modiS.getCategoriaLicencia() == 1) {
+							cbxLicencia.setSelectedIndex(2);
+						}
+						if (modiS.getCategoriaLicencia() == 2) {
+							cbxLicencia.setSelectedIndex(3);
+						}
+						if (modiS.getCategoriaLicencia() == 3) {
+							cbxLicencia.setSelectedIndex(4);
+						}
+						if (modiS.getCategoriaLicencia() == 4) {
+							cbxLicencia.setSelectedIndex(5);
+						}
+						if (modiS.isMudarse() == true) {
+							rbtnSiDisponibilidad.setSelected(true);
+						} else {
+							rbtnNoDisponibilidad.setSelected(true);
+						}
+						if (modiS instanceof Bachiller) {
+							for (String habi : ((Bachiller) modiS).getHabilidades()) {
+								misHabilidades.add(habi);
+							}
+							loadHabilidades();
+							listHabilidades.setEnabled(false);
+							spnYearExpO.setValue(modiS.getYearExperiencia());
+							cbxHabilidades.setEnabled(false);
+							spnYearExpO.setEnabled(false);
+							rbtnBachiller.setSelected(true);
+							rbtnTecnico.setSelected(false);
+							rbtnUniversitario.setSelected(false);
+							rbtnUniversitario.setEnabled(false);
+							rbtnTecnico.setEnabled(false);
+							rbtnBachiller.setEnabled(false);
+							pnlBachiller.setVisible(true);
+							pnlTecnico.setVisible(false);
+							pnlUniversitario.setVisible(false);
+						}
+						if (modiS instanceof Universitario) {
+							cbxCarrera.setEnabled(false);
+							cbxCarrera.setSelectedItem(((Universitario) modiS).getCarrera());
+							spnAnosExpUniversitario.setValue(modiS.getYearExperiencia());
+							spnAnosExpUniversitario.setEnabled(false);
+							rbtnBachiller.setSelected(false);
+							rbtnTecnico.setSelected(false);
+							rbtnUniversitario.setSelected(true);
+							pnlBachiller.setVisible(false);
+							pnlTecnico.setVisible(false);
+							pnlUniversitario.setVisible(true);
+							rbtnUniversitario.setEnabled(false);
+							rbtnTecnico.setEnabled(false);
+							rbtnBachiller.setEnabled(false);
+							rdbNoPost.setEnabled(false);
+							rdbSiPost.setEnabled(false);
+							if (((Universitario) modiS).isPostGrado()) {
+								rdbSiPost.setSelected(true);
+							} else {
+								rdbNoPost.setSelected(true);
+							}
+						}
+						if (modiS instanceof Tecnico) {
+							spnYearT.setValue(modiS.getYearExperiencia());
+							spnYearT.setEnabled(false);
+							cbxAreaTecnico.setSelectedItem(((Tecnico) modiS).getArea());
+							cbxAreaTecnico.setEnabled(false);
+							rbtnBachiller.setSelected(false);
+							rbtnTecnico.setSelected(true);
+							rbtnUniversitario.setSelected(false);
+							pnlBachiller.setVisible(false);
+							pnlTecnico.setVisible(true);
+							pnlUniversitario.setVisible(false);
+							rbtnUniversitario.setEnabled(false);
+							rbtnTecnico.setEnabled(false);
+							rbtnBachiller.setEnabled(false);
+						}
+	            	}   
+	            }
+	
+	public void laodVer() {
+		panel1.setEnabled(false);
+		panel2.setEnabled(false);
+		LocalDate fecha = verSoli.getFechaN();
+		Date date = java.sql.Date.valueOf(fecha);
+		textApellidos.setEnabled(false);
+		textNombre.setEnabled(false);
+		rdbFemenino.setEnabled(false);
+		rdbMasculino.setEnabled(false);
+		ftextCedula.setEnabled(false);
+		dateChooser.setEnabled(false);
+		cbxNacionalidad.setEnabled(false);
+		rbtnSiDisponibilidad.setEnabled(false);
+		rbtnNoDisponibilidad.setEnabled(false);
+		
+		// Incersion de datos
+				for (String idio : verSoli.getIdiomas()) {
+					misIdiomas.add(idio);
+				}
+				loadIdioma();
+				textCiudad.setText(verSoli.getCiudad());
+				textCalle.setText(verSoli.getCalle());
+				textSector.setText(verSoli.getSector());
+				textReferencia.setText(verSoli.getReferencia());
+				spnNumeroCasa.setValue(verSoli.getNumeroCasa());
+				textNombre.setText(verSoli.getName());
+				textApellidos.setText(verSoli.getApellido());
+				ftextCedula.setText(verSoli.getCedula());
+				dateChooser.setDate(date);
+				cbxNacionalidad.setSelectedItem(verSoli.getNacionalidad());
+				cbxEstadoCivil.setSelectedItem(verSoli.getEstadoCivil());
+				cbxProvincias.setSelectedItem(verSoli.getProvincia());
+				ftextTelefono.setText(verSoli.getTelefono());
+				textEmail.setText(verSoli.getCorreo());
+				
+				if (verSoli.getSexo().equalsIgnoreCase("Femenino")) {
+					rdbFemenino.setSelected(true);
+				} else {
+					rdbMasculino.setSelected(true);
+				}
+				if (verSoli.isVehiculo()) {
+					rbtnSiVehiculoPro.setSelected(true);
+				} else {
+					rbtnNoVehiculoPro.setSelected(true);
+				}
+				if (verSoli.getCategoriaLicencia() == 0) {
+					cbxLicencia.setSelectedIndex(1);
+				}
+				if (verSoli.getCategoriaLicencia() == 1) {
+					cbxLicencia.setSelectedIndex(2);
+				}
+				if (verSoli.getCategoriaLicencia() == 2) {
+					cbxLicencia.setSelectedIndex(3);
+				}
+				if (verSoli.getCategoriaLicencia() == 3) {
+					cbxLicencia.setSelectedIndex(4);
+				}
+				if (verSoli.getCategoriaLicencia() == 4) {
+					cbxLicencia.setSelectedIndex(5);
+				}
+				if (verSoli.isMudarse() == true) {
+					rbtnSiDisponibilidad.setSelected(true);
+				} else {
+					rbtnNoDisponibilidad.setSelected(true);
+				}
+				
+				if (modiS instanceof Bachiller) {
+					for (String habi : ((Bachiller) verSoli).getHabilidades()) {
+						misHabilidades.add(habi);
+					}
+					loadHabilidades();
+					listHabilidades.setEnabled(false);
+					spnYearExpO.setValue(verSoli.getYearExperiencia());
+					cbxHabilidades.setEnabled(false);
+					spnYearExpO.setEnabled(false);
+					rbtnBachiller.setSelected(true);
+					rbtnTecnico.setSelected(false);
+					rbtnUniversitario.setSelected(false);
+					rbtnUniversitario.setEnabled(false);
+					rbtnTecnico.setEnabled(false);
+					rbtnBachiller.setEnabled(false);
+					pnlBachiller.setVisible(true);
+					pnlTecnico.setVisible(false);
+					pnlUniversitario.setVisible(false);
+				}
+				
+				if (modiS instanceof Universitario) {
+					cbxCarrera.setEnabled(false);
+					cbxCarrera.setSelectedItem(((Universitario) verSoli).getCarrera());
+					spnAnosExpUniversitario.setValue(verSoli.getYearExperiencia());
+					spnAnosExpUniversitario.setEnabled(false);
+					rbtnBachiller.setSelected(false);
+					rbtnTecnico.setSelected(false);
+					rbtnUniversitario.setSelected(true);
+					pnlBachiller.setVisible(false);
+					pnlTecnico.setVisible(false);
+					pnlUniversitario.setVisible(true);
+					rbtnUniversitario.setEnabled(false);
+					rbtnTecnico.setEnabled(false);
+					rbtnBachiller.setEnabled(false);
+					rdbNoPost.setEnabled(false);
+					rdbSiPost.setEnabled(false);
+					if (((Universitario) verSoli).isPostGrado()) {
+						rdbSiPost.setSelected(true);
+					} else {
+						rdbNoPost.setSelected(true);
+					}
+				}
+				
+				if (modiS instanceof Tecnico) {
+					spnYearT.setValue(verSoli.getYearExperiencia());
+					spnYearT.setEnabled(false);
+					cbxAreaTecnico.setSelectedItem(((Tecnico) verSoli).getArea());
+					cbxAreaTecnico.setEnabled(false);
+					rbtnBachiller.setSelected(false);
+					rbtnTecnico.setSelected(true);
+					rbtnUniversitario.setSelected(false);
+					pnlBachiller.setVisible(false);
+					pnlTecnico.setVisible(true);
+					pnlUniversitario.setVisible(false);
+					rbtnUniversitario.setEnabled(false);
+					rbtnTecnico.setEnabled(false);
+					rbtnBachiller.setEnabled(false);
+				}
+
+	}
+		
+	}
+
+
