@@ -190,6 +190,15 @@ public class Principal extends JFrame {
 		mnPersonal.add(mntSolicitudP);
 		
 		JMenuItem mntListarSP = new JMenuItem("Listar Personal");
+		mntListarSP.setBackground(SystemColor.inactiveCaptionBorder);
+		mntListarSP.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarSolicitantes soli = new ListarSolicitantes();
+				soli.setVisible(true);
+				soli.setModal(true);
+				
+			}
+		});
 		mnPersonal.add(mntListarSP);
 		
 		JMenu mnUtilidades = new JMenu("Utilidades");

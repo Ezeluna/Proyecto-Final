@@ -954,7 +954,7 @@ public class InsertarSolicitante extends JDialog {
 											JOptionPane.INFORMATION_MESSAGE, null);
 									
 									//Principal.actualizarChart();  ESTO FALTA
-									//clean();
+									clean();
 								}
 								if(modificar) {
 									int years = (int) spnYearExpO.getValue();
@@ -1012,7 +1012,7 @@ public class InsertarSolicitante extends JDialog {
                                         
 									//Principal.actualizarChart();  ESTO FALTA
 									estado = false;
-									//clean();
+									clean();
 								}
 								if(modificar) {
 									int years = (int) spnYearT.getValue();
