@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.Timer;
@@ -34,7 +35,7 @@ public class Loading extends JDialog {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
-				if(option == 1) {
+				if(option == 1 || option ==2) {
 					timer = new Timer(18, new progreso());
 				}
 				timer.start();
@@ -54,7 +55,7 @@ public class Loading extends JDialog {
 		contentPanel.setLayout(null);
 		
 		lblTitulo = new JLabel("New label");
-		if(option == 1){
+		if(option == 1 || option == 2){
 			lblTitulo.setText("Guardando Cambios...");
 		}
 		lblTitulo.setBounds(30, 22, 321, 14);
@@ -77,6 +78,12 @@ public class Loading extends JDialog {
 				valor++;
 				progressBar.setValue(valor);
 			}else {
+				
+				if (option == 2) {
+					JOptionPane.showMessageDialog(null, "Todos los cambios se guardaron correctamente", "DAEX\u00A9 - Bolsa Laboral",
+							JOptionPane.INFORMATION_MESSAGE, null);
+
+				}
 				timer.stop();
 				dispose();
 					

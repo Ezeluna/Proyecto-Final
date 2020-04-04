@@ -196,6 +196,42 @@ public class Principal extends JFrame {
 		mnUtilidades.setIcon(new ImageIcon(Principal.class.getResource("/icons/reportar24.png")));
 		mnUtilidades.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		menuBar.add(mnUtilidades);
+		
+		JMenuItem mntGuardar = new JMenuItem("Guardar Datos");
+		mntGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Bolsa_Laboral.getInstance().writeBolsa();
+				Loading load = new Loading(2); 
+				load.setVisible(true);
+				load.setLocationRelativeTo(null);
+			}
+		});
+		mntGuardar.setIcon(new ImageIcon(Principal.class.getResource("/icons/guardar.png")));
+		mntGuardar.setBackground(SystemColor.inactiveCaptionBorder);
+		mnUtilidades.add(mntGuardar);
+		
+		JSeparator separator_1 = new JSeparator();
+		mnUtilidades.add(separator_1);
+		
+		JMenuItem mntCerrar = new JMenuItem("Cerrar");
+		mntCerrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (JOptionPane.showConfirmDialog(null, "¿Desea guardar los nuevos cambios en la bolsa laboral?",
+						"Atención Requerida", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+					Bolsa_Laboral.getInstance().writeBolsa();
+					Loading load = new Loading(2); 
+					load.setVisible(true);
+					load.setLocationRelativeTo(null);
+					dispose();
+				}else {
+					dispose();
+				}
+
+			}
+		});
+		mntCerrar.setIcon(new ImageIcon(Principal.class.getResource("/icons/cancelar.png")));
+		mntCerrar.setBackground(SystemColor.inactiveCaptionBorder);
+		mnUtilidades.add(mntCerrar);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.inactiveCaptionBorder);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
