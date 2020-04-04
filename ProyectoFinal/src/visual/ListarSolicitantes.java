@@ -49,15 +49,6 @@ public class ListarSolicitantes extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			ListarSolicitantes dialog = new ListarSolicitantes();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Create the dialog.
@@ -69,6 +60,7 @@ public class ListarSolicitantes extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
+		setLocationRelativeTo(null);
 		{
 			JPanel panel = new JPanel();
 			panel.setBorder(new TitledBorder(null, "Listado de Solicitantes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
