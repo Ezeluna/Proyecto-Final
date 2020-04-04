@@ -47,7 +47,6 @@ public class Match extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private static Object[] fila;
-
 	private static DefaultTableModel modelo;
 	private static DefaultTableCellRenderer centrar = new DefaultTableCellRenderer();
 	private JFormattedTextField ftxtRNC;
@@ -66,20 +65,14 @@ public class Match extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			Match dialog = new Match();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+
 
 	/**
 	 * Create the dialog.
 	 */
 	public Match() throws ParseException{
+		setResizable(false);
+		setModal(true);
 		setTitle("DAEX\u00A9 - Bolsa Laboral");
 		setBounds(100, 100, 870, 509);
 		getContentPane().setLayout(new BorderLayout());
@@ -106,6 +99,16 @@ public class Match extends JDialog {
 		scrollPane_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
+		scrollPane_1.setBounds(10, 114, 485, 233);
+		pnlEmpresa.add(scrollPane_1);
+		
+		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
 				int aux = table.getSelectedRow(); 
 				if(aux > -1) {
 					btnShow.setEnabled(true);
@@ -117,10 +120,9 @@ public class Match extends JDialog {
 				}
 			}
 		});
-		scrollPane_1.setBounds(10, 114, 485, 233);
-		pnlEmpresa.add(scrollPane_1);
-		
-		table = new JTable();
+		modelo = new DefaultTableModel();
+		table.setModel(modelo);
+		loadTable(null);
 		scrollPane_1.setViewportView(table);
 		
 		btnShow = new JButton(" Ver Solicitantes");
@@ -189,9 +191,9 @@ public class Match extends JDialog {
 		ftxtCodSolicitud.setBounds(351, 26, 128, 23);
 		pnlEmpresa.add(ftxtCodSolicitud);
 		
-		JLabel lblSoli = new JLabel("Solicitudes");
+		JLabel lblSoli = new JLabel("Solicitudes Empresariales:");
 		lblSoli.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblSoli.setBounds(213, 89, 88, 14);
+		lblSoli.setBounds(168, 89, 176, 14);
 		pnlEmpresa.add(lblSoli);
 		
 		JButton btnLimpiar = new JButton("Limpiar");
