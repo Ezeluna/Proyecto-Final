@@ -27,9 +27,15 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ListarSolicitantes extends JDialog {
 
@@ -54,6 +60,16 @@ public class ListarSolicitantes extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListarSolicitantes() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+				cbxMostrar.setSelectedIndex(0);
+				cargarTablaG();
+			}
+		});
+		setResizable(false);
+		setModal(true);
+		setResizable(false);
 		setTitle("Listar Solicitantes");
 		setBounds(100, 100, 987, 511);
 		getContentPane().setLayout(new BorderLayout());
@@ -101,6 +117,34 @@ public class ListarSolicitantes extends JDialog {
 			panel.add(scrollPane);
 			
 			table = new JTable();
+			table.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					int aux = table.getSelectedRow();
+					
+					if(aux > -1) {
+						btnModificar.setEnabled(true);
+						btnEliminar.setEnabled(true);
+						cedulaCliente = (String) table.getModel().getValueAt(aux,0);
+					} else {
+						btnModificar.setEnabled(false);
+						btnEliminar.setEnabled(false);
+						cedulaCliente = "";	
+					}
+				}
+			});
+			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			table.getTableHeader().setResizingAllowed(false);
+			modeloTabla = new DefaultTableModel() {
+
+				@Override
+				public boolean isCellEditable(int row, int column) {
+					return true;
+				}
+			};
+			String tipo = cbxMostrar.getSelectedItem().toString();
+
+			loadTabla(tipo);
 			scrollPane.setViewportView(table);
 		}
 		{

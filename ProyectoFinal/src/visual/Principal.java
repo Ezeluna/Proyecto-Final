@@ -193,9 +193,10 @@ public class Principal extends JFrame {
 		mntListarSP.setBackground(SystemColor.inactiveCaptionBorder);
 		mntListarSP.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListarSolicitantes soli = new ListarSolicitantes();
-				soli.setVisible(true);
-				soli.setModal(true);
+				ListarSolicitantes solici = new ListarSolicitantes();
+				solici.setVisible(true);
+				solici.setLocationRelativeTo(null);
+				solici.setModal(true);
 				
 			}
 		});
