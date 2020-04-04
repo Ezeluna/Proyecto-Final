@@ -57,7 +57,7 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/icons/icons8-pie-chart-22.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/icons/icons8-pie-chart-64.png")));
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
