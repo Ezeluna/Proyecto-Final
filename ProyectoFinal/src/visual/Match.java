@@ -14,6 +14,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.text.MaskFormatter;
 
 import logic.Bolsa_Laboral;
 import logic.Empresa;
@@ -79,6 +80,7 @@ public class Match extends JDialog {
 	 * Create the dialog.
 	 */
 	public Match() throws ParseException{
+		setTitle("DAEX\u00A9 - Bolsa Laboral");
 		setBounds(100, 100, 870, 509);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(SystemColor.inactiveCaptionBorder);
@@ -122,6 +124,7 @@ public class Match extends JDialog {
 		scrollPane_1.setViewportView(table);
 		
 		btnShow = new JButton(" Ver Solicitantes");
+		btnShow.setIcon(new ImageIcon(Match.class.getResource("/icons/ver.png")));
 		btnShow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Solicitud soli = Bolsa_Laboral.getInstance().RetornarSolocitudId(codigo);
@@ -133,7 +136,7 @@ public class Match extends JDialog {
 			}
 		});
 		btnShow.setEnabled(false);
-		btnShow.setBounds(356, 358, 139, 25);
+		btnShow.setBounds(330, 358, 165, 25);
 		pnlEmpresa.add(btnShow);
 		
 		txtNombre = new JTextField();
@@ -143,7 +146,8 @@ public class Match extends JDialog {
 		txtNombre.setBounds(73, 57, 406, 23);
 		pnlEmpresa.add(txtNombre);
 		
-		JFormattedTextField ftxtRNC = new JFormattedTextField();
+		MaskFormatter mascara = new MaskFormatter("##########");
+		ftxtRNC = new JFormattedTextField(mascara);
 		ftxtRNC.setBackground(Color.WHITE);
 		ftxtRNC.setBounds(73, 26, 139, 23);
 		pnlEmpresa.add(ftxtRNC);
@@ -159,10 +163,15 @@ public class Match extends JDialog {
 		JButton btnBuscar = new JButton("");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ftxtCodSolicitud.setValue("");
 				
 				if(Bolsa_Laboral.getInstance().RetornarEmpresa(ftxtRNC.getText()) != null) {
-					
-					
+					miEmpresa = Bolsa_Laboral.getInstance().RetornarEmpresa(ftxtRNC.getText()); 
+					txtNombre.setText(miEmpresa.getNombre());
+					loadTable(miEmpresa);
+				}else {
+					JOptionPane.showMessageDialog(null, "No se encontro una empresa con el RNC digitado.", "Información",
+											JOptionPane.WARNING_MESSAGE, null);
 				}
 			}
 		});
@@ -174,11 +183,11 @@ public class Match extends JDialog {
 		label_1.setBounds(254, 30, 102, 14);
 		pnlEmpresa.add(label_1);
 		
-		JFormattedTextField ftxtCodSolicitud_1 = new JFormattedTextField();
-		ftxtCodSolicitud_1.setEnabled(false);
-		ftxtCodSolicitud_1.setBackground(Color.WHITE);
-		ftxtCodSolicitud_1.setBounds(351, 26, 128, 23);
-		pnlEmpresa.add(ftxtCodSolicitud_1);
+		ftxtCodSolicitud = new JFormattedTextField();
+		ftxtCodSolicitud.setEnabled(false);
+		ftxtCodSolicitud.setBackground(Color.WHITE);
+		ftxtCodSolicitud.setBounds(351, 26, 128, 23);
+		pnlEmpresa.add(ftxtCodSolicitud);
 		
 		JLabel lblSoli = new JLabel("Solicitudes");
 		lblSoli.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -213,6 +222,7 @@ public class Match extends JDialog {
 			}
 			{
 				JButton btnCancelar = new JButton("Cancelar");
+				btnCancelar.setIcon(new ImageIcon(Match.class.getResource("/icons/cancelar.png")));
 				btnCancelar.setActionCommand("Cancel");
 				buttonPane.add(btnCancelar);
 			}

@@ -64,7 +64,6 @@ public class InsertarSolicitud_Empresa extends JDialog {
 	private JPanel panelTecnico;
 	private JPanel panelBachiller;
 	private JPanel panelUniversitario;
-	private JPanel PanelGeneral;
 	private JFormattedTextField ftxtRNC;
 	private JComboBox cbxLicencia;
 	private JComboBox cbxContrato;
@@ -848,7 +847,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 								}
 								if (rbtnTecnico.isSelected()) {
 									SolicitudTecnico nuevaSoli = new SolicitudTecnico((float) vacantes,
-											empresa, localidad, edadMaxima, edadMinima, experienciaUniversitario, Contrato, vehiculo,
+											empresa, localidad, edadMaxima, edadMinima, experienciaTecnico, Contrato, vehiculo,
 											categoriaLicencia, misIdiomas, reubicacion, area);
 									
 									bolsa.insertSolicitud(nuevaSoli);
@@ -858,9 +857,9 @@ public class InsertarSolicitud_Empresa extends JDialog {
 								}
 								if (rbtnBachiller.isSelected()) {
 									SolicitudBachiller nuevaSoli = new SolicitudBachiller((float) vacantes,
-											empresa, localidad, edadMaxima, edadMinima, experienciaUniversitario, Contrato, vehiculo,
+											empresa, localidad, edadMaxima, edadMinima, experienciaBachiller, Contrato, vehiculo,
 											categoriaLicencia, reubicacion, misIdiomas, misHabilidades);
-									nuevaSoli.setIdiomas(misIdiomas);
+									
 									bolsa.insertSolicitud(nuevaSoli);
 									JOptionPane.showMessageDialog(null, "La Solicitud se registro correctamente",
 											"Información", JOptionPane.INFORMATION_MESSAGE, null);
