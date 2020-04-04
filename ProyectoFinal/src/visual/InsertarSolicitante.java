@@ -51,6 +51,7 @@ import javax.swing.border.EtchedBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 
 public class InsertarSolicitante extends JDialog {
 //jeje //
@@ -129,6 +130,7 @@ public class InsertarSolicitante extends JDialog {
 	 * Create the dialog.
 	 */
 	public InsertarSolicitante(String title, boolean modificar, Personal solicitante, Personal persona) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(InsertarSolicitante.class.getResource("/icons/icons8-client-management-32.png")));
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
