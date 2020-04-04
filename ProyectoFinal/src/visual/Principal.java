@@ -15,6 +15,8 @@ import javax.swing.JLayeredPane;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
@@ -58,12 +60,23 @@ public class Principal extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				Bolsa_Laboral.getInstance().writeBolsa();
+				if (JOptionPane.showConfirmDialog(null, "¿Desea guardar los nuevos cambios en DAEX\u00A9 - Bolsa Laboral?",
+						"Atención Requerida", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+					
+					Loading load = new Loading(1); 
+					load.setVisible(true);
+					load.setLocationRelativeTo(null);
+					Bolsa_Laboral.getInstance().writeBolsa();
+					dispose();
+				}else {
+					dispose();
+				}
+				
 			}
 		});
 		setTitle("DAEX\u00A9 - Bolsa Laboral");
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		
 		Bolsa_Laboral.getInstance().readBolsa();

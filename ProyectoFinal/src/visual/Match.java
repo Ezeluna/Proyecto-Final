@@ -193,6 +193,18 @@ public class Match extends JDialog {
 		lblSoli.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblSoli.setBounds(213, 89, 88, 14);
 		pnlEmpresa.add(lblSoli);
+		
+		JButton btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				loadTable(null);
+				ftxtCodSolicitud.setText("");
+				txtNombre.setText("");
+				ftxtRNC.setText("");
+			}
+		});
+		btnLimpiar.setBounds(231, 358, 89, 25);
+		pnlEmpresa.add(btnLimpiar);
 		{
 			JPanel pnlSolicitantes = new JPanel();
 			pnlSolicitantes.setBorder(new TitledBorder(null, "Solicitantes:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -216,12 +228,34 @@ public class Match extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnContratar = new JButton("Contratar");
+				btnContratar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (miPersonalC.size() != 0) {
+							Solicitud soli = Bolsa_Laboral.getInstance().RetornarSolocitudId(codigo);
+							Bolsa_Laboral.getInstance().contratarEmpleados(soli, miPersonalC);
+							JOptionPane.showMessageDialog(null, "Los solicitantes han sido contratados.", "Información",
+									JOptionPane.INFORMATION_MESSAGE, null);
+							Bolsa_Laboral.getInstance().removerContratados(miPersonalC);
+							clean();
+						} else {
+							JOptionPane.showMessageDialog(null,
+									"No existen solicitantes en la actualidad para satisfacer esta solicitud",
+									"Información", JOptionPane.INFORMATION_MESSAGE, null);
+							
+						}
+					}
+				});
 				btnContratar.setActionCommand("OK");
 				buttonPane.add(btnContratar);
 				getRootPane().setDefaultButton(btnContratar);
 			}
 			{
 				JButton btnCancelar = new JButton("Cancelar");
+				btnCancelar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
 				btnCancelar.setIcon(new ImageIcon(Match.class.getResource("/icons/cancelar.png")));
 				btnCancelar.setActionCommand("Cancel");
 				buttonPane.add(btnCancelar);
