@@ -31,7 +31,8 @@ import java.awt.Toolkit;
 import javax.swing.JSeparator;
 
 public class Principal extends JFrame {
-
+	
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private Dimension dim = null;
 	
