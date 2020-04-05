@@ -30,6 +30,10 @@ import javax.swing.SwingConstants;
 import java.awt.Toolkit;
 import javax.swing.JSeparator;
 
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.ChartPanel;
+import java.awt.Panel;
+
 public class Principal extends JFrame {
 	
 	private static final long serialVersionUID = 1L;

@@ -22,6 +22,7 @@ public class Bolsa_Laboral implements Serializable{
 	private ArrayList<Personal> misSolicitantes; 
 	private ArrayList<Empresa> misEmpresas; 
 	private ArrayList<Solicitud> misSolicitudes; 
+	private ArrayList<Empresa> misEmpleadosCon;
 	public static Bolsa_Laboral bolsa;
 	private FileWriter Fwriter; 
 	private String archivo = "Bolsa_Laboral.dat"; 
@@ -294,6 +295,18 @@ public class Bolsa_Laboral implements Serializable{
 
 	}
 	
+	
+    //ELIMINAR VACANTE
+	public int eliminarV(Solicitud soli,ArrayList<Personal> empleados) {
+		int cant = 0;
+		contratarEmpleados(soli, empleados);
+		for(int i = 0; i < soli.getCantVacantes(); i++) {
+			cant = (int) (soli.getCantVacantes() - misEmpleadosCon.size());
+		}
+		
+		return cant;
+	}
+	
 	// SOLICITUD EMPRESA
 	
 	public void insertSolicitud(Solicitud solicitud) {// Agregar una solicitud al arraylist
@@ -511,6 +524,8 @@ public class Bolsa_Laboral implements Serializable{
 		}
 		return cant;
 	}
+	
+	
 	
 	// PORCIENTOS 
 	
