@@ -31,8 +31,12 @@ import java.awt.Toolkit;
 import javax.swing.JSeparator;
 
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import java.awt.Panel;
+import java.awt.Color;
 
 public class Principal extends JFrame {
 	
@@ -265,8 +269,50 @@ public class Principal extends JFrame {
 		JSeparator separator = new JSeparator();
 		separator.setBounds(0, 164, 1350, 2);
 		panel.add(separator);
+		
+		Panel panelBarrasSolici = new Panel();
+		panelBarrasSolici.setBackground(SystemColor.inactiveCaptionBorder);
+		panelBarrasSolici.setBounds(26, 191, 416, 369);
+		panel.add(panelBarrasSolici);
+		panelBarrasSolici.setLayout(null);
+		
+		JLabel lblCharVacio = new JLabel("       NO HAY SOLICITANTES");
+		lblCharVacio.setFont(new Font("Tahoma", Font.PLAIN, 27));
+		lblCharVacio.setBounds(10, 54, 381, 304);
+		panelBarrasSolici.add(lblCharVacio);
+		
+		Panel panelBarrasCon = new Panel();
+		panelBarrasCon.setBackground(SystemColor.inactiveCaptionBorder);
+		panelBarrasCon.setBounds(468, 191, 416, 369);
+		panel.add(panelBarrasCon);
+		panelBarrasCon.setLayout(null);
+		
+		JLabel lblCharVacio2 = new JLabel("          NO HAY EMPLEADOS");
+		lblCharVacio2.setFont(new Font("Tahoma", Font.PLAIN, 27));
+		lblCharVacio2.setBounds(10, 54, 381, 304);
+		panelBarrasCon.add(lblCharVacio2);
+		
+		JPanel panelPastel = new JPanel();
+		panelPastel.setBackground(SystemColor.inactiveCaptionBorder);
+		panelPastel.setBounds(912, 191, 416, 369);
+		panel.add(panelPastel);
+		panelPastel.setLayout(null);
+		
+		JLabel lblNoEmpleadosP = new JLabel("          NO HAY EMPLEADOS");
+		lblNoEmpleadosP.setFont(new Font("Tahoma", Font.PLAIN, 27));
+		lblNoEmpleadosP.setBounds(10, 54, 381, 304);
+		panelPastel.add(lblNoEmpleadosP);
 		dim = super.getToolkit().getScreenSize();
 		super.setSize(dim.width, (dim.height-50));
 		setLocationRelativeTo(null);
 	}
+	
+	public static JFreeChart creandoGraficoB1(CategoryDataset dataSet, String titulo ) {
+		JFreeChart grafico1 = ChartFactory.createBarChart3D(titulo, "Tipo de solicitante", "Cantidad de solicitante", dataSet, PlotOrientation.VERTICAL, false, true, false);
+		
+		
+		return grafico1;
+	}
+	
+	
 }
