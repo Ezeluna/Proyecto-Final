@@ -222,7 +222,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 			panelEmpresa.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Empresa",
 
 								TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panelEmpresa.setBackground(new Color(248, 248, 255));
+			panelEmpresa.setBackground(SystemColor.inactiveCaptionBorder);
 			panelEmpresa.setBounds(10, 32, 507, 72);
 			contentPanel.add(panelEmpresa);
 			{
@@ -289,7 +289,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 			PanelGeneral.setLayout(null);
 			PanelGeneral.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "General",
             TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			PanelGeneral.setBackground(new Color(248, 248, 255));
+			PanelGeneral.setBackground(SystemColor.inactiveCaptionBorder);
 			PanelGeneral.setBounds(10, 104, 507, 150);
 			contentPanel.add(PanelGeneral);
 			{
@@ -410,7 +410,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 			panelEdad.setLayout(null);
 			panelEdad.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Rango De Edad",
 			TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panelEdad.setBackground(new Color(248, 248, 255));
+			panelEdad.setBackground(SystemColor.inactiveCaptionBorder);
 			panelEdad.setBounds(10, 257, 245, 59);
 			contentPanel.add(panelEdad);
 			{
@@ -425,14 +425,14 @@ public class InsertarSolicitud_Empresa extends JDialog {
 			}
 			{
 				spnEdadMinima = new JSpinner();
-				spnEdadMinima.setModel(new SpinnerNumberModel(new Integer(18), null, null, new Integer(1)));
+				spnEdadMinima.setModel(new SpinnerNumberModel(new Integer(18), new Integer(18), null, new Integer(1)));
 				spnEdadMinima.setBackground(Color.WHITE);
 				spnEdadMinima.setBounds(62, 24, 51, 23);
 				panelEdad.add(spnEdadMinima);
 			}
 			{
 				spnEdadMaxima = new JSpinner();
-				spnEdadMaxima.setModel(new SpinnerNumberModel(new Integer(35), null, null, new Integer(1)));
+				spnEdadMaxima.setModel(new SpinnerNumberModel(new Integer(25), new Integer(0), null, new Integer(1)));
 				spnEdadMaxima.setBackground(Color.WHITE);
 				spnEdadMaxima.setBounds(180, 24, 51, 23);
 				panelEdad.add(spnEdadMaxima);
@@ -444,7 +444,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 			PanelVacante.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Tipo Vacante",
 
 								TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			PanelVacante.setBackground(new Color(248, 248, 255));
+			PanelVacante.setBackground(SystemColor.inactiveCaptionBorder);
 			PanelVacante.setBounds(255, 257, 265, 59);
 			contentPanel.add(PanelVacante);
 			{
@@ -499,7 +499,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 			panelIdioma.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Idiomas",
 
 								TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panelIdioma.setBackground(new Color(248, 248, 255));
+			panelIdioma.setBackground(SystemColor.inactiveCaptionBorder);
 			panelIdioma.setBounds(10, 319, 245, 164);
 			contentPanel.add(panelIdioma);
 			{
@@ -577,7 +577,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 			panelUniversitario.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null),
 
 								"Universitario", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panelUniversitario.setBackground(new Color(248, 248, 255));
+			panelUniversitario.setBackground(SystemColor.inactiveCaptionBorder);
 			panelUniversitario.setBounds(255, 319, 265, 164);
 			contentPanel.add(panelUniversitario);
 			{
@@ -587,6 +587,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 			}
 			{
 				spnUniversitarioExperiencia = new JSpinner();
+				spnUniversitarioExperiencia.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 				spnUniversitarioExperiencia.setBackground(Color.WHITE);
 				spnUniversitarioExperiencia.setBounds(93, 25, 160, 23);
 				panelUniversitario.add(spnUniversitarioExperiencia);
@@ -740,11 +741,16 @@ public class InsertarSolicitud_Empresa extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBackground(SystemColor.inactiveCaptionBorder);
+			buttonPane.setBackground(SystemColor.inactiveCaption);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton(" ");
+				if (modi == null) {
+					okButton.setIcon(new ImageIcon(InsertarSolicitud_Empresa.class.getResource("/icons/add.png")));
+				} else {
+					okButton.setIcon(new ImageIcon(InsertarSolicitud_Empresa.class.getResource("/icons/modificar.png")));
+				}
 				if (modificarSoli != null) {
 					okButton.setText("Modificar");
 				} else {

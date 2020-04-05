@@ -43,6 +43,7 @@ import java.text.ParseException;
 import java.awt.Color;
 import java.awt.SystemColor;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 //
 public class ListarSolicitud_Empresa extends JDialog {
 
@@ -70,6 +71,7 @@ public class ListarSolicitud_Empresa extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListarSolicitud_Empresa() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ListarSolicitud_Empresa.class.getResource("/icons/Listas.png")));
 		getContentPane().setBackground(new Color(245, 255, 250));
 		setTitle("Listar Solicitudes");
 		setResizable(false);

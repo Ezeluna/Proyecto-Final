@@ -39,6 +39,7 @@ import java.awt.event.MouseEvent;
 import java.awt.SystemColor;
 import java.awt.Color;
 import javax.swing.ScrollPaneConstants;
+import java.awt.Toolkit;
 
 public class ListarSolicitantes extends JDialog {
 
@@ -63,6 +64,7 @@ public class ListarSolicitantes extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListarSolicitantes() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ListarSolicitantes.class.getResource("/icons/Listas.png")));
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {

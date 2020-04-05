@@ -52,6 +52,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
+import javax.swing.SpinnerNumberModel;
 
 public class InsertarSolicitante extends JDialog {
 //jeje //
@@ -377,6 +378,7 @@ public class InsertarSolicitante extends JDialog {
 			}
 			
 			spnNumeroCasa = new JSpinner();
+			spnNumeroCasa.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 			spnNumeroCasa.setBounds(391, 73, 131, 20);
 			panelUbicacionA.add(spnNumeroCasa);
 			
@@ -672,6 +674,7 @@ public class InsertarSolicitante extends JDialog {
 			pnlBachiller.add(lblYearExpe);
 			
 			spnYearExpO = new JSpinner();
+			spnYearExpO.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 			spnYearExpO.setBounds(143, 48, 114, 20);
 			pnlBachiller.add(spnYearExpO);
 			
@@ -688,6 +691,7 @@ public class InsertarSolicitante extends JDialog {
 			pnlTecnico.add(lblYear);
 			
 			spnYearT = new JSpinner();
+			spnYearT.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 			spnYearT.setBackground(new Color(248, 248, 255));
 			spnYearT.setBounds(146, 46, 123, 23);
 			pnlTecnico.add(spnYearT);
@@ -724,6 +728,7 @@ public class InsertarSolicitante extends JDialog {
 			pnlUniversitario.add(lblAnosExpUniversitario);
 
 				spnAnosExpUniversitario = new JSpinner();
+				spnAnosExpUniversitario.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 				spnAnosExpUniversitario.setBackground(new Color(248, 248, 255));
 				spnAnosExpUniversitario.setBounds(146, 46, 123, 23);
 				pnlUniversitario.add(spnAnosExpUniversitario);
@@ -764,7 +769,7 @@ public class InsertarSolicitante extends JDialog {
 				pnlUniversitario.add(separator_3);
 			
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBackground(SystemColor.inactiveCaptionBorder);
+			buttonPane.setBackground(SystemColor.inactiveCaption);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			

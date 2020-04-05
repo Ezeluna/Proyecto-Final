@@ -26,6 +26,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.TitledBorder;
 import java.awt.SystemColor;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class ListarEmpresas extends JDialog {
 	
@@ -57,6 +58,7 @@ public class ListarEmpresas extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListarEmpresas() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ListarEmpresas.class.getResource("/icons/Listas.png")));
 		setResizable(false);
 		setTitle("Listado de Empresas");
 		setBounds(100, 100, 671, 498);
@@ -108,7 +110,7 @@ public class ListarEmpresas extends JDialog {
 		scrollPane.setViewportView(table);
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBackground(SystemColor.inactiveCaptionBorder);
+			buttonPane.setBackground(SystemColor.inactiveCaption);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			

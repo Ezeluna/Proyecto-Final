@@ -85,7 +85,7 @@ public class InsertarEmpresa extends JDialog {
 		JPanel pnlInformacion = new JPanel();
 		pnlInformacion.setBackground(SystemColor.inactiveCaptionBorder);
 		pnlInformacion.setBorder(new TitledBorder(null, "Informaci\u00F3n:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnlInformacion.setBounds(5, 23, 593, 140);
+		pnlInformacion.setBounds(10, 21, 588, 140);
 		contentPanel.add(pnlInformacion);
 		pnlInformacion.setLayout(null);
 		
@@ -182,7 +182,7 @@ public class InsertarEmpresa extends JDialog {
 		JPanel pnlUbicacion = new JPanel();
 		pnlUbicacion.setBackground(SystemColor.inactiveCaptionBorder);
 		pnlUbicacion.setBorder(new TitledBorder(null, "Ubicaci\u00F3n:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnlUbicacion.setBounds(5, 174, 593, 166);
+		pnlUbicacion.setBounds(10, 169, 588, 166);
 		contentPanel.add(pnlUbicacion);
 		pnlUbicacion.setLayout(null);
 		
@@ -309,7 +309,7 @@ public class InsertarEmpresa extends JDialog {
 		pnlUbicacion.add(lblReferencia);
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBackground(SystemColor.inactiveCaptionBorder);
+			buttonPane.setBackground(SystemColor.inactiveCaption);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{

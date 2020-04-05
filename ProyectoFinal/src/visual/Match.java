@@ -42,6 +42,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
+import java.awt.Toolkit;
 
 public class Match extends JDialog {
 	private final JPanel contentPanel = new JPanel();
@@ -67,21 +68,14 @@ public class Match extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			Match dialog = new Match();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+
 
 	/**
 	 * Create the dialog.
 	 */
 	public Match() throws ParseException {
-		setTitle("DAEX - Bolsa Laboral");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Match.class.getResource("/icons/icons8-pie-chart-64.png")));
+		setTitle("DAEX\u00A9 - Bolsa Laboral");
 		setResizable(false);
 		setBounds(100, 100, 588, 670);
 		getContentPane().setLayout(new BorderLayout());
@@ -271,7 +265,8 @@ public class Match extends JDialog {
 			panel.add(btnCandidatos);
 			
 			JButton btnClean = new JButton("Limpiar");
-			btnClean.setBounds(311, 294, 89, 23);
+			btnClean.setIcon(new ImageIcon(Match.class.getResource("/icons/filtrar.png")));
+			btnClean.setBounds(297, 294, 103, 23);
 			panel.add(btnClean);
 		}
 		setLocationRelativeTo(null);
@@ -282,6 +277,7 @@ public class Match extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnContratar = new JButton("Contratar");
+				btnContratar.setIcon(new ImageIcon(Match.class.getResource("/icons/Contratar.png")));
 				btnContratar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (misSolicitantesC.size() != 0) {
@@ -420,6 +416,9 @@ public class Match extends JDialog {
 
 
 	public void clean() {
+		ftxtCodSolicitud.setText("");
+		ftxtRNC.setText("");
+		txtName.setText("");
 		model.clear();
 		modelCont.clear();
 		misSolicitantesC = new ArrayList<>();
