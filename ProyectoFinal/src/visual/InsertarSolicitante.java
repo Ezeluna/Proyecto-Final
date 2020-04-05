@@ -1046,7 +1046,7 @@ public class InsertarSolicitante extends JDialog {
 											"El solicitante se ha modificado de manera exitosa.", "Información",
 											JOptionPane.INFORMATION_MESSAGE, null);
 									
-									//Principal.actualizarChart();  ESTO FALTA
+									Principal.actualizarChart(); 
 									dispose();
 								}
 					        }  
@@ -1063,7 +1063,7 @@ public class InsertarSolicitante extends JDialog {
 											JOptionPane.INFORMATION_MESSAGE, null);
 									Bolsa_Laboral.getInstance().modificarSolicitante(soli);
                                         
-									//Principal.actualizarChart();  ESTO FALTA
+									Principal.actualizarChart();
 									estado = false;
 									clean();
 								}

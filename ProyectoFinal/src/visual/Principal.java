@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import logic.Bolsa_Laboral;
 
+
 import javax.swing.JInternalFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JMenuBar;
@@ -34,8 +35,11 @@ import java.awt.Toolkit;
 import javax.swing.JSeparator;
 
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.PieDataset;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import java.awt.Panel;
@@ -46,6 +50,12 @@ public class Principal extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private Dimension dim = null;
+	private static JPanel panelBarrasSolici;
+	private static CategoryDataset datasetBarra;
+	private static PieDataset datasetPastel;
+	private static JFreeChart chartBarra;
+	private static JFreeChart chartPastel;
+	private static JPanel panelPastel;
 	
 
 	/**
@@ -276,7 +286,7 @@ public class Principal extends JFrame {
 		separator.setBounds(0, 164, 1350, 2);
 		panel.add(separator);
 		
-		Panel panelBarrasSolici = new Panel();
+		panelBarrasSolici = new JPanel();
 		panelBarrasSolici.setBackground(SystemColor.inactiveCaptionBorder);
 		panelBarrasSolici.setBounds(26, 191, 416, 369);
 		panel.add(panelBarrasSolici);
@@ -320,87 +330,30 @@ public class Principal extends JFrame {
 	public static JFreeChart creandoGraficoB1(CategoryDataset dataSet, String titulo ) {
 		JFreeChart grafico1 = ChartFactory.createBarChart3D(titulo, "Tipo de solicitante", "Cantidad de solicitante", dataSet, PlotOrientation.VERTICAL, false, true, false);
 		
-		
+		//CategoryPlot plot = (CategoryPlot) grafico1.getPlot();
+		Color color = new Color(255,120,80);
+		grafico1.setBackgroundPaint(color);
 		return grafico1;
 	}
 	
-/*	public void reloj() {
-
-		Thread reloj = new Thread() {
-			public void run() {
-				try {
-					for (;;) {
-						Calendar calen = new GregorianCalendar();
-						int dia = calen.get(Calendar.DAY_OF_WEEK_IN_MONTH);
-						int diaSemana = calen.get(Calendar.DAY_OF_WEEK);
-						int mes = calen.get(Calendar.MONTH + 1);
-						int minutos = calen.get(Calendar.MINUTE);
-						int hora = calen.get(Calendar.HOUR);
-						int sec = calen.get(Calendar.SECOND);
-						int meri = calen.get(Calendar.AM_PM);
-						LocalDate date = LocalDate.now();
-						int anno = date.getYear();
-						int mess= date.getMonthValue();
-						int dias = date.getDayOfMonth();
-						String realmes = "";
-						String merid = "";
-						if (meri == 1) {
-							merid = " PM";
-						} else {
-							merid = " AM";
-						}
-						if (mess == 1) {
-							realmes = "Enero";
-						}
-						if (mess == 1) {
-							realmes = "Enero";
-						}
-						if (mess == 2) {
-							realmes = "Febreo";
-						}
-						if (mess == 3) {
-							realmes = "Marzo";
-						}
-						if (mess == 4) {
-							realmes = "Abril";
-						}
-						if (mess == 5) {
-							realmes = "Mayo";
-						}
-						if (mess == 6) {
-							realmes = "Junio";
-						}
-						if (mess == 7) {
-							realmes = "Julio";
-						}
-						if (mess == 8) {
-							realmes = "Agosto";
-						}
-						if (mess == 9) {
-							realmes = "Septiembre";
-						}
-						if (mess == 10) {
-							realmes = "Octubre";
-						}
-						if (mess == 11) {
-							realmes = "Novienbre";
-						}
-						if (mess == 12) {
-							realmes = "Diciembre";
-						}
-						lblHora.setText(hora + ":" + minutos + ":" + sec + merid);
-						lblYear.setText(dias+", "+realmes+", "+anno);
-						
-
-						sleep(1000);
-					}
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		};
-		reloj.start();
-
-	}*/
+	public static CategoryDataset creandoCategoria() {
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		dataset.setValue(Bolsa_Laboral.getInstance().desempleadoB(), "Tipo de Solicitante", "Obreros");
+		dataset.setValue(Bolsa_Laboral.getInstance().desempleadoU(), "Tipo de Solicitante", "Universitarios");
+		dataset.setValue(Bolsa_Laboral.getInstance().desempleadoT(), "Tipo de Solicitante", "Técnicos");
+		return dataset;
+	}
 	
+	public static void actualizarChart() {
+		panelBarrasSolici.removeAll();
+		panelBarrasSolici.revalidate();
+		datasetBarra = creandoCategoria();
+		chartBarra = creandoGraficoB1(datasetBarra, "Solicitantes Desempleados");
+		panelBarrasSolici.setLayout(new BorderLayout(0, 0));
+		ChartPanel chartPanel = new ChartPanel(chartBarra);
+		chartPanel.setPreferredSize(new java.awt.Dimension(800, 500));
+		panelBarrasSolici.add(chartPanel, BorderLayout.CENTER);
+		panelBarrasSolici.repaint();
+
+	}
 }
