@@ -94,15 +94,13 @@ public class Match extends JDialog {
 			JButton btnDer = new JButton("");
 			btnDer.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
 					if (lstSoli.getSelectedValue() != null) {
 						modelCont.addElement(lstSoli.getSelectedValue());
 						lstSoli2.setModel(modelCont);
 						model.removeElement(lstSoli.getSelectedValue());
-						lstSoli.setModel(model);
-						
-					}
-					
-					
+						lstSoli.setModel(model);	
+					}	
 				}
 			});
 			btnDer.setIcon(new ImageIcon(Match.class.getResource("/icons/Siguiente.png")));
@@ -112,6 +110,7 @@ public class Match extends JDialog {
 			JButton btnIzq = new JButton("");
 			btnIzq.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
 					if (lstSoli2.getSelectedValue() != null) {
 						model.addElement(lstSoli2.getSelectedValue());
 						lstSoli.setModel(model);
@@ -251,7 +250,8 @@ public class Match extends JDialog {
 			btnCandidatos.setIcon(new ImageIcon(Match.class.getResource("/icons/ver.png")));
 			btnCandidatos.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-				
+					model.removeAllElements();
+					modelCont.removeAllElements();
 					Solicitud soli = Bolsa_Laboral.getInstance().RetornarSolocitudId(codigo);
 					if (soli != null) {
 						misSolicitantesC = Bolsa_Laboral.getInstance().matcheo(soli);
@@ -265,6 +265,14 @@ public class Match extends JDialog {
 			panel.add(btnCandidatos);
 			
 			JButton btnClean = new JButton("Limpiar");
+			btnClean.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					loadTable(null);
+					ftxtCodSolicitud.setText("");
+					txtName.setText("");
+					ftxtRNC.setText("");
+				}
+			});
 			btnClean.setIcon(new ImageIcon(Match.class.getResource("/icons/filtrar.png")));
 			btnClean.setBounds(297, 294, 103, 23);
 			panel.add(btnClean);
@@ -283,23 +291,25 @@ public class Match extends JDialog {
 						if (misSolicitantesC.size() != 0) {
 							Solicitud solicitud = Bolsa_Laboral.getInstance().RetornarSolocitudId(codigo);
 							ArrayList<Personal> auxSoliC = new ArrayList<>();
+							
 							for (int i = 0; i < modelCont.getSize(); i++) {
-								auxSoliC.add(Bolsa_Laboral.getInstance().buscarSolicitanteByCe(modelCont.getElementAt(i).toString().substring(0,13)));
-							}if(auxSoliC!= null) {
-							int option = JOptionPane.showConfirmDialog(null, "Esta a punto de contratar empleados. Esta seguro? ", "Aviso", JOptionPane.WARNING_MESSAGE);
-							if(option == JOptionPane.OK_OPTION) {
+								auxSoliC.add(Bolsa_Laboral.getInstance().
+										buscarSolicitanteByCe(modelCont.getElementAt(i).toString().substring(0,13)));
+							}
+							if(auxSoliC!= null) {
+							int option = JOptionPane.
+									showConfirmDialog(null, "Esta a punto de contratar empleado/s. Esta seguro? ", "Aviso", JOptionPane.WARNING_MESSAGE);
+							        if(option == JOptionPane.OK_OPTION) {
 								Bolsa_Laboral.getInstance().contratarEmpleados(solicitud, auxSoliC);
-						//		Bolsa_Laboral.getInstance().decrementoVa(solicitud, auxSoliC);
-						//		Bolsa_Laboral.getInstance().eliminarV(solicitud, auxSoliC);
 								clean();
 								JOptionPane.showMessageDialog(null, "Operación Satisfactoria.", "Información",
 										JOptionPane.INFORMATION_MESSAGE, null);
-							} 
+							    } 
 								
 							}
 						}else {
 							JOptionPane.showMessageDialog(null,
-									"No existen solicitantes en la actualidad para satisfacer esta solicitud",
+									"No existen solicitantes para satisfacer esta solicitud",
 									"Información", JOptionPane.INFORMATION_MESSAGE, null);
 						}
 					}
@@ -408,7 +418,7 @@ public class Match extends JDialog {
 			lstSoli.setModel(model);
 		} else {
 			JOptionPane.showMessageDialog(null,
-					"No existen solicitantes en la actualidad para satisfacer esta solicitud", "Información",
+					"No existen solicitantes para satisfacer esta solicitud", "Información",
 					JOptionPane.INFORMATION_MESSAGE, null);
 		}
 	}
