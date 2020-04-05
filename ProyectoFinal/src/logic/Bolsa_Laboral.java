@@ -170,6 +170,7 @@ public class Bolsa_Laboral implements Serializable{
 		return CantconB;
 	}
 	
+	
 
 	
 	// PERSONAL
@@ -597,7 +598,7 @@ public class Bolsa_Laboral implements Serializable{
 		return porciento;
 	}
 	
-	public float porcientoF() {// Retorna % de Bachilleres femeninos Contratado
+	public float porcientoF() {// Retorna % de femeninos Contratado
 		float cant = 0;
 		float porciento = 0;
 		float total = totalContratado();
@@ -609,7 +610,7 @@ public class Bolsa_Laboral implements Serializable{
 					}
 				}
 			}
-			if (soli instanceof Universitario) {
+			if (soli instanceof Universitario) {  
 				if (soli.isContratado()) {
 					if (soli.sexo.equalsIgnoreCase("Femenino")) {
 						cant++;
@@ -630,7 +631,7 @@ public class Bolsa_Laboral implements Serializable{
 		return porciento;
 	}
 	
-	public float porcientoH() {// retorna el % de Bachilleres masculinos contratados
+	public float porcientoH() {// retorna el % de masculinos contratados
 		float cant = 0;
 		float porciento = 0;
 		float total = totalContratado();

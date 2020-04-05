@@ -1005,7 +1005,7 @@ public class InsertarSolicitante extends JDialog {
 											"El solicitante se ha registrado de manera exitosa.", "Información",
 											JOptionPane.INFORMATION_MESSAGE, null);
 									
-									//Principal.actualizarChart();  ESTO FALTA
+									Principal.actualizarChart();  
 									clean();
 								}
 								if(modificar) {
@@ -1016,7 +1016,7 @@ public class InsertarSolicitante extends JDialog {
 									JOptionPane.showMessageDialog(null,
 											"El solicitante se ha modificado de manera exitosa.", "Información",
 											JOptionPane.INFORMATION_MESSAGE, null);
-									//Principal.actualizarChart();  ESTO FALTA
+									Principal.actualizarChart();  
 									dispose();
 								}
 								
@@ -1034,7 +1034,7 @@ public class InsertarSolicitante extends JDialog {
 											"El solicitante se ha registrado de manera exitosa.", "Información",
 											JOptionPane.INFORMATION_MESSAGE, null);
 									
-									//Principal.actualizarChart();  ESTO FALTA
+									Principal.actualizarChart();  
 									clean();
 					        	}
 								if(modificar) {
@@ -1075,6 +1075,7 @@ public class InsertarSolicitante extends JDialog {
 											"El solicitante se ha modificado de manera exitosa.", "Información",
 											JOptionPane.INFORMATION_MESSAGE, null);
 									estado = false;
+									Principal.actualizarChart(); 
 									dispose();
 								}
 							}

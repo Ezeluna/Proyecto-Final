@@ -36,10 +36,13 @@ import javax.swing.JSeparator;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
+import org.jfree.util.Rotation;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import java.awt.Panel;
@@ -51,11 +54,15 @@ public class Principal extends JFrame {
 	private JPanel contentPane;
 	private Dimension dim = null;
 	private static JPanel panelBarrasSolici;
+	public static JPanel panelPastel1; 
+	public static JPanel panelPastel2;
 	private static CategoryDataset datasetBarra;
 	private static PieDataset datasetPastel;
+	private static PieDataset datasetPastel2;
 	private static JFreeChart chartBarra;
 	private static JFreeChart chartPastel;
-	private static JPanel panelPastel;
+	private static JFreeChart chartPastel2;
+
 	
 
 	/**
@@ -305,27 +312,27 @@ public class Principal extends JFrame {
 		lblCharVacio.setBounds(10, 54, 381, 304);
 		panelBarrasSolici.add(lblCharVacio);
 		
-		Panel panelBarrasCon = new Panel();
-		panelBarrasCon.setBackground(SystemColor.inactiveCaptionBorder);
-		panelBarrasCon.setBounds(468, 191, 416, 369);
-		panel.add(panelBarrasCon);
-		panelBarrasCon.setLayout(null);
+		panelPastel1 = new JPanel();
+		panelPastel1.setBackground(SystemColor.inactiveCaptionBorder);
+		panelPastel1.setBounds(468, 191, 416, 369);
+		panel.add(panelPastel1);
+		panelPastel1.setLayout(null);
 		
 		JLabel lblCharVacio2 = new JLabel("          NO HAY EMPLEADOS");
 		lblCharVacio2.setFont(new Font("Tahoma", Font.PLAIN, 27));
 		lblCharVacio2.setBounds(10, 54, 381, 304);
-		panelBarrasCon.add(lblCharVacio2);
+		panelPastel1.add(lblCharVacio2);
 		
-		JPanel panelPastel = new JPanel();
-		panelPastel.setBackground(SystemColor.inactiveCaptionBorder);
-		panelPastel.setBounds(912, 191, 416, 369);
-		panel.add(panelPastel);
-		panelPastel.setLayout(null);
+		panelPastel2 = new JPanel();
+		panelPastel2.setBackground(SystemColor.inactiveCaptionBorder);
+		panelPastel2.setBounds(912, 191, 416, 369);
+		panel.add(panelPastel2);
+		panelPastel2.setLayout(null);
 		
 		JLabel lblNoEmpleadosP = new JLabel("          NO HAY EMPLEADOS");
 		lblNoEmpleadosP.setFont(new Font("Tahoma", Font.PLAIN, 27));
 		lblNoEmpleadosP.setBounds(10, 54, 381, 304);
-		panelPastel.add(lblNoEmpleadosP);
+		panelPastel2.add(lblNoEmpleadosP);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(SystemColor.inactiveCaption);
@@ -337,9 +344,9 @@ public class Principal extends JFrame {
 	
 	public static JFreeChart creandoGraficoB1(CategoryDataset dataSet, String titulo ) {
 		JFreeChart grafico1 = ChartFactory.createBarChart3D(titulo, "Tipo de solicitante", "Cantidad de solicitante", dataSet, PlotOrientation.VERTICAL, false, true, false);
-		
-		//CategoryPlot plot = (CategoryPlot) grafico1.getPlot();
-		Color color = new Color(255,120,80);
+		CategoryPlot plot = (CategoryPlot) grafico1.getPlot();
+		plot.setBackgroundPaint(new Color(236,240,241));
+		Color color = new Color(228,241,254);
 		grafico1.setBackgroundPaint(color);
 		return grafico1;
 	}
@@ -347,8 +354,8 @@ public class Principal extends JFrame {
 	public static CategoryDataset creandoCategoria() {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		dataset.setValue(Bolsa_Laboral.getInstance().desempleadoB(), "Tipo de Solicitante", "Bachilleres");
-		dataset.setValue(Bolsa_Laboral.getInstance().desempleadoU(), "Tipo de Solicitante", "Universitarios");
 		dataset.setValue(Bolsa_Laboral.getInstance().desempleadoT(), "Tipo de Solicitante", "Técnicos");
+		dataset.setValue(Bolsa_Laboral.getInstance().desempleadoU(), "Tipo de Solicitante", "Universitarios");
 		return dataset;
 	}
 	
@@ -356,7 +363,7 @@ public class Principal extends JFrame {
 		panelBarrasSolici.removeAll();
 		panelBarrasSolici.revalidate();
 		datasetBarra = creandoCategoria();
-		chartBarra = creandoGraficoB1(datasetBarra, "Solicitantes Desempleados");
+		chartBarra = creandoGraficoB1(datasetBarra, "SOLICITANTES");
 		panelBarrasSolici.setLayout(new BorderLayout(0, 0));
 		ChartPanel chartPanel = new ChartPanel(chartBarra);
 		chartPanel.setPreferredSize(new java.awt.Dimension(800, 500));
@@ -364,4 +371,84 @@ public class Principal extends JFrame {
 		panelBarrasSolici.repaint();
 
 	}
+	
+	
+	public static JFreeChart creandoGraficoP(PieDataset dataSet, String titulo) {
+		JFreeChart chart = ChartFactory.createPieChart3D(titulo, dataSet, true, true, false);
+		PiePlot3D plot = (PiePlot3D) chart.getPlot();
+		plot.setBackgroundPaint(new Color(236,240,241));
+		Color color = new Color(228,241,254);
+		chart.setBackgroundPaint(color);
+		plot.setStartAngle(0.5);
+		plot.setDirection(Rotation.CLOCKWISE);
+		return chart;
+	}
+	
+	public static PieDataset dataSetPastel() {
+		DefaultPieDataset result = new DefaultPieDataset();
+		if (Bolsa_Laboral.getInstance().porcientoB() != 0) {
+			result.setValue("Obrero", Bolsa_Laboral.getInstance().porcientoB());
+		}
+		if (Bolsa_Laboral.getInstance().porcientoT() != 0) {
+			result.setValue("Tecnico", Bolsa_Laboral.getInstance().porcientoT());
+		}
+		if (Bolsa_Laboral.getInstance().porcientoU() != 0) {
+			result.setValue("Universitario", Bolsa_Laboral.getInstance().porcientoU());
+		}
+
+		return result;
+	}
+	
+	public static void actualizarPastel() {
+		panelPastel1.removeAll();
+		panelPastel1.revalidate();
+		datasetPastel = dataSetPastel();
+		chartPastel = creandoGraficoP(datasetPastel, "Trabajadores Contratados por Tipo");
+		panelPastel1.setLayout(new BorderLayout(0, 0));
+		ChartPanel chartPanel = new ChartPanel(chartPastel);
+		chartPanel.setPreferredSize(new java.awt.Dimension(800, 500));
+		panelPastel1.add(chartPanel, BorderLayout.CENTER);
+		panelPastel1.repaint();
+
+	}
+	
+	public static JFreeChart creandoGraficoP2(PieDataset dataSet, String titulo) {
+		JFreeChart chart2 = ChartFactory.createPieChart3D(titulo, dataSet, true, true, false);
+		PiePlot3D plot = (PiePlot3D) chart2.getPlot();
+		plot.setBackgroundPaint(new Color(236,240,241));
+		Color color = new Color(228,241,254);
+		chart2.setBackgroundPaint(color);
+		plot.setStartAngle(0.5);
+		plot.setDirection(Rotation.CLOCKWISE);
+		return chart2;
+	}
+	public static PieDataset dataSetPastel2() {
+		DefaultPieDataset result = new DefaultPieDataset();
+		if (Bolsa_Laboral.getInstance().porcientoH() != 0) {
+			result.setValue("Masculino", Bolsa_Laboral.getInstance().porcientoH());
+		}
+		if (Bolsa_Laboral.getInstance().porcientoF() != 0) {
+			result.setValue("Femenino", Bolsa_Laboral.getInstance().porcientoF());
+		}
+
+		return result;
+	}
+	
+	public static void actualizarPastel2() {
+		panelPastel2.removeAll();
+		panelPastel2.revalidate();
+		datasetPastel2 = dataSetPastel2();
+		chartPastel2 = creandoGraficoP2(datasetPastel2, "Porcentaje de Contratados por Género");
+		panelPastel2.setLayout(null);
+		ChartPanel chartPanel2 = new ChartPanel(chartPastel2);
+		chartPanel2.setBorder(null);
+		chartPanel2.setBounds(10, 2, 590, 236);
+		chartPanel2.setPreferredSize(new java.awt.Dimension(800, 500));
+		panelPastel2.add(chartPanel2);
+		chartPanel2.setLayout(null);
+		panelPastel2.repaint();
+
+	}
+
+	
 }

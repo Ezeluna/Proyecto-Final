@@ -304,6 +304,8 @@ public class Match extends JDialog {
 								clean();
 								JOptionPane.showMessageDialog(null, "Operación Satisfactoria.", "Información",
 										JOptionPane.INFORMATION_MESSAGE, null);
+								Principal.actualizarPastel();
+								Principal.actualizarPastel2();
 							    } 
 								
 							}
