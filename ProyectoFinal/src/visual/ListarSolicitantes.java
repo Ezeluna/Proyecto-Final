@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
@@ -39,6 +40,8 @@ import java.awt.event.MouseEvent;
 import java.awt.SystemColor;
 import java.awt.Color;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+
 import java.awt.Toolkit;
 
 public class ListarSolicitantes extends JDialog {
@@ -54,6 +57,7 @@ public class ListarSolicitantes extends JDialog {
 	private String cedulaCliente = "";
 	private JComboBox<String> habilidades;
 	private static JComboBox<String> cbxIdioma;
+	private static DefaultTableCellRenderer centrar = new DefaultTableCellRenderer();
 	
 
 	/**
@@ -220,7 +224,7 @@ public class ListarSolicitantes extends JDialog {
 	
 	public static void cargarTablaG() {
 		String tipo = "";
-		String[] nombreColumna = { "Cédula", "Nombre", "Edad", "Años de Experiencia", "Tipo" };
+		String[] nombreColumna = { "Cédula", "Nombre", "Edad", "Experiencia", "Tipo" };
 		modeloTabla.setColumnIdentifiers(nombreColumna);
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
@@ -245,6 +249,11 @@ public class ListarSolicitantes extends JDialog {
 					table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 					table.getTableHeader().setReorderingAllowed(false);
 					TableColumnModel modeloColumna = table.getColumnModel();
+					centrar.setHorizontalAlignment(SwingConstants.CENTER);
+					for (int i = 0; i < nombreColumna.length; i++) {
+						table.getColumnModel().getColumn(i).setCellRenderer(centrar);
+					}
+					
 					modeloColumna.getColumn(0).setPreferredWidth(160);
 					modeloColumna.getColumn(1).setPreferredWidth(282);
 					modeloColumna.getColumn(2).setPreferredWidth(160);
@@ -288,6 +297,10 @@ public class ListarSolicitantes extends JDialog {
 					table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 					table.getTableHeader().setReorderingAllowed(false);
 					TableColumnModel modeloColumna = table.getColumnModel();
+					centrar.setHorizontalAlignment(SwingConstants.CENTER);
+					for (int i = 0; i < nombreColumna.length; i++) {
+						table.getColumnModel().getColumn(i).setCellRenderer(centrar);
+					}
 					modeloColumna.getColumn(0).setPreferredWidth(110);
 					modeloColumna.getColumn(1).setPreferredWidth(160);
 					modeloColumna.getColumn(2).setPreferredWidth(90);
@@ -303,7 +316,7 @@ public class ListarSolicitantes extends JDialog {
 	}
 	
 	public void cargarTablaT() {
-		String[] nombreColumna = { "Cédula", "Nombre", "Edad", "Área", "Idiomas", "Años de Experiencia", "Teléfono",
+		String[] nombreColumna = { "Cédula", "Nombre", "Edad", "Área", "Idiomas", "Experiencia", "Teléfono",
 				"E-Mail" };
 		modeloTabla.setColumnIdentifiers(nombreColumna);
 		modeloTabla.setRowCount(0);
@@ -329,14 +342,18 @@ public class ListarSolicitantes extends JDialog {
 					table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 					table.getTableHeader().setReorderingAllowed(false);
 					TableColumnModel modeloColumna = table.getColumnModel();
+					centrar.setHorizontalAlignment(SwingConstants.CENTER);
+					for (int i = 0; i < nombreColumna.length; i++) {
+						table.getColumnModel().getColumn(i).setCellRenderer(centrar);
+					}
 					modeloColumna.getColumn(0).setPreferredWidth(110);
 					modeloColumna.getColumn(1).setPreferredWidth(160);
 					modeloColumna.getColumn(2).setPreferredWidth(90);
-					modeloColumna.getColumn(3).setPreferredWidth(100);
+					modeloColumna.getColumn(3).setPreferredWidth(120);
 					modeloColumna.getColumn(4).setPreferredWidth(100);
-					modeloColumna.getColumn(5).setPreferredWidth(160);
+					modeloColumna.getColumn(5).setPreferredWidth(100);
 					modeloColumna.getColumn(6).setPreferredWidth(100);
-					modeloColumna.getColumn(7).setPreferredWidth(140);
+					modeloColumna.getColumn(7).setPreferredWidth(160);
 				}
 			}
 
@@ -346,7 +363,7 @@ public class ListarSolicitantes extends JDialog {
 	
 	public static void cargarTablaU() {
 
-		String[] nombreColumna = { "Cédula", "Nombre", "Edad", "Carrera", "Idiomas", "Años de Experiencia", "Teléfono",
+		String[] nombreColumna = { "Cédula", "Nombre", "Edad", "Carrera", "Idiomas", "Experiencia", "Teléfono",
 				"E-Mail" };
 		modeloTabla.setColumnIdentifiers(nombreColumna);
 		modeloTabla.setRowCount(0);
@@ -373,14 +390,18 @@ public class ListarSolicitantes extends JDialog {
 					table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 					table.getTableHeader().setReorderingAllowed(false);
 					TableColumnModel modeloColumna = table.getColumnModel();
+					centrar.setHorizontalAlignment(SwingConstants.CENTER);
+					for (int i = 0; i < nombreColumna.length; i++) {
+						table.getColumnModel().getColumn(i).setCellRenderer(centrar);
+					}
 					modeloColumna.getColumn(0).setPreferredWidth(110);
-					modeloColumna.getColumn(1).setPreferredWidth(150);
-					modeloColumna.getColumn(2).setPreferredWidth(80);
-					modeloColumna.getColumn(3).setPreferredWidth(110);
+					modeloColumna.getColumn(1).setPreferredWidth(160);
+					modeloColumna.getColumn(2).setPreferredWidth(90);
+					modeloColumna.getColumn(3).setPreferredWidth(120);
 					modeloColumna.getColumn(4).setPreferredWidth(100);
 					modeloColumna.getColumn(5).setPreferredWidth(100);
 					modeloColumna.getColumn(6).setPreferredWidth(100);
-					modeloColumna.getColumn(7).setPreferredWidth(140);
+					modeloColumna.getColumn(7).setPreferredWidth(160);
 				}
 			}
 

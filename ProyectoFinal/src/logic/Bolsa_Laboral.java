@@ -293,6 +293,8 @@ public class Bolsa_Laboral implements Serializable{
 			solicitud.DecrementoV();
 			empresa.insertarEmpleadoC(solicitante);
 			
+		} if (solicitud.getCantVacantes() <= 0 ) {
+			EliminarSolicitud(solicitud.getId());
 		}
 
 	}

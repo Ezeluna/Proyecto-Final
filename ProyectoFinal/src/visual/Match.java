@@ -204,7 +204,7 @@ public class Match extends JDialog {
 				pnlEmpresa.add(lblName);
 				
 				txtName = new JTextField();
-				txtName.setBackground(new Color(255, 255, 255));
+				txtName.setBackground(SystemColor.controlLtHighlight);
 				txtName.setEnabled(false);
 				txtName.setBounds(76, 36, 430, 20);
 				pnlEmpresa.add(txtName);
@@ -240,7 +240,7 @@ public class Match extends JDialog {
 				pnlEmpresa.add(lblCod);
 				
 				ftxtCodSolicitud = new JFormattedTextField();
-				ftxtCodSolicitud.setBackground(new Color(255, 255, 255));
+				ftxtCodSolicitud.setBackground(SystemColor.controlLtHighlight);
 				ftxtCodSolicitud.setEnabled(false);
 				ftxtCodSolicitud.setBounds(389, 9, 117, 20);
 				pnlEmpresa.add(ftxtCodSolicitud);
