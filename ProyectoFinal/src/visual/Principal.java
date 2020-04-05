@@ -387,7 +387,7 @@ public class Principal extends JFrame {
 	public static PieDataset dataSetPastel() {
 		DefaultPieDataset result = new DefaultPieDataset();
 		if (Bolsa_Laboral.getInstance().porcientoB() != 0) {
-			result.setValue("Obrero", Bolsa_Laboral.getInstance().porcientoB());
+			result.setValue("Bachiller", Bolsa_Laboral.getInstance().porcientoB());
 		}
 		if (Bolsa_Laboral.getInstance().porcientoT() != 0) {
 			result.setValue("Tecnico", Bolsa_Laboral.getInstance().porcientoT());
@@ -447,7 +447,6 @@ public class Principal extends JFrame {
 		panelPastel2.add(chartPanel2);
 		chartPanel2.setLayout(null);
 		panelPastel2.repaint();
-
 	}
 
 	
