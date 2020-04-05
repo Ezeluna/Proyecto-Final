@@ -1,6 +1,7 @@
 package logic;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Tecnico extends Personal {
 	//jeje
@@ -10,9 +11,9 @@ public class Tecnico extends Personal {
 	public Tecnico(String cedula, String name, String apellido, String sexo, String nacionalidad,  String provincia,
 			String ciudad, String sector, String calle, int numeroCasa, String referencia,  LocalDate fechaN, String telefono, String correo,
 			int yearExperiencia, boolean vehiculo, int categoriaLicencia, boolean dispViajar, boolean mudarse,
-			boolean contratado, String estadoCivil, String area) {
+			boolean contratado, String estadoCivil, ArrayList<String> idiomas, String area) {
 		super(cedula, name, apellido, sexo, nacionalidad, provincia, ciudad, sector, calle, numeroCasa, referencia, fechaN, telefono, correo,
-				yearExperiencia, vehiculo, categoriaLicencia, dispViajar, mudarse, contratado, estadoCivil);
+				yearExperiencia, vehiculo, categoriaLicencia, dispViajar, mudarse, contratado, estadoCivil, idiomas);
 		// TODO Auto-generated constructor stub
 		
 		this.area = area;

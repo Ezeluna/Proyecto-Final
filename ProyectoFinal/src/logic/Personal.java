@@ -37,7 +37,7 @@ public abstract class Personal implements Serializable {
 	
 	public Personal(String cedula, String name, String apellido, String sexo, String nacionalidad, String provincia,
 			String ciudad, String sector, String calle, int numeroCasa, String referencia, LocalDate fechaN, String telefono, String correo, int yearExperiencia, boolean vehiculo,
-			int categoriaLicencia, boolean dispViajar, boolean mudarse, boolean contratado, String estadoCivil) {
+			int categoriaLicencia, boolean dispViajar, boolean mudarse, boolean contratado, String estadoCivil, ArrayList<String> idiomas) {
 		super();
 		this.cedula = cedula;
 		this.name = name;
@@ -50,7 +50,7 @@ public abstract class Personal implements Serializable {
 		this.calle = calle;
 		this.numeroCasa = numeroCasa;
 		this.referencia = referencia;
-		idiomas = new ArrayList<String>();
+		this.idiomas = idiomas;
 		this.fechaN = fechaN;
 		this.telefono = telefono;
 		this.correo = correo;

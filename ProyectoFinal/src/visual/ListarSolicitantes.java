@@ -36,6 +36,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.SystemColor;
 
 public class ListarSolicitantes extends JDialog {
 
@@ -69,16 +70,18 @@ public class ListarSolicitantes extends JDialog {
 		});
 		setResizable(false);
 		setModal(true);
-		setResizable(false);
 		setTitle("Listar Solicitantes");
+		setResizable(false);
 		setBounds(100, 100, 987, 511);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(SystemColor.inactiveCaptionBorder);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		setLocationRelativeTo(null);
 		{
 			JPanel panel = new JPanel();
+			panel.setBackground(SystemColor.inactiveCaptionBorder);
 			panel.setBorder(new TitledBorder(null, "Listado de Solicitantes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			panel.setBounds(10, 11, 951, 417);
 			contentPanel.add(panel, BorderLayout.CENTER);
@@ -98,7 +101,7 @@ public class ListarSolicitantes extends JDialog {
 					if (seleccion.equalsIgnoreCase("Universitarios")) {
 						cargarTablaU();
 					}
-					if (seleccion.equalsIgnoreCase("Obreros")) {
+					if (seleccion.equalsIgnoreCase("Bachilleres")) {
 						cargarTablaB();
 					}
 					if (seleccion.equalsIgnoreCase("Técnicos")) {
@@ -115,7 +118,7 @@ public class ListarSolicitantes extends JDialog {
 			JScrollPane scrollPane = new JScrollPane();
 			scrollPane.setBounds(10, 60, 931, 343);
 			panel.add(scrollPane);
-			
+			{	
 			table = new JTable();
 			table.addMouseListener(new MouseAdapter() {
 				@Override
@@ -205,30 +208,6 @@ public class ListarSolicitantes extends JDialog {
 			}
 		}
 	}
-	
-	public static String[] llenarA(ArrayList<String> copiado) {
-		String[] arr = new String[copiado.size()];
-		copiado.toArray(arr);
-		return arr;
-	}
-	
-	public static void setComboIdiomas() {
-		TableColumn col = table.getColumnModel().getColumn(4);
-		col.setCellEditor(new DefaultCellEditor(cbxIdioma));
-	}
-
-	
-	public void setCombo() {
-		TableColumn col = table.getColumnModel().getColumn(3);
-		col.setCellEditor(new DefaultCellEditor(habilidades));
-		habilidades.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
-
 	}
 	
 	public static void cargarTablaG() {
@@ -242,7 +221,7 @@ public class ListarSolicitantes extends JDialog {
 				if (!soli.isContratado()) {
 					tipo = "Universitario";
 					if (soli instanceof Bachiller) {
-						tipo = "Obrero";
+						tipo = "Bachiller";
 					}
 					if (soli instanceof Tecnico) {
 						tipo = "Técnico";
@@ -262,7 +241,7 @@ public class ListarSolicitantes extends JDialog {
 					modeloColumna.getColumn(1).setPreferredWidth(282);
 					modeloColumna.getColumn(2).setPreferredWidth(160);
 					modeloColumna.getColumn(3).setPreferredWidth(170);
-					modeloColumna.getColumn(4).setPreferredWidth(150);
+					modeloColumna.getColumn(4).setPreferredWidth(160);
 				}
 			}
 
@@ -408,7 +387,7 @@ public class ListarSolicitantes extends JDialog {
 			cargarTablaU();
 
 		}
-		if (seleccion.equalsIgnoreCase("Bachiller")) {
+		if (seleccion.equalsIgnoreCase("Bachilleres")) {
 
 		}
 		if (seleccion.equalsIgnoreCase("Técnicos")) {
@@ -416,6 +395,28 @@ public class ListarSolicitantes extends JDialog {
 		}
 	}
 	
+	public static String[] llenarA(ArrayList<String> copiado) {
+		String[] arr = new String[copiado.size()];
+		copiado.toArray(arr);
+		return arr;
+	}
 	
+	public static void setComboIdiomas() {
+		TableColumn col = table.getColumnModel().getColumn(4);
+		col.setCellEditor(new DefaultCellEditor(cbxIdioma));
+	}
+
 	
+	public void setCombo() {
+		TableColumn col = table.getColumnModel().getColumn(3);
+		col.setCellEditor(new DefaultCellEditor(habilidades));
+		habilidades.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+
+	}
 }
