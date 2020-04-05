@@ -289,14 +289,16 @@ public class Bolsa_Laboral implements Serializable{
 
 		Empresa empresa = solicitud.getEmpresa();
 		for (Personal solicitante : empleados) {
-			solicitud.IncrementarCantSolicitudes();;
-			empresa.insertarEmpleadoC(solicitante);;
+			solicitud.IncrementarCantSolicitudes();
+			solicitud.DecrementoV();
+			empresa.insertarEmpleadoC(solicitante);
+			
 		}
 
 	}
 	
 	
-    //ELIMINAR VACANTE
+  /*  //ELIMINAR VACANTE
 	public int eliminarV(Solicitud soli,ArrayList<Personal> empleados) {
 		int cant = 0;
 		contratarEmpleados(soli, empleados);
@@ -305,7 +307,8 @@ public class Bolsa_Laboral implements Serializable{
 		}
 		
 		return cant;
-	}
+		}*/
+	
 	
 	// SOLICITUD EMPRESA
 	

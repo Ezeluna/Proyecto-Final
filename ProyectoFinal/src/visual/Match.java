@@ -44,206 +44,267 @@ import java.awt.event.MouseEvent;
 import java.text.ParseException;
 
 public class Match extends JDialog {
-
 	private final JPanel contentPanel = new JPanel();
+	private JTextField txtName;
+	private JTable table;
 	private static Object[] fila;
 	private static DefaultTableModel modelo;
 	private static DefaultTableCellRenderer centrar = new DefaultTableCellRenderer();
 	private JFormattedTextField ftxtRNC;
 	Empresa miEmpresa = null;
-	private JTextField txtNombre;
-	private JButton btnShow;
-	private DefaultListModel<String> model = new DefaultListModel<>();
-	private JList list;
+	private JButton btnCandidatos;
+	private DefaultListModel model = new DefaultListModel();
+	private DefaultListModel modelCont = new DefaultListModel();
+	private JList<String> lstSoli;
+	private JList<String> lstSoli2;
 	private String codigo = "";
-	private ArrayList<Personal> miPersonalC = new ArrayList<>();
+	private ArrayList<String> EmpleadosC = new ArrayList<>(); 
+	private ArrayList<String> EmpleadosCVuelta = new ArrayList<>();
+	private ArrayList<Personal> misSolicitantesC = new ArrayList<>();
 	private JFormattedTextField ftxtCodSolicitud;
-	private JTable table;
-	
-	
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
 	 */
-
+	public static void main(String[] args) {
+		try {
+			Match dialog = new Match();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Create the dialog.
 	 */
-	public Match() throws ParseException{
+	public Match() throws ParseException {
+		setTitle("DAEX - Bolsa Laboral");
 		setResizable(false);
-		setModal(true);
-		setTitle("DAEX\u00A9 - Bolsa Laboral");
-		setBounds(100, 100, 870, 509);
+		setBounds(100, 100, 588, 670);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(SystemColor.inactiveCaptionBorder);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		setLocationRelativeTo(null);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(SystemColor.inactiveCaptionBorder);
-		panel.setBounds(10, 11, 838, 415);
-		contentPanel.add(panel);
-		panel.setLayout(null);
-		
-		JPanel pnlEmpresa = new JPanel();
-		pnlEmpresa.setBorder(new TitledBorder(null, "Empresa:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnlEmpresa.setBackground(SystemColor.inactiveCaptionBorder);
-		pnlEmpresa.setBounds(5, 5, 505, 400);
-		panel.add(pnlEmpresa);
-		pnlEmpresa.setLayout(null);
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-			}
-		});
-		scrollPane_1.setBounds(10, 114, 485, 233);
-		pnlEmpresa.add(scrollPane_1);
-		
-		table = new JTable();
-		table.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int aux = table.getSelectedRow(); 
-				if(aux > -1) {
-					btnShow.setEnabled(true);
-					codigo = (String) table.getModel().getValueAt(aux, 0);
-					ftxtCodSolicitud.setValue(codigo);
-				} else {
-					codigo = "";
-					btnShow.setEnabled(false);
-				}
-			}
-		});
-		modelo = new DefaultTableModel();
-		table.setModel(modelo);
-		loadTable(null);
-		scrollPane_1.setViewportView(table);
-		
-		btnShow = new JButton(" Ver Solicitantes");
-		btnShow.setIcon(new ImageIcon(Match.class.getResource("/icons/ver.png")));
-		btnShow.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Solicitud soli = Bolsa_Laboral.getInstance().RetornarSolocitudId(codigo);
-				if(soli != null) {
-					miPersonalC = Bolsa_Laboral.getInstance().matcheo(soli);
-				}
-				
-				cargarSolicitante();
-			}
-		});
-		btnShow.setEnabled(false);
-		btnShow.setBounds(330, 358, 165, 25);
-		pnlEmpresa.add(btnShow);
-		
-		txtNombre = new JTextField();
-		txtNombre.setEnabled(false);
-		txtNombre.setColumns(10);
-		txtNombre.setBackground(Color.WHITE);
-		txtNombre.setBounds(73, 57, 406, 23);
-		pnlEmpresa.add(txtNombre);
-		
-		MaskFormatter mascara = new MaskFormatter("##########");
-		ftxtRNC = new JFormattedTextField(mascara);
-		ftxtRNC.setBackground(Color.WHITE);
-		ftxtRNC.setBounds(73, 26, 139, 23);
-		pnlEmpresa.add(ftxtRNC);
-		
-		JLabel label = new JLabel("RNC:");
-		label.setBounds(20, 30, 46, 14);
-		pnlEmpresa.add(label);
-		
-		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setBounds(20, 61, 59, 14);
-		pnlEmpresa.add(lblNombre);
-		
-		JButton btnBuscar = new JButton("");
-		btnBuscar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ftxtCodSolicitud.setValue("");
-				
-				if(Bolsa_Laboral.getInstance().RetornarEmpresa(ftxtRNC.getText()) != null) {
-					miEmpresa = Bolsa_Laboral.getInstance().RetornarEmpresa(ftxtRNC.getText()); 
-					txtNombre.setText(miEmpresa.getNombre());
-					loadTable(miEmpresa);
-				}else {
-					JOptionPane.showMessageDialog(null, "No se encontro una empresa con el RNC digitado.", "Información",
-											JOptionPane.WARNING_MESSAGE, null);
-				}
-			}
-		});
-		btnBuscar.setIcon(new ImageIcon(Match.class.getResource("/icons/Logo Buscar.png")));
-		btnBuscar.setBounds(215, 25, 29, 25);
-		pnlEmpresa.add(btnBuscar);
-		
-		JLabel label_1 = new JLabel("C\u00F3digo Solicitud:");
-		label_1.setBounds(254, 30, 102, 14);
-		pnlEmpresa.add(label_1);
-		
-		ftxtCodSolicitud = new JFormattedTextField();
-		ftxtCodSolicitud.setEnabled(false);
-		ftxtCodSolicitud.setBackground(Color.WHITE);
-		ftxtCodSolicitud.setBounds(351, 26, 128, 23);
-		pnlEmpresa.add(ftxtCodSolicitud);
-		
-		JLabel lblSoli = new JLabel("Solicitudes Empresariales:");
-		lblSoli.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblSoli.setBounds(168, 89, 176, 14);
-		pnlEmpresa.add(lblSoli);
-		
-		JButton btnLimpiar = new JButton("Limpiar");
-		btnLimpiar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				loadTable(null);
-				ftxtCodSolicitud.setText("");
-				txtNombre.setText("");
-				ftxtRNC.setText("");
-			}
-		});
-		btnLimpiar.setBounds(231, 358, 89, 25);
-		pnlEmpresa.add(btnLimpiar);
 		{
 			JPanel pnlSolicitantes = new JPanel();
-			pnlSolicitantes.setBorder(new TitledBorder(null, "Solicitantes:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			pnlSolicitantes.setBackground(SystemColor.inactiveCaptionBorder);
-			pnlSolicitantes.setBounds(520, 5, 308, 400);
-			panel.add(pnlSolicitantes);
+			pnlSolicitantes.setBorder(new TitledBorder(null, "Solicitantes Candidatos:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			pnlSolicitantes.setBounds(10, 340, 562, 246);
+			contentPanel.add(pnlSolicitantes);
 			pnlSolicitantes.setLayout(null);
-			{
-				JScrollPane scrollPane = new JScrollPane();
-				scrollPane.setBounds(10, 32, 291, 357);
-				pnlSolicitantes.add(scrollPane);
-				
-			    list = new JList();
-				scrollPane.setViewportView(list);
-			}
+			
+			JButton btnDer = new JButton("");
+			btnDer.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					if (lstSoli.getSelectedValue() != null) {
+						modelCont.addElement(lstSoli.getSelectedValue());
+						lstSoli2.setModel(modelCont);
+						model.removeElement(lstSoli.getSelectedValue());
+						lstSoli.setModel(model);
+						
+					}
+					
+					
+				}
+			});
+			btnDer.setIcon(new ImageIcon(Match.class.getResource("/icons/Siguiente.png")));
+			btnDer.setBounds(257, 93, 45, 23);
+			pnlSolicitantes.add(btnDer);
+			
+			JButton btnIzq = new JButton("");
+			btnIzq.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					if (lstSoli2.getSelectedValue() != null) {
+						model.addElement(lstSoli2.getSelectedValue());
+						lstSoli.setModel(model);
+						modelCont.removeElement(lstSoli2.getSelectedValue()); 
+						lstSoli2.setModel(modelCont);
+					}
+				}
+			});
+			btnIzq.setIcon(new ImageIcon(Match.class.getResource("/icons/retroceso.png")));
+			btnIzq.setBounds(257, 137, 45, 23);
+			pnlSolicitantes.add(btnIzq);
+			
+			JLabel lblNewLabel_1 = new JLabel("Solicitantes:");
+			lblNewLabel_1.setBounds(10, 21, 81, 14);
+			pnlSolicitantes.add(lblNewLabel_1);
+			
+			JLabel lblNewLabel_2 = new JLabel("Solicitantes a Contratar:");
+			lblNewLabel_2.setBounds(313, 21, 145, 14);
+			pnlSolicitantes.add(lblNewLabel_2);
+			
+			JScrollPane scrollPane_1 = new JScrollPane();
+			scrollPane_1.setBounds(10, 40, 237, 190);
+			pnlSolicitantes.add(scrollPane_1);
+			
+			lstSoli = new JList();
+			lstSoli.setBorder(new TitledBorder(null, "         C\u00E9dula       --             Nombre            ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			scrollPane_1.setViewportView(lstSoli);
+
+			
+			JScrollPane scrollPane_2 = new JScrollPane();
+			scrollPane_2.setBounds(312, 40, 237, 190);
+			pnlSolicitantes.add(scrollPane_2);
+			
+			lstSoli2 = new JList();
+			scrollPane_2.setViewportView(lstSoli2);
+			lstSoli2.setBorder(new TitledBorder(null, "         C\u00E9dula       --             Nombre            ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+    	
 		}
 		{
+			JPanel panel = new JPanel();
+			panel.setBackground(SystemColor.inactiveCaptionBorder);
+			panel.setBorder(new TitledBorder(null, "Informaci\u00F3n Empresarial:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel.setBounds(10, 11, 562, 328);
+			contentPanel.add(panel);
+			panel.setLayout(null);
+			{
+				JPanel pnlSolicitudes = new JPanel();
+				pnlSolicitudes.setBackground(SystemColor.inactiveCaptionBorder);
+				pnlSolicitudes.setBorder(new TitledBorder(null, "Solicitudes:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				pnlSolicitudes.setLayout(null);
+				pnlSolicitudes.setBounds(10, 89, 542, 202);
+				panel.add(pnlSolicitudes);
+				
+				scrollPane = new JScrollPane();
+				scrollPane.setBounds(10, 21, 522, 170);
+				pnlSolicitudes.add(scrollPane);
+				
+				table = new JTable();
+				table.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						int aux = table.getSelectedRow();
+						if (aux > -1) {
+							btnCandidatos.setEnabled(true);
+							codigo = (String) table.getModel().getValueAt(aux, 0);
+							ftxtCodSolicitud.setValue(codigo);
+						} else {
+							codigo = "";
+							btnCandidatos.setEnabled(false);
+						}
+					}
+				});
+				modelo = new DefaultTableModel();
+				table.setModel(modelo);
+				loadTable(null);
+				scrollPane.setViewportView(table);
+			}
+			{
+				JPanel pnlEmpresa = new JPanel();
+				pnlEmpresa.setBackground(SystemColor.inactiveCaption);
+				pnlEmpresa.setLayout(null);
+				pnlEmpresa.setBounds(10, 21, 542, 64);
+				panel.add(pnlEmpresa);
+				
+				JLabel lblRNC = new JLabel("RNC:");
+				lblRNC.setBounds(20, 12, 46, 14);
+				pnlEmpresa.add(lblRNC);
+				
+				JLabel lblName = new JLabel("Nombre:");
+				lblName.setBounds(20, 39, 58, 14);
+				pnlEmpresa.add(lblName);
+				
+				txtName = new JTextField();
+				txtName.setBackground(new Color(255, 255, 255));
+				txtName.setEnabled(false);
+				txtName.setBounds(76, 36, 430, 20);
+				pnlEmpresa.add(txtName);
+				txtName.setColumns(10);
+				
+				MaskFormatter mascara = new MaskFormatter("##########");
+				ftxtRNC = new JFormattedTextField(mascara);
+				ftxtRNC.setBounds(76, 9, 117, 20);
+				pnlEmpresa.add(ftxtRNC);
+				
+				JButton btnSearch = new JButton("");
+				btnSearch.setIcon(new ImageIcon(Match.class.getResource("/icons/Logo Buscar.png")));
+				btnSearch.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						ftxtCodSolicitud.setValue("");
+
+						if (Bolsa_Laboral.getInstance().RetornarEmpresa(ftxtRNC.getText()) != null) {
+							miEmpresa = Bolsa_Laboral.getInstance().RetornarEmpresa(ftxtRNC.getText());
+							txtName.setText(miEmpresa.getNombre());
+							loadTable(miEmpresa);
+						} else {
+							JOptionPane.showMessageDialog(null,
+									"No se encontro una empresa con el RNC digitado.", "Información",
+									JOptionPane.WARNING_MESSAGE, null);
+						}
+					}
+				});
+				btnSearch.setBounds(203, 9, 29, 21);
+				pnlEmpresa.add(btnSearch);
+				
+				JLabel lblCod = new JLabel("Id Solicitud:");
+				lblCod.setBounds(300, 12, 79, 14);
+				pnlEmpresa.add(lblCod);
+				
+				ftxtCodSolicitud = new JFormattedTextField();
+				ftxtCodSolicitud.setBackground(new Color(255, 255, 255));
+				ftxtCodSolicitud.setEnabled(false);
+				ftxtCodSolicitud.setBounds(389, 9, 117, 20);
+				pnlEmpresa.add(ftxtCodSolicitud);
+			}
+			
+			btnCandidatos = new JButton("Ver Candidatos");
+			btnCandidatos.setIcon(new ImageIcon(Match.class.getResource("/icons/ver.png")));
+			btnCandidatos.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				
+					Solicitud soli = Bolsa_Laboral.getInstance().RetornarSolocitudId(codigo);
+					if (soli != null) {
+						misSolicitantesC = Bolsa_Laboral.getInstance().matcheo(soli);
+					}
+
+					cargarSolicitante();
+				}
+			});
+			btnCandidatos.setEnabled(false);
+			btnCandidatos.setBounds(410, 294, 142, 23);
+			panel.add(btnCandidatos);
+			
+			JButton btnClean = new JButton("Limpiar");
+			btnClean.setBounds(311, 294, 89, 23);
+			panel.add(btnClean);
+		}
+		setLocationRelativeTo(null);
+		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBackground(SystemColor.inactiveCaptionBorder);
+			buttonPane.setBackground(SystemColor.inactiveCaption);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnContratar = new JButton("Contratar");
 				btnContratar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if (miPersonalC.size() != 0) {
-							Solicitud soli = Bolsa_Laboral.getInstance().RetornarSolocitudId(codigo);
-							Bolsa_Laboral.getInstance().contratarEmpleados(soli, miPersonalC);
-							JOptionPane.showMessageDialog(null, "Los solicitantes han sido contratados.", "Información",
-									JOptionPane.INFORMATION_MESSAGE, null);
-							Bolsa_Laboral.getInstance().removerContratados(miPersonalC);
-							clean();
-						} else {
+						if (misSolicitantesC.size() != 0) {
+							Solicitud solicitud = Bolsa_Laboral.getInstance().RetornarSolocitudId(codigo);
+							ArrayList<Personal> auxSoliC = new ArrayList<>();
+							for (int i = 0; i < modelCont.getSize(); i++) {
+								auxSoliC.add(Bolsa_Laboral.getInstance().buscarSolicitanteByCe(modelCont.getElementAt(i).toString().substring(0,13)));
+							}if(auxSoliC!= null) {
+							int option = JOptionPane.showConfirmDialog(null, "Esta a punto de contratar empleados. Esta seguro? ", "Aviso", JOptionPane.WARNING_MESSAGE);
+							if(option == JOptionPane.OK_OPTION) {
+								Bolsa_Laboral.getInstance().contratarEmpleados(solicitud, auxSoliC);
+						//		Bolsa_Laboral.getInstance().decrementoVa(solicitud, auxSoliC);
+						//		Bolsa_Laboral.getInstance().eliminarV(solicitud, auxSoliC);
+								clean();
+								JOptionPane.showMessageDialog(null, "Operación Satisfactoria.", "Información",
+										JOptionPane.INFORMATION_MESSAGE, null);
+							} 
+								
+							}
+						}else {
 							JOptionPane.showMessageDialog(null,
 									"No existen solicitantes en la actualidad para satisfacer esta solicitud",
 									"Información", JOptionPane.INFORMATION_MESSAGE, null);
-							
 						}
 					}
 				});
@@ -252,15 +313,15 @@ public class Match extends JDialog {
 				getRootPane().setDefaultButton(btnContratar);
 			}
 			{
-				JButton btnCancelar = new JButton("Cancelar");
-				btnCancelar.addActionListener(new ActionListener() {
+				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setIcon(new ImageIcon(Match.class.getResource("/icons/cancelar.png")));
+				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
 					}
 				});
-				btnCancelar.setIcon(new ImageIcon(Match.class.getResource("/icons/cancelar.png")));
-				btnCancelar.setActionCommand("Cancel");
-				buttonPane.add(btnCancelar);
+				cancelButton.setActionCommand("Cancel");
+				buttonPane.add(cancelButton);
 			}
 		}
 	}
@@ -336,19 +397,19 @@ public class Match extends JDialog {
 		}
 		columnModel.getColumn(0).setPreferredWidth(80);
 		columnModel.getColumn(1).setPreferredWidth(80);
-		columnModel.getColumn(2).setPreferredWidth(106);
+		columnModel.getColumn(2).setPreferredWidth(104);
 		columnModel.getColumn(3).setPreferredWidth(120);
-		columnModel.getColumn(4).setPreferredWidth(80);
+		columnModel.getColumn(4).setPreferredWidth(100);
 
 	}
-
+	
 	public void cargarSolicitante() {
-		if (miPersonalC.size() != 0) {
-			for (Personal soli : miPersonalC) {
-				String candidato = soli.getCedula() + " " + soli.getName() + " " + soli.getApellido();
+		if (misSolicitantesC.size() != 0) {
+			for (Personal soli : misSolicitantesC) {
+				String candidato = soli.getCedula() + "     " + soli.getName() + " " + soli.getApellido();
 				model.addElement(candidato);
 			}
-			list.setModel(model);
+			lstSoli.setModel(model);
 		} else {
 			JOptionPane.showMessageDialog(null,
 					"No existen solicitantes en la actualidad para satisfacer esta solicitud", "Información",
@@ -356,9 +417,12 @@ public class Match extends JDialog {
 		}
 	}
 
+
+
 	public void clean() {
 		model.clear();
-		miPersonalC = new ArrayList<>();
+		modelCont.clear();
+		misSolicitantesC = new ArrayList<>();
 		loadTable(null);
 	}
 }

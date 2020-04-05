@@ -148,6 +148,11 @@ public abstract class Solicitud implements Serializable {
 		cantSolicitudes++;
 	}
 	
+	public void DecrementoV() {
+		cantVacantes--; 
+		
+	}
+	
 	
 
 }

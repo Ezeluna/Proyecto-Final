@@ -95,6 +95,7 @@ public class ListarSolicitud_Empresa extends JDialog {
 			}
 			{
 				cbxfiltro = new JComboBox();
+				cbxfiltro.setBackground(new Color(255, 255, 255));
 				cbxfiltro.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
@@ -219,7 +220,7 @@ public class ListarSolicitud_Empresa extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBackground(SystemColor.inactiveCaptionBorder);
+			buttonPane.setBackground(SystemColor.inactiveCaption);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{

@@ -37,6 +37,8 @@ import java.awt.event.WindowEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.SystemColor;
+import java.awt.Color;
+import javax.swing.ScrollPaneConstants;
 
 public class ListarSolicitantes extends JDialog {
 
@@ -92,6 +94,7 @@ public class ListarSolicitantes extends JDialog {
 			panel.add(lblMostrarPor);
 			
 			cbxMostrar = new JComboBox();
+			cbxMostrar.setBackground(Color.WHITE);
 			cbxMostrar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					String seleccion = cbxMostrar.getSelectedItem().toString();
@@ -116,10 +119,12 @@ public class ListarSolicitantes extends JDialog {
 			panel.add(cbxMostrar);
 			
 			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			scrollPane.setBounds(10, 60, 931, 343);
 			panel.add(scrollPane);
 			{	
 			table = new JTable();
+			table.setBackground(new Color(255, 255, 255));
 			table.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -152,6 +157,7 @@ public class ListarSolicitantes extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(SystemColor.inactiveCaption);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			
@@ -251,7 +257,7 @@ public class ListarSolicitantes extends JDialog {
 	
 	public  void cargarTablaB() {
 
-		String[] nombreColumna = { "Cédula", "Nombre", "Edad", "Habilidades", "Idiomas", "Años de Experiencia",
+		String[] nombreColumna = { "Cédula", "Nombre", "Edad", "Habilidades", "Idiomas", "Experiencia",
 				"Teléfono", "E-Mail" };
 		modeloTabla.setColumnIdentifiers(nombreColumna);
 		modeloTabla.setRowCount(0);
@@ -283,11 +289,11 @@ public class ListarSolicitantes extends JDialog {
 					modeloColumna.getColumn(0).setPreferredWidth(110);
 					modeloColumna.getColumn(1).setPreferredWidth(160);
 					modeloColumna.getColumn(2).setPreferredWidth(90);
-					modeloColumna.getColumn(3).setPreferredWidth(100);
+					modeloColumna.getColumn(3).setPreferredWidth(120);
 					modeloColumna.getColumn(4).setPreferredWidth(100);
-					modeloColumna.getColumn(5).setPreferredWidth(160);
+					modeloColumna.getColumn(5).setPreferredWidth(100);
 					modeloColumna.getColumn(6).setPreferredWidth(100);
-					modeloColumna.getColumn(7).setPreferredWidth(140);
+					modeloColumna.getColumn(7).setPreferredWidth(160);
 				}
 			}
 
@@ -370,7 +376,7 @@ public class ListarSolicitantes extends JDialog {
 					modeloColumna.getColumn(2).setPreferredWidth(80);
 					modeloColumna.getColumn(3).setPreferredWidth(110);
 					modeloColumna.getColumn(4).setPreferredWidth(100);
-					modeloColumna.getColumn(5).setPreferredWidth(160);
+					modeloColumna.getColumn(5).setPreferredWidth(100);
 					modeloColumna.getColumn(6).setPreferredWidth(100);
 					modeloColumna.getColumn(7).setPreferredWidth(140);
 				}
