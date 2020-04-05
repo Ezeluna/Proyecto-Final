@@ -25,6 +25,8 @@ import logic.SolicitudBachiller;
 import logic.SolicitudTecnico;
 import logic.SolicitudUniversitario;
 import java.awt.SystemColor;
+import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 
 
@@ -74,6 +76,7 @@ public class DetallesSolicitudE extends JDialog {
 	 * Create the dialog.
 	 */
 	public DetallesSolicitudE(Solicitud solicitud) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(DetallesSolicitudE.class.getResource("/icons/ver.png")));
 		setResizable(false);
 		setModal(true);
 		miSolici = solicitud;
@@ -318,6 +321,7 @@ public class DetallesSolicitudE extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnCancelar = new JButton("Aceptar");
+				btnCancelar.setIcon(new ImageIcon(DetallesSolicitudE.class.getResource("/icons/aceptar.png")));
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

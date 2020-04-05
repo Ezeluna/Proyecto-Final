@@ -116,6 +116,7 @@ public class Principal extends JFrame {
 		menuBar.add(mnMatcheo);
 		
 		JMenuItem mntmPareo = new JMenuItem("Realizar Match");
+		mntmPareo.setIcon(new ImageIcon(Principal.class.getResource("/icons/pareo.png")));
 		mntmPareo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Match match;
@@ -134,6 +135,7 @@ public class Principal extends JFrame {
 		mnMatcheo.add(mntmPareo);
 		
 		JMenuItem mntContratados = new JMenuItem("Personal Contratado");
+		mntContratados.setIcon(new ImageIcon(Principal.class.getResource("/icons/Contratar.png")));
 		mntContratados.setBackground(SystemColor.inactiveCaptionBorder);
 		mnMatcheo.add(mntContratados);
 		
@@ -143,6 +145,7 @@ public class Principal extends JFrame {
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmRegistrarEmpresa = new JMenuItem("Registrar Empresa");
+		mntmRegistrarEmpresa.setIcon(new ImageIcon(Principal.class.getResource("/icons/addEmpresa.png")));
 		mntmRegistrarEmpresa.setBackground(SystemColor.inactiveCaptionBorder);
 		mntmRegistrarEmpresa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -156,6 +159,7 @@ public class Principal extends JFrame {
 		mnNewMenu.add(mntmRegistrarEmpresa);
 		
 		JMenuItem mntmListarEmpresas = new JMenuItem("Listado de Empresas");
+		mntmListarEmpresas.setIcon(new ImageIcon(Principal.class.getResource("/icons/Listas.png")));
 		mntmListarEmpresas.setBackground(SystemColor.inactiveCaptionBorder);
 		mntmListarEmpresas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -175,6 +179,7 @@ public class Principal extends JFrame {
 		menuBar.add(mnSolicitudEmpresa);
 		
 		JMenuItem mntmSolicitudEmpresa = new JMenuItem("Registrar Solicitud");
+		mntmSolicitudEmpresa.setIcon(new ImageIcon(Principal.class.getResource("/icons/addSolicitud.png")));
 		mntmSolicitudEmpresa.setBackground(SystemColor.inactiveCaptionBorder);
 		mntmSolicitudEmpresa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -186,6 +191,7 @@ public class Principal extends JFrame {
 		mnSolicitudEmpresa.add(mntmSolicitudEmpresa);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Listar Solicitud");
+		mntmNewMenuItem.setIcon(new ImageIcon(Principal.class.getResource("/icons/Listas.png")));
 		mntmNewMenuItem.setBackground(SystemColor.inactiveCaptionBorder);
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -202,6 +208,7 @@ public class Principal extends JFrame {
 		menuBar.add(mnPersonal);
 		
 		JMenuItem mntSolicitudP = new JMenuItem("Solicitud");
+		mntSolicitudP.setIcon(new ImageIcon(Principal.class.getResource("/icons/agregarSolicitante.png")));
 		mntSolicitudP.setBackground(SystemColor.inactiveCaptionBorder);
 		mntSolicitudP.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -214,6 +221,7 @@ public class Principal extends JFrame {
 		mnPersonal.add(mntSolicitudP);
 		
 		JMenuItem mntListarSP = new JMenuItem("Listar Personal");
+		mntListarSP.setIcon(new ImageIcon(Principal.class.getResource("/icons/Listas.png")));
 		mntListarSP.setBackground(SystemColor.inactiveCaptionBorder);
 		mntListarSP.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -338,7 +346,7 @@ public class Principal extends JFrame {
 	
 	public static CategoryDataset creandoCategoria() {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		dataset.setValue(Bolsa_Laboral.getInstance().desempleadoB(), "Tipo de Solicitante", "Obreros");
+		dataset.setValue(Bolsa_Laboral.getInstance().desempleadoB(), "Tipo de Solicitante", "Bachilleres");
 		dataset.setValue(Bolsa_Laboral.getInstance().desempleadoU(), "Tipo de Solicitante", "Universitarios");
 		dataset.setValue(Bolsa_Laboral.getInstance().desempleadoT(), "Tipo de Solicitante", "Técnicos");
 		return dataset;
