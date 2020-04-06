@@ -778,28 +778,20 @@ public class InsertarSolicitante extends JDialog {
 			btnContinuar.addActionListener(new ActionListener() {
 				
 				public void actionPerformed(ActionEvent e) {
-					String sexo2 = "";
-					String fecha2 = ((JTextField) dateChooser.getDateEditor().getUiComponent()).getText();
-					if (rdbFemenino.isSelected()) {
-						sexo2 = "Femenino";
-					} else if (rdbMasculino.isSelected()) {
-						sexo2 = "Masculino";
-					}
+					
+					
 					if (panel2.isVisible() ) {
-					if(!ftextCedula.getText().equalsIgnoreCase("___-_______-_") && !textNombre.getText().isEmpty() &&  !textApellidos.getText().isEmpty() && !textCiudad.getText().isEmpty() && cbxLicencia.getSelectedIndex() != 0 && cbxProvincias.getSelectedIndex() != 0 && !sexo2.equalsIgnoreCase("") && !fecha2.equalsIgnoreCase("")) {
-						
 						
 						btnContinuar.setIcon(
 						
 								new ImageIcon(InsertarSolicitante.class.getResource("/icons/Siguiente.png")));
-					}
 					}
 					 else {
 						btnContinuar.setIcon(
 								new ImageIcon(InsertarSolicitante.class.getResource("/icons/retroceso.png")));
 					}
 					
-					boolean igual = false;
+				//	boolean igual = false;
 					String sexo = "";
 					String fecha = ((JTextField) dateChooser.getDateEditor().getUiComponent()).getText();
 					if (rdbFemenino.isSelected()) {
@@ -816,21 +808,21 @@ public class InsertarSolicitante extends JDialog {
 				}
 					
 					else if(panel1.isVisible()) {
-						if(!modificar) {
+						//if(!modificar) {
 					
-					if(!Bolsa_Laboral.getInstance().getMisSolicitantes().isEmpty()) {
-						for (Personal personal : Bolsa_Laboral.getInstance().getMisSolicitantes()) {
-							if (ftextCedula.getText().equalsIgnoreCase(personal.getCedula())) {
-								igual=true;
-							}
-						  }
-						}
-						if(igual==true) {
-							JOptionPane.showMessageDialog(null,"Ya existe una persona registrada con esa cedula");
-						}
-						}
-						else if(ftextCedula.getText().equalsIgnoreCase("___-_______-_")||textNombre.getText().isEmpty()|| textApellidos.getText().isEmpty()||textCiudad.getText().isEmpty() || cbxLicencia.getSelectedIndex() == 0 || cbxProvincias.getSelectedIndex() == 0 || sexo.equalsIgnoreCase("") || fecha.equalsIgnoreCase("")) {
-							JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
+					//if(!Bolsa_Laboral.getInstance().getMisSolicitantes().isEmpty()) {
+						//for (Personal personal : Bolsa_Laboral.getInstance().getMisSolicitantes()) {
+							//if (ftextCedula.getText().equalsIgnoreCase(personal.getCedula())) {
+								//igual=true;
+							//}
+						 // }
+						//}
+						//if(igual==true) {
+						//	JOptionPane.showMessageDialog(null,"Ya existe una persona registrada con esa cedula");
+						//}
+						//}
+						 if(ftextCedula.getText().equalsIgnoreCase("___-_______-_")||textNombre.getText().isEmpty()|| textApellidos.getText().isEmpty()||textCiudad.getText().isEmpty() || cbxLicencia.getSelectedIndex() == 0 || cbxProvincias.getSelectedIndex() == 0 || sexo.equalsIgnoreCase("") || fecha.equalsIgnoreCase("")) {
+							JOptionPane.showMessageDialog(null, "Debe de llenar todos los campos", "AVISO", JOptionPane.WARNING_MESSAGE, null);
 						}else {
 							if (!modificar) {
 								estado = true;
