@@ -194,10 +194,8 @@ public class ListaContratados extends JDialog {
 			    } 
 	        } else {
 	        	ArrayList<Personal> miPersonalC = new ArrayList<>(); 
-	        	for (Empresa miempre : Bolsa_Laboral.getInstance().getMisEmpresas()) {
-	        		for (Personal miPersonal : miempre.getMisEmpleadosC()) {
+	        	for (Personal miPersonal : empresa.getMisEmpleadosC()) {
 	        			miPersonalC.add(miPersonal);
-	        		}
 	        	}
 	        	
 	        	for (Personal miEmpleado : miPersonalC) {
