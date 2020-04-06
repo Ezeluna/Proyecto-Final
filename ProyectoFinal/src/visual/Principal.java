@@ -259,6 +259,16 @@ public class Principal extends JFrame {
 		mntGuardar.setBackground(SystemColor.inactiveCaptionBorder);
 		mnUtilidades.add(mntGuardar);
 		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Registrar");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Users users = new Users();
+				users.setModal(true);
+				users.setVisible(true);
+			}
+		});
+		mnUtilidades.add(mntmNewMenuItem_1);
+		
 		JSeparator separator_1 = new JSeparator();
 		mnUtilidades.add(separator_1);
 		
@@ -448,6 +458,4 @@ public class Principal extends JFrame {
 		chartPanel2.setLayout(null);
 		panelPastel2.repaint();
 	}
-
-	
 }

@@ -12,8 +12,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-
+import logic.User;
 
 public class Bolsa_Laboral implements Serializable{
 	
@@ -22,12 +21,12 @@ public class Bolsa_Laboral implements Serializable{
 	private ArrayList<Personal> misSolicitantes; 
 	private ArrayList<Empresa> misEmpresas; 
 	private ArrayList<Solicitud> misSolicitudes; 
-	private ArrayList<Empresa> misEmpleadosCon;
 	public static Bolsa_Laboral bolsa;
 	private FileWriter Fwriter; 
 	private String archivo = "Bolsa_Laboral.dat"; 
-	
-	
+	private ArrayList<User> misUsers;
+	private static User loginUser;
+	private static boolean firstTime;
 	
 	
 	// CONSTRUCTOR
@@ -37,8 +36,8 @@ public class Bolsa_Laboral implements Serializable{
 		this.misSolicitantes = new ArrayList<>(); 
 		this.misEmpresas = new ArrayList<>(); 
 		this.misSolicitudes = new ArrayList<>(); 
-		
-		
+		misUsers = new ArrayList<User>();
+
 	}
 	
 	
@@ -74,11 +73,60 @@ public class Bolsa_Laboral implements Serializable{
 			bolsa = new Bolsa_Laboral();
 		}
 		return bolsa;
-
 	}
 	
-	// EMPRESA
+	public ArrayList<User> getMisUsers() {
+		return misUsers;
+	}
+
+	public void setMisUsers(ArrayList<User> misUsers) {
+		this.misUsers = misUsers;
+	}
+
+	public static Bolsa_Laboral getBolsa_Laboral() {
+		return bolsa;
+	}
+
+	public static void setControl(Bolsa_Laboral bolsa) {
+		Bolsa_Laboral.bolsa = bolsa;
+	}
+
+	public static User getLoginUser() {
+		return loginUser;
+	}
+
+	public static void setLoginUser(User loginUser) {
+		Bolsa_Laboral.loginUser = loginUser;
+	}
+
+	public void regUser(User user) {
+		misUsers.add(user);
+		
+	}
+
+	public static boolean isFirstTime() {
+		return firstTime;
+	}
+
+	public static void setFirstTime(boolean firstTime) {
+		Bolsa_Laboral.firstTime = firstTime;
+	}
 	
+
+	public boolean confirmLogin(String text, String text2) {
+		boolean login = false;
+		for (User user : misUsers) {
+			if(user.getUserName().equals(text)){
+				loginUser = user;
+				login = true;
+			}
+		}
+		return login;
+	}
+
+
+
+	// EMPRESA
 	public void insertEmpresa(Empresa empresa) {
 		misEmpresas.add(empresa);
 	}

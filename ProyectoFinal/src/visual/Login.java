@@ -7,6 +7,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import logic.Bolsa_Laboral;
+import logic.User;
+
+
 import java.awt.SystemColor;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -14,13 +19,23 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	private JPasswordField passwordField;
+	JLabel lblMin; 
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -28,6 +43,14 @@ public class Login extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				Bolsa_Laboral.getInstance().readBolsa();
+				
+		
+						
+						User aux = new User("Administrador", "Admin", "Admin");
+						Bolsa_Laboral.getInstance().regUser(aux);
+						Bolsa_Laboral.getInstance().writeBolsa();
+			
 				try {
 					Login frame = new Login();
 					frame.setVisible(true);
@@ -49,6 +72,7 @@ public class Login extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setLocationRelativeTo(null);
+		this.setUndecorated(true);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(SystemColor.textHighlight);
@@ -74,11 +98,11 @@ public class Login extends JFrame {
 		lblClose.setBounds(418, 11, 22, 29);
 		panel.add(lblClose);
 		
-		JLabel lblMin = new JLabel("-");
+		lblMin = new JLabel("-");
 		lblMin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int iconified2 = JFrame.ICONIFIED;
+				setExtendedState(ICONIFIED);
 			}
 		});
 		lblMin.setForeground(Color.WHITE);
@@ -118,18 +142,29 @@ public class Login extends JFrame {
 		panel_1.add(textField);
 		textField.setColumns(10);
 		
-		passwordField = new JPasswordField();
-		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		passwordField.setBounds(131, 110, 224, 20);
-		passwordField.setBackground(new Color(108, 122, 137));
-		panel_1.add(passwordField);
-		
 		JButton btnNewButton = new JButton("LogIn");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(Bolsa_Laboral.getInstance().confirmLogin(textField.getText(),textField_1.getText())){
+					Principal frame = new Principal();
+					dispose();
+					frame.setVisible(true);
+				};
+				
+			}
+		});
 		btnNewButton.setBackground(new Color(34, 167, 240));
 		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnNewButton.setBounds(266, 144, 89, 35);
 		panel_1.add(btnNewButton);
-		this.setUndecorated(true);
+		
+		textField_1 = new JTextField();
+		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textField_1.setColumns(10);
+		textField_1.setBackground(new Color(108, 122, 137));
+		textField_1.setBounds(131, 108, 224, 20);
+		panel_1.add(textField_1);
+		
 	}
 }
