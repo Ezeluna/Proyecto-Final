@@ -357,14 +357,17 @@ public class Principal extends JFrame {
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
+		actualizarChart();
+		actualizarPastel();
+		actualizarPastel2();
+		
 	}
 	
 	public static JFreeChart creandoGraficoB1(CategoryDataset dataSet, String titulo ) {
 		JFreeChart grafico1 = ChartFactory.createBarChart3D(titulo, "Tipo de solicitante", "Cantidad de solicitante", dataSet, PlotOrientation.VERTICAL, false, true, false);
 		CategoryPlot plot = (CategoryPlot) grafico1.getPlot();
 		plot.setBackgroundPaint(new Color(236,240,241));
-		Color color = new Color(228,241,254);
-		grafico1.setBackgroundPaint(color);
+		grafico1.setBackgroundPaint(SystemColor.activeCaption);
 		return grafico1;
 	}
 	
@@ -394,8 +397,7 @@ public class Principal extends JFrame {
 		JFreeChart chart = ChartFactory.createPieChart3D(titulo, dataSet, true, true, false);
 		PiePlot3D plot = (PiePlot3D) chart.getPlot();
 		plot.setBackgroundPaint(new Color(236,240,241));
-		Color color = new Color(228,241,254);
-		chart.setBackgroundPaint(color);
+		chart.setBackgroundPaint(SystemColor.activeCaption);
 		plot.setStartAngle(0.5);
 		plot.setDirection(Rotation.CLOCKWISE);
 		return chart;
@@ -433,8 +435,7 @@ public class Principal extends JFrame {
 		JFreeChart chart2 = ChartFactory.createPieChart3D(titulo, dataSet, true, true, false);
 		PiePlot3D plot = (PiePlot3D) chart2.getPlot();
 		plot.setBackgroundPaint(new Color(236,240,241));
-		Color color = new Color(228,241,254);
-		chart2.setBackgroundPaint(color);
+		chart2.setBackgroundPaint(SystemColor.activeCaption);
 		plot.setStartAngle(0.5);
 		plot.setDirection(Rotation.CLOCKWISE);
 		return chart2;
@@ -450,19 +451,17 @@ public class Principal extends JFrame {
 
 		return result;
 	}
-	
 	public static void actualizarPastel2() {
 		panelPastel2.removeAll();
 		panelPastel2.revalidate();
 		datasetPastel2 = dataSetPastel2();
 		chartPastel2 = creandoGraficoP2(datasetPastel2, "Porcentaje de Contratados por Género");
-		panelPastel2.setLayout(null);
+		panelPastel2.setLayout(new BorderLayout(0, 0));
 		ChartPanel chartPanel2 = new ChartPanel(chartPastel2);
-		chartPanel2.setBorder(null);
-		chartPanel2.setBounds(10, 2, 590, 236);
 		chartPanel2.setPreferredSize(new java.awt.Dimension(800, 500));
-		panelPastel2.add(chartPanel2);
-		chartPanel2.setLayout(null);
+		panelPastel2.add(chartPanel2, BorderLayout.CENTER);
 		panelPastel2.repaint();
+
 	}
+	
 }

@@ -816,6 +816,7 @@ public class InsertarSolicitante extends JDialog {
 				}
 					
 					else if(panel1.isVisible()) {
+						if(!modificar) {
 					
 					if(!Bolsa_Laboral.getInstance().getMisSolicitantes().isEmpty()) {
 						for (Personal personal : Bolsa_Laboral.getInstance().getMisSolicitantes()) {
@@ -826,6 +827,7 @@ public class InsertarSolicitante extends JDialog {
 						}
 						if(igual==true) {
 							JOptionPane.showMessageDialog(null,"Ya existe una persona registrada con esa cedula");
+						}
 						}
 						else if(ftextCedula.getText().equalsIgnoreCase("___-_______-_")||textNombre.getText().isEmpty()|| textApellidos.getText().isEmpty()||textCiudad.getText().isEmpty() || cbxLicencia.getSelectedIndex() == 0 || cbxProvincias.getSelectedIndex() == 0 || sexo.equalsIgnoreCase("") || fecha.equalsIgnoreCase("")) {
 							JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
