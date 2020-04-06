@@ -44,10 +44,37 @@ public class Login extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				
-				Bolsa_Laboral.getInstance().readBolsa();
-				User aux = new User("Administrador", "Admin", "Admin");
-			    Bolsa_Laboral.getInstance().regUser(aux);;
-				Bolsa_Laboral.getInstance().writeBolsa();
+				FileInputStream bolsa;
+				FileOutputStream bolsa2;
+				ObjectInputStream bolsaRead;
+				ObjectOutputStream bolsaWrite;
+				try {
+					bolsa = new FileInputStream ("Bolsa_Laboral.dat");
+					bolsaRead = new ObjectInputStream(bolsa);
+					Bolsa_Laboral temp = (Bolsa_Laboral)bolsaRead.readObject();
+					Bolsa_Laboral.setBolsa_Laboral(temp);
+					bolsa.close();
+					bolsaRead.close();
+				} catch (FileNotFoundException e) {
+					try {
+						bolsa2 = new  FileOutputStream("Bolsa_Laboral.dat");
+						bolsaWrite = new ObjectOutputStream(bolsa2);
+						User aux = new User("Administrador", "Admin", "Admin");
+						Bolsa_Laboral.getInstance().regUser(aux);
+						bolsaWrite.writeObject(Bolsa_Laboral.getInstance());
+						bolsa2.close();
+						bolsaWrite.close();
+					} catch (FileNotFoundException e1) {
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+					}
+				} catch (IOException e) {
+					
+					
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			
 				try {
 					Login frame = new Login();

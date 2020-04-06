@@ -269,11 +269,10 @@ public class Principal extends JFrame {
 				load.setLocationRelativeTo(null);
 			}
 		});
-		mntGuardar.setIcon(new ImageIcon(Principal.class.getResource("/icons/guardar.png")));
-		mntGuardar.setBackground(SystemColor.inactiveCaptionBorder);
-		mnUtilidades.add(mntGuardar);
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Registrar");
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Nueo Usuario");
+		mntmNewMenuItem_1.setBackground(SystemColor.inactiveCaptionBorder);
+		mntmNewMenuItem_1.setIcon(new ImageIcon(Principal.class.getResource("/icons/add.png")));
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Users users = new Users();
@@ -282,6 +281,9 @@ public class Principal extends JFrame {
 			}
 		});
 		mnUtilidades.add(mntmNewMenuItem_1);
+		mntGuardar.setIcon(new ImageIcon(Principal.class.getResource("/icons/guardar.png")));
+		mntGuardar.setBackground(SystemColor.inactiveCaptionBorder);
+		mnUtilidades.add(mntGuardar);
 		
 		JSeparator separator_1 = new JSeparator();
 		mnUtilidades.add(separator_1);
