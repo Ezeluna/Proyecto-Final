@@ -1093,6 +1093,7 @@ public class InsertarSolicitante extends JDialog {
 			}
 			{
 				btnCancelar = new JButton("Cancelar");
+				btnCancelar.setIcon(new ImageIcon(InsertarSolicitante.class.getResource("/icons/cancelar.png")));
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
