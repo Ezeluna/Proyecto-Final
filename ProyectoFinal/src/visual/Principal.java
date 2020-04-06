@@ -144,9 +144,16 @@ public class Principal extends JFrame {
 		JMenuItem mntContratados = new JMenuItem("Personal Contratado");
 		mntContratados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListaContratados aux = new ListaContratados();
-				aux.setModal(true);
-				aux.setVisible(true);
+				ListaContratados aux;
+				try {
+					aux = new ListaContratados();
+					aux.setModal(true);
+					aux.setVisible(true);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		mntContratados.setIcon(new ImageIcon(Principal.class.getResource("/icons/Contratar.png")));
