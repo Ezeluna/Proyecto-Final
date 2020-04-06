@@ -22,6 +22,7 @@ public class Bolsa_Laboral implements Serializable{
 	private ArrayList<Empresa> misEmpresas; 
 	private ArrayList<Solicitud> misSolicitudes; 
 	public static Bolsa_Laboral bolsa;
+	public ArrayList<Personal> misEmpleados;
 	private FileWriter Fwriter; 
 	private String archivo = "Bolsa_Laboral.dat"; 
 	private ArrayList<User> misUsers;
@@ -88,6 +89,14 @@ public class Bolsa_Laboral implements Serializable{
 
 	public static void setBolsa_Laboral(Bolsa_Laboral bolsa) {
 		Bolsa_Laboral.bolsa = bolsa;
+	}
+
+	public ArrayList<Personal> getMisEmpleados() {
+		return misEmpleados;
+	}
+
+	public void setMisEmpleados(ArrayList<Personal> misEmpleados) {
+		this.misEmpleados = misEmpleados;
 	}
 
 	public static User getLoginUser() {
