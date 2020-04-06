@@ -43,13 +43,11 @@ public class Login extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				Bolsa_Laboral.getInstance().readBolsa();
 				
-		
-						
-						User aux = new User("Administrador", "Admin", "Admin");
-						Bolsa_Laboral.getInstance().regUser(aux);
-						Bolsa_Laboral.getInstance().writeBolsa();
+				Bolsa_Laboral.getInstance().readBolsa();
+				User aux = new User("Administrador", "Admin", "Admin");
+			    Bolsa_Laboral.getInstance().regUser(aux);;
+				Bolsa_Laboral.getInstance().writeBolsa();
 			
 				try {
 					Login frame = new Login();

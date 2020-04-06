@@ -36,10 +36,9 @@ public class Bolsa_Laboral implements Serializable{
 		this.misSolicitantes = new ArrayList<>(); 
 		this.misEmpresas = new ArrayList<>(); 
 		this.misSolicitudes = new ArrayList<>(); 
-		misUsers = new ArrayList<User>();
+		this.misUsers = new ArrayList<User>();
 
 	}
-	
 	
 	// SETTERS Y GETTERS
 
@@ -87,7 +86,7 @@ public class Bolsa_Laboral implements Serializable{
 		return bolsa;
 	}
 
-	public static void setControl(Bolsa_Laboral bolsa) {
+	public static void setBolsa_Laboral(Bolsa_Laboral bolsa) {
 		Bolsa_Laboral.bolsa = bolsa;
 	}
 
@@ -123,7 +122,6 @@ public class Bolsa_Laboral implements Serializable{
 		}
 		return login;
 	}
-
 
 
 	// EMPRESA
