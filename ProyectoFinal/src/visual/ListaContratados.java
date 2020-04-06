@@ -177,7 +177,7 @@ public class ListaContratados extends JDialog {
 	}
 	
 	
-	
+	//
 	private  void loadTabla(Empresa empresa) {
 		String [] columNombres = {"Cédula", "Empleado", "Tipo de empleado", "Télefono"};
 		model.setColumnIdentifiers(columNombres);
