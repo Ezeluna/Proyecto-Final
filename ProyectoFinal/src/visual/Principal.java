@@ -364,7 +364,7 @@ public class Principal extends JFrame {
 	}
 	
 	public static JFreeChart creandoGraficoB1(CategoryDataset dataSet, String titulo ) {
-		JFreeChart grafico1 = ChartFactory.createBarChart3D(titulo, "Tipo de solicitante", "Cantidad de solicitante", dataSet, PlotOrientation.VERTICAL, false, true, false);
+		JFreeChart grafico1 = ChartFactory.createBarChart3D(titulo, "Tipo de solicitantes", "Cantidad de solicitantes", dataSet, PlotOrientation.VERTICAL, false, true, false);
 		CategoryPlot plot = (CategoryPlot) grafico1.getPlot();
 		plot.setBackgroundPaint(new Color(236,240,241));
 		grafico1.setBackgroundPaint(SystemColor.activeCaption);
@@ -373,9 +373,9 @@ public class Principal extends JFrame {
 	
 	public static CategoryDataset creandoCategoria() {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		dataset.setValue(Bolsa_Laboral.getInstance().desempleadoB(), "Tipo de Solicitante", "Bachilleres");
-		dataset.setValue(Bolsa_Laboral.getInstance().desempleadoT(), "Tipo de Solicitante", "Técnicos");
-		dataset.setValue(Bolsa_Laboral.getInstance().desempleadoU(), "Tipo de Solicitante", "Universitarios");
+		dataset.setValue(Bolsa_Laboral.getInstance().desempleadoB(), "Tipo de Solicitantes", "Bachilleres");
+		dataset.setValue(Bolsa_Laboral.getInstance().desempleadoT(), "Tipo de Solicitantes", "Técnicos");
+		dataset.setValue(Bolsa_Laboral.getInstance().desempleadoU(), "Tipo de Solicitantes", "Universitarios");
 		return dataset;
 	}
 	
@@ -442,11 +442,11 @@ public class Principal extends JFrame {
 	}
 	public static PieDataset dataSetPastel2() {
 		DefaultPieDataset result = new DefaultPieDataset();
-		if (Bolsa_Laboral.getInstance().porcientoH() != 0) {
-			result.setValue("Masculino", Bolsa_Laboral.getInstance().porcientoH());
-		}
 		if (Bolsa_Laboral.getInstance().porcientoF() != 0) {
 			result.setValue("Femenino", Bolsa_Laboral.getInstance().porcientoF());
+		}
+		if (Bolsa_Laboral.getInstance().porcientoH() != 0) {
+			result.setValue("Masculino", Bolsa_Laboral.getInstance().porcientoH());
 		}
 
 		return result;
