@@ -44,10 +44,9 @@ public class Loading extends JDialog {
 		getContentPane().setBackground(new Color(248, 248, 255));
 		setBackground(new Color(248, 248, 255));
 		option = i;
-		
 		this.setUndecorated(true);
 		this.setLocationRelativeTo(null);
-		setBounds(100, 100, 450, 150);
+		setBounds(100, 100, 450, 120);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(248, 248, 255));
 		contentPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
