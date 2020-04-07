@@ -30,6 +30,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.SystemColor;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 //jeje
 public class InsertarEmpresa extends JDialog {
 
@@ -62,6 +63,7 @@ public class InsertarEmpresa extends JDialog {
 	 * @throws ParseException 
 	 */
 	public InsertarEmpresa(String title, boolean modi, Empresa empresa, String RNCsoli)  {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(InsertarEmpresa.class.getResource("/icons/addEmpresa.png")));
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {

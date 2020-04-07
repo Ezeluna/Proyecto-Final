@@ -47,6 +47,7 @@ import javax.swing.UIManager;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Toolkit;
 //
 public class InsertarSolicitud_Empresa extends JDialog {
 
@@ -105,6 +106,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 	 * Create the dialog.
 	 */
 	public InsertarSolicitud_Empresa(Solicitud modi) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(InsertarSolicitud_Empresa.class.getResource("/icons/addSolicitud.png")));
 		setResizable(false);
 		modificarSoli = modi; 
 		addWindowListener(new WindowAdapter() {
@@ -458,7 +460,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 						panelBachiller.setVisible(false);
 					}
 				});
-				rbtnTecnico.setBackground(new Color(248, 248, 255));
+				rbtnTecnico.setBackground(SystemColor.inactiveCaptionBorder);
 				rbtnTecnico.setBounds(107, 22, 75, 23);
 				PanelVacante.add(rbtnTecnico);
 			}
@@ -473,7 +475,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 						panelBachiller.setVisible(false);
 					}
 				});
-				rbtnUniversitario.setBackground(new Color(248, 248, 255));
+				rbtnUniversitario.setBackground(SystemColor.inactiveCaptionBorder);
 				rbtnUniversitario.setBounds(6, 22, 99, 23);
 				PanelVacante.add(rbtnUniversitario);
 			}
@@ -488,7 +490,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 						panelBachiller.setVisible(true);
 					}
 				});
-				rbtnBachiller.setBackground(new Color(248, 248, 255));
+				rbtnBachiller.setBackground(SystemColor.inactiveCaptionBorder);
 				rbtnBachiller.setBounds(184, 22, 75, 23);
 				PanelVacante.add(rbtnBachiller);
 			}
@@ -729,6 +731,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 			
 			{
 				JButton bntEliminarHabilidad = new JButton("");
+				bntEliminarHabilidad.setIcon(new ImageIcon(InsertarSolicitud_Empresa.class.getResource("/icons/borrar.png")));
 				bntEliminarHabilidad.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						misHabilidades.remove(indexListaHabilidades);
