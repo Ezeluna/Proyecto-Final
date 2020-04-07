@@ -142,7 +142,7 @@ public class ListaContratados extends JDialog {
 	
 	
 	private  void loadTabla() {
-		String [] columNombres = {"Cédula", "Empleado", "Tipo de empleado", "Empresa"};
+		String [] columNombres = {"Cédula", "Empleado", "Tipo de empleado", "Teléfono"};
 		model.setColumnIdentifiers(columNombres);
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
@@ -151,10 +151,9 @@ public class ListaContratados extends JDialog {
 					fila[0] = aux.getCedula();
 					fila[1] = aux.getName() + " " + aux.getApellido();
 					fila[2] = tipoEmpleado(aux);
-					for(Empresa aux2 : Bolsa_Laboral.getInstance().getMisEmpresas()) {
-					fila[3] =  aux2.getNombre();
+					fila[3] =  aux.getTelefono();
 					model.addRow(fila);
-			   } 
+			   
 	        } 
 		}
 		centrar.setHorizontalAlignment(SwingConstants.CENTER);
