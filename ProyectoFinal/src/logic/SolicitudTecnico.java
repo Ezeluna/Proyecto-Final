@@ -9,9 +9,9 @@ public class SolicitudTecnico extends Solicitud {
 
 	public SolicitudTecnico(float cantVacantes, Empresa empresa, String localidad, int edadMax, 
 			int edadMin, int yearExperience, String tipoContrato, boolean vehiculoPropio, 
-			int categoriaLicencia, ArrayList<String> idiomas, boolean mudarse, String area) {
+			int categoriaLicencia, ArrayList<String> idiomas, boolean mudarse, String area, float cantAux) {
 		super(cantVacantes, empresa, localidad, edadMax, edadMin, yearExperience,
-				tipoContrato, vehiculoPropio, categoriaLicencia, mudarse, idiomas);
+				tipoContrato, vehiculoPropio, categoriaLicencia, mudarse, idiomas, cantAux);
 		
 		this.area = area;
 	}

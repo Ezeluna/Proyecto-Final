@@ -774,6 +774,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 						}
 
 						float vacantes = (float) spnVacantes.getValue();
+						float cantAux = (float) spnVacantes.getValue();
 
 						String localidad = (String) cbxLocalidad.getSelectedItem();
 						int categoriaLicencia = 0;
@@ -844,7 +845,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 								if (rbtnUniversitario.isSelected()) {
 									SolicitudUniversitario nuevaSoli = new SolicitudUniversitario((float) vacantes,
 											empresa, localidad, edadMaxima, edadMinima, experienciaUniversitario, Contrato, vehiculo,
-											categoriaLicencia, reubicacion, misIdiomas, carrera, posGrado);
+											categoriaLicencia, reubicacion, misIdiomas, carrera, posGrado, (float) cantAux);
 
 									bolsa.insertSolicitud(nuevaSoli);
 									JOptionPane.showMessageDialog(null, "La Solicitud se registro correctamente",
@@ -854,7 +855,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 								if (rbtnTecnico.isSelected()) {
 									SolicitudTecnico nuevaSoli = new SolicitudTecnico((float) vacantes,
 											empresa, localidad, edadMaxima, edadMinima, experienciaTecnico, Contrato, vehiculo,
-											categoriaLicencia, misIdiomas, reubicacion, area);
+											categoriaLicencia, misIdiomas, reubicacion, area, (float) cantAux);
 									
 									bolsa.insertSolicitud(nuevaSoli);
 									JOptionPane.showMessageDialog(null, "La Solicitud se registro correctamente",
@@ -864,7 +865,7 @@ public class InsertarSolicitud_Empresa extends JDialog {
 								if (rbtnBachiller.isSelected()) {
 									SolicitudBachiller nuevaSoli = new SolicitudBachiller((float) vacantes,
 											empresa, localidad, edadMaxima, edadMinima, experienciaBachiller, Contrato, vehiculo,
-											categoriaLicencia, reubicacion, misIdiomas, misHabilidades);
+											categoriaLicencia, reubicacion, misIdiomas, misHabilidades, (float) cantAux);
 									
 									bolsa.insertSolicitud(nuevaSoli);
 									JOptionPane.showMessageDialog(null, "La Solicitud se registro correctamente",

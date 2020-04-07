@@ -160,7 +160,8 @@ public class Principal extends JFrame {
 		mntContratados.setBackground(SystemColor.inactiveCaptionBorder);
 		mnMatcheo.add(mntContratados);
 		
-		JMenuItem mntmPorcentaje = new JMenuItem("Porcentaje de Sastifacci\u00F3n");
+		JMenuItem mntmPorcentaje = new JMenuItem("Porcentajes de Sastifacci\u00F3n");
+		mntmPorcentaje.setIcon(new ImageIcon(Principal.class.getResource("/icons/icons8-discount-finder-20.png")));
 		mntmPorcentaje.setBackground(SystemColor.inactiveCaptionBorder);
 		mntmPorcentaje.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

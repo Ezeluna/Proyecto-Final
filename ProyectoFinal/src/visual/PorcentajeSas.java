@@ -47,6 +47,7 @@ public class PorcentajeSas extends JDialog {
 	 * Create the dialog.
 	 */
 	public PorcentajeSas() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(PorcentajeSas.class.getResource("/icons/icons8-discount-finder-20.png")));
 		setResizable(false);
 		setTitle("Porcentajes de Contrataci\u00F3n");
 		setBounds(100, 100, 719, 472);
@@ -60,7 +61,7 @@ public class PorcentajeSas extends JDialog {
 		JPanel panel = new JPanel();
 		panel.setBackground(SystemColor.inactiveCaptionBorder);
 		panel.setBorder(new TitledBorder(null, "Porcentajes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 683, 376);
+		panel.setBounds(10, 11, 693, 386);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
@@ -70,7 +71,7 @@ public class PorcentajeSas extends JDialog {
 			public void mouseClicked(MouseEvent e) {
 			}
 		});
-		scrollPane.setBounds(10, 22, 663, 332);
+		scrollPane.setBounds(10, 22, 673, 353);
 		panel.add(scrollPane);
 		
 		table = new JTable();
@@ -114,7 +115,7 @@ public class PorcentajeSas extends JDialog {
 			fila[1] = tipoSolicitud(soli);
 			fila[2] = soli.getCantVacantes();
 			cant1 = soli.getCantAux();
-			cant2 = soli.getCantSolicitudes()+1;
+			cant2 = soli.getCantSolicitudes();
 			porciento = (cant2 / cant1 )*100;
 			
 			fila[3] = porciento+" %";

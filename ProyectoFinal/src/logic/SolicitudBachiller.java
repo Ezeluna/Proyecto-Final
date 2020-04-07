@@ -9,9 +9,9 @@ public class SolicitudBachiller extends Solicitud {
 
 	public SolicitudBachiller( float cantVacantes, Empresa empresa, String localidad,
 			int edadMax, int edadMin, int yearExperience, String tipoContrato, boolean vehiculoPropio, int categoriaLicencia,
-			boolean mudarse, ArrayList<String> idiomas, ArrayList<String> habilidades) {
+			boolean mudarse, ArrayList<String> idiomas, ArrayList<String> habilidades, float cantAux) {
 		super(cantVacantes, empresa, localidad, edadMax, edadMin, yearExperience,
-				tipoContrato, vehiculoPropio, categoriaLicencia, mudarse, idiomas );
+				tipoContrato, vehiculoPropio, categoriaLicencia, mudarse, idiomas, cantAux );
 		
 		this.habilidades = new ArrayList<>();
 		for (String habili : habilidades) {
