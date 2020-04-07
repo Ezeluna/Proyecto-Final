@@ -270,7 +270,7 @@ public class Principal extends JFrame {
 		mnPersonal.add(mntListarSP);
 		
 		JMenu mnUtilidades = new JMenu("Utilidades");
-		mnUtilidades.setIcon(new ImageIcon(Principal.class.getResource("/icons/reportar24.png")));
+		mnUtilidades.setIcon(new ImageIcon(Principal.class.getResource("/icons/icons8-file-configuration-32.png")));
 		mnUtilidades.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		menuBar.add(mnUtilidades);
 		
