@@ -43,6 +43,7 @@ import javax.swing.ScrollPaneConstants;
 import java.awt.Button;
 
 
+
 public class ListaContratados extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -51,6 +52,7 @@ public class ListaContratados extends JDialog {
 	private static Object[] fila;
 	private static DefaultTableCellRenderer centrar = new DefaultTableCellRenderer();
 	private Empresa miEmpresa; 
+	private JTextField txtName;
 
 	/**
 	 * Launch the application.
@@ -64,7 +66,7 @@ public class ListaContratados extends JDialog {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListaContratados.class.getResource("/icons/Listas.png")));
 		setTitle("Lista de contratados");
-		setBounds(100, 100, 719, 472);
+		setBounds(100, 100, 719, 510);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(SystemColor.inactiveCaptionBorder);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -75,7 +77,7 @@ public class ListaContratados extends JDialog {
 			JPanel panel = new JPanel();
 			panel.setBackground(SystemColor.inactiveCaptionBorder);
 			panel.setBorder(new TitledBorder(null, "Personal Contratado", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panel.setBounds(10, 11, 693, 386);
+			panel.setBounds(10, 92, 693, 343);
 			contentPanel.add(panel);
 			panel.setLayout(null);
 			
@@ -86,7 +88,7 @@ public class ListaContratados extends JDialog {
 				public void mouseClicked(MouseEvent e) {
 				}
 			});
-			scrollPane.setBounds(10, 23, 673, 352);
+			scrollPane.setBounds(10, 23, 673, 309);
 			panel.add(scrollPane);
 			
 			table = new JTable();
@@ -98,6 +100,36 @@ public class ListaContratados extends JDialog {
 			//loadEmpresa();
 			scrollPane.setViewportView(table);
 		}
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(SystemColor.inactiveCaption);
+		panel.setBounds(10, 11, 693, 76);
+		contentPanel.add(panel);
+		panel.setLayout(null);
+		
+		JButton btnSearch = new JButton("");
+		btnSearch.setIcon(new ImageIcon(ListaContratados.class.getResource("/icons/Logo Buscar.png")));
+		btnSearch.setBounds(281, 11, 29, 21);
+		panel.add(btnSearch);
+		
+		JFormattedTextField ftxtRNC = new JFormattedTextField();
+		ftxtRNC.setBounds(154, 11, 117, 20);
+		panel.add(ftxtRNC);
+		
+		JLabel lblRNC = new JLabel("RNC:");
+		lblRNC.setBounds(98, 14, 46, 14);
+		panel.add(lblRNC);
+		
+		JLabel lblName = new JLabel("Nombre:");
+		lblName.setBounds(98, 41, 58, 14);
+		panel.add(lblName);
+		
+		txtName = new JTextField();
+		txtName.setEnabled(false);
+		txtName.setColumns(10);
+		txtName.setBackground(Color.WHITE);
+		txtName.setBounds(154, 38, 430, 20);
+		panel.add(txtName);
 		
 		MaskFormatter mascara = new MaskFormatter("##########");
 		{
