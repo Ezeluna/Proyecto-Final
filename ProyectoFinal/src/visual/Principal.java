@@ -160,6 +160,16 @@ public class Principal extends JFrame {
 		mntContratados.setBackground(SystemColor.inactiveCaptionBorder);
 		mnMatcheo.add(mntContratados);
 		
+		JMenuItem mntmPorcentaje = new JMenuItem("Porcentaje de Sastifacci\u00F3n");
+		mntmPorcentaje.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PorcentajeSas aux = new PorcentajeSas();
+				aux.setModal(true);
+				aux.setVisible(true);
+			}
+		});
+		mnMatcheo.add(mntmPorcentaje);
+		
 		JMenu mnNewMenu = new JMenu("Empresa");
 		mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/icons/empresa24.png")));
 		mnNewMenu.setFont(new Font("Segoe UI", Font.BOLD, 13));
@@ -472,5 +482,4 @@ public class Principal extends JFrame {
 		panelPastel2.repaint();
 
 	}
-	
 }

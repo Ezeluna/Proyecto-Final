@@ -40,6 +40,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JFormattedTextField;
 import javax.swing.ScrollPaneConstants;
+import java.awt.Button;
 
 
 public class ListaContratados extends JDialog {
@@ -49,8 +50,6 @@ public class ListaContratados extends JDialog {
 	private  DefaultTableModel model;
 	private static Object[] fila;
 	private static DefaultTableCellRenderer centrar = new DefaultTableCellRenderer();
-	private JTextField txtName;
-	private JFormattedTextField ftxtRNC; 
 	private Empresa miEmpresa; 
 
 	/**
@@ -95,7 +94,8 @@ public class ListaContratados extends JDialog {
 			model = new DefaultTableModel();
 			table.setModel(model);
 			table.getTableHeader().setResizingAllowed(false);
-			loadTabla(null);
+			loadTabla();
+			//loadEmpresa();
 			scrollPane.setViewportView(table);
 		}
 		
@@ -105,43 +105,7 @@ public class ListaContratados extends JDialog {
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
-		txtName = new JTextField();
-		txtName.setEnabled(false);
-		txtName.setColumns(10);
-		txtName.setBackground(Color.WHITE);
-		txtName.setBounds(147, 38, 430, 20);
-		panel.add(txtName);
-		
-		JLabel lblName = new JLabel("Nombre:");
-		lblName.setBounds(91, 41, 58, 14);
-		panel.add(lblName);
-		
-		JLabel lblRNC = new JLabel("RNC:");
-		lblRNC.setBounds(91, 14, 46, 14);
-		panel.add(lblRNC);
-		
 		MaskFormatter mascara = new MaskFormatter("##########");
-		ftxtRNC = new JFormattedTextField(mascara);
-		ftxtRNC.setBounds(147, 11, 117, 20);
-		panel.add(ftxtRNC);
-		
-		JButton btnSearch = new JButton("");
-		btnSearch.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (Bolsa_Laboral.getInstance().RetornarEmpresa(ftxtRNC.getText()) != null) {
-					miEmpresa = Bolsa_Laboral.getInstance().RetornarEmpresa(ftxtRNC.getText());
-					txtName.setText(miEmpresa.getNombre());
-					loadTabla(miEmpresa);
-				} else {
-					JOptionPane.showMessageDialog(null,
-							"No se encontro una empresa con el RNC digitado.", "Información",
-							JOptionPane.WARNING_MESSAGE, null);
-				}
-			}
-		});
-		btnSearch.setIcon(new ImageIcon(ListaContratados.class.getResource("/icons/Logo Buscar.png")));
-		btnSearch.setBounds(274, 11, 29, 21);
-		panel.add(btnSearch);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBackground(SystemColor.inactiveCaption);
@@ -177,35 +141,21 @@ public class ListaContratados extends JDialog {
 	}
 	
 	
-	private  void loadTabla(Empresa empresa) {
-		String [] columNombres = {"Cédula", "Empleado", "Tipo de empleado", "Télefono"};
+	private  void loadTabla() {
+		String [] columNombres = {"Cédula", "Empleado", "Tipo de empleado", "Empresa"};
 		model.setColumnIdentifiers(columNombres);
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 		for(Personal aux : Bolsa_Laboral.getInstance().getMisSolicitantes()) {	
-			if (empresa == null) {
-				if(aux.isContratado()) {
+			if(aux.isContratado()) {
 					fila[0] = aux.getCedula();
 					fila[1] = aux.getName() + " " + aux.getApellido();
 					fila[2] = tipoEmpleado(aux);
-					fila[3] =  aux.getTelefono();
+					for(Empresa aux2 : Bolsa_Laboral.getInstance().getMisEmpresas()) {
+					fila[3] =  aux2.getNombre();
 					model.addRow(fila);
-			    } 
-	        } else {
-	        	ArrayList<Personal> miPersonalC = new ArrayList<>(); 
-	        	for (Personal miPersonal : empresa.getMisEmpleadosC()) {
-	        			miPersonalC.add(miPersonal);
-	        	}
-	        	
-	        	for (Personal miEmpleado : miPersonalC) {
-	        		fila[0] = miEmpleado.getCedula();
-					fila[1] = miEmpleado.getName() + " " + aux.getApellido();
-					fila[2] = tipoEmpleado(miEmpleado);
-					fila[3] =  miEmpleado.getTelefono();
-					model.addRow(fila);
-	        	}
-	        	
-	        }
+			   } 
+	        } 
 		}
 		centrar.setHorizontalAlignment(SwingConstants.CENTER);
 		for (int i = 0; i < columNombres.length; i++) {
@@ -222,4 +172,6 @@ public class ListaContratados extends JDialog {
 
 		
 	}
+	
+
 }

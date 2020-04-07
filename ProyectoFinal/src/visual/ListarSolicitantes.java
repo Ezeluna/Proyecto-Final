@@ -293,26 +293,28 @@ public class ListarSolicitantes extends JDialog {
 					fila[7] = soli.getCorreo();
 					modeloTabla.addRow(fila);
 
-					table.setModel(modeloTabla);
-					table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-					table.getTableHeader().setReorderingAllowed(false);
-					TableColumnModel modeloColumna = table.getColumnModel();
-					centrar.setHorizontalAlignment(SwingConstants.CENTER);
-					for (int i = 0; i < nombreColumna.length; i++) {
-						table.getColumnModel().getColumn(i).setCellRenderer(centrar);
-					}
-					modeloColumna.getColumn(0).setPreferredWidth(110);
-					modeloColumna.getColumn(1).setPreferredWidth(160);
-					modeloColumna.getColumn(2).setPreferredWidth(90);
-					modeloColumna.getColumn(3).setPreferredWidth(120);
-					modeloColumna.getColumn(4).setPreferredWidth(100);
-					modeloColumna.getColumn(5).setPreferredWidth(100);
-					modeloColumna.getColumn(6).setPreferredWidth(100);
-					modeloColumna.getColumn(7).setPreferredWidth(160);
+					
 				}
 			}
 
 		}
+		table.setModel(modeloTabla);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table.getTableHeader().setReorderingAllowed(false);
+		TableColumnModel modeloColumna = table.getColumnModel();
+		centrar.setHorizontalAlignment(SwingConstants.CENTER);
+		for (int i = 0; i < nombreColumna.length; i++) {
+			table.getColumnModel().getColumn(i).setCellRenderer(centrar);
+		}
+		modeloColumna.getColumn(0).setPreferredWidth(110);
+		modeloColumna.getColumn(1).setPreferredWidth(160);
+		modeloColumna.getColumn(2).setPreferredWidth(90);
+		modeloColumna.getColumn(3).setPreferredWidth(120);
+		modeloColumna.getColumn(4).setPreferredWidth(100);
+		modeloColumna.getColumn(5).setPreferredWidth(100);
+		modeloColumna.getColumn(6).setPreferredWidth(100);
+		modeloColumna.getColumn(7).setPreferredWidth(160);
+		
 	}
 	
 	public void cargarTablaT() {
@@ -338,26 +340,28 @@ public class ListarSolicitantes extends JDialog {
 					fila[7] = soli.getCorreo();
 					modeloTabla.addRow(fila);
 
-					table.setModel(modeloTabla);
-					table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-					table.getTableHeader().setReorderingAllowed(false);
-					TableColumnModel modeloColumna = table.getColumnModel();
-					centrar.setHorizontalAlignment(SwingConstants.CENTER);
-					for (int i = 0; i < nombreColumna.length; i++) {
-						table.getColumnModel().getColumn(i).setCellRenderer(centrar);
-					}
-					modeloColumna.getColumn(0).setPreferredWidth(110);
-					modeloColumna.getColumn(1).setPreferredWidth(160);
-					modeloColumna.getColumn(2).setPreferredWidth(90);
-					modeloColumna.getColumn(3).setPreferredWidth(120);
-					modeloColumna.getColumn(4).setPreferredWidth(100);
-					modeloColumna.getColumn(5).setPreferredWidth(100);
-					modeloColumna.getColumn(6).setPreferredWidth(100);
-					modeloColumna.getColumn(7).setPreferredWidth(160);
+					
 				}
 			}
 
 		}
+		
+		table.setModel(modeloTabla);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table.getTableHeader().setReorderingAllowed(false);
+		TableColumnModel modeloColumna = table.getColumnModel();
+		centrar.setHorizontalAlignment(SwingConstants.CENTER);
+		for (int i = 0; i < nombreColumna.length; i++) {
+			table.getColumnModel().getColumn(i).setCellRenderer(centrar);
+		}
+		modeloColumna.getColumn(0).setPreferredWidth(110);
+		modeloColumna.getColumn(1).setPreferredWidth(160);
+		modeloColumna.getColumn(2).setPreferredWidth(90);
+		modeloColumna.getColumn(3).setPreferredWidth(120);
+		modeloColumna.getColumn(4).setPreferredWidth(100);
+		modeloColumna.getColumn(5).setPreferredWidth(100);
+		modeloColumna.getColumn(6).setPreferredWidth(100);
+		modeloColumna.getColumn(7).setPreferredWidth(160);
 
 	}
 	
@@ -386,26 +390,28 @@ public class ListarSolicitantes extends JDialog {
 
 					modeloTabla.addRow(fila);
 
-					table.setModel(modeloTabla);
-					table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-					table.getTableHeader().setReorderingAllowed(false);
-					TableColumnModel modeloColumna = table.getColumnModel();
-					centrar.setHorizontalAlignment(SwingConstants.CENTER);
-					for (int i = 0; i < nombreColumna.length; i++) {
-						table.getColumnModel().getColumn(i).setCellRenderer(centrar);
-					}
-					modeloColumna.getColumn(0).setPreferredWidth(110);
-					modeloColumna.getColumn(1).setPreferredWidth(160);
-					modeloColumna.getColumn(2).setPreferredWidth(90);
-					modeloColumna.getColumn(3).setPreferredWidth(120);
-					modeloColumna.getColumn(4).setPreferredWidth(100);
-					modeloColumna.getColumn(5).setPreferredWidth(100);
-					modeloColumna.getColumn(6).setPreferredWidth(100);
-					modeloColumna.getColumn(7).setPreferredWidth(160);
+					
 				}
 			}
 
 		}
+		table.setModel(modeloTabla);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table.getTableHeader().setReorderingAllowed(false);
+		TableColumnModel modeloColumna = table.getColumnModel();
+		centrar.setHorizontalAlignment(SwingConstants.CENTER);
+		for (int i = 0; i < nombreColumna.length; i++) {
+			table.getColumnModel().getColumn(i).setCellRenderer(centrar);
+		}
+		modeloColumna.getColumn(0).setPreferredWidth(110);
+		modeloColumna.getColumn(1).setPreferredWidth(160);
+		modeloColumna.getColumn(2).setPreferredWidth(90);
+		modeloColumna.getColumn(3).setPreferredWidth(120);
+		modeloColumna.getColumn(4).setPreferredWidth(100);
+		modeloColumna.getColumn(5).setPreferredWidth(100);
+		modeloColumna.getColumn(6).setPreferredWidth(100);
+		modeloColumna.getColumn(7).setPreferredWidth(160);
+		
 	}
 
 	public static void loadTabla(String seleccion) {
