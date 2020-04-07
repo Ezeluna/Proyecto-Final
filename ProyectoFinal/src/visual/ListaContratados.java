@@ -126,7 +126,8 @@ public class ListaContratados extends JDialog {
 		btnSearch.setBounds(281, 11, 29, 21);
 		panel.add(btnSearch);
 		
-		 ftxtRNC = new JFormattedTextField();
+		MaskFormatter mascara = new MaskFormatter("##########");
+		ftxtRNC = new JFormattedTextField(mascara);
 		ftxtRNC.setBounds(154, 11, 117, 20);
 		panel.add(ftxtRNC);
 		
@@ -151,15 +152,16 @@ public class ListaContratados extends JDialog {
 		panel.add(txtName);
 		
 		JButton btnGeneral = new JButton("General");
+		btnGeneral.setIcon(new ImageIcon(ListaContratados.class.getResource("/icons/ver.png")));
 		btnGeneral.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				loadTablaG();
 			}
 		});
-		btnGeneral.setBounds(10, 21, 78, 23);
+		btnGeneral.setBounds(479, 11, 105, 21);
 		panel.add(btnGeneral);
 		
-		MaskFormatter mascara = new MaskFormatter("##########");
+
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBackground(SystemColor.inactiveCaption);

@@ -30,6 +30,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
+import javax.swing.ScrollPaneConstants;
 
 public class PorcentajeSas extends JDialog {
 
@@ -66,6 +67,7 @@ public class PorcentajeSas extends JDialog {
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -133,7 +135,7 @@ public class PorcentajeSas extends JDialog {
 		columnModel.getColumn(0).setPreferredWidth(160);
 		columnModel.getColumn(1).setPreferredWidth(167);
 		columnModel.getColumn(2).setPreferredWidth(166);
-		columnModel.getColumn(3).setPreferredWidth(167);
+		columnModel.getColumn(3).setPreferredWidth(180);
 
 	}
 
