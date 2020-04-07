@@ -156,6 +156,8 @@ public class ListaContratados extends JDialog {
 		btnGeneral.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				loadTablaG();
+				ftxtRNC.setText("");
+				txtName.setText("");
 			}
 		});
 		btnGeneral.setBounds(479, 11, 105, 21);
