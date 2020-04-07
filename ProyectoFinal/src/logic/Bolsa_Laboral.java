@@ -349,26 +349,11 @@ public class Bolsa_Laboral implements Serializable{
 			solicitud.DecrementoV();
 			empresa.insertarEmpleadoC(solicitante);
 			
-		} if (solicitud.getCantVacantes() <= 0 ) {
+		} /*if (solicitud.getCantVacantes() <= 0 ) {
 			EliminarSolicitud(solicitud.getId());
-		}
+		}*/
 
 	}
-	
-	
-  /*  //ELIMINAR VACANTE
-	public int eliminarV(Solicitud soli,ArrayList<Personal> empleados) {
-		int cant = 0;
-		contratarEmpleados(soli, empleados);
-		for(int i = 0; i < soli.getCantVacantes(); i++) {
-			cant = (int) (soli.getCantVacantes() - misEmpleadosCon.size());
-		}
-		
-		return cant;
-		}*/
-	
-	
-	// SOLICITUD EMPRESA
 	
 	public void insertSolicitud(Solicitud solicitud) {// Agregar una solicitud al arraylist
 		String id = getIdSolicitud();

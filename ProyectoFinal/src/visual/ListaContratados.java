@@ -75,7 +75,7 @@ public class ListaContratados extends JDialog {
 			JPanel panel = new JPanel();
 			panel.setBackground(SystemColor.inactiveCaptionBorder);
 			panel.setBorder(new TitledBorder(null, "Personal Contratado", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panel.setBounds(10, 93, 693, 296);
+			panel.setBounds(10, 11, 693, 386);
 			contentPanel.add(panel);
 			panel.setLayout(null);
 			
@@ -86,7 +86,7 @@ public class ListaContratados extends JDialog {
 				public void mouseClicked(MouseEvent e) {
 				}
 			});
-			scrollPane.setBounds(10, 23, 673, 255);
+			scrollPane.setBounds(10, 23, 673, 352);
 			panel.add(scrollPane);
 			
 			table = new JTable();
@@ -98,12 +98,6 @@ public class ListaContratados extends JDialog {
 			//loadEmpresa();
 			scrollPane.setViewportView(table);
 		}
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(SystemColor.inactiveCaption);
-		panel.setBounds(10, 11, 693, 71);
-		contentPanel.add(panel);
-		panel.setLayout(null);
 		
 		MaskFormatter mascara = new MaskFormatter("##########");
 		{
@@ -171,6 +165,4 @@ public class ListaContratados extends JDialog {
 
 		
 	}
-	
-
 }

@@ -8,6 +8,7 @@ public abstract class Solicitud implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected String id; 
 	protected float cantVacantes;
+	private float cantAux; 
 	protected int cantSolicitudes;
 	protected Empresa empresa;  
 	protected String localidad; 
@@ -26,6 +27,7 @@ public abstract class Solicitud implements Serializable {
 		super();
 		this.cantVacantes = cantVacantes;
 		this.cantSolicitudes = 0;
+		this.cantAux = 0; 
 		this.localidad = localidad; 
 		this.empresa = empresa;
 		this.edadMax = edadMax;
@@ -62,6 +64,14 @@ public abstract class Solicitud implements Serializable {
 
 	public void setCantSolicitudes(int cantSolicitudes) {
 		this.cantSolicitudes = cantSolicitudes;
+	}
+
+	public float getCantAux() {
+		return cantAux;
+	}
+
+	public void setCantAux(float cantAux) {
+		this.cantAux = cantAux;
 	}
 
 	public Empresa getEmpresa() {
@@ -150,7 +160,7 @@ public abstract class Solicitud implements Serializable {
 	
 	public void DecrementoV() {
 		cantVacantes--; 
-		
+		cantAux++;
 	}
 	
 	

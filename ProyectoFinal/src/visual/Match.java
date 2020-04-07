@@ -220,6 +220,8 @@ public class Match extends JDialog {
 				btnSearch.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						ftxtCodSolicitud.setValue("");
+						model.clear();
+						modelCont.clear();
 
 						if (Bolsa_Laboral.getInstance().RetornarEmpresa(ftxtRNC.getText()) != null) {
 							miEmpresa = Bolsa_Laboral.getInstance().RetornarEmpresa(ftxtRNC.getText());
@@ -271,6 +273,8 @@ public class Match extends JDialog {
 					ftxtCodSolicitud.setText("");
 					txtName.setText("");
 					ftxtRNC.setText("");
+					model.clear();
+					modelCont.clear();
 				}
 			});
 			btnClean.setIcon(new ImageIcon(Match.class.getResource("/icons/filtrar.png")));

@@ -316,30 +316,33 @@ public class ListarSolicitud_Empresa extends JDialog {
 		modeloTabla.setColumnIdentifiers(nombreColumna);
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
+		
 		for (Solicitud soli : Bolsa_Laboral.getInstance().getMisSolicitudes()) {
+			if (soli.getCantVacantes() > 0) {
+				fila[0] = soli.getId();
+				fila[1] = soli.getEmpresa().getNombre();
+				if (soli instanceof SolicitudUniversitario) {
+					fila[2] = "Universitario";
+				}
+				if (soli instanceof SolicitudTecnico) {
+					fila[2] = "Técnico";
+				}
+				if (soli instanceof SolicitudBachiller) {
+					fila[2] = "Bachiller";
+				}
+				String min = Integer.toString(soli.getEdadMin());
+				String max = Integer.toString(soli.getEdadMax());
+				fila[3] = min + " - " + max;
 
-			fila[0] = soli.getId();
-			fila[1] = soli.getEmpresa().getNombre();
-			if (soli instanceof SolicitudUniversitario) {
-				fila[2] = "Universitario";
+				if (soli.isVehiculoPropio()) {
+					fila[4] = "Si";
+				} else {
+					fila[4] = "No";
+				}
+				fila[5] = soli.getLocalidad();
+				modeloTabla.addRow(fila);
 			}
-			if (soli instanceof SolicitudTecnico) {
-				fila[2] = "Técnico";
-			}
-			if (soli instanceof SolicitudBachiller) {
-				fila[2] = "Bachiller";
-			}
-			String min = Integer.toString(soli.getEdadMin());
-			String max = Integer.toString(soli.getEdadMax());
-			fila[3] = min + " - " + max;
-
-			if (soli.isVehiculoPropio()) {
-				fila[4] = "Si";
-			} else {
-				fila[4] = "No";
-			}
-			fila[5] = soli.getLocalidad();
-			modeloTabla.addRow(fila);
+			
 		}
 		table.setModel(modeloTabla);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -366,32 +369,34 @@ public class ListarSolicitud_Empresa extends JDialog {
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
 		for (Solicitud soli : Bolsa_Laboral.getInstance().getMisSolicitudes()) {
-			if (soli instanceof SolicitudUniversitario) {
-				String[] idioma = llenado(soli.getIdiomas());
-				cbxIdioma = new JComboBox<String>(idioma);
-				setComboIdiomas();
+			if (soli.getCantVacantes() > 0) {
+				if (soli instanceof SolicitudUniversitario) {
+					String[] idioma = llenado(soli.getIdiomas());
+					cbxIdioma = new JComboBox<String>(idioma);
+					setComboIdiomas();
 
-				fila[0] = soli.getId();
-				fila[1] = soli.getEmpresa().getNombre();
-				fila[2] = soli.getCantVacantes();
-				String min = Integer.toString(soli.getEdadMin());
-				String max = Integer.toString(soli.getEdadMax());
-				fila[3] = min + " - " + max;
-				if (soli.isVehiculoPropio()) {
-					fila[4] = "Si";
-				} else {
-					fila[4] = "No";
-				}
-				fila[5] = soli.getLocalidad();
-				fila[6] = "Ver Idiomas";
-				fila[7] = ((SolicitudUniversitario) soli).getCarrera();
-				if (((SolicitudUniversitario) soli).isPostGrado()) {
-					fila[8] = "Si";
-				} else {
-					fila[8] = "No";
-				}
-				modeloTabla.addRow(fila);
+					fila[0] = soli.getId();
+					fila[1] = soli.getEmpresa().getNombre();
+					fila[2] = soli.getCantVacantes();
+					String min = Integer.toString(soli.getEdadMin());
+					String max = Integer.toString(soli.getEdadMax());
+					fila[3] = min + " - " + max;
+					if (soli.isVehiculoPropio()) {
+						fila[4] = "Si";
+					} else {
+						fila[4] = "No";
+					}
+					fila[5] = soli.getLocalidad();
+					fila[6] = "Ver Idiomas";
+					fila[7] = ((SolicitudUniversitario) soli).getCarrera();
+					if (((SolicitudUniversitario) soli).isPostGrado()) {
+						fila[8] = "Si";
+					} else {
+						fila[8] = "No";
+					}
+					modeloTabla.addRow(fila);
 
+				}
 			}
 
 		}
@@ -424,31 +429,34 @@ public class ListarSolicitud_Empresa extends JDialog {
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
 		for (Solicitud soli : Bolsa_Laboral.getInstance().getMisSolicitudes()) {
-			if (soli instanceof SolicitudTecnico) {
-				String[] idioma = llenado(soli.getIdiomas());
-				cbxIdioma = new JComboBox<String>(idioma);
-				setComboIdiomas();
+			if (soli.getCantVacantes() > 0) {
+				if (soli instanceof SolicitudTecnico) {
+					String[] idioma = llenado(soli.getIdiomas());
+					cbxIdioma = new JComboBox<String>(idioma);
+					setComboIdiomas();
 
-				fila[0] = soli.getId();
-				fila[1] = soli.getEmpresa().getNombre();
-				fila[2] = soli.getCantVacantes();
+					fila[0] = soli.getId();
+					fila[1] = soli.getEmpresa().getNombre();
+					fila[2] = soli.getCantVacantes();
 
-				String min = Integer.toString(soli.getEdadMin());
-				String max = Integer.toString(soli.getEdadMax());
-				fila[3] = min + " - " + max;
+					String min = Integer.toString(soli.getEdadMin());
+					String max = Integer.toString(soli.getEdadMax());
+					fila[3] = min + " - " + max;
 
-				if (soli.isVehiculoPropio()) {
-					fila[4] = "Si";
-				} else {
-					fila[4] = "No";
+					if (soli.isVehiculoPropio()) {
+						fila[4] = "Si";
+					} else {
+						fila[4] = "No";
+					}
+					fila[5] = soli.getLocalidad();
+					fila[6] = "Ver Idiomas";
+					fila[7] = ((SolicitudTecnico) soli).getArea();
+
+					modeloTabla.addRow(fila);
+
 				}
-				fila[5] = soli.getLocalidad();
-				fila[6] = "Ver Idiomas";
-				fila[7] = ((SolicitudTecnico) soli).getArea();
-
-				modeloTabla.addRow(fila);
-
 			}
+			
 
 		}
 		table.setModel(modeloTabla);
@@ -478,33 +486,36 @@ public class ListarSolicitud_Empresa extends JDialog {
 		modeloTabla.setRowCount(0);
 		fila = new Object[modeloTabla.getColumnCount()];
 		for (Solicitud soli : Bolsa_Laboral.getInstance().getMisSolicitudes()) {
-			if (soli instanceof SolicitudBachiller) {
-				String[] idioma = llenado(soli.getIdiomas());
-				String[] habilidad = llenado(((SolicitudBachiller) soli).getHabilidades());
-				cbxHabilidades = new JComboBox<String>(habilidad);
-				cbxIdioma = new JComboBox<String>(idioma);
-				setComboIdiomas();
-				setCombo();
+			if (soli.getCantVacantes() > 0) {
+				if (soli instanceof SolicitudBachiller) {
+					String[] idioma = llenado(soli.getIdiomas());
+					String[] habilidad = llenado(((SolicitudBachiller) soli).getHabilidades());
+					cbxHabilidades = new JComboBox<String>(habilidad);
+					cbxIdioma = new JComboBox<String>(idioma);
+					setComboIdiomas();
+					setCombo();
 
-				fila[0] = soli.getId();
-				fila[1] = soli.getEmpresa().getNombre();
-				fila[2] = soli.getCantVacantes();
+					fila[0] = soli.getId();
+					fila[1] = soli.getEmpresa().getNombre();
+					fila[2] = soli.getCantVacantes();
 
-				String min = Integer.toString(soli.getEdadMin());
-				String max = Integer.toString(soli.getEdadMax());
-				fila[3] = min + " - " + max;
-				if (soli.isVehiculoPropio()) {
-					fila[4] = "Si";
-				} else {
-					fila[4] = "No";
+					String min = Integer.toString(soli.getEdadMin());
+					String max = Integer.toString(soli.getEdadMax());
+					fila[3] = min + " - " + max;
+					if (soli.isVehiculoPropio()) {
+						fila[4] = "Si";
+					} else {
+						fila[4] = "No";
+					}
+					fila[5] = soli.getLocalidad();
+					fila[6] = "Ver Idiomas";
+					fila[7] = "Ver Habilidades";
+
+					modeloTabla.addRow(fila);
+
 				}
-				fila[5] = soli.getLocalidad();
-				fila[6] = "Ver Idiomas";
-				fila[7] = "Ver Habilidades";
-
-				modeloTabla.addRow(fila);
-
 			}
+			
 
 		}
 		table.setModel(modeloTabla);
@@ -536,29 +547,30 @@ public class ListarSolicitud_Empresa extends JDialog {
 		fila = new Object[modeloTabla.getColumnCount()];
 
 		for (Solicitud soli : lista) {
-		
-			fila[0] = soli.getId();
-			fila[1] = soli.getEmpresa().getNombre();
-			if (soli instanceof SolicitudUniversitario) {
-				fila[2] = "Universitario";
+			if (soli.getCantVacantes() > 0) {
+				fila[0] = soli.getId();
+				fila[1] = soli.getEmpresa().getNombre();
+				if (soli instanceof SolicitudUniversitario) {
+					fila[2] = "Universitario";
+				}
+				if (soli instanceof SolicitudTecnico) {
+					fila[2] = "Técnico";
+				}
+				if (soli instanceof SolicitudBachiller) {
+					fila[2] = "Bachiller";
+				}
+				String min = Integer.toString(soli.getEdadMin());
+				String max = Integer.toString(soli.getEdadMax());
+				fila[3] = min + " - " + max;
+				if (soli.isVehiculoPropio()) {
+					fila[4] = "Si";
+				} else {
+					fila[4] = "No";
+				}
+				fila[5] = soli.getLocalidad();
+				modeloTabla.addRow(fila);
 			}
-			if (soli instanceof SolicitudTecnico) {
-				fila[2] = "Técnico";
-			}
-			if (soli instanceof SolicitudBachiller) {
-				fila[2] = "Bachiller";
-			}
-			String min = Integer.toString(soli.getEdadMin());
-			String max = Integer.toString(soli.getEdadMax());
-			fila[3] = min + " - " + max;
-			if (soli.isVehiculoPropio()) {
-				fila[4] = "Si";
-			} else {
-				fila[4] = "No";
-			}
-			fila[5] = soli.getLocalidad();
-			modeloTabla.addRow(fila);
-
+			
 		}
 		table.setModel(modeloTabla);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
