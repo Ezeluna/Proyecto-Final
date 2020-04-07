@@ -37,7 +37,7 @@ public class Bolsa_Laboral implements Serializable{
 		this.misSolicitantes = new ArrayList<>(); 
 		this.misEmpresas = new ArrayList<>(); 
 		this.misSolicitudes = new ArrayList<>(); 
-		this.misUsers = new ArrayList<>();
+		this.misUsers = new ArrayList<User>();
 
 	}
 	

@@ -14,6 +14,8 @@ import logic.User;
 
 import java.awt.SystemColor;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -29,13 +31,14 @@ import java.io.ObjectOutputStream;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class Login extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField txtUser;
 	JLabel lblMin; 
-	private JTextField textField_1;
+	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
@@ -90,6 +93,7 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 	public Login() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/icons/icons8-pie-chart-64.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -147,49 +151,69 @@ public class Login extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("Usuario:");
-		lblNewLabel_1.setForeground(SystemColor.text);
-		lblNewLabel_1.setBackground(new Color(236,240,241));
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_1.setBounds(22, 54, 75, 14);
-		panel_1.add(lblNewLabel_1);
+		JLabel lblUser = new JLabel("Usuario:");
+		lblUser.setForeground(SystemColor.text);
+		lblUser.setBackground(new Color(236,240,241));
+		lblUser.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblUser.setBounds(22, 57, 75, 14);
+		panel_1.add(lblUser);
 		
-		JLabel lblNewLabel_2 = new JLabel("Contrase\u00F1a:");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_2.setForeground(SystemColor.text);
-		lblNewLabel_2.setBounds(22, 110, 129, 17);
-		panel_1.add(lblNewLabel_2);
+		JLabel lblPass = new JLabel("Contrase\u00F1a:");
+		lblPass.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPass.setForeground(SystemColor.text);
+		lblPass.setBounds(22, 115, 129, 17);
+		panel_1.add(lblPass);
 		
-		textField = new JTextField();
-		textField.setBackground(new Color(108, 122, 137));
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		textField.setBounds(131, 53, 224, 20);
-		panel_1.add(textField);
-		textField.setColumns(10);
+		txtUser = new JTextField();
+		txtUser.setBackground(new Color(108, 122, 137));
+		txtUser.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtUser.setBounds(131, 53, 224, 22);
+		panel_1.add(txtUser);
+		txtUser.setColumns(10);
 		
-		JButton btnNewButton = new JButton("LogIn");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnLogin = new JButton("LogIn");
+		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(Bolsa_Laboral.getInstance().confirmLogin(textField.getText(),textField_1.getText())){
+				if(Bolsa_Laboral.getInstance().confirmLogin(txtUser.getText(),passwordField.getText())){
 					Principal frame = new Principal();
 					dispose();
 					frame.setVisible(true);
-				};
+					JOptionPane.showMessageDialog(null,
+							"Bienvenido a DAEX\u00A9 - Bolsa Laboral", "Información",
+							JOptionPane.INFORMATION_MESSAGE, null);
+				} else {
+					JOptionPane.showMessageDialog(null,
+							"Usuario o contraseña incorrectos, inténtelo nuevamente.", "Error",
+							JOptionPane.ERROR_MESSAGE, null);
+					txtUser.setText("");
+					passwordField.setText("");
+				} 
 				
 			}
 		});
-		btnNewButton.setBackground(new Color(34, 167, 240));
-		btnNewButton.setForeground(new Color(255, 255, 255));
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnNewButton.setBounds(266, 144, 89, 35);
-		panel_1.add(btnNewButton);
+		btnLogin.setBackground(new Color(34, 167, 240));
+		btnLogin.setForeground(new Color(255, 255, 255));
+		btnLogin.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnLogin.setBounds(257, 157, 98, 35);
+		panel_1.add(btnLogin);
 		
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		textField_1.setColumns(10);
-		textField_1.setBackground(new Color(108, 122, 137));
-		textField_1.setBounds(131, 108, 224, 20);
-		panel_1.add(textField_1);
+		passwordField = new JPasswordField();
+		passwordField.setBackground(new Color(108, 122, 137));
+		passwordField.setBounds(131, 110, 224, 22);
+		panel_1.add(passwordField);
+		
+		JButton cancelButton = new JButton("Cancelar");
+		cancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		cancelButton.setForeground(Color.WHITE);
+		cancelButton.setFont(new Font("Tahoma", Font.BOLD, 14));
+		cancelButton.setBackground(new Color(255, 69, 0));
+		cancelButton.setActionCommand("Cancel");
+		cancelButton.setBounds(132, 157, 98, 35);
+		panel_1.add(cancelButton);
 		
 	}
 }
