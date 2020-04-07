@@ -155,19 +155,19 @@ public class Login extends JFrame {
 		lblUser.setForeground(SystemColor.text);
 		lblUser.setBackground(new Color(236,240,241));
 		lblUser.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblUser.setBounds(22, 57, 75, 14);
+		lblUser.setBounds(23, 41, 75, 14);
 		panel_1.add(lblUser);
 		
 		JLabel lblPass = new JLabel("Contrase\u00F1a:");
 		lblPass.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblPass.setForeground(SystemColor.text);
-		lblPass.setBounds(22, 115, 129, 17);
+		lblPass.setBounds(23, 99, 129, 17);
 		panel_1.add(lblPass);
 		
 		txtUser = new JTextField();
 		txtUser.setBackground(new Color(108, 122, 137));
 		txtUser.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		txtUser.setBounds(131, 53, 224, 22);
+		txtUser.setBounds(132, 37, 224, 22);
 		panel_1.add(txtUser);
 		txtUser.setColumns(10);
 		
@@ -194,12 +194,12 @@ public class Login extends JFrame {
 		btnLogin.setBackground(new Color(34, 167, 240));
 		btnLogin.setForeground(new Color(255, 255, 255));
 		btnLogin.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnLogin.setBounds(257, 157, 98, 35);
+		btnLogin.setBounds(258, 141, 98, 35);
 		panel_1.add(btnLogin);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBackground(new Color(108, 122, 137));
-		passwordField.setBounds(131, 110, 224, 22);
+		passwordField.setBounds(132, 94, 224, 22);
 		panel_1.add(passwordField);
 		
 		JButton cancelButton = new JButton("Cancelar");
@@ -212,8 +212,22 @@ public class Login extends JFrame {
 		cancelButton.setFont(new Font("Tahoma", Font.BOLD, 14));
 		cancelButton.setBackground(new Color(255, 69, 0));
 		cancelButton.setActionCommand("Cancel");
-		cancelButton.setBounds(132, 157, 98, 35);
+		cancelButton.setBounds(133, 141, 98, 35);
 		panel_1.add(cancelButton);
+		
+		JLabel lblPass_1 = new JLabel("Crear una nueva cuenta");
+		lblPass_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Users users = new Users(); 
+				users.setModal(true);
+				users.setVisible(true);
+			}
+		});
+		lblPass_1.setForeground(Color.WHITE);
+		lblPass_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblPass_1.setBounds(165, 195, 175, 17);
+		panel_1.add(lblPass_1);
 		
 	}
 }

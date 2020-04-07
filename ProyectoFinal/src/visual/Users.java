@@ -113,6 +113,7 @@ public class Users extends JDialog {
 				    textField.setText("");
 				    passwordField.setText("");
 				    passwordField_1.setText("");
+				    comboBox.setSelectedIndex(0);
 				    
 				    
 				    JOptionPane.showMessageDialog(null,
