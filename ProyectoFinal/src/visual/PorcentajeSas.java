@@ -53,6 +53,7 @@ public class PorcentajeSas extends JDialog {
 	 * Create the dialog.
 	 */
 	public PorcentajeSas() {
+		setResizable(false);
 		setTitle("Porcentajes de Contrataci\u00F3n");
 		setBounds(100, 100, 719, 472);
 		getContentPane().setLayout(new BorderLayout());
@@ -60,6 +61,7 @@ public class PorcentajeSas extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
+		setLocationRelativeTo(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(SystemColor.inactiveCaptionBorder);
@@ -89,6 +91,7 @@ public class PorcentajeSas extends JDialog {
 		scrollPane.setViewportView(table);
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(SystemColor.inactiveCaption);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{

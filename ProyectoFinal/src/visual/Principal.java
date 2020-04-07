@@ -161,6 +161,7 @@ public class Principal extends JFrame {
 		mnMatcheo.add(mntContratados);
 		
 		JMenuItem mntmPorcentaje = new JMenuItem("Porcentaje de Sastifacci\u00F3n");
+		mntmPorcentaje.setBackground(SystemColor.inactiveCaptionBorder);
 		mntmPorcentaje.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				PorcentajeSas aux = new PorcentajeSas();
