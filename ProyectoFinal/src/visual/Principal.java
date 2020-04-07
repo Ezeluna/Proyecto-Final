@@ -62,6 +62,8 @@ public class Principal extends JFrame {
 	private static JFreeChart chartBarra;
 	private static JFreeChart chartPastel;
 	private static JFreeChart chartPastel2;
+	private JLabel lblhora; 
+	private JLabel lblyear; 
 
 	
 
@@ -378,10 +380,20 @@ public class Principal extends JFrame {
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
+		lblhora = new JLabel("");
+		lblhora.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblhora.setBounds(24, 11, 140, 39);
+		panel_1.add(lblhora);
+		
+		lblyear = new JLabel("");
+		lblyear.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblyear.setBounds(119, 11, 116, 39);
+		panel_1.add(lblyear);
+		
 		actualizarChart();
 		actualizarPastel();
 		actualizarPastel2();
-		
+		reloj();
 	}
 	
 	public static JFreeChart creandoGraficoB1(CategoryDataset dataSet, String titulo ) {
@@ -482,6 +494,86 @@ public class Principal extends JFrame {
 		chartPanel2.setPreferredSize(new java.awt.Dimension(800, 500));
 		panelPastel2.add(chartPanel2, BorderLayout.CENTER);
 		panelPastel2.repaint();
+
+	}
+	
+	
+	public void reloj() {
+
+		Thread reloj = new Thread() {
+			public void run() {
+				try {
+					for (;;) {
+						Calendar calen = new GregorianCalendar();
+						int dia = calen.get(Calendar.DAY_OF_WEEK_IN_MONTH);
+						int diaSemana = calen.get(Calendar.DAY_OF_WEEK);
+						int mes = calen.get(Calendar.MONTH + 1);
+						int minutos = calen.get(Calendar.MINUTE);
+						int hora = calen.get(Calendar.HOUR);
+						int sec = calen.get(Calendar.SECOND);
+						int meri = calen.get(Calendar.AM_PM);
+						LocalDate date = LocalDate.now();
+						int anno = date.getYear();
+						int mess= date.getMonthValue();
+						int dias = date.getDayOfMonth();
+						String realmes = "";
+						String merid = "";
+						if (meri == 1) {
+							merid = " PM";
+						} else {
+							merid = " AM";
+						}
+						if (mess == 1) {
+							realmes = "Enero";
+						}
+						if (mess == 1) {
+							realmes = "Enero";
+						}
+						if (mess == 2) {
+							realmes = "Febreo";
+						}
+						if (mess == 3) {
+							realmes = "Marzo";
+						}
+						if (mess == 4) {
+							realmes = "Abril";
+						}
+						if (mess == 5) {
+							realmes = "Mayo";
+						}
+						if (mess == 6) {
+							realmes = "Junio";
+						}
+						if (mess == 7) {
+							realmes = "Julio";
+						}
+						if (mess == 8) {
+							realmes = "Agosto";
+						}
+						if (mess == 9) {
+							realmes = "Septiembre";
+						}
+						if (mess == 10) {
+							realmes = "Octubre";
+						}
+						if (mess == 11) {
+							realmes = "Novienbre";
+						}
+						if (mess == 12) {
+							realmes = "Diciembre";
+						}
+						lblhora.setText(hora + ":" + minutos + ":" + sec + merid);
+						lblyear.setText(dias+", "+realmes+", "+anno);
+						
+
+						sleep(1000);
+					}
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		reloj.start();
 
 	}
 }
