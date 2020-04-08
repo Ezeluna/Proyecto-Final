@@ -434,7 +434,7 @@ public class Principal extends JFrame {
 			result.setValue("Bachiller", Bolsa_Laboral.getInstance().porcientoB());
 		}
 		if (Bolsa_Laboral.getInstance().porcientoT() != 0) {
-			result.setValue("Tecnico", Bolsa_Laboral.getInstance().porcientoT());
+			result.setValue("Técnico", Bolsa_Laboral.getInstance().porcientoT());
 		}
 		if (Bolsa_Laboral.getInstance().porcientoU() != 0) {
 			result.setValue("Universitario", Bolsa_Laboral.getInstance().porcientoU());
