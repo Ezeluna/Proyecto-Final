@@ -51,7 +51,7 @@ public class PorcentajeSas extends JDialog {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(PorcentajeSas.class.getResource("/icons/icons8-discount-finder-20.png")));
 		setResizable(false);
 		setTitle("Porcentajes de Contrataci\u00F3n");
-		setBounds(100, 100, 719, 472);
+		setBounds(100, 100, 815, 500);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(SystemColor.inactiveCaptionBorder);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -62,7 +62,7 @@ public class PorcentajeSas extends JDialog {
 		JPanel panel = new JPanel();
 		panel.setBackground(SystemColor.inactiveCaptionBorder);
 		panel.setBorder(new TitledBorder(null, "Porcentajes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 693, 386);
+		panel.setBounds(10, 11, 789, 414);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
@@ -73,7 +73,7 @@ public class PorcentajeSas extends JDialog {
 			public void mouseClicked(MouseEvent e) {
 			}
 		});
-		scrollPane.setBounds(10, 22, 673, 353);
+		scrollPane.setBounds(10, 22, 769, 381);
 		panel.add(scrollPane);
 		
 		table = new JTable();
@@ -107,7 +107,7 @@ public class PorcentajeSas extends JDialog {
 		float cant2 = 0;
 		float porciento = 0;
 		model.setRowCount(0);
-		String[] colimneNames = { "Nombre Empresa", "Tipo Solicitud", "Cantidad Vacantes",
+		String[] colimneNames = { "Nombre Empresa", "Tipo Solicitud", "Vacantes Solicitadas", "Vacantes Actuales",
 		"Porcentaje Completado" };
 		model.setColumnIdentifiers(colimneNames);
 		fila = new Object[model.getColumnCount()];
@@ -115,12 +115,13 @@ public class PorcentajeSas extends JDialog {
 			
 			fila[0] = soli.getEmpresa().getNombre();
 			fila[1] = tipoSolicitud(soli);
-			fila[2] = soli.getCantVacantes();
+			fila[2] = soli.getCantAux();
+			fila[3] = soli.getCantVacantes();
 			cant1 = soli.getCantAux();
 			cant2 = soli.getCantSolicitudes();
 			porciento = (cant2 / cant1 )*100;
 			
-			fila[3] = porciento+" %";
+			fila[4] = porciento+" %";
 			model.addRow(fila);
 
 		}
@@ -134,8 +135,9 @@ public class PorcentajeSas extends JDialog {
 		TableColumnModel columnModel = table.getColumnModel();
 		columnModel.getColumn(0).setPreferredWidth(160);
 		columnModel.getColumn(1).setPreferredWidth(167);
-		columnModel.getColumn(2).setPreferredWidth(166);
-		columnModel.getColumn(3).setPreferredWidth(180);
+		columnModel.getColumn(2).setPreferredWidth(135);
+		columnModel.getColumn(3).setPreferredWidth(135);
+		columnModel.getColumn(4).setPreferredWidth(170);
 
 	}
 
