@@ -3,7 +3,6 @@ package logic;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -149,10 +148,10 @@ public class Bolsa_Laboral implements Serializable{
 		return miEmpresa;
 	}
 
-	public void eliminarEmpresa(String cod) {// Elimina una empresa pasandole el codigo
+	public void eliminarEmpresa(String RNC) {// Elimina una empresa pasandole el RNC
 		Empresa empresaeliminar = null;
 		for (Empresa empresa : misEmpresas) {
-			if (empresa.getRNC().equalsIgnoreCase(cod)) {
+			if (empresa.getRNC().equalsIgnoreCase(RNC)) {
 				empresaeliminar = empresa;
 			}
 		}
@@ -296,7 +295,7 @@ public class Bolsa_Laboral implements Serializable{
 		}
 	}
 	
-	public String contradato(Personal soli) {// retorna un boolean si esta contratado o no
+	public String contratado(Personal soli) {// retorna un boolean si esta contratado o no
 		String estado = null;
 		if (soli.isContratado()) {
 			estado = "Contratado";
@@ -349,9 +348,7 @@ public class Bolsa_Laboral implements Serializable{
 			solicitud.DecrementoV();
 			empresa.insertarEmpleadoC(solicitante);
 			
-		} /*if (solicitud.getCantVacantes() <= 0 ) {
-			EliminarSolicitud(solicitud.getId());
-		}*/
+		}
 
 	}
 	
@@ -572,140 +569,6 @@ public class Bolsa_Laboral implements Serializable{
 	}
 	
 	
-	
-	// PORCIENTOS 
-	
-	public float porcientoSolicitud(Solicitud soli) {// RETORNA EL PORCIENTO DE LAS SOLICITUDES ACTIVAS
-		float por = 0;
-		if (soli.getCantSolicitudes() != soli.cantVacantes) {
-			float cantTotal = soli.getCantVacantes();
-			float cantActual = soli.getCantSolicitudes();
-			por = (cantActual / cantTotal) * 100;
-		} else {
-			por = 100;
-		}
-		return por;
-	}
-	
-	public float porcientoU() {// Retorna % de Universitarios Contratados
-		float cant = 0;
-		float porciento = 0;
-		float total = totalContratado();
-		for (Personal soli : misSolicitantes) {
-			if (soli instanceof Universitario) {
-				if (soli.isContratado()) {
-					cant++;
-				}
-			}
-		}
-		if (total != 0) {
-			porciento = (cant / total) * 100;
-		}
-		return porciento;
-	}
-
-	public float porcientoT() {// Retorna % de Tecnicos Contratados
-		float cant = 0;
-		float porciento = 0;
-		float total = totalContratado();
-		for (Personal soli : misSolicitantes) {
-			if (soli instanceof Tecnico) {
-				if (soli.isContratado()) {
-					cant++;
-				}
-			}
-		}
-		if (total != 0) {
-			porciento = (cant / total) * 100;
-		}
-		return porciento;
-	}
-	
-	public float porcientoB() {// Retorna % de Bachilleres Contratados
-		float cant = 0;
-		float porciento = 0;
-		float total = totalContratado();
-		for (Personal soli : misSolicitantes) {
-			if (soli instanceof Bachiller) {
-				if (soli.isContratado()) {
-					cant++;
-				}
-			}
-		}
-		if (total != 0) {
-			porciento = (cant / total) * 100;
-		}
-		return porciento;
-	}
-	
-	public float porcientoF() {// Retorna % de femeninos Contratado
-		float cant = 0;
-		float porciento = 0;
-		float total = totalContratado();
-		for (Personal soli : misSolicitantes) {
-			if (soli instanceof Bachiller) {
-				if (soli.isContratado()) {
-					if (soli.sexo.equalsIgnoreCase("Femenino")) {
-						cant++;
-					}
-				}
-			}
-			if (soli instanceof Universitario) {  
-				if (soli.isContratado()) {
-					if (soli.sexo.equalsIgnoreCase("Femenino")) {
-						cant++;
-					}
-				}
-			}
-			if (soli instanceof Tecnico) {
-				if (soli.isContratado()) {
-					if (soli.sexo.equalsIgnoreCase("Femenino")) {
-						cant++;
-					}
-				}
-			}
-		}
-		if (total != 0) {
-			porciento = (cant / total) * 100;
-		}
-		return porciento;
-	}
-	
-	public float porcientoH() {// retorna el % de masculinos contratados
-		float cant = 0;
-		float porciento = 0;
-		float total = totalContratado();
-		for (Personal soli : misSolicitantes) {
-			if (soli instanceof Bachiller) {
-				if (soli.isContratado()) {
-					if (soli.sexo.equalsIgnoreCase("Masculino")) {
-						cant++;
-					}
-				}
-			}
-			if (soli instanceof Universitario) {
-				if (soli.isContratado()) {
-					if (soli.sexo.equalsIgnoreCase("Masculino")) {
-						cant++;
-					}
-				}
-			}
-			if (soli instanceof Tecnico) {
-				if (soli.isContratado()) {
-					if (soli.sexo.equalsIgnoreCase("Masculino")) {
-						cant++;
-					}
-				}
-			}
-		}
-		if (total != 0) {
-			porciento = (cant / total) * 100;
-		}
-		return porciento;
-	}
-
-	
-	
 	//MATCHING
 	
 	public boolean validarGeneral(Personal persona, Solicitud solicitud) {// VALIDA AL PERSONAL GENERAL
@@ -860,7 +723,7 @@ public class Bolsa_Laboral implements Serializable{
 		return candidato;
 	}
 	
-	// FICHEROS 
+	// Codigos
 	
 	public String getIdSolicitud() { // Generacion de Codigos para solicitud
 		String code = "";
@@ -894,6 +757,8 @@ public class Bolsa_Laboral implements Serializable{
 		codigo = "S" + code;
 		return codigo;
 	}
+	
+	// FICHEROS
 	
 	public void writeBolsa() {
 		FileOutputStream bolsaFile = null;
@@ -940,6 +805,139 @@ public class Bolsa_Laboral implements Serializable{
 			e.printStackTrace();
 		}
 	}
+	
+
+	// PORCIENTOS GRAFICOS
+	
+	public float porcientoSolicitud(Solicitud soli) {// RETORNA EL PORCIENTO DE LAS SOLICITUDES ACTIVAS
+		float por = 0;
+		if (soli.getCantSolicitudes() != soli.cantVacantes) {
+			float cantTotal = soli.getCantVacantes();
+			float cantActual = soli.getCantSolicitudes();
+			por = (cantActual / cantTotal) * 100;
+		} else {
+			por = 100;
+		}
+		return por;
+	}
+	
+	public float porcientoU() {// Retorna % de Universitarios Contratados
+		float cant = 0;
+		float porciento = 0;
+		float total = totalContratado();
+		for (Personal soli : misSolicitantes) {
+			if (soli instanceof Universitario) {
+				if (soli.isContratado()) {
+					cant++;
+				}
+			}
+		}
+		if (total != 0) {
+			porciento = (cant / total) * 100;
+		}
+		return porciento;
+	}
+
+	public float porcientoT() {// Retorna % de Tecnicos Contratados
+		float cant = 0;
+		float porciento = 0;
+		float total = totalContratado();
+		for (Personal soli : misSolicitantes) {
+			if (soli instanceof Tecnico) {
+				if (soli.isContratado()) {
+					cant++;
+				}
+			}
+		}
+		if (total != 0) {
+			porciento = (cant / total) * 100;
+		}
+		return porciento;
+	}
+	
+	public float porcientoB() {// Retorna % de Bachilleres Contratados
+		float cant = 0;
+		float porciento = 0;
+		float total = totalContratado();
+		for (Personal soli : misSolicitantes) {
+			if (soli instanceof Bachiller) {
+				if (soli.isContratado()) {
+					cant++;
+				}
+			}
+		}
+		if (total != 0) {
+			porciento = (cant / total) * 100;
+		}
+		return porciento;
+	}
+	
+	public float porcientoF() {// Retorna % de femeninos Contratado
+		float cant = 0;
+		float porciento = 0;
+		float total = totalContratado();
+		for (Personal soli : misSolicitantes) {
+			if (soli instanceof Bachiller) {
+				if (soli.isContratado()) {
+					if (soli.sexo.equalsIgnoreCase("Femenino")) {
+						cant++;
+					}
+				}
+			}
+			if (soli instanceof Universitario) {  
+				if (soli.isContratado()) {
+					if (soli.sexo.equalsIgnoreCase("Femenino")) {
+						cant++;
+					}
+				}
+			}
+			if (soli instanceof Tecnico) {
+				if (soli.isContratado()) {
+					if (soli.sexo.equalsIgnoreCase("Femenino")) {
+						cant++;
+					}
+				}
+			}
+		}
+		if (total != 0) {
+			porciento = (cant / total) * 100;
+		}
+		return porciento;
+	}
+	
+	public float porcientoH() {// retorna el % de masculinos contratados
+		float cant = 0;
+		float porciento = 0;
+		float total = totalContratado();
+		for (Personal soli : misSolicitantes) {
+			if (soli instanceof Bachiller) {
+				if (soli.isContratado()) {
+					if (soli.sexo.equalsIgnoreCase("Masculino")) {
+						cant++;
+					}
+				}
+			}
+			if (soli instanceof Universitario) {
+				if (soli.isContratado()) {
+					if (soli.sexo.equalsIgnoreCase("Masculino")) {
+						cant++;
+					}
+				}
+			}
+			if (soli instanceof Tecnico) {
+				if (soli.isContratado()) {
+					if (soli.sexo.equalsIgnoreCase("Masculino")) {
+						cant++;
+					}
+				}
+			}
+		}
+		if (total != 0) {
+			porciento = (cant / total) * 100;
+		}
+		return porciento;
+	}
+
 	
 	
 	
