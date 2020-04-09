@@ -177,7 +177,7 @@ public class ListarSolicitantes extends JDialog {
 						if (JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea eliminar la solicitud?", "AVISO",
 								JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 							Bolsa_Laboral.getInstance().eliminarSolicitante(soli);
-							//Principal.actualizarChart();
+							Principal.actualizarChart();
 
 						}
 					}
