@@ -808,19 +808,19 @@ public class InsertarSolicitante extends JDialog {
 				}
 					
 					else if(panel1.isVisible()) {
-						//if(!modificar) {
-					
-					//if(!Bolsa_Laboral.getInstance().getMisSolicitantes().isEmpty()) {
-						//for (Personal personal : Bolsa_Laboral.getInstance().getMisSolicitantes()) {
-							//if (ftextCedula.getText().equalsIgnoreCase(personal.getCedula())) {
-								//igual=true;
-							//}
-						 // }
-						//}
-						//if(igual==true) {
-						//	JOptionPane.showMessageDialog(null,"Ya existe una persona registrada con esa cedula");
-						//}
-						//}
+						if(!modificar) {
+					boolean igual = false;
+					if(!Bolsa_Laboral.getInstance().getMisSolicitantes().isEmpty()) {
+						for (Personal personal : Bolsa_Laboral.getInstance().getMisSolicitantes()) {
+							if (ftextCedula.getText().equalsIgnoreCase(personal.getCedula())) {
+								igual=true;
+							}
+						  }
+						}
+						if(igual==true) {
+						JOptionPane.showMessageDialog(null,"Ya existe una persona registrada con esa cedula");
+						}
+						}
 						 if(ftextCedula.getText().equalsIgnoreCase("___-_______-_")||textNombre.getText().isEmpty()|| textApellidos.getText().isEmpty()||textCiudad.getText().isEmpty() || cbxLicencia.getSelectedIndex() == 0 || cbxProvincias.getSelectedIndex() == 0 || sexo.equalsIgnoreCase("") || fecha.equalsIgnoreCase("")) {
 							JOptionPane.showMessageDialog(null, "Debe de llenar todos los campos", "AVISO", JOptionPane.WARNING_MESSAGE, null);
 						}else {
