@@ -310,6 +310,7 @@ public class Match extends JDialog {
 										JOptionPane.INFORMATION_MESSAGE, null);
 								Principal.actualizarPastel();
 								Principal.actualizarPastel2();
+								Principal.actualizarChart();
 							    } 
 								
 							}
