@@ -46,6 +46,9 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.util.Rotation;
+
+import com.jgoodies.common.swing.MnemonicUtils;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import java.awt.Panel;
@@ -117,6 +120,11 @@ public class Principal extends JFrame {
 		menuBar.add(mnMatcheo);
 		
 		JMenuItem mntmPareo = new JMenuItem("Realizar Match");
+		if(Bolsa_Laboral.getLoginUser().getTipo().equalsIgnoreCase("Solicitante")) {
+			mntmPareo.setEnabled(false);
+		}else {
+			mntmPareo.setEnabled(true);
+		}
 		mntmPareo.setIcon(new ImageIcon(Principal.class.getResource("/icons/pareo.png")));
 		mntmPareo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -167,6 +175,11 @@ public class Principal extends JFrame {
 		mnMatcheo.add(mntmPorcentaje);
 		
 		JMenu mnNewMenu = new JMenu("Empresa");
+		if(Bolsa_Laboral.getLoginUser().getTipo().equalsIgnoreCase("Solicitante")) {
+			mnNewMenu.setEnabled(false);
+		}else {
+			mnNewMenu.setEnabled(true);
+		}
 		mnNewMenu.setIcon(new ImageIcon(Principal.class.getResource("/icons/empresa24.png")));
 		mnNewMenu.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		menuBar.add(mnNewMenu);
@@ -200,6 +213,11 @@ public class Principal extends JFrame {
 		mnNewMenu.add(mntmListarEmpresas);
 		
 		JMenu mnSolicitudEmpresa = new JMenu("Solicitud Empresarial");
+		if(Bolsa_Laboral.getLoginUser().getTipo().equalsIgnoreCase("Solicitante")) {
+			mnSolicitudEmpresa.setEnabled(false);
+		}else {
+			mnSolicitudEmpresa.setEnabled(true);
+		}
 		mnSolicitudEmpresa.setIcon(new ImageIcon(Principal.class.getResource("/icons/Solicitud24.png")));
 		mnSolicitudEmpresa.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		mnSolicitudEmpresa.setBackground(SystemColor.inactiveCaptionBorder);
@@ -230,6 +248,11 @@ public class Principal extends JFrame {
 		mnSolicitudEmpresa.add(mntmNewMenuItem);
 		
 		JMenu mnPersonal = new JMenu("Personal");
+		if(Bolsa_Laboral.getLoginUser().getTipo().equalsIgnoreCase("Empresario")) {
+			mnPersonal.setEnabled(false);
+		}else {
+			mnPersonal.setEnabled(true);
+		}
 		mnPersonal.setIcon(new ImageIcon(Principal.class.getResource("/icons/Solicitante24.png")));
 		mnPersonal.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		menuBar.add(mnPersonal);

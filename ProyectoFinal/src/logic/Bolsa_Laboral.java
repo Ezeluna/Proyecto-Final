@@ -23,7 +23,6 @@ public class Bolsa_Laboral implements Serializable{
 	private ArrayList<Solicitud> misSolicitudes; 
 	public static Bolsa_Laboral bolsa;
 	public ArrayList<Personal> misEmpleados;
-	private FileWriter Fwriter; 
 	private String archivo = "Bolsa_Laboral.dat"; 
 	private ArrayList<User> misUsers;
 	private static User loginUser;
@@ -120,6 +119,7 @@ public class Bolsa_Laboral implements Serializable{
 		Bolsa_Laboral.firstTime = firstTime;
 	}
 	
+	// LOGIN
 
 	public boolean confirmLogin(String text, String text2) {
 		boolean login = false;
