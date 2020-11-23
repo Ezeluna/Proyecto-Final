@@ -402,7 +402,7 @@ public class Principal extends JFrame {
 		
 		lblyear = new JLabel("");
 		lblyear.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblyear.setBounds(119, 11, 116, 39);
+		lblyear.setBounds(131, 11, 212, 39);
 		panel_1.add(lblyear);
 		
 		actualizarChart();
