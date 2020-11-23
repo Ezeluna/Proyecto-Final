@@ -541,9 +541,6 @@ public class Principal extends JFrame {
 						if (mess == 1) {
 							realmes = "Enero";
 						}
-						if (mess == 1) {
-							realmes = "Enero";
-						}
 						if (mess == 2) {
 							realmes = "Febreo";
 						}
@@ -572,7 +569,7 @@ public class Principal extends JFrame {
 							realmes = "Octubre";
 						}
 						if (mess == 11) {
-							realmes = "Novienbre";
+							realmes = "Noviembre";
 						}
 						if (mess == 12) {
 							realmes = "Diciembre";
